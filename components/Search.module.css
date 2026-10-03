@@ -1,0 +1,140 @@
+/* At rest the trigger is a navigation cell (see TopNav --nav-cell-*). */
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: var(--nav-cell-h, 40px);
+  padding: 0 var(--nav-cell-pad, 20px);
+  background: var(--nav-cell, var(--surface-inset));
+  color: var(--nav-cell-text, var(--text-2));
+  font-size: var(--nav-cell-size, 13.5px);
+  line-height: 1;
+  letter-spacing: -0.005em;
+  transition: background-color var(--dur-fast) ease, color var(--dur-fast) ease;
+}
+
+.trigger:hover {
+  background: var(--nav-cell-hover, var(--surface-raised));
+  color: var(--text);
+}
+
+.trigger:focus-visible {
+  outline-offset: -2px;
+}
+
+.trigger svg {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  opacity: 0.8;
+}
+
+/* Shortcut stays functional; it is shown inside the dialog, not on the cell. */
+.trigger .kbd {
+  display: none;
+}
+
+.kbd {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-3);
+  letter-spacing: 0.04em;
+}
+
+.dialog {
+  width: min(560px, calc(100vw - 32px));
+  max-height: min(480px, calc(100dvh - 120px));
+  margin: 14vh auto auto;
+  padding: 0;
+  border: 1px solid rgba(239, 248, 226, 0.24);
+  border-radius: 0;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+}
+
+.dialog[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.dialog::backdrop {
+  background: rgba(0, 0, 0, 0.7);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 52px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--text-2);
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  background: none;
+  font-size: 15px;
+  color: var(--text);
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--text-3);
+}
+
+.results {
+  overflow-y: auto;
+  padding: 6px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 36px;
+  padding: 0 10px;
+  font-size: 14px;
+  color: var(--text-2);
+  cursor: pointer;
+}
+
+.option[aria-selected="true"] {
+  background: var(--accent-soft);
+  box-shadow: inset 1px 0 0 var(--accent);
+  color: var(--accent);
+}
+
+.section {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.empty {
+  padding: 14px 10px;
+  font-size: 14px;
+  color: var(--text-3);
+}
+
+/* Between the drawer breakpoint and 1300px the rail needs the room: icon-only cell. */
+@media (min-width: 1180px) and (max-width: 1300px), (max-width: 760px) {
+  .trigger {
+    width: var(--nav-cell-h, 40px);
+    padding: 0;
+    justify-content: center;
+  }
+
+  .triggerLabel {
+    display: none;
+  }
+}

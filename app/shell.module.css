@@ -1,0 +1,59 @@
+/*
+ * Desktop shell: fixed-width rail + bounded content canvas.
+ * The whole shell is capped at --shell-max and centred, so large monitors keep
+ * the same apparent scale instead of stretching the canvas.
+ */
+.shell {
+  /* Clears the fixed global navbar on load; content then scrolls beneath it. */
+  padding-top: var(--nav-h);
+  display: grid;
+  grid-template-columns: var(--rail-w) minmax(0, 1fr);
+  max-width: var(--shell-max);
+  margin: 0 auto;
+}
+
+.rail {
+  position: sticky;
+  top: var(--nav-h);
+  align-self: start;
+  height: calc(100dvh - var(--nav-h));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 17px 0 40px 16px;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.rail:hover,
+.rail:focus-within {
+  scrollbar-color: rgba(255, 255, 255, 0.14) transparent;
+}
+
+.main {
+  min-width: 0;
+  padding: 33px var(--edge) 0 var(--gutter);
+}
+
+.content {
+  container: content / inline-size;
+  max-width: var(--content-max);
+  min-width: 0;
+}
+
+@media (max-width: 1179px) {
+  .shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .rail {
+    display: none;
+  }
+
+  .main {
+    padding: 24px clamp(16px, 4vw, 40px) 0;
+  }
+
+  .content {
+    margin: 0 auto;
+  }
+}

@@ -1,0 +1,54 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.title {
+  font-size: 21px;
+  font-weight: 450;
+  line-height: 28px;
+  letter-spacing: -0.015em;
+  color: #ffffff;
+}
+
+.list {
+  margin-top: 14px;
+}
+
+/* Index rows divided by accent-tinted hairlines; hover lifts text and nudges the arrow. */
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 40px;
+  padding: 8px 0;
+  border-top: 1px solid var(--accent-line);
+  font-size: 14.5px;
+  line-height: 22px;
+  color: var(--text-2);
+  transition: color var(--dur-fast) ease;
+}
+
+.link:hover {
+  color: var(--accent);
+}
+
+.arrow {
+  flex: none;
+  color: var(--text-3);
+  transition: color var(--dur-fast) ease, transform var(--dur-std) var(--ease);
+}
+
+.link:hover .arrow {
+  color: var(--accent);
+  transform: translate(2px, -2px);
+}
+
+@container content (max-width: 760px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 36px;
+  }
+}

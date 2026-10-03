@@ -1,0 +1,64 @@
+.nav {
+  width: 256px;
+  max-width: 100%;
+}
+
+.section + .section {
+  margin-top: 22px;
+}
+
+.heading {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  font-size: 13.5px;
+  font-weight: 450;
+  color: #ffffff;
+  letter-spacing: -0.005em;
+}
+
+.list {
+  display: grid;
+  gap: 2px;
+  margin-top: 2px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 32px;
+  padding: 0 8px;
+  border-radius: var(--radius-item);
+  font-size: 13.5px;
+  color: var(--text-2);
+  letter-spacing: -0.005em;
+  transition: color var(--dur-fast) ease, background-color var(--dur-fast) ease, box-shadow var(--dur-fast) ease;
+}
+
+.link:hover {
+  color: var(--text);
+}
+
+/* Current page: accent text on a faint accent field, marked by a 1px rule. */
+.link[aria-current="page"] {
+  background: var(--accent-soft);
+  box-shadow: inset 1px 0 0 var(--accent);
+  color: var(--accent);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  height: 19px;
+  padding: 0 6px;
+  border: 1px solid rgba(239, 248, 226, 0.2);
+  border-radius: var(--radius-tag);
+  background: rgba(239, 248, 226, 0.08);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}

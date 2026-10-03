@@ -1,0 +1,114 @@
+/* Technical inset: lighter than its window and outlined, never a separate theme. */
+.panel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: 1px solid var(--rule-inset);
+  border-radius: var(--radius-inner);
+  background: var(--surface-inset);
+  overflow: hidden;
+}
+
+.rail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 52px;
+  padding: 0 14px 0 8px;
+  border-bottom: 1px solid var(--rule-inset);
+}
+
+.tabs {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tabs::-webkit-scrollbar {
+  display: none;
+}
+
+/* Secondary selector: the chosen language is underlined in the accent. */
+.tab {
+  flex: none;
+  height: 32px;
+  padding: 0 12px;
+  font-size: 13px;
+  color: var(--text-3);
+  white-space: nowrap;
+  text-decoration: underline 1px transparent;
+  text-underline-offset: 6px;
+  transition: color var(--dur-fast) ease, text-decoration-color var(--dur-fast) ease;
+}
+
+.tab:hover {
+  color: var(--text);
+}
+
+.tab[aria-selected="true"] {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
+/* Nested under accent chips (Quickstart), the label steps down to plain text. */
+.pill .tab[aria-selected="true"] {
+  color: var(--text);
+}
+
+.tab:focus-visible {
+  outline-offset: -2px;
+}
+
+/* Icon control: square outlined tile. */
+.copy {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--rule);
+  color: var(--text-3);
+  transition: color var(--dur-fast) ease, border-color var(--dur-fast) ease;
+}
+
+.copy:hover {
+  color: var(--text);
+  border-color: var(--rule-strong);
+}
+
+.copy[aria-label="Copied"] {
+  color: var(--accent);
+  border-color: var(--accent-line);
+}
+
+.body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 22px 20px 24px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+}
+
+.body:focus-visible {
+  outline-offset: -2px;
+}
+
+.pre {
+  font-size: 13.25px;
+  line-height: 20px;
+  color: var(--syn-plain);
+  tab-size: 2;
+  white-space: pre;
+}
+
+.pre code {
+  display: block;
+  width: max-content;
+  min-width: 100%;
+}

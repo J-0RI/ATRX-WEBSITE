@@ -1,0 +1,99 @@
+.trigger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--nav-cell-h, 40px);
+  height: var(--nav-cell-h, 40px);
+  background: var(--nav-cell, var(--surface-inset));
+  color: var(--nav-cell-text, var(--text));
+  transition: background-color var(--dur-fast) ease, color var(--dur-fast) ease;
+}
+
+.trigger:hover {
+  background: var(--nav-cell-hover, var(--surface-raised));
+  color: var(--text);
+}
+
+@media (max-width: 1179px) {
+  .trigger {
+    display: inline-flex;
+  }
+}
+
+.drawer {
+  margin: 0;
+  margin-right: auto;
+  width: min(320px, 88vw);
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  padding: 0;
+  border: 0;
+  border-right: 1px solid var(--accent-line);
+  background: var(--bg);
+  color: var(--text);
+}
+
+.drawer::backdrop {
+  background: rgba(0, 0, 0, 0.7);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.panel {
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 16px 40px;
+}
+
+.head {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 64px;
+  background: var(--bg);
+}
+
+.close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-control);
+  color: var(--text-2);
+  transition: color var(--dur-fast) ease, border-color var(--dur-fast) ease;
+}
+
+.close:hover {
+  color: var(--text);
+  border-color: var(--rule-strong);
+}
+
+.primary {
+  display: grid;
+  gap: 2px;
+  padding-bottom: 18px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.primary a {
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 8px;
+  border-radius: var(--radius-item);
+  font-size: 15px;
+  color: var(--text);
+  transition: color var(--dur-fast) ease, background-color var(--dur-fast) ease;
+}
+
+.primary a:hover {
+  background: var(--surface-raised);
+  color: var(--accent);
+}

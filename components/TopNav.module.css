@@ -1,0 +1,222 @@
+/* Global chrome: fixed to the viewport, independent of document extent or overscroll. */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: var(--nav-h);
+}
+
+/*
+ * Optical layer over the scrolling document, in two parts that fade at
+ * different depths: ::before blurs the live backdrop and dissolves out just
+ * below the nav row; ::after is a dark tint that tails off past the header's
+ * bottom edge. No border — separation comes from blur and tone alone.
+ * Both layers extend 12px beyond the header box without affecting layout.
+ */
+.header::before,
+.header::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 -12px;
+  pointer-events: none;
+}
+
+.header::before {
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 56%, transparent 76%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 56%, transparent 76%);
+}
+
+.header::after {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.24) 64%,
+    rgba(0, 0, 0, 0.08) 80%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  /* Navigation cell system, inherited by Search and MobileNav inside the header. */
+  /* Translucent tonal steps over the blurred header: the backdrop shows through. */
+  --nav-cell: rgba(255, 255, 255, 0.065);
+  --nav-cell-hover: rgba(255, 255, 255, 0.1);
+  --nav-cell-open: rgba(255, 255, 255, 0.115);
+  --nav-cell-h: 37px;
+  --nav-cell-pad: clamp(14px, 1.5vw, 21px);
+  --nav-cell-text: rgba(235, 237, 232, 0.72);
+  --nav-cell-size: 14px;
+  --nav-cell-gap: 1px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  max-width: var(--shell-max);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Brand anchor left; all remaining space accumulates before the nav rail. */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  margin-right: auto;
+}
+
+.logo img {
+  height: 21px;
+  width: auto;
+}
+
+/* One right-hand rail: center links + actions sit as adjoining cells. */
+.center,
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--nav-cell-gap);
+}
+
+.center {
+  margin-right: var(--nav-cell-gap);
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: var(--nav-cell-h);
+  padding: 0 var(--nav-cell-pad);
+  background: var(--nav-cell);
+  font-size: var(--nav-cell-size);
+  line-height: 1;
+  color: var(--nav-cell-text);
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  transition: color var(--dur-fast) ease, background-color var(--dur-fast) ease;
+}
+
+.link:hover {
+  background: var(--nav-cell-hover);
+  color: var(--text);
+}
+
+.link[aria-expanded="true"] {
+  background: var(--nav-cell-open);
+  color: var(--text);
+}
+
+/* Current route: text emphasis only; every cell shares one default surface. */
+.current {
+  color: var(--text);
+}
+
+.link svg {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  opacity: 0.8;
+  transition: transform var(--dur-fast) ease;
+}
+
+.link[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+.link:focus-visible,
+.splitMain:focus-visible,
+.splitToggle:focus-visible {
+  outline-offset: -2px;
+}
+
+/* Final cell: Request access with its menu chevron inside the same surface. */
+.split {
+  display: inline-flex;
+  align-items: stretch;
+  height: var(--nav-cell-h);
+  background: var(--nav-cell);
+  transition: background-color var(--dur-fast) ease;
+}
+
+.split:hover,
+.split:focus-within {
+  background: var(--nav-cell-hover);
+}
+
+.split:has([aria-expanded="true"]) {
+  background: var(--nav-cell-open);
+}
+
+.splitMain {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 2px 0 var(--nav-cell-pad);
+  font-size: var(--nav-cell-size);
+  line-height: 1;
+  font-weight: 450;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  color: var(--accent);
+}
+
+.splitToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: var(--nav-cell-h);
+  padding-right: 4px;
+  color: var(--nav-cell-text);
+  transition: color var(--dur-fast) ease;
+}
+
+.splitToggle:hover,
+.splitToggle[aria-expanded="true"] {
+  color: var(--text);
+}
+
+.splitToggle svg {
+  width: 12px;
+  height: 12px;
+  transition: transform var(--dur-fast) ease;
+}
+
+.splitToggle[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+@media (max-width: 1179px) {
+  .inner {
+    padding: 0 clamp(16px, 3vw, 24px);
+    --nav-cell-h: 40px;
+  }
+
+  .center {
+    display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .logo img {
+    height: 18px;
+  }
+
+  .splitToggle {
+    display: none;
+  }
+
+  .splitMain {
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .split {
+    display: none;
+  }
+}
