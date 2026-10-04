@@ -45,6 +45,10 @@
   color: var(--text-2);
 }
 
+.descriptor span {
+  display: block;
+}
+
 .legal {
   margin-top: 32px;
   font-size: 13px;

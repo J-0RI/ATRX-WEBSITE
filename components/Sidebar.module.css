@@ -53,6 +53,7 @@
 }
 
 .link {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -62,18 +63,29 @@
   font-size: 13.5px;
   color: var(--text-2);
   letter-spacing: -0.005em;
-  transition: color var(--dur-fast) ease, background-color var(--dur-fast) ease, box-shadow var(--dur-fast) ease;
+  transition: color var(--dur-fast) ease;
 }
 
 .link:hover {
   color: var(--text);
 }
 
-/* Current page: accent text on a faint accent field, marked by a 1px rule. */
+/* Current position: primary text and one short index mark on the list axis. */
 .link[aria-current="page"] {
-  background: var(--accent-soft);
-  box-shadow: inset 1px 0 0 var(--accent);
-  color: var(--accent);
+  color: var(--text);
+  font-weight: 450;
+}
+
+.link[aria-current="page"]::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 1px;
+  height: 20px;
+  transform: translateY(-50%);
+  background: var(--text);
+  pointer-events: none;
 }
 
 .badge {

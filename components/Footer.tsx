@@ -28,7 +28,10 @@ export default function Footer() {
             <Link href="/" className={styles.logo} aria-label="ATRX home">
               <img src="/brand/atrx.svg" alt="ATRX" width={139} height={28} />
             </Link>
-            <p className={styles.descriptor}>Autonomous quantitative infrastructure</p>
+            <p className={styles.descriptor}>
+              <span>Alpha Technology</span>
+              <span>Risk Execution</span>
+            </p>
           </div>
           <div className={styles.navigation}>
             {footerColumns.map((column) => (

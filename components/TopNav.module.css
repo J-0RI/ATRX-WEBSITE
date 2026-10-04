@@ -134,8 +134,11 @@
   outline-offset: -2px;
 }
 
-/* Final cell: Request access with its menu chevron inside the same surface. */
+/* Terminal action: a richer warm-neutral step within the same segmented rail. */
 .split {
+  --nav-cell: rgba(235, 237, 232, 0.105);
+  --nav-cell-hover: rgba(235, 237, 232, 0.135);
+  --nav-cell-open: rgba(235, 237, 232, 0.15);
   display: inline-flex;
   align-items: stretch;
   height: var(--nav-cell-h);
@@ -171,7 +174,7 @@
   width: 30px;
   height: var(--nav-cell-h);
   padding-right: 4px;
-  color: var(--nav-cell-text);
+  color: var(--text);
   transition: color var(--dur-fast) ease;
 }
 
