@@ -1,0 +1,80 @@
+/* Local section menu (narrow screens only); the global drawer never carries local links. */
+.menu {
+  display: none;
+  margin-bottom: 28px;
+  background: var(--surface-flat);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+
+@media (max-width: 1179px) {
+  .menu {
+    display: block;
+  }
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 46px;
+  padding: 0 16px;
+  text-align: left;
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex: none;
+  font-size: 14.5px;
+  font-weight: 480;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.badge {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+}
+
+.current {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13.5px;
+  color: var(--text-2);
+}
+
+.current::before {
+  content: "/";
+  margin-right: 10px;
+  color: var(--text-3);
+}
+
+.chevron {
+  flex: none;
+  margin-left: auto;
+  color: var(--text-2);
+  transition: transform var(--dur-std) var(--ease);
+}
+
+.toggle[aria-expanded="true"] .chevron {
+  transform: rotate(180deg);
+}
+
+.toggle:focus-visible {
+  outline-offset: -2px;
+}
+
+.panel {
+  padding: 8px 8px 14px;
+  border-top: 1px solid var(--rule);
+}
+
+.list {
+  width: auto;
+}

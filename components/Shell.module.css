@@ -3,10 +3,17 @@
  * The whole shell is capped at --shell-max and centred, so large monitors keep
  * the same apparent scale instead of stretching the canvas.
  */
+.shell,
+.standalone {
+  /* On short pages, spare viewport height belongs before the global footer. */
+  flex: 1 0 auto;
+}
+
 .shell {
   /* Clears the fixed global navbar on load; content then scrolls beneath it. */
   padding-top: var(--nav-h);
   display: grid;
+  width: 100%;
   grid-template-columns: var(--rail-w) minmax(0, 1fr);
   max-width: var(--shell-max);
   margin: 0 auto;
@@ -16,7 +23,9 @@
   position: sticky;
   top: var(--nav-h);
   align-self: start;
-  height: calc(100dvh - var(--nav-h));
+  /* max-height (not height): the rail scrolls when tall but never props the shell open,
+     so short pages end at their content and the global footer follows directly. */
+  max-height: calc(100dvh - var(--nav-h));
   overflow-y: auto;
   overscroll-behavior: contain;
   padding: 17px 0 40px 16px;
@@ -55,5 +64,24 @@
 
   .content {
     margin: 0 auto;
+  }
+}
+
+/*
+ * Standalone shell: focused pages (conversion, disclosure, performance) take the
+ * full canvas under the global navbar. No rail column, no reserved gutter.
+ */
+.standalone {
+  padding: calc(var(--nav-h) + 33px) var(--edge) 0;
+}
+
+.standalone > .content {
+  max-width: var(--standalone-max);
+  margin: 0 auto;
+}
+
+@media (max-width: 1179px) {
+  .standalone {
+    padding: calc(var(--nav-h) + 24px) clamp(16px, 4vw, 40px) 0;
   }
 }

@@ -2,21 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { primaryNav, requestAccessMenu, type NavItem } from "@/content/nav";
+import { documentationMenu, primaryNav, requestAccessMenu } from "@/content/nav";
 import MenuButton from "./MenuButton";
 import MobileNav from "./MobileNav";
 import Search from "./Search";
 import { ChevronDown } from "./Icons";
 import styles from "./TopNav.module.css";
-
-const documentationMenu: NavItem[] = [
-  { label: "Overview", href: "/" },
-  { label: "Access tiers", href: "/access" },
-  { label: "System architecture", href: "/architecture" },
-  { label: "Enterprise tenancy", href: "/partnerships" },
-  { label: "Instruments", href: "/instruments" },
-  { label: "Technical library", href: "/documentation" },
-];
 
 export default function TopNav() {
   const pathname = usePathname();
@@ -29,7 +20,7 @@ export default function TopNav() {
           <img src="/brand/atrx.svg" alt="ATRX" width={84} height={17} />
         </Link>
 
-        <nav className={styles.center} aria-label="Primary">
+        <nav className={styles.center} aria-label="Global navigation">
           <MenuButton
             label={
               <>

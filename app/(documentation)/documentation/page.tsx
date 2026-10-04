@@ -18,7 +18,7 @@ const library = [
 export default function DocumentationPage() {
   return (
     <>
-      <DocHeader eyebrow="Whitepapers · reports · disclosures" title="Technical library for evaluators.">
+      <DocHeader title="Technical library for evaluators.">
         <p>
           The materials below are maintained for qualified quantitative evaluators and capital
           allocators. The technical whitepaper provides deep structural insight into the
@@ -44,7 +44,7 @@ export default function DocumentationPage() {
         />
         <Note>
           PDF editions of the whitepaper and ablation studies are released to qualified evaluators on
-          request. <Link href="/contact?engagement=documentation">Request technical documentation</Link>.
+          request. <Link href="/contact?engagement=documentation#request">Request technical documentation</Link>.
         </Note>
       </DocSection>
     </>

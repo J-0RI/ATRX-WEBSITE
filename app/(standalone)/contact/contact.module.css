@@ -1,0 +1,336 @@
+/*
+ * Request Access: standalone conversion page.
+ * Flow: centred hero → pathways → application → direct contact → closing statement.
+ * Surfaces follow the specification-object role (flat, square, hairline).
+ */
+
+.page {
+  --band-gap: clamp(88px, 8.5vw, 128px);
+}
+
+/* ---------- hero ---------- */
+/* Headline spans the canvas (one line on wide desktops); the lead keeps a reading measure. */
+.hero {
+  padding-top: clamp(40px, 5vw, 72px);
+  text-align: center;
+}
+
+.title {
+  font-size: var(--type-display);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  color: #ffffff;
+  text-wrap: balance;
+}
+
+.lead {
+  max-width: var(--measure-display-support);
+  margin: var(--space-display-support) auto 0;
+  font-size: var(--type-display-support);
+  line-height: var(--leading-display-support);
+  letter-spacing: var(--tracking-display-support);
+  color: var(--text-2);
+  text-wrap: balance;
+}
+
+/* ---------- intro + content bands ---------- */
+.band {
+  display: grid;
+  grid-template-columns: minmax(0, 0.38fr) minmax(0, 1fr);
+  gap: 32px clamp(32px, 4cqi, 64px);
+  margin-top: var(--band-gap);
+}
+
+.intro {
+  display: grid;
+  align-content: start;
+  gap: var(--space-section-support);
+  font-size: var(--type-section-support);
+  line-height: var(--leading-section-support);
+  color: var(--text-2);
+}
+
+.intro p {
+  max-width: 22em;
+}
+
+.bandTitle {
+  font-size: var(--type-section);
+  font-weight: 430;
+  line-height: 1.12;
+  letter-spacing: -0.028em;
+  color: #ffffff;
+}
+
+.stack {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+
+/* ---------- pathway cards ---------- */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+  padding: 28px;
+  background: var(--surface-flat);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+
+/* No container hover: the button inside carries the interaction. */
+.cardTitle {
+  font-size: var(--type-card);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.cardBody {
+  margin: 14px 0 28px;
+  font-size: var(--type-body);
+  line-height: var(--leading-body);
+  color: var(--text-2);
+}
+
+.fit {
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+  font-size: var(--type-small);
+  line-height: var(--leading-small);
+  color: var(--text-2);
+}
+
+.fit svg {
+  flex: none;
+  margin-top: 4px;
+  color: var(--accent);
+}
+
+.cardAction {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* ---------- supporting strip ---------- */
+.strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 24px;
+  padding: 20px 24px 20px 28px;
+  background: var(--surface-flat);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  font-size: var(--type-body);
+  line-height: var(--leading-body);
+  color: var(--text-2);
+}
+
+/* Copy wraps beside the action rather than pushing it onto its own row. */
+.strip p {
+  flex: 1 1 360px;
+  max-width: 46em;
+}
+
+.strip :global(.btn) {
+  flex: none;
+}
+
+.strip strong {
+  font-weight: 450;
+  color: var(--text);
+}
+
+/* ---------- application form ---------- */
+.formPanel {
+  padding: 28px;
+  background: var(--surface-flat);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+
+.form {
+  display: grid;
+  gap: 22px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.field {
+  display: grid;
+  gap: 10px;
+  font-size: var(--type-small);
+  line-height: 20px;
+  color: var(--text-2);
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 11px 16px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-control);
+  background: var(--surface-inset);
+  font-size: var(--type-body);
+  line-height: 24px;
+  color: var(--text);
+  outline: none;
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+.field select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--text-2) 50%),
+    linear-gradient(135deg, var(--text-2) 50%, transparent 50%);
+  background-position: calc(100% - 21px) 22px, calc(100% - 16px) 22px;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 36px;
+}
+
+/* Focus: crisp 2px accent edge (1px border + 1px inset), no blur; hover changes nothing. */
+.field input:focus-visible,
+.field select:focus-visible,
+.field textarea:focus-visible {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+  outline: none;
+}
+
+.submitRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 18px;
+  margin-top: 6px;
+}
+
+.hint {
+  font-size: var(--type-small);
+  color: var(--text-2);
+}
+
+/* ---------- direct engineering contact ---------- */
+.direct {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px 24px;
+  padding: 22px 28px;
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+
+.directLabel {
+  font-size: var(--type-small);
+  line-height: var(--leading-small);
+  color: var(--text-2);
+}
+
+.directEmail {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 19px;
+  line-height: 28px;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  transition: color var(--dur-fast) ease;
+}
+
+.directEmail:hover {
+  color: var(--accent);
+}
+
+.directNote {
+  font-size: var(--type-small);
+  line-height: var(--leading-small);
+  color: var(--text-2);
+}
+
+/* ---------- closing ---------- */
+/*
+ * Balanced breathing room: one space token above and below the stack. The bottom
+ * padding subtracts the global footer's margin so the optical gaps match.
+ */
+.closing {
+  --closing-space: clamp(112px, 11cqi, 168px);
+  display: grid;
+  justify-items: center;
+  padding-block: var(--closing-space) calc(var(--closing-space) - var(--section-gap));
+  text-align: center;
+}
+
+.closingTitle {
+  font-size: var(--type-display);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  color: #ffffff;
+}
+
+/* Two-tone sentence pair; wraps naturally rather than on a forced line break. */
+.closingTitle span {
+  color: var(--text-3);
+}
+
+.closingLead {
+  max-width: var(--measure-display-support);
+  margin: var(--space-display-support) 0 var(--space-support-action);
+  font-size: var(--type-display-support);
+  line-height: var(--leading-display-support);
+  letter-spacing: var(--tracking-display-support);
+  color: var(--text-2);
+  text-wrap: balance;
+}
+
+/* ---------- reflow ---------- */
+@container content (max-width: 900px) {
+  .band {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .intro {
+    max-width: 560px;
+  }
+}
+
+@container content (max-width: 640px) {
+  .cards,
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .card {
+    min-height: 0;
+    padding: 22px;
+  }
+
+  .formPanel {
+    padding: 20px;
+  }
+
+  .strip,
+  .direct {
+    padding: 18px 20px;
+  }
+}

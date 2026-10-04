@@ -10,7 +10,7 @@
   z-index: 60;
   min-width: 212px;
   padding: 6px;
-  border: 1px solid rgba(239, 248, 226, 0.24);
+  border: 1px solid var(--rule-strong);
   background: var(--bg);
 }
 
@@ -39,4 +39,9 @@
   background: var(--surface-raised);
   color: var(--accent);
   outline: none;
+}
+
+/* Keyboard focus adds the site's crisp inset rule (hover does not). */
+.item:focus-visible {
+  box-shadow: inset 2px 0 0 var(--accent);
 }

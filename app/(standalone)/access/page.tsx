@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function AccessPage() {
   return (
     <>
-      <DocHeader eyebrow="Three tiers · by application" title="Compute constrained. Qualified allocators only.">
+      <DocHeader title="Compute constrained. Qualified allocators only.">
         <p>
           ATRX is operating in a closed deployment phase. Platform access is granted exclusively to
           qualified enterprise desks and quantitative prosumers.

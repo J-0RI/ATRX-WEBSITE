@@ -1,24 +1,29 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { ENGINEERING_EMAIL } from "@/content/nav";
+import { Suspense, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { CONTACT_EMAIL } from "@/content/nav";
 import styles from "./contact.module.css";
 
 const engagements = [
   { value: "tier-1", label: "Tier I · Prosumer Node" },
-  { value: "tier-2", label: "Tier II · Enterprise Desk" },
+  { value: "tier-2", label: "Tier II · Capital Desk" },
   { value: "tier-3", label: "Tier III · Institutional" },
   { value: "documentation", label: "Ablation Studies / Documentation" },
 ];
 
+/** Follows ?engagement= on load and on in-page pathway links, without making the form wait for the URL. */
+function EngagementFromUrl({ onChange }: { onChange: (value: string) => void }) {
+  const requested = useSearchParams().get("engagement");
+  useEffect(() => {
+    if (requested && engagements.some((e) => e.value === requested)) onChange(requested);
+  }, [requested, onChange]);
+  return null;
+}
+
 /** Composes a message in the visitor's own mail client; nothing is submitted to a server. */
 export default function ContactForm() {
   const [engagement, setEngagement] = useState(engagements[0].value);
-
-  useEffect(() => {
-    const requested = new URLSearchParams(window.location.search).get("engagement");
-    if (requested && engagements.some((e) => e.value === requested)) setEngagement(requested);
-  }, []);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -35,11 +40,14 @@ export default function ContactForm() {
       "Deployment objective:",
       field("objective"),
     ].join("\n");
-    window.location.href = `mailto:${ENGINEERING_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
   return (
-    <form className={styles.form} onSubmit={onSubmit}>
+    <form className={styles.form} onSubmit={onSubmit} aria-label="Access request">
+      <Suspense fallback={null}>
+        <EngagementFromUrl onChange={setEngagement} />
+      </Suspense>
       <div className={styles.row}>
         <label className={styles.field}>
           <span>Name</span>

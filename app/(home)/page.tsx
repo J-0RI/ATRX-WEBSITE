@@ -40,7 +40,7 @@ export default function OverviewPage() {
         <CodeTabs samples={hero} label="Integration example language" className={styles.heroCode} />
       </section>
 
-      <section className={styles.section} aria-labelledby="access-title">
+      <section id="access" className={styles.section} aria-labelledby="access-title">
         <h2 id="access-title" className={styles.sectionTitle}>
           Access
         </h2>
@@ -51,7 +51,7 @@ export default function OverviewPage() {
         </div>
       </section>
 
-      <section className={styles.section} aria-labelledby="quickstart-title">
+      <section id="quickstart" className={styles.section} aria-labelledby="quickstart-title">
         <h2 id="quickstart-title" className={styles.sectionTitle}>
           Jump straight in
         </h2>
@@ -61,7 +61,7 @@ export default function OverviewPage() {
         <Quickstart categories={categories} />
       </section>
 
-      <section className={styles.section} aria-labelledby="directory-title">
+      <section id="directory" className={styles.section} aria-labelledby="directory-title">
         <h2 id="directory-title" className={styles.sectionTitle}>
           Explore the documentation
         </h2>

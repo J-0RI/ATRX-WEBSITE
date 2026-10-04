@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  padding: 26px 24px 24px;
+  padding: 28px;
   border-radius: var(--radius-panel);
   background: var(--surface-flat);
   box-shadow: inset 0 0 0 1px var(--rule);
@@ -29,7 +29,7 @@
 
 .meta {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--type-meta);
   line-height: 18px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -37,10 +37,10 @@
 }
 
 .name {
-  margin-top: 6px;
-  font-size: 21px;
-  font-weight: 450;
-  line-height: 28px;
+  margin-top: 8px;
+  font-size: var(--type-card);
+  font-weight: 500;
+  line-height: 1.2;
   letter-spacing: -0.015em;
   color: #ffffff;
 }
@@ -49,16 +49,16 @@
   margin-top: 6px;
   padding-bottom: 18px;
   border-bottom: 1px solid var(--rule);
-  font-size: 14px;
+  font-size: var(--type-small);
   color: var(--text-2);
 }
 
 .features {
   display: grid;
-  gap: 10px;
-  margin-top: 18px;
-  font-size: 14.5px;
-  line-height: 22px;
+  gap: 12px;
+  margin-top: 20px;
+  font-size: var(--type-body);
+  line-height: var(--leading-body);
 }
 
 .features li {
@@ -69,7 +69,7 @@
 
 .features svg {
   flex: none;
-  margin-top: 4px;
+  margin-top: 6px;
   color: var(--accent);
 }
 

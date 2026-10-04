@@ -1,27 +1,130 @@
+/*
+ * One broad brand rail + exactly four navigation columns on wide desktop.
+ * Each column owns its stacked groups; legal identity follows the full main grid.
+ * The footer continues the page background, without a separate surface or divider.
+ */
 .footer {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px 24px;
   margin-top: var(--section-gap);
-  padding: 21px 0 32px;
-  border-top: 2px solid #1a1e1f;
-  font-size: 12.5px;
-  color: var(--text-3);
 }
 
-.links {
+.inner {
+  max-width: var(--shell-max);
+  margin: 0 auto;
+  /* End the document with a page-edge inset, not another section-sized gap. */
+  padding: 72px 24px 24px;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: minmax(0, 28fr) minmax(0, 72fr);
+  gap: 56px 32px;
+}
+
+.brand {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px 22px;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
 }
 
-.links a {
+.logo {
+  display: inline-flex;
+}
+
+.logo img {
+  height: 28px;
+  width: auto;
+}
+
+.descriptor {
+  max-width: 22ch;
+  margin-top: 24px;
+  font-size: var(--type-small);
+  line-height: var(--leading-small);
+  letter-spacing: -0.005em;
+  color: var(--text-2);
+}
+
+.legal {
+  margin-top: 32px;
+  font-size: 13px;
+  line-height: 20px;
   color: var(--text-3);
+}
+
+.navigation {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 48px 24px;
+  min-width: 0;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+  min-width: 0;
+}
+
+.title {
+  font-size: var(--type-small);
+  font-weight: 400;
+  line-height: var(--leading-small);
+  letter-spacing: -0.005em;
+  color: var(--text-3);
+}
+
+.list {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.link {
+  font-size: var(--type-small);
+  line-height: var(--leading-small);
+  letter-spacing: -0.005em;
+  color: var(--text);
   transition: color var(--dur-fast) ease;
 }
 
-.links a:hover {
+.link:hover {
   color: var(--accent);
+}
+
+/* Keep readable column widths before the wide brand rail would crowd the links. */
+@media (max-width: 1359px) {
+  .main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .inner {
+    padding: 64px 24px 24px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .main {
+    gap: 48px;
+  }
+
+  .inner {
+    padding: 56px clamp(16px, 3vw, 24px) 24px;
+  }
+
+  .navigation {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px 28px;
+  }
+}
+
+@media (max-width: 519px) {
+  .navigation {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+  }
+
+  .column {
+    gap: 32px;
+  }
 }

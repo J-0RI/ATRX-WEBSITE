@@ -49,10 +49,7 @@ const integration = [
 export default function PartnershipsPage() {
   return (
     <>
-      <DocHeader
-        eyebrow="Tenancy · Enterprise desks · Quantitative allocators"
-        title="A parallel intelligence layer for enterprise capital."
-      >
+      <DocHeader title="A parallel intelligence layer for enterprise capital.">
         <p>
           ATRX is engineered to integrate with enterprise trading desks as a centralized
           intelligence core. Validated telemetry reaches the firm&apos;s execution nodes through
@@ -88,7 +85,7 @@ export default function PartnershipsPage() {
           </p>
         </Prose>
         <Actions>
-          <Link href="/contact?engagement=tier-2" className="btn btn-primary">
+          <Link href="/contact?engagement=tier-2#request" className="btn btn-primary">
             Request enterprise deployment
           </Link>
         </Actions>

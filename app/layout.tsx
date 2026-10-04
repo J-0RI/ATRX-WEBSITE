@@ -1,10 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import TopNav from "@/components/TopNav";
-import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
 import ScrollManager from "@/components/ScrollManager";
-import styles from "./shell.module.css";
 import "./globals.css";
 
 const aeonik = localFont({
@@ -48,17 +46,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <TopNav />
-        <div className={styles.shell}>
-          <aside className={styles.rail} aria-label="Documentation">
-            <Sidebar />
-          </aside>
-          <main id="main" className={styles.main}>
-            <div className={styles.content}>
-              {children}
-              <Footer />
-            </div>
-          </main>
-        </div>
+        {/* Each route group supplies its shell: a domain sidebar shell or the standalone shell. */}
+        {children}
+        {/* One global footer, after every shell: below both the sidebar and the main column. */}
+        <Footer />
         <ScrollManager />
       </body>
     </html>

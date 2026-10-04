@@ -3,14 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { sidebar } from "@/content/nav";
+import type { LocalSection } from "@/content/nav";
 import styles from "./Sidebar.module.css";
 
-const anchoredHrefs = new Set(
-  sidebar.flatMap((s) => s.items.map((i) => i.href)).filter((href) => href.includes("#")),
-);
-
-export default function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
+/** Current item within one section: anchors win over their page, page wins when no anchor is selected. */
+export function useActiveItem(section: LocalSection) {
   const pathname = usePathname();
   const [hash, setHash] = useState("");
 
@@ -21,21 +18,54 @@ export default function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
     return () => window.removeEventListener("hashchange", update);
   }, [pathname]);
 
+  const hrefs = section.groups.flatMap((g) => g.items.map((i) => i.href));
+  const anchored = new Set(hrefs.filter((href) => href.includes("#")));
+
   const isActive = (href: string) => {
     const [path, anchor] = href.split("#");
     if (path !== pathname) return false;
     if (anchor) return hash === `#${anchor}`;
-    // A plain page link stays current unless one of its anchors is selected.
-    return !hash || !anchoredHrefs.has(`${pathname}${hash}`);
+    return !hash || !anchored.has(`${pathname}${hash}`);
   };
 
+  const select = (href: string) => {
+    const anchor = href.split("#")[1];
+    setHash(anchor ? `#${anchor}` : "");
+  };
+
+  return { isActive, select };
+}
+
+/** Local navigation for the current domain only. */
+export default function Sidebar({
+  section,
+  onNavigate,
+  showHeader = true,
+  className,
+}: {
+  section: LocalSection;
+  onNavigate?: () => void;
+  showHeader?: boolean;
+  className?: string;
+}) {
+  const { isActive, select } = useActiveItem(section);
+
   return (
-    <nav className={styles.nav}>
-      {sidebar.map((section) => (
-        <div key={section.title} className={styles.section}>
-          <p className={styles.heading}>{section.title}</p>
+    <nav className={`${styles.nav} ${className ?? ""}`} aria-label={`${section.label} navigation`}>
+      {showHeader ? (
+        <div className={styles.context}>
+          <p className={styles.contextTitle}>
+            <span>{section.label}</span>
+            {section.badge ? <span className={styles.badge}>{section.badge}</span> : null}
+          </p>
+          {section.subtitle ? <p className={styles.contextSubtitle}>{section.subtitle}</p> : null}
+        </div>
+      ) : null}
+      {section.groups.map((group, index) => (
+        <div key={group.title ?? index} className={styles.section}>
+          {group.title ? <p className={styles.heading}>{group.title}</p> : null}
           <ul className={styles.list}>
-            {section.items.map((item) => {
+            {group.items.map((item) => {
               const active = isActive(item.href);
               return (
                 <li key={item.href}>
@@ -44,8 +74,7 @@ export default function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
                     className={styles.link}
                     aria-current={active ? "page" : undefined}
                     onClick={() => {
-                      const anchor = item.href.split("#")[1];
-                      setHash(anchor ? `#${anchor}` : "");
+                      select(item.href);
                       onNavigate?.();
                     }}
                   >

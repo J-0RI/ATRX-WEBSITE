@@ -23,12 +23,19 @@
   color: var(--accent);
 }
 
+/* Without an eyebrow the title starts the header. */
+.header > .title:first-child {
+  margin-top: 0;
+}
+
+/* Section-shell intro under the page title: support scale, one step above body. */
 .lead {
   display: grid;
   gap: 14px;
-  margin-top: 22px;
-  font-size: 16px;
-  line-height: 26px;
+  margin-top: 20px;
+  font-size: clamp(17px, 0.15cqi + 15.5px, 18px);
+  line-height: 28px;
+  letter-spacing: -0.005em;
   color: var(--text-2);
 }
 
@@ -190,6 +197,82 @@
 
 .relatedLink:hover {
   color: var(--accent);
+}
+
+/*
+ * Standalone pages (no rail): broader, more assured type. Headlines use the canvas
+ * and wrap only when the width requires it; body copy keeps a reading measure.
+ * Section-shell pages keep the calibrated documentation scale above.
+ */
+:global([data-shell="standalone"]) .header {
+  max-width: none;
+}
+
+:global([data-shell="standalone"]) .eyebrow {
+  font-size: var(--type-meta);
+}
+
+:global([data-shell="standalone"]) .title {
+  font-size: var(--type-display);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+:global([data-shell="standalone"]) .lead {
+  gap: 0.75em;
+  max-width: var(--measure-display-support);
+  margin-top: var(--space-display-support);
+  font-size: var(--type-display-support);
+  line-height: var(--leading-display-support);
+  letter-spacing: var(--tracking-display-support);
+}
+
+:global([data-shell="standalone"]) .sectionTitle {
+  margin-bottom: 26px;
+  font-size: var(--type-section);
+  font-weight: 430;
+  line-height: 1.12;
+}
+
+:global([data-shell="standalone"]) .prose {
+  max-width: 760px;
+  font-size: var(--type-body-lg);
+  line-height: var(--leading-body-lg);
+}
+
+:global([data-shell="standalone"]) .entry {
+  padding: 22px 0;
+}
+
+:global([data-shell="standalone"]) .entryLabel {
+  font-size: var(--type-body-lg);
+  line-height: 26px;
+}
+
+:global([data-shell="standalone"]) .entryTitle {
+  font-size: var(--type-small);
+  line-height: var(--leading-small);
+}
+
+:global([data-shell="standalone"]) .entry dd {
+  max-width: 720px;
+  font-size: var(--type-body);
+  line-height: var(--leading-body);
+}
+
+:global([data-shell="standalone"]) .note {
+  font-size: var(--type-small);
+  line-height: var(--leading-small);
+}
+
+:global([data-shell="standalone"]) .relatedTitle {
+  font-size: var(--type-meta);
+}
+
+:global([data-shell="standalone"]) .relatedLink {
+  min-height: 46px;
+  font-size: var(--type-body);
 }
 
 @container content (max-width: 640px) {

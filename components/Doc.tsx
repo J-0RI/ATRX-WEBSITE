@@ -7,13 +7,13 @@ export function DocHeader({
   title,
   children,
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   children?: React.ReactNode;
 }) {
   return (
     <header className={styles.header}>
-      <p className={styles.eyebrow}>{eyebrow}</p>
+      {eyebrow ? <p className={styles.eyebrow}>{eyebrow}</p> : null}
       <h1 className={styles.title}>{title}</h1>
       {children ? <div className={styles.lead}>{children}</div> : null}
     </header>

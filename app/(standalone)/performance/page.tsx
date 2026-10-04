@@ -25,10 +25,10 @@ const paths = [
 export default function PerformancePage() {
   return (
     <>
-      <DocHeader eyebrow="Phase 1 · Q1 2026 Validation" title="Phase 1 performance metrics.">
+      <DocHeader title="Phase 1 performance metrics.">
         <p>
           The metrics below validate the overarching systemic architecture during its live
-          production deployment.
+          production deployment in Q1 2026.
         </p>
       </DocHeader>
 
@@ -45,7 +45,7 @@ export default function PerformancePage() {
         not guarantee future operational yield.
       </Note>
 
-      <DocSection id="paths" title="By topology · validated paths">
+      <DocSection id="paths" title="Validated paths by topology">
         <div className={styles.tableWrap}>
           <table className={styles.table}>
             <thead>
@@ -92,7 +92,7 @@ export default function PerformancePage() {
       <Related
         links={[
           { label: "Risk disclosure", href: "/risk" },
-          { label: "Request ablation studies", href: "/contact?engagement=documentation" },
+          { label: "Request ablation studies", href: "/contact?engagement=documentation#request" },
           { label: "System architecture", href: "/architecture" },
         ]}
       />

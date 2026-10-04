@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function InstrumentsPage() {
   return (
     <>
-      <DocHeader eyebrow="Instruments" title="Multi asset by architecture. Disciplined by deployment.">
+      <DocHeader title="Multi asset by architecture. Disciplined by deployment.">
         <p>
           Forex, metals, indices, and commodities today. Equities, fixed income, and decentralized
           liquidity tomorrow. The same core architecture deploys everywhere.

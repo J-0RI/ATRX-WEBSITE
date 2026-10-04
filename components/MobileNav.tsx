@@ -3,12 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
-import { primaryNav } from "@/content/nav";
-import Sidebar from "./Sidebar";
+import { documentationMenu, primaryNav, requestAccessMenu, type NavItem } from "@/content/nav";
 import { CloseIcon, MenuIcon } from "./Icons";
 import styles from "./MobileNav.module.css";
 
-/** Below the desktop breakpoint the sidebar moves into a modal drawer. */
+/**
+ * Below the desktop breakpoint the global navigation moves into a modal drawer.
+ * It carries global destinations only; local section links stay in each page's SectionMenu.
+ */
 export default function MobileNav() {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -43,7 +45,7 @@ export default function MobileNav() {
       <dialog
         ref={dialogRef}
         className={styles.drawer}
-        aria-label="Site navigation"
+        aria-label="Global navigation"
         onClick={(e) => {
           if (e.target === dialogRef.current) close();
         }}
@@ -54,18 +56,38 @@ export default function MobileNav() {
               <CloseIcon />
             </button>
           </div>
-          <ul className={styles.primary}>
-            {primaryNav.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} onClick={close}>
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <Sidebar onNavigate={close} />
+          <nav aria-label="Global navigation">
+            <Group title="Documentation" items={documentationMenu} onNavigate={close} />
+            <ul className={styles.primary}>
+              {primaryNav.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} onClick={close} aria-current={pathname === item.href ? "page" : undefined}>
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <Group title="Request access" items={requestAccessMenu} onNavigate={close} />
+          </nav>
         </div>
       </dialog>
     </>
+  );
+}
+
+function Group({ title, items, onNavigate }: { title: string; items: NavItem[]; onNavigate: () => void }) {
+  return (
+    <div className={styles.group}>
+      <p className={styles.groupTitle}>{title}</p>
+      <ul className={styles.groupList}>
+        {items.map((item) => (
+          <li key={item.href}>
+            <Link href={item.href} onClick={onNavigate}>
+              {item.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

@@ -30,7 +30,7 @@ export const tiers: Tier[] = [
       "Systemic guardrails enforced at the API level",
       "Standard JSON webhook delivery",
     ],
-    apply: "/contact?engagement=tier-1",
+    apply: "/contact?engagement=tier-1#request",
   },
   {
     id: "capital-desk",
@@ -51,7 +51,7 @@ export const tiers: Tier[] = [
       "Direct low-latency integration SDKs",
       "Priority latency routing",
     ],
-    apply: "/contact?engagement=tier-2",
+    apply: "/contact?engagement=tier-2#request",
   },
   {
     id: "institutional",
@@ -72,6 +72,6 @@ export const tiers: Tier[] = [
       "Audit-grade telemetry logs for governance",
       "Direct engineering syncs",
     ],
-    apply: "/contact?engagement=tier-3",
+    apply: "/contact?engagement=tier-3#request",
   },
 ];

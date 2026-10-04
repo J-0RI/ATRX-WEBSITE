@@ -32,7 +32,7 @@ const columns: Column[] = [
       { label: "Structural Philosophy", href: "/philosophy" },
       { label: "Phase 1 Validation Metrics", href: "/performance" },
       { label: "Technical library", href: "/documentation" },
-      { label: "Documentation request", href: "/contact?engagement=documentation" },
+      { label: "Documentation request", href: "/contact?engagement=documentation#request" },
     ],
   },
 ];

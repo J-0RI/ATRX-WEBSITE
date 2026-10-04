@@ -46,7 +46,7 @@
   max-height: min(480px, calc(100dvh - 120px));
   margin: 14vh auto auto;
   padding: 0;
-  border: 1px solid rgba(239, 248, 226, 0.24);
+  border: 1px solid var(--rule-strong);
   border-radius: 0;
   background: var(--bg);
   color: var(--text);

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function PhilosophyPage() {
   return (
     <>
-      <DocHeader eyebrow="Philosophy · Essay · 2026" title="ATRX is a self-compiling organism.">
+      <DocHeader title="ATRX is a self-compiling organism.">
         <p>
           ATRX exists for a reason that is simple to state and brutally difficult to execute.
           Institutional-grade quantitative trading has historically been monopolized by funds with
@@ -86,7 +86,6 @@ export default function PhilosophyPage() {
         links={[
           { label: "System architecture", href: "/architecture" },
           { label: "Phase 1 performance", href: "/performance" },
-          { label: "Founder", href: "/founder" },
         ]}
       />
     </>

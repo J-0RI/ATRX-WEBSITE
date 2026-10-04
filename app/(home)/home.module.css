@@ -29,10 +29,11 @@
 }
 
 .heroLead {
-  max-width: 30em;
-  margin-top: 26px;
-  font-size: 16px;
-  line-height: 26px;
+  max-width: 24em;
+  margin-top: 22px;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: -0.008em;
   color: var(--text-2);
 }
 
@@ -62,10 +63,10 @@
 }
 
 .sectionLead {
-  margin-top: -12px;
+  margin-top: calc(var(--space-section-support) - 26px);
   margin-bottom: 26px;
-  font-size: 15px;
-  line-height: 22px;
+  font-size: var(--type-section-support);
+  line-height: var(--leading-section-support);
   color: var(--text-2);
 }
 

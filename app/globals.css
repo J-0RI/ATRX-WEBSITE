@@ -15,14 +15,15 @@
   /* surfaces: page → window → inset; flat is for framed spec objects */
   --bg: #000000;
   --surface: #0e0f11;
-  --surface-flat: #0b0d0e;
+  --surface-flat: #0e1012;   /* raised a step so panels read by surface, not outline */
   --surface-inset: #16181b;
   --surface-raised: rgba(255, 255, 255, 0.05);
 
-  /* text */
+  /* text: secondary carries explanatory copy and must read comfortably (~10:1 on #000);
+     tertiary (~6:1) is for genuinely incidental metadata only */
   --text: #ebede8;
-  --text-2: #9a9b9f;
-  --text-3: #77787c;
+  --text-2: #b0b2b5;
+  --text-3: #8b8d91;
 
   /* accent */
   --accent: #eff8e2;
@@ -33,10 +34,13 @@
   --accent-line: rgba(239, 248, 226, 0.14);
   --accent-mark: rgba(239, 248, 226, 0.4);
 
-  /* lines */
-  --rule: rgba(255, 255, 255, 0.1);
-  --rule-strong: rgba(255, 255, 255, 0.18);
-  --rule-inset: #303338;
+  /* strokes: three roles only. Panels are defined by surface first, edge second.
+     subtle  = panel edges and in-object dividers (a surface edge, not a border)
+     strong  = fields and outlined controls, where the hit area must be legible
+     accent  = focus / current state only (crisp, never blurred, never on hover) */
+  --rule: rgba(255, 255, 255, 0.075);
+  --rule-strong: rgba(255, 255, 255, 0.14);
+  --rule-inset: #272a2e;
   --highlight: inset 0 1px 0 rgba(255, 255, 255, 0.06), inset 0 -1px 0 rgba(255, 255, 255, 0.03);
 
   /* syntax: monochrome structure, accent on calls and literals */
@@ -64,6 +68,7 @@
   --edge: clamp(24px, 2.7vw, 40px);
   --content-max: 1180px;
   --shell-max: 1600px;
+  --standalone-max: 1440px;  /* standalone pages: no rail, so the canvas widens */
 
   /* radius: windows soften, spec objects and list rows stay square */
   --radius-window: clamp(12px, 1.05vw, 20px);
@@ -75,6 +80,38 @@
   --radius-pill: 999px;
 
   --section-gap: clamp(48px, 4.4vw, 68px);
+
+  /* type scale (standalone pages + footer; section shells keep their calibrated sizes).
+     cqi resolves against the page content container where the token is used. */
+  --type-display: clamp(32px, 2.3cqi + 20px, 54px);
+  --type-section: clamp(28px, 1.9cqi + 12px, 40px);
+  --type-card: clamp(22px, 0.5cqi + 16.5px, 26px);
+  --type-lead: clamp(17px, 0.25cqi + 15px, 19px);
+
+  /*
+   * Heading + support composition. Support copy sits directly beneath a heading and is
+   * subordinate but never timid: it scales with its heading family and keeps a broad
+   * measure. Microcopy (labels, meta, legal, captions) never uses these roles.
+   */
+  --type-display-support: clamp(17px, 0.6cqi + 13.5px, 24px);
+  --leading-display-support: 1.5;
+  --tracking-display-support: -0.012em;
+  --measure-display-support: 44em;
+  --type-section-support: clamp(17px, 0.25cqi + 14.5px, 19px);
+  --leading-section-support: 1.55;
+  /* stack rhythm: title → support, then a larger step support → action */
+  --space-display-support: clamp(18px, 0.8cqi + 8px, 26px);
+  --space-section-support: clamp(14px, 0.5cqi + 8px, 18px);
+  --space-support-action: clamp(32px, 1.6cqi + 14px, 44px);
+
+  --type-body-lg: 17px;
+  --leading-body-lg: 28px;
+  --type-body: 16px;
+  --leading-body: 26px;
+  --type-small: 15px;
+  --leading-small: 23px;
+  --type-control: 15px;
+  --type-meta: 12px;
 }
 
 *,
@@ -90,6 +127,9 @@ html {
 }
 
 body {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
   margin: 0;
   background: var(--bg);
   color: var(--text);
@@ -229,9 +269,9 @@ kbd {
   color: var(--text);
 }
 
+/* Hover is a quiet fill change; the stroke never brightens. */
 .btn-secondary:hover {
-  border-color: rgba(239, 248, 226, 0.6);
-  background: rgba(239, 248, 226, 0.04);
+  background: var(--surface-raised);
 }
 
 .btn-secondary:active {
@@ -245,6 +285,13 @@ kbd {
 
 .btn:hover svg {
   transform: translateX(3px);
+}
+
+/* Standalone pages: controls follow the raised readability floor. */
+[data-shell="standalone"] .btn {
+  height: 44px;
+  padding: 0 20px;
+  font-size: var(--type-control);
 }
 
 /* ---------- syntax tokens ---------- */

@@ -22,7 +22,7 @@
 
 .metric dt {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--type-meta);
   line-height: 18px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -32,9 +32,9 @@
 .metric dd {
   margin: 0;
   color: var(--accent);
-  font-size: 26px;
+  font-size: 30px;
   font-weight: 400;
-  line-height: 32px;
+  line-height: 36px;
   letter-spacing: -0.02em;
 }
 
@@ -46,12 +46,12 @@
   width: 100%;
   min-width: 560px;
   border-collapse: collapse;
-  font-size: 14.5px;
+  font-size: var(--type-body);
 }
 
 .table th,
 .table td {
-  padding: 13px 16px 13px 0;
+  padding: 15px 16px 15px 0;
   border-top: 1px solid var(--rule);
   text-align: left;
   font-weight: 400;
@@ -62,7 +62,7 @@
   border-top: 0;
   padding-top: 0;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--type-meta);
   line-height: 19.5px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -74,7 +74,7 @@
 }
 
 .table code {
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .table tbody tr:last-child > * {

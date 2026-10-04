@@ -109,7 +109,7 @@ export default function ArchitecturePage() {
           { label: "Enterprise tenancy", href: "/partnerships" },
           { label: "Instrument topology", href: "/instruments" },
           { label: "Structural philosophy", href: "/philosophy" },
-          { label: "Request the technical whitepaper", href: "/contact?engagement=documentation" },
+          { label: "Request the technical whitepaper", href: "/contact?engagement=documentation#request" },
         ]}
       />
     </>
