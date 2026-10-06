@@ -27,8 +27,17 @@
 
   /* accent */
   --accent: #eff8e2;
-  --accent-hover: #ffffff;
-  --accent-press: #dde6d0;
+  /* Conventional buttons: stationary content over a geometry-only material layer. */
+  --button-primary-bg: var(--accent);
+  --button-primary-ink: var(--accent-ink);
+  --button-secondary-bg: transparent;
+  --button-border: var(--rule-strong);
+  --button-icon: var(--text-3);
+  --button-icon-hover: var(--text);
+  --button-transition: 140ms ease-out;
+  --button-scale-hover: 1.03;
+  --button-scale-active: 1.01;
+  --button-scale-transition: 150ms cubic-bezier(0.2, 0, 0, 1);
   --accent-ink: #000000;
   --accent-soft: rgba(239, 248, 226, 0.06);
   --accent-line: rgba(239, 248, 226, 0.14);
@@ -68,7 +77,7 @@
   --edge: clamp(24px, 2.7vw, 40px);
   --content-max: 1180px;
   --shell-max: 1600px;
-  --standalone-max: 1440px;  /* standalone pages: no rail, so the canvas widens */
+  --standalone-max: 1600px;  /* shared outer bound; no rail-reserved canvas */
 
   /* radius: windows soften, spec objects and list rows stay square */
   --radius-window: clamp(12px, 1.05vw, 20px);
@@ -85,7 +94,7 @@
      cqi resolves against the page content container where the token is used. */
   --type-display: clamp(32px, 2.3cqi + 20px, 54px);
   --type-section: clamp(28px, 1.9cqi + 12px, 40px);
-  --type-card: clamp(22px, 0.5cqi + 16.5px, 26px);
+  --type-card: clamp(22px, 2.1cqi, 26px);
   --type-lead: clamp(17px, 0.25cqi + 15px, 19px);
 
   /*
@@ -97,6 +106,7 @@
   --leading-display-support: 1.5;
   --tracking-display-support: -0.012em;
   --measure-display-support: 44em;
+  --measure-hero-lead: 32em;
   --type-section-support: clamp(17px, 0.25cqi + 14.5px, 19px);
   --leading-section-support: 1.55;
   /* stack rhythm: title → support, then a larger step support → action */
@@ -236,7 +246,11 @@ kbd {
 }
 
 /* ---------- shared buttons ---------- */
+/* Surface scales independently; labels stay fixed and marked CTA arrows translate. */
 .btn {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -244,51 +258,82 @@ kbd {
   height: 40px;
   padding: 0 18px;
   border-radius: var(--radius-control);
+  background: transparent;
   font-size: 14px;
   font-weight: 450;
   letter-spacing: -0.005em;
   white-space: nowrap;
-  transition: background-color var(--dur-fast) ease, border-color var(--dur-fast) ease, color var(--dur-fast) ease;
 }
 
-.btn-primary {
-  background: var(--accent);
-  color: var(--accent-ink);
-}
-
-.btn-primary:hover {
-  background: var(--accent-hover);
-}
-
-.btn-primary:active {
-  background: var(--accent-press);
-}
-
-.btn-secondary {
-  border: 1px solid var(--rule-strong);
-  color: var(--text);
-}
-
-/* Hover is a quiet fill change; the stroke never brightens. */
-.btn-secondary:hover {
-  background: var(--surface-raised);
-}
-
-.btn-secondary:active {
-  background: var(--accent-soft);
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: inherit;
+  background: var(--button-surface, transparent);
+  transform: scale(1);
+  transform-origin: center center;
+  transition: transform var(--button-scale-transition);
 }
 
 .btn svg {
   flex: none;
-  transition: transform var(--dur-std) var(--ease);
 }
 
-.btn:hover svg {
-  transform: translateX(3px);
+/* Explicit directional CTA arrows move independently of the stationary label. */
+.btn-arrow {
+  transition: transform var(--button-scale-transition);
+}
+
+.btn-primary {
+  --button-surface: var(--button-primary-bg);
+  color: var(--button-primary-ink);
+}
+
+.btn-secondary {
+  --button-surface: var(--button-secondary-bg);
+  /* Preserve the existing layout box; the visible edge lives on the surface. */
+  border: 1px solid transparent;
+  color: var(--text);
+}
+
+.btn-secondary::before {
+  inset: -1px;
+  border: 1px solid var(--button-border);
+}
+
+@media (hover: hover) {
+  .btn:not(:disabled, [aria-disabled="true"]):hover::before {
+    transform: scale(var(--button-scale-hover));
+  }
+
+  .btn:not(:disabled, [aria-disabled="true"]):hover .btn-arrow {
+    transform: translateX(3px);
+  }
+}
+
+/* Pressed feedback compresses only the surface; all colors remain unchanged. */
+.btn:not(:disabled, [aria-disabled="true"]):active::before {
+  transform: scale(var(--button-scale-active));
+}
+
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
 /* Standalone pages: controls follow the raised readability floor. */
 [data-shell="standalone"] .btn {
+  height: 44px;
+  padding: 0 20px;
+  font-size: var(--type-control);
+}
+
+/* Resting control scale for section pages; material interaction is unchanged. */
+[data-shell="section"] .btn {
   height: 44px;
   padding: 0 20px;
   font-size: var(--type-control);

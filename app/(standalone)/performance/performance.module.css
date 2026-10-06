@@ -13,7 +13,7 @@
   flex-direction: column-reverse;
   justify-content: flex-end;
   gap: 6px;
-  padding: 22px 24px;
+  padding: 28px;
 }
 
 .metric + .metric {
@@ -32,9 +32,9 @@
 .metric dd {
   margin: 0;
   color: var(--accent);
-  font-size: 30px;
+  font-size: 34px;
   font-weight: 400;
-  line-height: 36px;
+  line-height: 40px;
   letter-spacing: -0.02em;
 }
 

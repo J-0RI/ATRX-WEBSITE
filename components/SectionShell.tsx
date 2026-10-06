@@ -6,7 +6,7 @@ import styles from "./Shell.module.css";
 /** Domain shell: local sidebar for the current section + bounded content canvas. */
 export default function SectionShell({ section, children }: { section: LocalSection; children: React.ReactNode }) {
   return (
-    <div className={styles.shell}>
+    <div className={styles.shell} data-shell="section">
       <div className={styles.rail}>
         <Sidebar section={section} />
       </div>

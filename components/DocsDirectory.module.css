@@ -5,7 +5,7 @@
 }
 
 .title {
-  font-size: 21px;
+  font-size: var(--section-card-title);
   font-weight: 450;
   line-height: 28px;
   letter-spacing: -0.015em;
@@ -25,8 +25,8 @@
   min-height: 40px;
   padding: 8px 0;
   border-top: 1px solid var(--accent-line);
-  font-size: 14.5px;
-  line-height: 22px;
+  font-size: var(--section-body);
+  line-height: var(--section-body-leading);
   color: var(--text-2);
   transition: color var(--dur-fast) ease;
 }

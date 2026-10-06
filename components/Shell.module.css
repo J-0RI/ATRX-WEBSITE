@@ -10,6 +10,19 @@
 }
 
 .shell {
+  /* One bounded canvas for all four local-navigation domains. */
+  --section-gutter: 32px;
+  --section-display: clamp(36px, 4.25cqi, 54px);
+  --section-heading: clamp(28px, 3cqi, 36px);
+  --section-card-title: clamp(22px, 2.1cqi, 26px);
+  --section-lead: clamp(18px, 1.8cqi, 22px);
+  --section-body: 16px;
+  --section-body-leading: 26px;
+  --section-small: 15px;
+  --section-small-leading: 24px;
+  --section-code: 14.5px;
+  --section-code-leading: 22px;
+  --section-panel-padding: clamp(20px, 2.5cqi, 32px);
   /* Clears the fixed global navbar on load; content then scrolls beneath it. */
   padding-top: var(--nav-h);
   display: grid;
@@ -40,12 +53,11 @@
 
 .main {
   min-width: 0;
-  padding: 33px var(--edge) 0 var(--gutter);
+  padding: 33px var(--edge) 0 var(--section-gutter);
 }
 
 .content {
   container: content / inline-size;
-  max-width: var(--content-max);
   min-width: 0;
 }
 

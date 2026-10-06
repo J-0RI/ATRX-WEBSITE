@@ -30,7 +30,7 @@ export default function OverviewPage() {
           <div className={styles.heroActions}>
             <Link href="/contact" className="btn btn-primary">
               Request access
-              <ChevronRight size={14} />
+              <ChevronRight size={14} className="btn-arrow" />
             </Link>
             <Link href="/architecture" className="btn btn-secondary">
               Read architecture

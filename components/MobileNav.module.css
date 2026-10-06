@@ -69,9 +69,10 @@
   transition: color var(--dur-fast) ease, border-color var(--dur-fast) ease;
 }
 
-.close:hover {
-  color: var(--text);
-  border-color: var(--rule-strong);
+@media (hover: hover) {
+  .close:hover {
+    color: var(--button-icon-hover);
+  }
 }
 
 .primary {

@@ -11,9 +11,8 @@
 .context {
   display: grid;
   gap: 2px;
-  padding: 5px 8px 16px;
-  margin-bottom: 14px;
-  border-bottom: 1px solid var(--rule);
+  padding: 5px 8px 0;
+  margin-bottom: 8px;
 }
 
 .contextTitle {

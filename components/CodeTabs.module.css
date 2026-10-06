@@ -72,13 +72,15 @@
   width: 32px;
   height: 32px;
   border: 1px solid var(--rule);
-  color: var(--text-3);
-  transition: color var(--dur-fast) ease, background-color var(--dur-fast) ease;
+  color: var(--button-icon);
+  transition: color var(--button-transition);
 }
 
-.copy:hover {
-  color: var(--text);
-  background: var(--surface-raised);
+/* Icon control: icon tone only; the hairline frame and fill stay put. */
+@media (hover: hover) {
+  .copy:hover {
+    color: var(--button-icon-hover);
+  }
 }
 
 .copy[aria-label="Copied"] {
@@ -111,4 +113,23 @@
   display: block;
   width: max-content;
   min-width: 100%;
+}
+
+/* Technical surfaces follow the section-page readability floor. */
+:global([data-shell="section"]) .rail {
+  height: 56px;
+  flex-shrink: 0;
+}
+
+:global([data-shell="section"]) .tab {
+  font-size: var(--section-small);
+}
+
+:global([data-shell="section"]) .pre {
+  font-size: var(--section-code);
+  line-height: var(--section-code-leading);
+}
+
+:global([data-shell="section"]) .body {
+  padding: 24px;
 }
