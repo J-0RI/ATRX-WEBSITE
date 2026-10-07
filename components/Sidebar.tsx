@@ -2,41 +2,20 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import type { LocalSection } from "@/content/nav";
 import styles from "./Sidebar.module.css";
 
-/** Current item within one section: anchors win over their page, page wins when no anchor is selected. */
+/** Product selection is exclusively pathname-based; hashes never change it. */
 export function useActiveItem(section: LocalSection) {
   const pathname = usePathname();
-  const [hash, setHash] = useState("");
-
-  useEffect(() => {
-    const update = () => setHash(window.location.hash);
-    update();
-    window.addEventListener("hashchange", update);
-    return () => window.removeEventListener("hashchange", update);
-  }, [pathname]);
-
-  const hrefs = section.groups.flatMap((g) => g.items.map((i) => i.href));
-  const anchored = new Set(hrefs.filter((href) => href.includes("#")));
-
-  const isActive = (href: string) => {
-    const [path, anchor] = href.split("#");
-    if (path !== pathname) return false;
-    if (anchor) return hash === `#${anchor}`;
-    return !hash || !anchored.has(`${pathname}${hash}`);
-  };
-
-  const select = (href: string) => {
-    const anchor = href.split("#")[1];
-    setHash(anchor ? `#${anchor}` : "");
-  };
-
-  return { isActive, select };
+  const selected = section.groups.flatMap((group) => group.items)
+    .filter((item) => pathname === item.href || pathname.startsWith(`${item.href}/`))
+    .sort((a, b) => b.href.length - a.href.length)[0]?.href;
+  return { isActive: (href: string) => href === selected };
 }
 
-/** Local navigation for the current domain only. */
+/** Persistent local product navigation, also reused by the mobile section menu. */
 export default function Sidebar({
   section,
   onNavigate,
@@ -48,11 +27,25 @@ export default function Sidebar({
   showHeader?: boolean;
   className?: string;
 }) {
-  const { isActive, select } = useActiveItem(section);
+  const { isActive } = useActiveItem(section);
+  const pathname = usePathname();
+  const navRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const nav = navRef.current;
+    const viewport = nav?.closest<HTMLElement>("[data-sidebar-viewport]");
+    const active = nav?.querySelector<HTMLElement>('[aria-current="page"]');
+    if (!viewport || !active || !viewport.clientHeight) return;
+    // Adjust only the rail, and only when clipped. Never scroll the document.
+    const rail = viewport.getBoundingClientRect();
+    const row = active.getBoundingClientRect();
+    if (row.top < rail.top) viewport.scrollTop += row.top - rail.top;
+    else if (row.bottom > rail.bottom) viewport.scrollTop += row.bottom - rail.bottom;
+  }, [pathname]);
 
   return (
-    <nav className={`${styles.nav} ${className ?? ""}`} aria-label={`${section.label} navigation`}>
-      {showHeader ? (
+    <nav ref={navRef} className={`${styles.nav} ${className ?? ""}`} aria-label={`${section.label} navigation`}>
+      {showHeader && !section.hideContext ? (
         <div className={styles.context}>
           <p className={styles.contextTitle}>
             <span>{section.label}</span>
@@ -74,7 +67,6 @@ export default function Sidebar({
                     className={styles.link}
                     aria-current={active ? "page" : undefined}
                     onClick={() => {
-                      select(item.href);
                       onNavigate?.();
                     }}
                   >

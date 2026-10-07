@@ -78,7 +78,7 @@ export const quickstart: QuickstartCategory[] = [
       { tier: "I", text: "Standard JSON webhook delivery" },
       { tier: "II", text: "Direct low-latency integration SDKs" },
     ],
-    href: "/partnerships#webhooks",
+    href: "/delivery/zero-latency-webhooks",
     samples: [
       {
         id: "python",
@@ -130,7 +130,7 @@ export async function handleAtrxPayload(request) {
       { tier: "I", text: "Systemic guardrails enforced at the API level" },
       { tier: "II", text: "Custom regime-gating and drawdown parameterization" },
     ],
-    href: "/partnerships#risk-mandates",
+    href: "/control/native-risk-mandates",
     samples: [
       {
         id: "python",
@@ -183,7 +183,7 @@ export function applyDeskMandates(payload) {
       "Every execution payload carries a regime tag and a structural identifier.",
     points: ["Regime tag on every payload", "Structural identifier", "P&L by catalyst and volatility state"],
     tiers: [],
-    href: "/partnerships#attribution",
+    href: "/capabilities/causal-attribution",
     samples: [
       {
         id: "python",
@@ -228,7 +228,7 @@ console.table(Object.fromEntries(pnl))`,
       "Decision logs, state classifications, and risk veto events are exported in machine-readable formats.",
     points: ["Decision logs", "State classifications", "Risk veto events"],
     tiers: [{ tier: "III", text: "Audit-grade telemetry logs for governance" }],
-    href: "/partnerships#ledgers",
+    href: "/delivery/audit-grade-ledgers",
     samples: [
       {
         id: "python",

@@ -10,7 +10,7 @@
 }
 
 .shell {
-  /* One bounded canvas for all four local-navigation domains. */
+  /* One bounded canvas for the persistent product navigation. */
   --section-gutter: 32px;
   --section-display: clamp(36px, 4.25cqi, 54px);
   --section-heading: clamp(28px, 3cqi, 36px);
@@ -33,22 +33,24 @@
 }
 
 .rail {
-  position: sticky;
-  top: var(--nav-h);
-  align-self: start;
-  /* max-height (not height): the rail scrolls when tall but never props the shell open,
-     so short pages end at their content and the global footer follows directly. */
-  max-height: calc(100dvh - var(--nav-h));
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  padding: 17px 0 40px 16px;
-  scrollbar-width: thin;
-  scrollbar-color: transparent transparent;
+  min-width: 0;
 }
 
-.rail:hover,
-.rail:focus-within {
+.railViewport {
+  position: sticky;
+  top: var(--nav-h);
+  /* Use only the index's natural height when it fits; otherwise constrain its
+     native scroll area. The stretched outer column bounds it above the footer. */
+  max-height: calc(100dvh - var(--nav-h) - 24px);
+  overflow-y: auto;
+  overscroll-behavior-y: auto;
+  padding: 17px 0 40px 16px;
+  scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.14) transparent;
+}
+
+.railViewport:focus-visible {
+  outline-offset: -2px;
 }
 
 .main {

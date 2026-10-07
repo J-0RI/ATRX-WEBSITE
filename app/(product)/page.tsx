@@ -59,6 +59,7 @@ export default function OverviewPage() {
           Webhooks, guardrails, attribution, and audit telemetry inside your existing stack
         </p>
         <Quickstart categories={categories} />
+        <div className={styles.heroActions}><Link href="/quickstart" className="btn btn-secondary">Open the quickstart guide</Link></div>
       </section>
 
       <section id="directory" className={styles.section} aria-labelledby="directory-title">

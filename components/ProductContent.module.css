@@ -1,0 +1,65 @@
+.example {
+  min-width: 0;
+}
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  counter-reset: step;
+}
+.steps li {
+  counter-increment: step;
+  min-width: 0;
+  padding: var(--section-panel-padding);
+  background: var(--surface-flat);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  color: var(--text-2);
+  font-size: var(--section-body);
+  line-height: var(--section-body-leading);
+}
+.steps li::before {
+  content: counter(step, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: var(--type-meta);
+  color: var(--text-3);
+}
+.steps h3 {
+  margin: 16px 0 12px;
+  color: var(--text);
+  font-size: var(--section-card-title);
+  line-height: 1.25;
+  font-weight: 450;
+  letter-spacing: -0.02em;
+}
+.comparison {
+  overflow-x: auto;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--section-body);
+  line-height: var(--section-body-leading);
+  text-align: left;
+}
+.table caption {
+  text-align: left;
+  color: var(--text-2);
+  margin-bottom: 20px;
+}
+.table th, .table td {
+  padding: 20px 16px;
+  vertical-align: top;
+  border-bottom: 1px solid var(--accent-line);
+  min-width: 160px;
+}
+.table th {
+  color: var(--text);
+  font-weight: 450;
+}
+.table td {
+  color: var(--text-2);
+}
+.table th:first-child, .table td:first-child { padding-left: 0; }
+@container content (max-width: 820px) {
+  .steps { grid-template-columns: minmax(0, 1fr); }
+}

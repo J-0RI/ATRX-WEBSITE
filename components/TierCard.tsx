@@ -30,7 +30,7 @@ export default function TierCard({ tier }: { tier: Tier }) {
         <Link href={tier.apply} className="btn btn-primary">
           Apply
         </Link>
-        <Link href={`/access#${tier.id}`} className="btn btn-secondary">
+        <Link href={`/access/${tier.id}`} className="btn btn-secondary">
           Tier details
         </Link>
       </div>

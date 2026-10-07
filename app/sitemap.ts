@@ -1,8 +1,9 @@
 import type { MetadataRoute } from "next";
+import { productSection } from "@/content/nav";
 
 const BASE = "https://atrx.tech";
 
-// Mirrors the published atrx.tech sitemap, plus /instruments.
+// Preserve published URLs and add the independent product destinations.
 const routes: { path: string; priority: number; changeFrequency: "monthly" | "yearly" }[] = [
   { path: "/", priority: 1, changeFrequency: "monthly" },
   { path: "/philosophy", priority: 0.8, changeFrequency: "monthly" },
@@ -17,7 +18,8 @@ const routes: { path: string; priority: number; changeFrequency: "monthly" | "ye
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return routes.map((r) => ({
+  const productRoutes = productSection.groups.flatMap((group) => group.items).filter((item) => !routes.some((route) => route.path === item.href)).map((item) => ({ path: item.href, priority: 0.7, changeFrequency: "monthly" as const }));
+  return [...routes, ...productRoutes].map((r) => ({
     url: `${BASE}${r.path === "/" ? "/" : r.path}`,
     changeFrequency: r.changeFrequency,
     priority: r.priority,

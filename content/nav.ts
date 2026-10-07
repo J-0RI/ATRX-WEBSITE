@@ -14,32 +14,51 @@ export type NavGroup = {
 };
 
 /**
- * Local navigation owned by one ATRX domain. The top navbar moves between domains;
- * a section sidebar only moves within its own domain and is never a site map.
+ * Shared navigation shape. The product rail owns independent product routes;
+ * global-domain topic records are retained below for global search only.
  */
 export type LocalSection = {
-  id: "home" | "documentation" | "architecture" | "partnerships";
+  id: "product" | "documentation" | "architecture" | "partnerships";
   label: string;
   subtitle?: string;
   badge?: string;
+  hideContext?: boolean;
   groups: NavGroup[];
 };
 
-export const sections = {
-  home: {
-    id: "home",
-    label: "Get Started",
-    groups: [
-      {
-        items: [
-          { label: "Overview", href: "/", searchLabel: "ATRX home" },
-          { label: "Access", href: "/#access", searchLabel: "Access overview" },
-          { label: "Quickstart", href: "/#quickstart", keywords: "jump straight in webhooks guardrails" },
-          { label: "Documentation", href: "/#directory", searchLabel: "Explore the documentation" },
-        ],
-      },
-    ],
-  },
+/** The only primary product navigation. Global domains stay in the navbar. */
+export const productSection: LocalSection = {
+  id: "product",
+  label: "Product",
+  hideContext: true,
+  groups: [
+    { title: "Get Started", items: [
+      { label: "Overview", href: "/overview", searchLabel: "ATRX product overview", keywords: "operating model intelligence controls delivery" },
+      { label: "Quickstart", href: "/quickstart", keywords: "onboarding Python JavaScript payload integration" },
+      { label: "Access Tiers", href: "/access", keywords: "Prosumer Node Capital Desk Institutional pricing comparison" },
+    ] },
+    { title: "Access Modes", items: [
+      { label: "Prosumer Node", href: "/access/prosumer-node", keywords: "Tier I single tenant FX metals" },
+      { label: "Capital Desk", href: "/access/capital-desk", keywords: "Tier II enterprise cohort SDK drawdown" },
+      { label: "Institutional", href: "/access/institutional", keywords: "Tier III dedicated cluster AWS GCP governance" },
+    ] },
+    { title: "Intelligence", items: [
+      { label: "Systemic Macro Intelligence", href: "/capabilities/market-intelligence", keywords: "causal transmission perception synthesis projection" },
+      { label: "Regime & State Analysis", href: "/capabilities/regime-state-analysis", keywords: "conditioning classification state gating" },
+      { label: "Causal Attribution", href: "/capabilities/causal-attribution", keywords: "P&L regime tags structural identifiers" },
+      { label: "Market Coverage", href: "/capabilities/market-coverage", keywords: "instruments FX metals indices energy live preparing roadmap" },
+    ] },
+    { title: "Control & Delivery", items: [
+      { label: "Risk & Control", href: "/capabilities/risk-control", keywords: "veto exposure capital sovereignty" },
+      { label: "Native Risk Mandates", href: "/control/native-risk-mandates", keywords: "guardrails drawdown blackout limits" },
+      { label: "Zero-Latency Webhooks", href: "/delivery/zero-latency-webhooks", keywords: "JSON signed schema replay delivery" },
+      { label: "Audit-Grade Ledgers", href: "/delivery/audit-grade-ledgers", keywords: "telemetry governance decision logs veto events" },
+    ] },
+  ],
+};
+
+/** Detailed global-domain topics remain searchable, independently of the product rail. */
+const domainSearchSections = {
   documentation: {
     id: "documentation",
     label: "Documentation",
@@ -123,12 +142,12 @@ export const sections = {
       },
     ],
   },
-} satisfies Record<LocalSection["id"], LocalSection>;
+} satisfies Record<Exclude<LocalSection["id"], "product">, LocalSection>;
 
 /** Focused single-purpose destinations: no local navigation, but globally searchable. */
 const standalonePages: (NavItem & { section: string })[] = [
   { label: "Phase 1 Performance", href: "/performance", section: "Performance", keywords: "Q1 2026 validation sharpe metrics" },
-  { label: "Access Tiers", href: "/access", section: "Access", keywords: "Prosumer Node Capital Desk Institutional pricing" },
+  { label: "ATRX home", href: "/", section: "Home" },
   { label: "Request Access", href: "/contact", section: "Request access", keywords: "contact engineering apply application" },
   { label: "Risk Disclosure", href: "/risk", section: "Disclosure" },
 ];
@@ -155,11 +174,16 @@ export const requestAccessMenu: NavItem[] = [
   { label: "Contact engineering", href: "/contact" },
 ];
 
-/** Global search index: every domain plus standalone pages. Search is global; sidebars are local. */
+// Deeper product guides replace their matching enterprise-anchor search results.
+// Generic labels such as Overview must still retain each global domain's landing page.
+const productTopicLabels = new Set(productSection.groups.slice(2).flatMap((group) => group.items.map((item) => item.label)));
+
+/** Global search includes product guides, domain topics and standalone pages once each. */
 export const searchIndex = [
-  ...Object.values(sections).flatMap((section: LocalSection) =>
+  ...productSection.groups.flatMap((group) => group.items.map(({ searchLabel, ...item }) => ({ ...item, label: searchLabel ?? item.label, section: group.title ?? productSection.label }))),
+  ...Object.values(domainSearchSections).flatMap((section: LocalSection) =>
     section.groups.flatMap((group) =>
-      group.items.map(({ searchLabel, ...item }) => ({
+      group.items.filter((item) => !productTopicLabels.has(item.label)).map(({ searchLabel, ...item }) => ({
         ...item,
         label: searchLabel ?? item.label,
         section: section.label,

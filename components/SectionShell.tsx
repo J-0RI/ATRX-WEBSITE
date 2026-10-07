@@ -8,7 +8,9 @@ export default function SectionShell({ section, children }: { section: LocalSect
   return (
     <div className={styles.shell} data-shell="section">
       <div className={styles.rail}>
-        <Sidebar section={section} />
+        <div className={styles.railViewport} data-sidebar-viewport tabIndex={0} role="region" aria-label={`${section.label} index`}>
+          <Sidebar section={section} />
+        </div>
       </div>
       <main id="main" className={styles.main}>
         <div className={styles.content}>

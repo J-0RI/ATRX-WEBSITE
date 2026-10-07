@@ -74,6 +74,9 @@
 }
 
 .action {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
   margin-top: auto;
   padding-top: 28px;
 }
