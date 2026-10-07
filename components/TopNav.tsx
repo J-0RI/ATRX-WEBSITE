@@ -7,10 +7,12 @@ import MenuButton from "./MenuButton";
 import MobileNav from "./MobileNav";
 import Search from "./Search";
 import { ChevronDown } from "./Icons";
+import { useNavDropdowns } from "./useNavDropdowns";
 import styles from "./TopNav.module.css";
 
 export default function TopNav() {
   const pathname = usePathname();
+  const dropdowns = useNavDropdowns();
 
   return (
     <header className={styles.header}>
@@ -22,6 +24,8 @@ export default function TopNav() {
 
         <nav className={styles.center} aria-label="Global navigation">
           <MenuButton
+            id="documentation"
+            controller={dropdowns}
             label={
               <>
                 Documentation
@@ -50,6 +54,8 @@ export default function TopNav() {
               Request access
             </Link>
             <MenuButton
+              id="request-access"
+              controller={dropdowns}
               label={<ChevronDown size={14} />}
               ariaLabel="More access options"
               items={requestAccessMenu}

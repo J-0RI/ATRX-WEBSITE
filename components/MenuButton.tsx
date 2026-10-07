@@ -1,11 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef } from "react";
 import type { NavItem } from "@/content/nav";
+import type { NavDropdowns } from "./useNavDropdowns";
 import styles from "./MenuButton.module.css";
 
 type Props = {
+  id: string;
+  controller: NavDropdowns;
   label: React.ReactNode;
   ariaLabel?: string;
   items: NavItem[];
@@ -13,9 +16,13 @@ type Props = {
   align?: "start" | "end";
 };
 
-/** Disclosure-style navigation menu: Esc, outside click and Tab-away close it. */
-export default function MenuButton({ label, ariaLabel, items, buttonClassName, align = "start" }: Props) {
-  const [open, setOpen] = useState(false);
+/**
+ * Disclosure-style navigation menu. Trigger and panel form one pointer region;
+ * hover intent, click/tap, Esc, outside click and Tab-away share one controller.
+ */
+export default function MenuButton({ id, controller, label, ariaLabel, items, buttonClassName, align = "start" }: Props) {
+  const open = controller.openId === id;
+  const { close } = controller;
   const rootRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
@@ -27,30 +34,26 @@ export default function MenuButton({ label, ariaLabel, items, buttonClassName, a
     links[(index + links.length) % links.length].focus();
   };
 
-  const close = useCallback((restoreFocus: boolean) => {
-    setOpen(false);
-    if (restoreFocus) buttonRef.current?.focus();
-  }, []);
-
   useEffect(() => {
     if (!open) return;
     const onPointer = (e: PointerEvent) => {
-      if (!rootRef.current?.contains(e.target as Node)) close(false);
+      if (!rootRef.current?.contains(e.target as Node)) close(id);
     };
     document.addEventListener("pointerdown", onPointer);
     return () => document.removeEventListener("pointerdown", onPointer);
-  }, [open, close]);
+  }, [open, close, id]);
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     const links = Array.from(listRef.current?.querySelectorAll<HTMLAnchorElement>("a") ?? []);
     const current = links.indexOf(document.activeElement as HTMLAnchorElement);
     if (e.key === "Escape" && open) {
       e.preventDefault();
-      close(true);
+      close(id);
+      buttonRef.current?.focus();
     } else if (e.key === "ArrowDown") {
       e.preventDefault();
       if (!open) {
-        setOpen(true);
+        controller.open(id, "keyboard");
         requestAnimationFrame(() => focusItem(0));
       } else focusItem(current + 1);
     } else if (e.key === "ArrowUp" && open) {
@@ -64,8 +67,10 @@ export default function MenuButton({ label, ariaLabel, items, buttonClassName, a
       ref={rootRef}
       className={styles.root}
       onKeyDown={onKeyDown}
+      onPointerEnter={(e) => controller.pointerEnter(id, e)}
+      onPointerLeave={(e) => controller.pointerLeave(id, e, rootRef.current)}
       onBlur={(e) => {
-        if (open && !rootRef.current?.contains(e.relatedTarget as Node)) setOpen(false);
+        if (open && !rootRef.current?.contains(e.relatedTarget as Node)) close(id);
       }}
     >
       <button
@@ -75,7 +80,7 @@ export default function MenuButton({ label, ariaLabel, items, buttonClassName, a
         aria-expanded={open}
         aria-controls={menuId}
         aria-label={ariaLabel}
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => controller.toggle(id)}
       >
         {label}
       </button>
@@ -83,11 +88,11 @@ export default function MenuButton({ label, ariaLabel, items, buttonClassName, a
         ref={listRef}
         id={menuId}
         className={`${styles.menu} ${align === "end" ? styles.end : ""}`}
-        hidden={!open}
+        data-open={open || undefined}
       >
         {items.map((item) => (
           <li key={item.href}>
-            <Link href={item.href} className={styles.item} onClick={() => setOpen(false)}>
+            <Link href={item.href} className={styles.item} onClick={() => close(id)}>
               {item.label}
             </Link>
           </li>

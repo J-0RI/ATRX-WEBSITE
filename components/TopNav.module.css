@@ -54,6 +54,14 @@
   --nav-cell-text: rgba(235, 237, 232, 0.72);
   --nav-cell-size: 14px;
   --nav-cell-gap: 1px;
+  /* Dropdown material: a borderless near-black step above page and panel surfaces. */
+  --nav-dropdown-bg: #141517;
+  --nav-dropdown-shadow: 0 18px 40px -10px rgba(0, 0, 0, 0.7);
+  --nav-dropdown-radius: 0;
+  --nav-dropdown-padding: 6px;
+  --nav-dropdown-offset: 6px;
+  --nav-dropdown-open-duration: 140ms;
+  --nav-dropdown-close-duration: 100ms;
   display: flex;
   align-items: center;
   height: 100%;

@@ -33,7 +33,7 @@ export const productSection: LocalSection = {
   hideContext: true,
   groups: [
     { title: "Get Started", items: [
-      { label: "Overview", href: "/overview", searchLabel: "ATRX product overview", keywords: "operating model intelligence controls delivery" },
+      { label: "Overview", href: "/", searchLabel: "ATRX Overview", keywords: "home operating model intelligence controls delivery" },
       { label: "Quickstart", href: "/quickstart", keywords: "onboarding Python JavaScript payload integration" },
       { label: "Access Tiers", href: "/access", keywords: "Prosumer Node Capital Desk Institutional pricing comparison" },
     ] },
@@ -147,7 +147,6 @@ const domainSearchSections = {
 /** Focused single-purpose destinations: no local navigation, but globally searchable. */
 const standalonePages: (NavItem & { section: string })[] = [
   { label: "Phase 1 Performance", href: "/performance", section: "Performance", keywords: "Q1 2026 validation sharpe metrics" },
-  { label: "ATRX home", href: "/", section: "Home" },
   { label: "Request Access", href: "/contact", section: "Request access", keywords: "contact engineering apply application" },
   { label: "Risk Disclosure", href: "/risk", section: "Disclosure" },
 ];

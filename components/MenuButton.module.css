@@ -3,19 +3,48 @@
   display: inline-flex;
 }
 
+/*
+ * Borderless elevated navigation surface: separated from the page by tone and a
+ * broad neutral shadow, never by a perimeter stroke. Sized by its own content.
+ */
 .menu {
   position: absolute;
-  top: calc(100% + 2px);
+  top: calc(100% + var(--nav-dropdown-offset));
   left: 0;
   z-index: 60;
   min-width: 212px;
-  padding: 6px;
-  border: 1px solid var(--rule-strong);
-  background: var(--bg);
+  padding: var(--nav-dropdown-padding);
+  border-radius: var(--nav-dropdown-radius);
+  background: var(--nav-dropdown-bg);
+  box-shadow: var(--nav-dropdown-shadow);
+  /* Closed: removed from view, tab order and the accessibility tree. */
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-3px);
+  transition:
+    opacity var(--nav-dropdown-close-duration) ease,
+    transform var(--nav-dropdown-close-duration) ease,
+    visibility 0s linear var(--nav-dropdown-close-duration);
 }
 
-.menu[hidden] {
-  display: none;
+.menu[data-open] {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--nav-dropdown-open-duration) ease,
+    transform var(--nav-dropdown-open-duration) ease,
+    visibility 0s;
+}
+
+/* Invisible pointer bridge across the visual gap: trigger and panel stay one region. */
+.menu::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: var(--nav-dropdown-offset);
 }
 
 .end {
@@ -26,9 +55,9 @@
 .item {
   display: flex;
   align-items: center;
-  min-height: 32px;
-  padding: 0 10px;
-  font-size: 13.5px;
+  min-height: 34px;
+  padding: 0 12px;
+  font-size: var(--nav-cell-size, 14px);
   color: var(--text-2);
   white-space: nowrap;
   transition: color var(--dur-fast) ease, background-color var(--dur-fast) ease;
@@ -37,11 +66,19 @@
 .item:hover,
 .item:focus-visible {
   background: var(--surface-raised);
-  color: var(--accent);
+  color: var(--text);
   outline: none;
 }
 
 /* Keyboard focus adds the site's crisp inset rule (hover does not). */
 .item:focus-visible {
   box-shadow: inset 2px 0 0 var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu,
+  .menu[data-open] {
+    transform: none;
+    transition: none;
+  }
 }
