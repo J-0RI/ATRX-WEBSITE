@@ -2,8 +2,12 @@
 
 import { useId, useState } from "react";
 import type { ReactNode } from "react";
+import { ArrowLeftRight, ChartNoAxesColumn, FileSearch, GitBranch, Landmark, Radar, Shield } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { onTabListKeyDown } from "./tabs";
 import { monitoredTopics, research, riskReview, savedBriefs } from "./PracticeData";
+import { AppToolbar, IconTip, Notice, UserMessage, WorkflowConclusion } from "./AtrxUi";
 import styles from "./Practice.module.css";
 
 /*
@@ -15,6 +19,8 @@ import styles from "./Practice.module.css";
 
 type Composition = {
   name: string;
+  /** Function-switcher icon (decision-20261018-function-switcher-icons); Lucide only. */
+  icon: LucideIcon;
   tone: "sage" | "slate" | "stone" | "moss";
   layout: "chartLeft" | "docRight" | "reviewLeft" | "recordRight";
   context: { body: string; task: string; inputs: string[] };
@@ -23,6 +29,7 @@ type Composition = {
 const compositions: Composition[] = [
   {
     name: "Market monitoring",
+    icon: Radar,
     tone: "sage",
     layout: "chartLeft",
     context: {
@@ -33,6 +40,7 @@ const compositions: Composition[] = [
   },
   {
     name: "Macro research",
+    icon: FileSearch,
     tone: "slate",
     layout: "docRight",
     context: {
@@ -43,6 +51,7 @@ const compositions: Composition[] = [
   },
   {
     name: "Risk review",
+    icon: Shield,
     tone: "stone",
     layout: "reviewLeft",
     context: {
@@ -53,6 +62,7 @@ const compositions: Composition[] = [
   },
   {
     name: "Decision support",
+    icon: GitBranch,
     tone: "moss",
     layout: "recordRight",
     context: {
@@ -86,13 +96,7 @@ function ContextWindow({ title, c }: { title: string; c: Composition["context"] 
 function AppWindow({ view, location, children, crop }: { view: string; location: string; children: ReactNode; crop?: boolean }) {
   return (
     <section className={styles.app} data-crop={crop || undefined} aria-label={`ATRX ${view} preview`}>
-      <header className={styles.appBar}>
-        <img src="/brand/atrx.svg" width={44} height={9} alt="ATRX" />
-        <span className={styles.crumb}>
-          {view} <span aria-hidden="true">/</span> <strong>{location}</strong>
-        </span>
-        <span className={styles.sample}>Illustrative data</span>
-      </header>
+      <AppToolbar section={view} page={location} />
       <div className={styles.appBody} tabIndex={0} role="region" aria-label={`${view} workspace`}>{children}</div>
     </section>
   );
@@ -102,101 +106,361 @@ function DocIcon() {
   return <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2H4v12h8V4.5L9.5 2Zm0 0v3H12M6 8h4M6 10.5h4" /></svg>;
 }
 
-/* Monitoring: a topic inbox alongside one selected development. */
+/* Monitoring rail icons, one per stream: central bank policy, currency exchange, economic data. */
+const railIcons = { "surv-01": Landmark, "surv-02": ArrowLeftRight, "surv-03": ChartNoAxesColumn };
+
+/* Monitoring: an icon navigation rail alongside the selected stream's detailed brief. */
 function MarketMonitoringPreview() {
   const [selected, setSelected] = useState(0);
   const topic = monitoredTopics[selected];
   return (
-    <AppWindow view="Monitor" location="Monitored developments">
-      <div className={styles.monitoring}>
-        <div className={styles.topicRail}>
-          <h4>Following</h4>
-          <ul aria-label="Monitored topics">
-            {monitoredTopics.map((item, i) => <li key={item.name}><button type="button" aria-pressed={selected === i} onClick={() => setSelected(i)}>{item.name}</button></li>)}
-          </ul>
-        </div>
-        <article className={styles.development}>
-          <span className={styles.meta}>{topic.period}</span>
-          <h4>{selected === 0 ? "Monetary policy outlook" : topic.name}</h4>
-          <h5>{topic.title}</h5>
-          <p>{topic.observation}</p>
-          <section className={styles.relatedObservations} aria-label="Related observations">
-            <h5>Related observations</h5>
-            <dl>{topic.related.map((item) => <div key={item.label}><dt>{item.label}</dt><dd>{item.text}</dd></div>)}</dl>
-          </section>
-          <div className={styles.openQuestion}><h5>Still to investigate</h5><p>{topic.open}</p></div>
-          <p className={styles.inputLine}>Inputs: {topic.inputs}</p>
+    <AppWindow view="Monitor" location="Surveillance brief">
+      <div className={styles.monitoringWorkspace}>
+        {/* Left: icon navigation rail (decision-20261018-monitoring-icon-rail) */}
+        <TooltipProvider delayDuration={200}>
+          <div className={styles.surveillanceRail}>
+            <ul className={styles.railList} role="tablist" aria-orientation="vertical" aria-label="Monitored market streams">
+              {monitoredTopics.map((item, i) => {
+                const Icon = railIcons[item.id as keyof typeof railIcons];
+                return (
+                  <li key={item.id} role="presentation">
+                    <IconTip label={item.name}>
+                      <button
+                        type="button"
+                        role="tab"
+                        aria-selected={selected === i}
+                        aria-label={item.name}
+                        className={styles.railItemButton}
+                        onClick={() => setSelected(i)}
+                      >
+                        <Icon aria-hidden="true" />
+                      </button>
+                    </IconTip>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </TooltipProvider>
+
+        {/* Right: Selected intelligence brief */}
+        <article className={styles.monitoringBrief} aria-label={`${topic.name}: Intelligence Brief`}>
+          {/* Header strip */}
+          <div className={styles.briefHeader}>
+            <div className={styles.briefTags}>
+              <span className={styles.briefCategory}>{topic.category}</span>
+              <span className={styles.briefDivider} aria-hidden="true">/</span>
+              <span className={styles.briefTopic}>{topic.name}</span>
+              <span className={styles.briefDivider} aria-hidden="true">/</span>
+              <span className={styles.briefPeriod}>{topic.period}</span>
+            </div>
+            <span className={styles.briefStatusBadge}>Surveillance update</span>
+          </div>
+
+          {/* Headline & change */}
+          <h4 className={styles.briefHeadline}>{topic.headline}</h4>
+          <p className={styles.briefChange}>{topic.change}</p>
+
+          {/* Verified Observations Matrix */}
+          <div className={styles.observationsBlock}>
+            <h5 className={styles.blockHeading}>Empirical observations</h5>
+            <div className={styles.observationsGrid}>
+              {topic.observations.map((obs) => (
+                <div key={obs.aspect} className={styles.observationCard}>
+                  <strong className={styles.obsAspect}>{obs.aspect}</strong>
+                  <p className={styles.obsDetail}>{obs.detail}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Analytical Context */}
+          <Notice tone="info" title="Analytical transmission context">
+            {topic.analyticalContext}
+          </Notice>
+
+          {/* Unresolved Interpretation */}
+          <div className={styles.unresolvedQuestionRow}>
+            <span className={styles.unresolvedLabel}>Unresolved interpretation</span>
+            <p className={styles.unresolvedText}>{topic.unresolved}</p>
+          </div>
+
+          {/* Workflow conclusion: Surveillance continuation */}
+          <WorkflowConclusion
+            label="Surveillance continuation"
+            primaryText={topic.continuation}
+            supportingText={topic.continuationContext}
+          />
         </article>
       </div>
     </AppWindow>
   );
 }
 
-/* Research: a submitted request, open investigation plan and working excerpt. */
+/* Research: a submitted request, structured process plan, working excerpt and evidence gap. */
 function MacroResearchPreview() {
   return (
     <AppWindow view="Research" location="Investigation plan" crop>
       <div className={styles.researchPlanner}>
-        <div className={styles.submittedRequest}><span className={styles.meta}>Research request</span><p>{research.request}</p></div>
-        <section className={styles.investigation}>
-          <h4>Research plan</h4>
-          <ol>{research.plan.map((step) => <li key={step}>{step}</li>)}</ol>
-        </section>
-        <section className={styles.workingOutput}>
-          <span className={styles.meta}>Working output</span>
-          <h5>Transmission to test</h5>
-          <p>{research.output}</p>
-          <p className={styles.evidenceGap}>{research.gap}</p>
-        </section>
-        <div className={styles.followupQuestion}><span className={styles.meta}>Follow-up question</span><p>{research.followup}</p></div>
+        {/* A. User request: distinct compact user-input surface */}
+        <UserMessage>{research.request}</UserMessage>
+
+        {/* B. ATRX response: short transitional sentence */}
+        <div className={styles.systemResponseRow}>
+          <div className={styles.systemAvatar} aria-hidden="true">
+            <img className={styles.systemIdentityIcon} src="/brand/atrx-response-icon.svg" width={18} height={18} alt="" />
+          </div>
+          <p className={styles.systemResponseText}>{research.response}</p>
+        </div>
+
+        {/* C. Structured research-plan module: integrated vertical progression */}
+        <div className={styles.planModule}>
+          <div className={styles.planModuleHeader}>
+            <div className={styles.planTitleWrap}>
+              <svg className={styles.planHeaderIcon} viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M2.5 4h11M2.5 8h11M2.5 12h7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+              <h4 className={styles.planModuleTitle}>{research.planTitle}</h4>
+            </div>
+            <span className={styles.planModuleScope}>4-phase investigation</span>
+          </div>
+
+          <div className={styles.planTimeline}>
+            {research.plan.map((step, idx) => {
+              const isCompleted = step.status === "completed";
+              const isActive = step.status === "active";
+              return (
+                <div
+                  key={step.phase}
+                  className={styles.planStep}
+                  data-status={step.status}
+                >
+                  <div className={styles.stepTrack}>
+                    <div className={styles.stepNode}>
+                      {isCompleted ? (
+                        <svg viewBox="0 0 12 12" className={styles.checkIcon} aria-hidden="true">
+                          <path d="M2.5 6.2 4.8 8.5 9.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                        </svg>
+                      ) : isActive ? (
+                        <span className={styles.activeDot} />
+                      ) : (
+                        <span className={styles.pendingDot} />
+                      )}
+                    </div>
+                    {idx < research.plan.length - 1 && <div className={styles.stepConnector} />}
+                  </div>
+                  <div className={styles.stepContent}>
+                    <div className={styles.stepHeader}>
+                      <span className={styles.stepPhaseTitle}>{step.phase}</span>
+                      {isActive && <span className={styles.activePhaseTag}>In progress</span>}
+                      {isCompleted && <span className={styles.completedPhaseTag}>Reviewed</span>}
+                    </div>
+                    <p className={styles.stepDetail}>{step.detail}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* D. Research-output excerpt: substantive analytical findings and missing evidence */}
+        <div className={styles.analyticalExcerpt}>
+          <div className={styles.excerptHeader}>
+            <span className={styles.excerptMeta}>Working finding</span>
+            <span className={styles.excerptTag}>Transmission mechanism</span>
+          </div>
+          <p className={styles.findingParagraph}>{research.finding}</p>
+
+          <Notice tone="info" title="Evidence still required" className={styles.excerptNotice}>
+            {research.gap}
+          </Notice>
+        </div>
+
+        {/* E. Workflow conclusion: Next action */}
+        <WorkflowConclusion
+          label="Next action"
+          primaryText={research.action}
+          supportingText={research.actionContext}
+        />
       </div>
     </AppWindow>
   );
 }
 
-/* Risk: a formal assessment memorandum, without dashboard chrome. */
+/* Risk: an institutional assessment memorandum with criteria matrix and precedence veto. */
 function RiskReviewPreview() {
   return (
     <AppWindow view="Risk" location="Assessment memorandum" crop>
       <article className={styles.assessment}>
+        {/* Memo header */}
         <header className={styles.assessmentHeader}>
-          <h4>Risk assessment</h4>
-          <p>Proposed FX exposure during a policy event</p>
-          <dl><div><dt>Review basis</dt><dd>Event calendar · Desk mandate</dd></div><div><dt>Review state</dt><dd>Stopped by macro blackout</dd></div></dl>
+          <div className={styles.assessmentTitleRow}>
+            <div>
+              <span className={styles.memoRef}>{riskReview.ref} · {riskReview.desk}</span>
+              <h4 className={styles.assessmentTitle}>{riskReview.title}</h4>
+            </div>
+            <span className={styles.vetoBadge}>Veto enforced</span>
+          </div>
+
+          <dl className={styles.memoMetaGrid}>
+            <div>
+              <dt>Review basis</dt>
+              <dd>{riskReview.basis}</dd>
+            </div>
+            <div>
+              <dt>Precedence rule</dt>
+              <dd>Macro blackout takes absolute precedence</dd>
+            </div>
+          </dl>
         </header>
-        <section><h5>Assessment context</h5><p>{riskReview.context}</p></section>
-        <section>
-          <h5>Conditions reviewed</h5>
+
+        {/* Section 1: Assessment Context */}
+        <section className={styles.assessmentSection}>
+          <h5 className={styles.sectionHeader}>Assessment context</h5>
+          <p className={styles.contextStatement}>{riskReview.context}</p>
+        </section>
+
+        {/* Section 2: Evaluation Criteria Table */}
+        <section className={styles.assessmentSection}>
+          <div className={styles.sectionHeaderRow}>
+            <h5 className={styles.sectionHeader}>Mandate evaluation criteria</h5>
+            <span className={styles.evalCount}>4 criteria screened</span>
+          </div>
+
           <table className={styles.assessmentTable}>
-            <thead><tr><th scope="col">Condition & basis</th><th scope="col">Finding</th></tr></thead>
-            <tbody>{riskReview.conditions.map((condition) => <tr key={condition.name}><th scope="row">{condition.name}<span>{condition.basis}</span></th><td>{condition.finding}</td></tr>)}</tbody>
+            <thead>
+              <tr>
+                <th scope="col" className={styles.colCriterion}>Criterion & policy basis</th>
+                <th scope="col" className={styles.colFinding}>Observed condition</th>
+                <th scope="col" className={styles.colOutcome}>Review state</th>
+              </tr>
+            </thead>
+            <tbody>
+              {riskReview.conditions.map((item) => {
+                const isVeto = item.status === "veto";
+                return (
+                  <tr key={item.name} className={isVeto ? styles.vetoRow : undefined}>
+                    <td className={styles.colCriterion}>
+                      <strong>{item.name}</strong>
+                      <span>{item.basis}</span>
+                    </td>
+                    <td className={styles.colFinding}>{item.finding}</td>
+                    <td className={styles.colOutcome}>
+                      <span className={isVeto ? styles.vetoTag : styles.unevaluatedTag}>
+                        {item.outcome}
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
           </table>
         </section>
-        <section><h5>Review finding</h5><p>{riskReview.finding}</p></section>
-        <section><h5>Conditions for reassessment</h5><p>{riskReview.next}</p></section>
+
+        {/* Section 3: Reasoned Finding */}
+        <section className={styles.assessmentSection}>
+          <h5 className={styles.sectionHeader}>Review finding & limit rationale</h5>
+          <Notice tone="warning" title="Review stopped at macro blackout">
+            {riskReview.finding}
+          </Notice>
+        </section>
+
+        {/* Section 4: Conditions for Reassessment */}
+        <section className={styles.assessmentSection}>
+          <h5 className={styles.sectionHeader}>Conditions for reassessment</h5>
+          <ul className={styles.reassessmentList}>
+            {riskReview.reassessment.map((rule) => (
+              <li key={rule}>
+                <span className={styles.bulletNode} aria-hidden="true" />
+                <span>{rule}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Section 5: Workflow conclusion: Further review */}
+        <WorkflowConclusion
+          label="Further review"
+          primaryText={riskReview.nextStep}
+          supportingText={riskReview.authority}
+        />
       </article>
     </AppWindow>
   );
 }
 
-/* Decisions: a compact library of prepared work, with a selected document below. */
+/* Decisions: an executive decision-brief workspace with supporting reasoning and uncertainty limits. */
 function DecisionSupportPreview() {
   const [selected, setSelected] = useState(0);
   const brief = savedBriefs[selected];
   return (
-    <AppWindow view="Decisions" location="Prepared materials">
+    <AppWindow view="Decisions" location="Executive decision brief">
       <div className={styles.decisionWorkspace}>
-        <header><h4>Decision workspace</h4><p className={styles.meta}>Prepared materials for desk review</p></header>
-        <ul className={styles.documentLibrary} aria-label="Prepared review materials">
-          {savedBriefs.map((item, i) => <li key={item.name}><button type="button" aria-pressed={selected === i} onClick={() => setSelected(i)}><DocIcon /><span><strong>{item.name}</strong><span>{item.caption}</span></span></button></li>)}
-        </ul>
-        <article className={styles.selectedBrief}>
-          <span className={styles.meta}>{brief.name}</span>
-          <h5>{brief.title}</h5>
-          <p>{brief.summary}</p>
-          <h6>Review focus</h6>
-          <ul>{brief.points.map((point) => <li key={point}>{point}</li>)}</ul>
-          <div className={styles.briefNext}><h6>Next review</h6><p>{brief.next}</p></div>
+        {/* Document Switcher Rail at Top */}
+        <div className={styles.briefSelectorBar}>
+          <span className={styles.selectorLabel}>Prepared briefs:</span>
+          <div className={styles.briefTabs} role="tablist" aria-label="Prepared decision briefs">
+            {savedBriefs.map((item, idx) => {
+              const isSelected = selected === idx;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={isSelected}
+                  className={styles.briefTabButton}
+                  onClick={() => setSelected(idx)}
+                >
+                  <DocIcon />
+                  <span className={styles.briefTabName}>{item.name}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Selected Working Document */}
+        <article className={styles.briefDocument} aria-label={`${brief.title}: Decision Brief`}>
+          {/* Header */}
+          <header className={styles.briefDocHeader}>
+            <div className={styles.briefMetaRow}>
+              <span className={styles.briefRefBadge}>{brief.id} · {brief.meta}</span>
+              <span className={styles.briefDeskBadge}>Prepared for desk review</span>
+            </div>
+            <h4 className={styles.briefDocTitle}>{brief.title}</h4>
+            <span className={styles.briefCaption}>{brief.caption}</span>
+          </header>
+
+          {/* Region B: Executive Conclusion */}
+          <div className={styles.executiveSummaryBlock}>
+            <span className={styles.executiveLabel}>Executive takeaway</span>
+            <p className={styles.executiveText}>{brief.executiveSummary}</p>
+          </div>
+
+          {/* Region C: Supporting Reasoning Pillars */}
+          <div className={styles.reasoningSection}>
+            <h5 className={styles.reasoningHeading}>Supporting analytical reasoning</h5>
+            <div className={styles.reasoningPillars}>
+              {brief.pillars.map((pillar) => (
+                <div key={pillar.label} className={styles.pillarCard}>
+                  <strong className={styles.pillarLabel}>{pillar.label}</strong>
+                  <p className={styles.pillarText}>{pillar.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Region D: Limitations & Uncertainties */}
+          <Notice tone="info" title="Key uncertainties & review considerations">
+            {brief.uncertainty}
+          </Notice>
+
+          {/* Region E: Workflow conclusion: Next consideration */}
+          <WorkflowConclusion
+            label="Next consideration"
+            primaryText={brief.nextAction}
+            supportingText="Capital authority remains with desk"
+          />
         </article>
       </div>
     </AppWindow>
@@ -214,7 +478,10 @@ export default function Practice() {
       <div className={styles.tabs} role="tablist" aria-label="ATRX functions" onKeyDown={(e) => onTabListKeyDown(e, ids, active, setActive)}>
         {compositions.map((c, i) => (
           <button key={c.name} type="button" role="tab" id={ids[i]} aria-selected={active === i} aria-controls={`${uid}-panel-${i}`} tabIndex={active === i ? 0 : -1} onClick={() => setActive(i)}>
-            {c.name}
+            <span className={styles.tabLabel}>
+              <c.icon aria-hidden="true" strokeWidth={1.75} />
+              {c.name}
+            </span>
           </button>
         ))}
       </div>

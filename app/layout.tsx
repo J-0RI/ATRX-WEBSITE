@@ -4,6 +4,7 @@ import TopNav from "@/components/TopNav";
 import Footer from "@/components/Footer";
 import ScrollManager from "@/components/ScrollManager";
 import "./globals.css";
+import "./ui.css";
 
 const aeonik = localFont({
   src: "./fonts/AeonikExtendedProVF.woff2",

@@ -1,0 +1,257 @@
+/*
+ * Haldane + ATRX rules for the shadcn/ui Bubble and Alert primitives
+ * (decision-20261018-user-bubble-standard, decision-20261018-alert-standard).
+ * The essential layout is declared here as well as by the shadcn utilities, so the
+ * components hold their structure even before the Tailwind layer loads.
+ */
+
+/* ---------- user message (Bubble): right-aligned, black, white text ---------- */
+.bubble {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+  width: fit-content;
+  max-width: 80%;
+  margin-left: auto;
+}
+
+.bubbleContent {
+  padding: 10px 14px;
+  border: 0;
+  border-radius: var(--radius-inner);
+  background: #000000;
+  box-shadow: none;
+  color: #ffffff;
+  font-size: var(--app-body, 12.5px);
+  font-weight: var(--app-regular, 400);
+  line-height: var(--app-leading, 1.5);
+  letter-spacing: normal;
+  text-align: left;
+}
+
+@media (max-width: 600px) {
+  .bubble {
+    max-width: 92%;
+  }
+}
+
+/* ---------- notice (Alert): unfilled; icon left, title + description right ---------- */
+/* Typography follows the application roles (decision-20261018-app-typography-invariant):
+   title = subsection heading, description = secondary body. */
+.alert {
+  display: grid;
+  grid-template-columns: 14px minmax(0, 1fr);
+  align-items: start;
+  column-gap: 10px;
+  row-gap: 2px;
+  padding: 12px 14px;
+  border: 1px solid var(--ui-border);
+  border-radius: var(--radius-inner);
+  background: transparent;
+  box-shadow: none;
+  color: var(--ui-foreground);
+  font-size: var(--app-body, 12.5px);
+  line-height: var(--app-leading, 1.5);
+}
+
+/* Icon sits in its own column on the title's first line (12.5px × 1.5 ≈ 19px line). */
+.alert > svg {
+  grid-column: 1;
+  grid-row: 1;
+  width: 14px;
+  height: 14px;
+  margin-top: 2px;
+  translate: none;
+  color: var(--ui-foreground);
+}
+
+.alertTitle {
+  display: block;
+  grid-column: 2;
+  grid-row: 1;
+  min-height: 0;
+  overflow: visible;
+  -webkit-line-clamp: none;
+  font-weight: var(--app-medium, 500);
+  letter-spacing: normal;
+  color: var(--ui-foreground);
+}
+
+.alertDescription {
+  display: block;
+  grid-column: 2;
+  grid-row: 2;
+  font-size: var(--app-body, 12.5px);
+  font-weight: var(--app-regular, 400);
+  line-height: var(--app-leading, 1.5);
+  color: var(--ui-muted-foreground);
+}
+
+/* ---------- application toolbar: lights · centred logo · breadcrumb ---------- */
+/* Equal side tracks reserve clearance; the logo anchors to the entire toolbar.
+   The original SVG has symmetric artwork bounds, so no optical offset is needed. */
+.toolbar {
+  position: relative;
+  display: grid;
+  flex: none;
+  grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1fr);
+  align-items: center;
+  column-gap: 12px;
+  min-height: 38px;
+  padding: 8px 16px;
+  background: #000000;
+}
+
+.lights {
+  display: flex;
+  justify-self: start;
+  gap: 6px;
+}
+
+.lights i {
+  display: block;
+  width: 10px;
+  height: 10px;
+  flex: none;
+  border: 0;
+  background: #8f8f8f;
+  border-radius: 50%;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  width: 44px;
+  height: auto;
+}
+
+.crumbs {
+  grid-column: 3;
+  justify-self: end;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.crumbList {
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  line-height: 1.25;
+  color: var(--text-3);
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.crumbParent {
+  flex: none;
+  white-space: nowrap;
+  color: var(--text-3);
+}
+
+.crumbSeparator {
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-3);
+}
+
+.crumbSeparator > svg {
+  width: 9.5px;
+  height: 9.5px;
+}
+
+/* Long workspace names truncate; the logo never moves. */
+.crumbCurrent {
+  min-width: 0;
+}
+
+.crumbPage {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 450;
+  color: var(--text);
+}
+
+/* Narrow windows (the preview's `application` container): tighten the gutters first, then
+   drop the secondary parent label so the current workspace stays readable. Logo stays centred. */
+@container application (max-width: 600px) {
+  .toolbar {
+    column-gap: 8px;
+  }
+
+  .crumbList {
+    gap: 3.5px;
+  }
+}
+
+@container application (max-width: 420px) {
+  .crumbParent,
+  .crumbSeparator {
+    display: none;
+  }
+}
+
+/* ---------- tooltip: compact neutral label for icon-only controls ---------- */
+/* Portalled to <body>, outside `.app`, so the application tokens carry fallbacks. */
+.tooltip {
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: var(--ui-foreground);
+  color: var(--ui-background);
+  font-size: var(--app-meta, 11.5px);
+  font-weight: var(--app-regular, 400);
+  line-height: 1.4;
+  letter-spacing: normal;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ---------- workflow conclusion: context label · primary statement · supporting context ---------- */
+/* decision-20261018-workflow-conclusion-standard:
+   Unified editorial hierarchy aligned to a single left content axis.
+   Divider is a restrained 1px hairline matching --work-rule; no cards or panels. */
+.conclusion {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: var(--space-paragraph, 16px);
+  border-top: 1px solid var(--work-rule, #e3e3e3);
+  width: 100%;
+}
+
+.conclusionLabel {
+  font-size: var(--app-label, 11px);
+  font-weight: var(--app-medium, 500);
+  line-height: var(--app-leading, 1.5);
+  letter-spacing: var(--app-label-tracking, 0.06em);
+  text-transform: uppercase;
+  color: var(--app-muted, #666666);
+  margin-bottom: 4px;
+}
+
+.conclusionPrimary {
+  margin: 0;
+  font-size: var(--app-body, 12.5px);
+  font-weight: var(--app-regular, 400);
+  line-height: var(--app-leading, 1.5);
+  letter-spacing: normal;
+  color: var(--app-ink, #171717);
+  max-width: 60ch;
+  overflow-wrap: break-word;
+}
+
+.conclusionSupporting {
+  margin-top: 6px;
+  font-size: var(--app-meta, 11.5px);
+  font-weight: var(--app-regular, 400);
+  line-height: var(--app-leading, 1.5);
+  letter-spacing: normal;
+  color: var(--app-muted, #666666);
+  max-width: 60ch;
+  overflow-wrap: break-word;
+}

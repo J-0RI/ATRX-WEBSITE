@@ -2,92 +2,250 @@
  * Concepts: /capabilities/market-intelligence, /control/native-risk-mandates,
  * /delivery/audit-grade-ledgers. No external provenance or default desk limits implied.
  */
+
+/* =========================================================================
+   1. Market Monitoring: Intelligence Surveillance Feed & Detailed Briefing
+   ========================================================================= */
 export const monitoredTopics = [
   {
+    id: "surv-01",
     name: "Policy expectations",
-    title: "Policy-path revision needs relative context",
-    period: "Policy-review window",
-    observation: "The desk note describes a lower expected US policy path. The comparison with euro-area expectations is still incomplete.",
-    related: [
-      { label: "Relative policy", text: "A US revision alone does not establish a change in the relative rate path." },
-      { label: "Funding conditions", text: "Dollar liquidity could reinforce or offset the proposed policy channel." },
+    category: "Rate guidance",
+    period: "Policy review window",
+    headline: "Downward revision in expected US policy path requires cross-market relative context",
+    change: "Market-implied terminal rate shifted downward by 34 bps across the 12-month forward curve, initiating cross-asset repricing.",
+    observations: [
+      {
+        aspect: "Yield differential",
+        detail: "US-German 2Y spread compressed 14 bps, narrowing the dollar's nominal rate advantage against the euro.",
+      },
+      {
+        aspect: "Funding conditions",
+        detail: "Short-term cross-currency basis swaps remained stable, indicating orderly liquidity despite the rate shift.",
+      },
+      {
+        aspect: "Positioning skew",
+        detail: "Commercial positioning data shows moderate net dollar long exposure, leaving open the risk of unwinding flows.",
+      },
     ],
-    open: "Does the relative policy shift persist once funding conditions are considered?",
-    inputs: "Desk policy note · Market-state notes",
+    analyticalContext: "A downward revision in expected US policy rates tends to weaken the dollar via relative yield compression. However, if partner central banks adjust guidance simultaneously, the effective bilateral rate differential remains bounded.",
+    unresolved: "Does the yield compression reflect genuine policy divergence, or are global central banks preparing symmetrical easing cycles?",
+    continuation: "Track upcoming European Central Bank and Bank of Japan commentary to evaluate relative policy transmission.",
+    continuationContext: "Scheduled central bank communications calendar",
   },
   {
+    id: "surv-02",
     name: "Currency conditions",
-    title: "Separate the common driver from local conditions",
-    period: "Cross-market review window",
-    observation: "The working comparison asks whether related currencies share a policy explanation or respond to different local conditions.",
-    related: [
-      { label: "Policy divergence", text: "Compare the policy outlook on both sides of each currency relationship." },
-      { label: "Local conditions", text: "Retain growth and funding differences in the interpretation." },
+    category: "FX transmission",
+    period: "Cross-market window",
+    headline: "Dollar Index retreat exceeds short-end rate adjustment across major currency pairs",
+    change: "The DXY index declined 1.4% over five trading sessions, outpacing the move implied solely by 2-year sovereign yield spreads.",
+    observations: [
+      {
+        aspect: "Transmission asymmetry",
+        detail: "EUR/USD appreciated faster than nominal rate differentials alone predict; JPY failed to participate in dollar weakness.",
+      },
+      {
+        aspect: "Reserve flows",
+        detail: "No evidence of sovereign reserve rebalancing or official liquidity intervention across monitored currencies.",
+      },
+      {
+        aspect: "Risk-asset correlation",
+        detail: "Equity volatility spiked mid-week without driving customary defensive dollar inflows, indicating weaker safe-haven demand.",
+      },
     ],
-    open: "Would a common dollar explanation still hold after local conditions are included?",
-    inputs: "Cross-market notes · Policy comparison",
+    analyticalContext: "When currency movements diverge from interest-rate differentials, secondary transmission channels—such as risk-sentiment regimes or funding-market imbalances—frequently dominate immediate pricing.",
+    unresolved: "Whether the haven channel remains impaired, or if current market pricing simply reflects temporary asset rotation.",
+    continuation: "Monitor cross-currency swap spreads and risk premia in European corporate credit to verify funding stability.",
+    continuationContext: "Continuous intraday cross-currency liquidity feed",
   },
   {
+    id: "surv-03",
     name: "Inflation developments",
-    title: "An inflation signal needs a transmission path",
-    period: "Economic-observation review",
-    observation: "The research note separates a change in inflation expectations from the policy response that markets may anticipate.",
-    related: [
-      { label: "Expected response", text: "Identify which part of the policy path the observation could affect." },
-      { label: "Alternative drivers", text: "Check whether growth or supply conditions offer another explanation." },
+    category: "Macro evidence",
+    period: "Macro data release",
+    headline: "Core services disinflation reinforces market expectations of an easing trajectory",
+    change: "Latest core services CPI registered 0.22% month-over-month, confirming a deceleration in the primary persistence component.",
+    observations: [
+      {
+        aspect: "Underlying momentum",
+        detail: "3-month annualized core inflation slowed to 2.4%, approaching central bank operating tolerance bands.",
+      },
+      {
+        aspect: "Breakeven rates",
+        detail: "5-year inflation breakevens held steady at 2.18%, signaling well-anchored medium-term inflation expectations.",
+      },
+      {
+        aspect: "Wage indicators",
+        detail: "Private-sector wage growth metrics moderated to 3.6% annualized, reducing prospective cost-push pressures.",
+      },
     ],
-    open: "Which evidence connects the inflation observation to a durable policy revision?",
-    inputs: "Economic-observation note · Research outline",
+    analyticalContext: "Disinflation in labor-intensive services provides necessary empirical validation for rate cuts, distinguishing fundamental easing from preemptive or reactive liquidity provisions.",
+    unresolved: "Which threshold of labor-market softening is required before the central bank accelerates its path?",
+    continuation: "Compare monthly employment reports and unit labor cost revisions against the stated reaction function.",
+    continuationContext: "Scheduled monthly labor and inflation releases",
   },
 ];
 
+/* =========================================================================
+   2. Macro Research: Structured Investigation Workspace
+   ========================================================================= */
 export const research = {
-  request: "Examine how a lower expected US policy path could influence currency conditions. Separate the transmission mechanism from what still needs evidence.",
+  request: "Examine how a lower expected US policy path could influence currency conditions. Separate the economic transmission mechanism from competing explanations and identify the evidence needed to distinguish them.",
+  response: "I've organized the investigation around the principal transmission channels and the evidence needed to test them.",
+  planTitle: "US Policy and Currency Conditions",
   plan: [
-    "Review policy expectations and the relevant economic observations.",
-    "Examine related currency and funding conditions.",
-    "Compare the policy channel with competing explanations.",
-    "Identify missing evidence and unresolved assumptions.",
+    {
+      phase: "Review economic evidence",
+      detail: "Examine policy expectations, interest-rate differentials, and relevant currency-market observations.",
+      status: "completed",
+    },
+    {
+      phase: "Evaluate competing explanations",
+      detail: "Consider relative yields, funding conditions, positioning, and factors affecting demand for the dollar.",
+      status: "active",
+    },
+    {
+      phase: "Synthesize findings",
+      detail: "Separate supported observations from hypotheses requiring more evidence.",
+      status: "pending",
+    },
+    {
+      phase: "Prepare research output",
+      detail: "Organize the investigation into a reviewable briefing with explicit assumptions and unresolved questions.",
+      status: "pending",
+    },
   ],
-  output: "Lower expected US rates could reduce the dollar’s relative yield support if other policy paths are unchanged. Tighter dollar funding could offset that channel.",
-  gap: "The supplied notes do not yet establish persistence or cross-market confirmation. Keep the causal conclusion open.",
-  followup: "What evidence would distinguish a policy effect from a funding effect?",
+  finding: "A lower expected US policy path could weaken the dollar by narrowing relative interest-rate differentials. However, funding conditions, positioning, and changes in other central banks' policy expectations may alter that relationship.",
+  gap: "Compare relevant yield differentials with currency movements and check whether funding conditions support the proposed explanation.",
+  action: "Review the research briefing and evaluate whether funding conditions support the proposed transmission channel.",
+  actionContext: "Awaiting yield-differential test before formal desk review",
 };
 
+/* =========================================================================
+   3. Risk Review: Institutional Assessment Workspace
+   ========================================================================= */
 export const riskReview = {
-  context: "Evaluate a proposed FX exposure during the desk’s policy-event window. The event calendar and desk mandate form the basis of this review.",
+  title: "Macro Policy-Window Exposure Assessment",
+  ref: "RR-2026-042",
+  status: "Veto enforced",
+  basis: "Event Calendar · Desk Mandate Rev 4.2",
+  desk: "G10 FX & Systematic Macro Desk",
+  context: "Review of proposed currency position submitted ahead of scheduled Tier-1 central bank policy announcement. Risk protocol mandates calendar-based blackout verification prior to capital deployment or sizing authorization.",
   conditions: [
-    { name: "Macro blackout", basis: "The event window overlaps the assessment.", finding: "Stops assessment" },
-    { name: "Drawdown & exposure", basis: "Limit evaluation was not reached after the veto.", finding: "Not evaluated" },
-    { name: "Instrument permission", basis: "The stopped assessment did not reach this check.", finding: "Not evaluated" },
+    {
+      name: "Macro policy blackout",
+      basis: "Mandatory freeze ±2 hours around scheduled FOMC rate decision",
+      finding: "Overlaps policy announcement window",
+      outcome: "Veto enforced",
+      status: "veto",
+    },
+    {
+      name: "Cumulative drawdown",
+      basis: "1.25% maximum allowable daily portfolio impairment",
+      finding: "Evaluation halted before limit calculation",
+      outcome: "Not evaluated",
+      status: "unevaluated",
+    },
+    {
+      name: "Instrument authorization",
+      basis: "Authorized spot & forward currency pairs only",
+      finding: "Evaluation halted before compliance check",
+      outcome: "Not evaluated",
+      status: "unevaluated",
+    },
+    {
+      name: "Liquidity stress floor",
+      basis: "Minimum 90th-percentile interbank depth in target pairs",
+      finding: "Evaluation halted before depth analysis",
+      outcome: "Not evaluated",
+      status: "unevaluated",
+    },
   ],
-  finding: "The blackout rule stops the proposal before limit evaluation or sizing. No conclusion is recorded for the remaining mandate checks.",
-  next: "Confirm the event window has closed, refresh market-state context and submit a fresh assessment for the full mandate review.",
+  finding: "The scheduled macro blackout mandate triggered an immediate review veto. In accordance with risk governance rules, sizing calculations and limit validations were suspended. No capital deployment is permitted.",
+  reassessment: [
+    "Verify the event window has closed and policy statement has been published.",
+    "Refresh realized volatility metrics and cross-currency liquidity depth.",
+    "Submit fresh assessment under post-announcement market state.",
+  ],
+  nextStep: "Submit a fresh mandate assessment once the blackout window has elapsed and post-announcement volatility stabilizes.",
+  authority: "Mandatory trading freeze remains in effect under RR-2026-042",
 };
 
+/* =========================================================================
+   4. Decision Support: Executive Decision-Brief Workspace
+   ========================================================================= */
 export const savedBriefs = [
   {
-    name: "Market assessment brief", caption: "Policy-path investigation", title: "Policy-path transmission",
-    summary: "A lower expected US policy path is a working explanation for currency conditions, subject to relative policy and funding context.",
-    points: ["Compare the expected policy path across markets.", "Keep funding conditions separate from the policy hypothesis."],
-    next: "Resolve the evidence gaps before carrying the interpretation into a desk decision.",
+    id: "brief-01",
+    name: "Policy divergence & FX sizing",
+    caption: "Relative yield vs funding dynamics",
+    title: "US Policy Divergence & Currency Sizing Brief",
+    meta: "Macro Strategy · Desk Review · Rev 1.2",
+    executiveSummary: "A lower expected US policy path creates prospective downward pressure on the dollar, but persistent funding frictions and European central bank divergence prevent a one-way trend. Sizing should remain defensive until cross-currency basis confirms genuine dollar weakness.",
+    pillars: [
+      {
+        label: "Macro transmission",
+        text: "Narrowing 2-year yield differentials reduce the dollar's carry advantage, but nominal yield spreads alone have historically overpredicted rapid FX adjustments.",
+      },
+      {
+        label: "Key assumptions",
+        text: "Dollar funding liquidity remains orderly across swap markets; foreign central banks do not aggressively ease in lockstep.",
+      },
+      {
+        label: "Alternative interpretation",
+        text: "Recent dollar softening reflects speculative positioning unwind rather than an enduring structural regime transition.",
+      },
+    ],
+    uncertainty: "Short-end rate spreads have stabilized while long yields continue to reprice. Without cross-currency basis confirmation, funding market dislocation remains an unquantified risk.",
+    nextAction: "Evaluate whether to hedge tail dollar-funding volatility before committing to directional currency sizing.",
   },
   {
-    name: "Scenario comparison", caption: "Policy and funding channels", title: "Compare the competing explanations",
-    summary: "The review keeps a relative-policy explanation alongside a funding explanation rather than assigning a common cause from price direction.",
-    points: ["Policy channel: relative yield support changes.", "Funding channel: dollar liquidity reinforces or offsets the response."],
-    next: "Identify which observations would weaken each explanation.",
+    id: "brief-02",
+    name: "Swap basis & liquidity friction",
+    caption: "Cross-market funding conditions",
+    title: "Cross-Currency Swap Basis & Liquidity Assessment",
+    meta: "Liquidity & Funding · Desk Review · Rev 2.0",
+    executiveSummary: "Widening cross-currency basis indicates offshore dollar demand is becoming structural, counteracting the rate-differential channel. The desk should refrain from short-dollar positioning without funding relief.",
+    pillars: [
+      {
+        label: "Funding channel",
+        text: "Offshore dollar demand remains elevated; non-US financial institutions are paying a persistent premium to secure term dollar liquidity.",
+      },
+      {
+        label: "Key assumptions",
+        text: "Collateral velocity in tri-party repo stays within historical standard deviations; no emergency swap-line drawdowns.",
+      },
+      {
+        label: "Alternative interpretation",
+        text: "Basis widening may represent temporary quarter-end balance sheet contraction rather than systemic funding distress.",
+      },
+    ],
+    uncertainty: "Spread between commercial paper and OIS has widened 4 bps, leaving open whether funding tightness will spill directly into spot FX pricing.",
+    nextAction: "Review interbank liquidity metrics prior to the morning investment committee.",
   },
   {
-    name: "Assumption review", caption: "Calendar and state context", title: "Assumptions to revisit",
-    summary: "The next review depends on current control inputs and refreshed market-state context.",
-    points: ["The event calendar reflects the desk’s current policy window.", "The prior market-state assessment is refreshed before reuse."],
-    next: "Verify both assumptions when preparing a fresh assessment.",
-  },
-  {
-    name: "Decision record", caption: "FX policy-window finding", title: "Stopped at the macro blackout",
-    summary: "The review record retains the blackout finding and its basis. Subsequent checks remain unevaluated.",
-    points: ["Basis retained: event calendar and desk mandate.", "No sizing or capital deployment follows this stopped assessment."],
-    next: "Review the event window before considering a fresh assessment. Capital authority remains with the desk.",
+    id: "brief-03",
+    name: "Asymmetric policy paths",
+    caption: "Sovereign spread risk analysis",
+    title: "Asymmetric Policy Paths & Sovereign Spread Risk",
+    meta: "Sovereign Rates · Desk Review · Rev 1.1",
+    executiveSummary: "Core inflation persistence in major trading partners limits their ability to match US rate cuts, creating genuine bilateral policy divergence. High conviction in relative spreads, lower in outright directional beta.",
+    pillars: [
+      {
+        label: "Divergence channel",
+        text: "Sticky services inflation abroad constrains rate cuts, accelerating the compression of bilateral policy differentials.",
+      },
+      {
+        label: "Key assumptions",
+        text: "US disinflation proceeds without an abrupt growth shock; energy supply remains insulated from geopolitical disruption.",
+      },
+      {
+        label: "Alternative interpretation",
+        text: "A growth slowdown abroad could force central banks to cut rates regardless of inflation, nullifying the divergence thesis.",
+      },
+    ],
+    uncertainty: "Services inflation momentum remains above central bank targets in 3 of 5 monitored jurisdictions.",
+    nextAction: "Stress-test sovereign duration exposures against a scenario where foreign central banks pause cuts.",
   },
 ];

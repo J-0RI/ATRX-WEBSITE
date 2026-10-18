@@ -46,6 +46,21 @@
   outline-offset: -3px;
 }
 
+/* Function-switcher icon + label (decision-20261018-function-switcher-icons): one shared
+   layout; the icon inherits the label colour, so hover and selection need no icon rules. */
+.tabLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-micro);
+  white-space: nowrap;
+}
+
+.tabLabel svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+}
+
 /* ---------- stage ---------- */
 .stage {
   --stage-tone: #4f5a4c;
@@ -54,7 +69,7 @@
   display: grid;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  border-radius: var(--radius-window);
+  border-radius: 0;
   background-color: var(--stage-tone);
   background-image: url("/practice/stage-lines.svg");
   background-size: cover;
@@ -167,6 +182,23 @@
 
 /* ---------- neutral software surfaces; each view owns its internal anatomy ---------- */
 .app {
+  /* Semantic preview scale: inherited Aeonik, independent of marketing display sizes. */
+  --app-title: 16px;
+  --app-lead: 13.5px;
+  --app-body: 12.5px;
+  --app-meta: 11.5px;
+  --app-label: 11px;
+  --app-leading: 1.5;
+  --app-title-leading: 1.35;
+  --app-label-tracking: 0.06em;
+  --app-regular: 400;
+  --app-medium: 500;
+  --app-semibold: 600;
+  --app-ink: var(--work-ink);
+  --app-muted: var(--work-muted);
+  --app-section-gap: var(--space-paragraph);
+  container: application / inline-size;
+  min-width: 0;
   --work-ink: #171717;
   --work-muted: #666666;
   --work-rule: #e3e3e3;
@@ -176,24 +208,11 @@
   border-radius: 12px;
   background: #ffffff;
   box-shadow: var(--window-shadow);
-  font-size: 13px;
-  line-height: 1.5;
+  font-size: var(--app-body);
+  line-height: var(--app-leading);
   color: var(--work-ink);
 }
 
-.appBar {
-  display: flex;
-  flex: none;
-  align-items: center;
-  gap: 12px;
-  min-height: 38px;
-  padding: 8px 16px;
-  background: #000000;
-}
-.appBar img { display: block; width: 44px; height: auto; }
-.crumb { font-size: 12px; color: var(--text-3); }
-.crumb strong { font-weight: 400; color: var(--text); }
-.sample { margin-left: auto; font-size: 11px; color: var(--text-3); white-space: nowrap; }
 
 .appBody {
   flex: 1;
@@ -206,85 +225,876 @@
 }
 .appBody:focus-visible,
 .appBody button:focus-visible { outline: 2px solid #000000; outline-offset: -2px; }
-.appBody :is(h4, h5, h6) { margin: 0; color: var(--work-ink); font-weight: 500; }
-.appBody h4 { font-size: 18px; line-height: 1.3; }
-.appBody h5 { font-size: 15px; line-height: 1.4; }
-.appBody h6 { font-size: 13px; line-height: 1.5; }
+.appBody :where(h4, h5, h6) { margin: 0; color: var(--app-ink); font-weight: var(--app-medium); }
+.appBody :where(h4) { font-size: var(--app-title); line-height: var(--app-title-leading); }
+.appBody :where(h5) { font-size: var(--app-label); line-height: var(--app-leading); }
+.appBody :where(h6) { font-size: var(--app-body); line-height: var(--app-leading); }
 .appBody p { text-wrap: pretty; }
 .label { display: block; font-size: 11.5px; line-height: 1.4; color: var(--text-3); }
-.meta { display: block; font-size: 11.5px; line-height: 1.4; color: var(--work-muted); }
 
-/* A: monitoring inbox. The topic list and development have separate reading axes. */
-.monitoring { display: grid; grid-template-columns: 148px minmax(0, 1fr); background: #ffffff; }
-.topicRail { padding: 18px 12px; border-right: 1px solid var(--work-rule); }
-.topicRail h4 { padding-left: 8px; font-size: 12.5px; }
-.topicRail ul { margin-top: 12px; }
-.topicRail li + li { margin-top: 6px; }
-.topicRail button { width: 100%; min-height: 44px; padding: 8px; border: 0; border-left: 1px solid transparent; background: #ffffff; color: var(--work-muted); font: inherit; font-size: 12px; line-height: 1.5; text-align: left; cursor: pointer; }
-.topicRail button[aria-pressed="true"] { border-left-color: #000000; color: var(--work-ink); font-weight: 500; }
-.development { min-width: 0; padding: 18px; }
-.development > h4 { margin-top: 4px; }
-.development > h5 { margin-top: var(--space-paragraph); }
-.development > p { margin-top: var(--space-micro); }
-.relatedObservations { margin-top: var(--space-paragraph); }
-.relatedObservations h5, .openQuestion h5 { font-size: 13px; }
-.relatedObservations dl { margin-top: var(--space-micro); }
-.relatedObservations dl div + div { margin-top: 10px; }
-.relatedObservations dt { font-size: 12px; font-weight: 500; }
-.relatedObservations dd { margin: 2px 0 0; color: var(--work-muted); font-size: 12px; }
-.openQuestion { margin-top: var(--space-paragraph); padding-top: 12px; border-top: 1px solid var(--work-rule); }
-.openQuestion p { margin-top: 4px; font-size: 12.5px; }
-.development > .inputLine { margin-top: var(--space-paragraph); font-size: 11.5px; color: var(--work-muted); }
+/* ---------- application typography roles (decision-20261018-app-typography-invariant) ----------
+   One semantic hierarchy for every ATRX application window. A component chooses its role here;
+   the role owns size, weight, leading, tracking and foreground. Equivalent roles in Market
+   Monitoring, Macro Research, Risk Review and Decision Support share these declarations.
+   Component rules below carry layout, chips and state only. */
 
-/* B: research conversation. One submitted request, an open plan, then working output. */
-.researchPlanner { padding: 18px 22px 42px; background: #ffffff; }
-.submittedRequest { width: 88%; margin-left: auto; padding: 12px 14px; border: 1px solid var(--work-rule); border-radius: 4px; }
-.submittedRequest p { margin-top: 4px; }
-.investigation { margin-top: var(--space-title-content); }
-.investigation ol { display: grid; gap: var(--space-micro); margin: 12px 0 0; padding-left: 22px; list-style: decimal; }
-.investigation li { padding-left: 4px; }
-.workingOutput { margin-top: var(--space-title-content); padding-left: 14px; border-left: 1px solid #bdbdbd; }
-.workingOutput h5 { margin-top: 4px; }
-.workingOutput p { margin-top: var(--space-micro); }
-.evidenceGap { color: var(--work-muted); font-size: 12px; }
-.followupQuestion { margin-top: var(--space-title-content); padding-top: 12px; border-top: 1px solid var(--work-rule); }
-.followupQuestion p { margin-top: 4px; font-size: 12.5px; }
+/* Application document title */
+.briefHeadline,
+.assessmentTitle,
+.briefDocTitle {
+  font-size: var(--app-title);
+  font-weight: var(--app-semibold);
+  line-height: var(--app-title-leading);
+  letter-spacing: normal;
+  color: var(--app-ink);
+}
 
-/* C: assessment memorandum. Document hierarchy and a compact conditions table. */
-.assessment { padding: 20px 24px 42px; background: #ffffff; }
-.assessmentHeader { padding-bottom: var(--space-paragraph); border-bottom: 1px solid var(--work-rule); }
-.assessmentHeader h4 { font-size: 20px; }
-.assessmentHeader > p { margin-top: 6px; }
-.assessmentHeader dl { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; font-size: 11.5px; }
-.assessmentHeader dt { color: var(--work-muted); }
-.assessmentHeader dd { margin: 2px 0 0; }
-.assessment > section { margin-top: 18px; }
-.assessment section h5 { font-size: 13px; }
-.assessment section > p { margin-top: 6px; font-size: 12.5px; }
-.assessmentTable { width: 100%; margin-top: var(--space-micro); border-collapse: collapse; font-size: 12px; text-align: left; }
-.assessmentTable th, .assessmentTable td { padding: 8px 0; border-bottom: 1px solid var(--work-rule); vertical-align: top; }
-.assessmentTable th { font-weight: 500; }
-.assessmentTable thead th { padding-top: 0; font-size: 11.5px; color: var(--work-muted); font-weight: 400; }
-.assessmentTable th:first-child { width: 72%; padding-right: 16px; }
-.assessmentTable tbody th span { display: block; margin-top: 2px; color: var(--work-muted); font-size: 11.5px; font-weight: 400; }
+/* Section heading: opens a document section */
+.blockHeading,
+.unresolvedLabel,
+.excerptMeta,
+.sectionHeader,
+.executiveLabel,
+.reasoningHeading {
+  font-size: var(--app-label);
+  font-weight: var(--app-semibold);
+  line-height: var(--app-leading);
+  letter-spacing: var(--app-label-tracking);
+  text-transform: uppercase;
+  color: var(--app-ink);
+}
 
-/* D: prepared-document library. Compact work products above a selected excerpt. */
-.decisionWorkspace { padding: 18px; background: #ffffff; }
-.decisionWorkspace > header > p { margin-top: 6px; }
-.documentLibrary { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-micro); margin-top: var(--space-paragraph); }
-.documentLibrary li { min-width: 0; }
-.documentLibrary button { display: flex; align-items: start; gap: var(--space-micro); width: 100%; height: 100%; min-height: 66px; padding: 10px; border: 1px solid var(--work-rule); border-radius: 0; background: #ffffff; color: var(--work-ink); font: inherit; text-align: left; cursor: pointer; }
-.documentLibrary button[aria-pressed="true"] { border-left-color: #000000; box-shadow: inset 1px 0 0 #000000; }
-.documentLibrary svg { flex: none; width: 14px; height: 14px; margin-top: 3px; fill: none; stroke: #666666; stroke-width: 1.25; stroke-linecap: round; stroke-linejoin: round; }
-.documentLibrary strong { display: block; font-size: 12.5px; line-height: 1.4; font-weight: 500; }
-.documentLibrary button > span > span { display: block; margin-top: 4px; font-size: 11.5px; line-height: 1.4; color: var(--work-muted); }
-.selectedBrief { margin-top: 18px; padding-top: var(--space-paragraph); border-top: 1px solid var(--work-rule); }
-.selectedBrief h5 { margin-top: 4px; font-size: 16px; }
-.selectedBrief > p { margin-top: var(--space-micro); }
-.selectedBrief h6 { margin-top: 14px; }
-.selectedBrief ul { margin-top: 6px; padding-left: 16px; list-style: disc; font-size: 12.5px; }
-.selectedBrief li + li { margin-top: 4px; }
-.briefNext p { margin-top: 4px; font-size: 12.5px; }
+/* Section label: eyebrows, references, categories, column headers, closing-row prompts */
+.briefCategory,
+.continuationMeta,
+.nextActionPrompt,
+.memoRef,
+.vetoBadge,
+.assessmentTable thead th,
+.selectorLabel,
+.briefRefBadge,
+.protocolPrompt,
+.conclusionLabel {
+  font-size: var(--app-label);
+  font-weight: var(--app-medium);
+  line-height: var(--app-leading);
+  letter-spacing: var(--app-label-tracking);
+  text-transform: uppercase;
+  color: var(--app-muted);
+}
+
+/* Analytical lead: the principal finding or conclusion of a view */
+.findingParagraph,
+.executiveText {
+  font-size: var(--app-lead);
+  font-weight: var(--app-regular);
+  line-height: var(--app-leading);
+  letter-spacing: normal;
+  color: var(--app-ink);
+}
+
+/* Subsection heading: item, column, step and primary-statement headings */
+.obsAspect,
+.planModuleTitle,
+.stepPhaseTitle,
+.nextActionItem,
+.colCriterion strong,
+.pillarLabel,
+.protocolAction {
+  font-size: var(--app-body);
+  font-weight: var(--app-medium);
+  line-height: var(--app-leading);
+  letter-spacing: normal;
+  color: var(--app-ink);
+}
+
+/* Standard body: primary analytical prose */
+.systemResponseText,
+.unresolvedText,
+.contextStatement,
+.memoMetaGrid dd,
+.conclusionPrimary {
+  font-size: var(--app-body);
+  font-weight: var(--app-regular);
+  line-height: var(--app-leading);
+  letter-spacing: normal;
+  color: var(--app-ink);
+}
+
+/* Secondary body: supporting detail beneath a title or heading */
+.briefChange,
+.obsDetail,
+.continuationText,
+.stepDetail,
+.colFinding,
+.reassessmentList li,
+.briefCaption,
+.pillarText {
+  font-size: var(--app-body);
+  font-weight: var(--app-regular);
+  line-height: var(--app-leading);
+  letter-spacing: normal;
+  color: var(--app-muted);
+}
+
+/* Metadata: counts, periods, scope, references, authority notes */
+.briefTopic,
+.briefPeriod,
+.planModuleScope,
+.excerptTag,
+.nextActionContext,
+.evalCount,
+.colCriterion span,
+.memoMetaGrid dt,
+.briefDeskBadge,
+.protocolAuthority,
+.conclusionSupporting {
+  font-size: var(--app-meta);
+  font-weight: var(--app-regular);
+  line-height: var(--app-leading);
+  letter-spacing: normal;
+  color: var(--app-muted);
+}
+
+/* Status tag: metadata on a chip (fill and inverse text stay in the component rule) */
+.briefStatusBadge,
+.activePhaseTag,
+.completedPhaseTag,
+.vetoTag,
+.unevaluatedTag {
+  font-size: var(--app-meta);
+  font-weight: var(--app-medium);
+  line-height: var(--app-leading);
+  letter-spacing: normal;
+  color: var(--app-muted);
+}
+
+/* A: Market monitoring workspace: icon navigation rail + selected brief
+   (decision-20261018-monitoring-icon-rail). The rail is navigation only; stream names,
+   categories and periods live in the brief header. */
+.monitoringWorkspace {
+  display: grid;
+  grid-template-columns: var(--rail-width) minmax(0, 1fr);
+  background: #ffffff;
+  min-height: 100%;
+  --rail-width: 48px;
+  --rail-target: 32px;
+}
+
+.surveillanceRail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 0;
+  border-right: 1px solid var(--work-rule);
+  background: #ffffff;
+}
+
+/* The icons stay in reach while the brief scrolls inside the window. */
+.railList {
+  position: sticky;
+  top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-micro);
+}
+
+/* Unselected: muted icon, no surface. Hover: faint neutral surface. Selected: firmer neutral
+   surface + ink icon. Keyboard focus keeps the shared inset outline (.appBody button). */
+.railItemButton {
+  display: grid;
+  place-items: center;
+  width: var(--rail-target);
+  height: var(--rail-target);
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--app-muted);
+  cursor: pointer;
+  transition: background-color var(--dur-fast) ease, color var(--dur-fast) ease;
+}
+
+.railItemButton svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 1.75;
+}
+
+.railItemButton:hover {
+  background: #f4f4f5;
+  color: var(--app-ink);
+}
+
+.railItemButton[aria-selected="true"] {
+  background: #e8e8e8;
+  color: var(--app-ink);
+}
+
+.monitoringBrief {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-section-gap);
+  padding: 16px 20px 32px;
+  background: #ffffff;
+  min-width: 0;
+}
+
+.briefHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-micro);
+}
+
+.briefTags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 6px;
+}
+
+/* Stream identity (category / name / period) wraps between items, never inside one. */
+.briefTags > * { white-space: nowrap; }
+
+
+.briefDivider {
+  color: #d4d4d8;
+}
+
+
+.briefStatusBadge {
+  padding: 2px 7px;
+  border-radius: 10px;
+  background: #f4f4f5;
+}
+
+.briefHeadline {
+  margin: 0;
+}
+
+.briefChange {
+  margin: 0;
+}
+
+.observationsBlock {
+  margin-top: 2px;
+}
+
+.blockHeading {
+  margin: 0 0 6px;
+}
+
+/* Editorial pattern — ruled columns: related perspectives side by side on the workspace,
+   divided by hairlines only (shared by monitoring observations and decision reasoning). */
+.observationsGrid,
+.reasoningPillars {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+}
+
+.observationCard,
+.pillarCard {
+  padding: 0 14px;
+  border: 0;
+  border-left: 1px solid var(--work-rule);
+  border-radius: 0;
+  background: none;
+}
+
+.observationCard:first-child,
+.pillarCard:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.observationCard:last-child,
+.pillarCard:last-child {
+  padding-right: 0;
+}
+
+.obsAspect {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.obsDetail {
+  margin: 0;
+}
+
+
+.unresolvedQuestionRow {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+
+.unresolvedText {
+  margin: 0;
+}
+
+
+/* B: research workspace. Input surface, system transition, structured process timeline, analytical excerpt and next action. */
+.researchPlanner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-section-gap);
+  padding: 16px 20px 36px;
+  background: #ffffff;
+}
+
+
+.systemResponseRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 0 2px;
+}
+
+.systemAvatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+}
+
+.systemIdentityIcon {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.systemResponseText {
+  margin: 0;
+}
+
+.planModule {
+  border: 1px solid #e4e4e7;
+  border-radius: 8px;
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.planModuleHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 14px;
+  background: #fafafa;
+  border-bottom: 1px solid #f0f0f2;
+}
+
+.planTitleWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.planHeaderIcon {
+  width: 14px;
+  height: 14px;
+  color: #52525b;
+}
+
+.planModuleTitle {
+  margin: 0;
+}
+
+
+.planTimeline {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 14px 14px;
+}
+
+.planStep {
+  display: flex;
+  gap: 12px;
+  position: relative;
+}
+
+.stepTrack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: none;
+  width: 16px;
+}
+
+.stepNode {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.planStep[data-status="completed"] .stepNode {
+  background: #f4f4f5;
+  border: 1px solid #d4d4d8;
+  color: #18181b;
+}
+
+.checkIcon {
+  width: 10px;
+  height: 10px;
+}
+
+.planStep[data-status="active"] .stepNode {
+  background: #18181b;
+  border: 1px solid #18181b;
+}
+
+.activeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #eff8e2;
+}
+
+.planStep[data-status="pending"] .stepNode {
+  background: #ffffff;
+  border: 1.5px solid #d4d4d8;
+}
+
+.pendingDot {
+  display: none;
+}
+
+.stepConnector {
+  flex: 1;
+  width: 1.5px;
+  min-height: 16px;
+  margin: 2px 0;
+  background: #e4e4e7;
+}
+
+.stepContent {
+  flex: 1;
+  min-width: 0;
+  padding-bottom: 11px;
+}
+
+.planStep:last-child .stepContent {
+  padding-bottom: 0;
+}
+
+.stepHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+/* Step state: the active phase takes the semibold weight; pending phases recede to muted. */
+.planStep[data-status="active"] .stepPhaseTitle {
+  font-weight: var(--app-semibold);
+}
+
+.planStep[data-status="pending"] .stepPhaseTitle {
+  color: var(--app-muted);
+}
+
+.activePhaseTag {
+  padding: 1px 6px;
+  border-radius: 10px;
+  background: #18181b;
+  color: #ffffff;
+}
+
+.completedPhaseTag {
+  padding: 1px 6px;
+  border-radius: 10px;
+  background: #f4f4f5;
+}
+
+.stepDetail {
+  margin: 2px 0 0;
+}
+
+.analyticalExcerpt {
+  padding-top: 14px;
+  border-top: 1px solid #e4e4e7;
+}
+
+.excerptHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+
+.findingParagraph {
+  margin: 0;
+}
+
+
+
+
+/* C: Institutional risk assessment memorandum */
+.assessment {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 18px 24px;
+  background: #ffffff;
+}
+
+.assessmentHeader {
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--work-rule);
+}
+
+.assessmentTitleRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.memoRef {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--work-muted);
+}
+
+.assessmentTitle {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--work-ink);
+}
+
+.vetoBadge {
+  flex: none;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: #18181b;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.memoMetaGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.memoMetaGrid dt {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-3);
+}
+
+.memoMetaGrid dd {
+  margin: 1px 0 0;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--work-ink);
+}
+
+.assessmentSection {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.sectionHeader {
+  margin: 0;
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--work-muted);
+}
+
+.sectionHeaderRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.evalCount {
+  font-size: 10.5px;
+  color: var(--text-3);
+}
+
+.contextStatement {
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: #3f3f46;
+}
+
+.assessmentTable {
+  width: 100%;
+  margin-top: 2px;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 11.5px;
+}
+
+.assessmentTable thead th {
+  padding: 5px 6px;
+  border-bottom: 1px solid #d4d4d8;
+  background: #fafafa;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--work-muted);
+}
+
+.assessmentTable td,
+.assessmentTable tbody th {
+  padding: 5px 6px;
+  border-bottom: 1px solid #f0f0f2;
+  vertical-align: top;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.colCriterion {
+  width: 46%;
+}
+
+.colCriterion strong {
+  display: block;
+  font-weight: 500;
+  color: var(--work-ink);
+}
+
+.colCriterion span {
+  display: block;
+  margin-top: 1px;
+  font-size: 10px;
+  color: var(--work-muted);
+}
+
+.colFinding {
+  width: 34%;
+  color: #3f3f46;
+}
+
+.colOutcome {
+  width: 20%;
+  text-align: right;
+}
+
+.vetoRow {
+  background: #fafafa;
+}
+
+.vetoTag {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: #18181b;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.unevaluatedTag {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: #f4f4f5;
+  color: #71717a;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.findingCallout {
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: #fafafa;
+  border: 1px solid #e4e4e7;
+  border-left: 3px solid #18181b;
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--work-ink);
+}
+
+.findingCallout p {
+  margin: 0;
+}
+
+.reassessmentList {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 1px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.reassessmentList li {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  font-size: 11px;
+  line-height: 1.4;
+  color: #3f3f46;
+}
+
+.bulletNode {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #71717a;
+  flex: none;
+}
+
+/* D: Executive decision-brief workspace */
+.decisionWorkspace {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  min-height: 100%;
+}
+
+.briefSelectorBar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--work-rule);
+}
+
+.selectorLabel {
+  white-space: nowrap;
+}
+
+.briefTabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+/* Document tabs: inactive = neutral #f2f2f2 + dark text; active = near-black + white. Same geometry. */
+.briefTabButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: #f2f2f2;
+  color: var(--app-ink);
+  font: inherit;
+  font-size: var(--app-meta);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color var(--dur-fast) ease, color var(--dur-fast) ease;
+}
+
+.briefTabButton:hover {
+  background: #e8e8e8;
+}
+
+.briefTabButton[aria-selected="true"] {
+  background: #18181b;
+  color: #ffffff;
+}
+
+.briefTabButton svg {
+  width: 12px;
+  height: 12px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.25;
+}
+
+.briefDocument {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-section-gap);
+  padding: 16px 20px 32px;
+  background: #ffffff;
+}
+
+.briefDocHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-bottom: 11px;
+  border-bottom: 1px solid var(--work-rule);
+}
+
+.briefMetaRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
+
+
+.briefDocTitle {
+  margin: 0;
+}
+
+
+/* Principal conclusion: carried by type and measure on the white workspace, not a panel. */
+.executiveSummaryBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-micro);
+}
+
+.executiveLabel {
+  display: block;
+}
+
+.executiveText {
+  max-width: 64ch;
+  margin: 0;
+}
+
+.reasoningSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-micro);
+}
+
+.reasoningHeading {
+  margin: 0;
+}
+
+.pillarLabel {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.pillarText {
+  margin: 0;
+}
+
+
 
 .disclaimer {
   margin-top: var(--space-title-content);
@@ -324,25 +1134,59 @@
 }
 
 @container showcase (max-width: 480px) {
-  .appBar { gap: 8px; }
-  .sample { display: none; }
   .composition[data-layout] .app {
     height: clamp(640px, calc(1395px - 163.75cqi), 900px);
   }
-  /* Keep the monitoring list beside its detail: it must still read as an inbox. */
-  .monitoring { grid-template-columns: 96px minmax(0, 1fr); }
-  .topicRail { padding: 14px 6px; }
-  .topicRail h4 { padding-left: 6px; font-size: 12px; }
-  .topicRail button { padding: 8px 6px; font-size: 11.5px; }
-  .development { padding: 14px 12px; }
-  .development > h4 { font-size: 16px; }
-  .development > h5 { font-size: 14px; }
-  .researchPlanner { padding: 16px 14px 32px; }
-  .submittedRequest { width: 94%; padding: 10px 12px; }
-  .assessment { padding: 18px 16px 32px; }
+  .monitoringBrief { padding: 14px 12px; }
+
+  .observationsGrid,
+  .reasoningPillars { grid-template-columns: minmax(0, 1fr); row-gap: 10px; }
+  .observationCard,
+  .pillarCard { padding: 0; border-left: 0; }
+  .observationCard + .observationCard,
+  .pillarCard + .pillarCard { padding-top: 10px; border-top: 1px solid var(--work-rule); }
+  .researchPlanner { padding: 14px 12px 28px; }
+  .assessment { padding: 16px 14px 28px; }
   .assessmentHeader dl { grid-template-columns: minmax(0, 1fr); gap: 6px; }
-  .assessmentTable th:first-child { width: 66%; padding-right: 12px; }
-  .decisionWorkspace { padding: 16px 14px; }
-  .documentLibrary button { padding: 8px; gap: 6px; }
-  .documentLibrary svg { display: none; }
+  .assessmentTable th:first-child { width: 55%; padding-right: 8px; }
+  .decisionWorkspace { padding: 0; }
+  .briefSelectorBar { padding: 8px 10px; }
+  .briefDocument { padding: 14px 12px 28px; }
+
+}
+
+/* Notice inside the research excerpt keeps the excerpt's internal rhythm. */
+.excerptNotice {
+  margin-top: 10px;
+}
+
+/* Share heading and paragraph tracks: wrapped headings never stagger the body baseline. */
+.reasoningPillars { grid-template-rows: auto auto; row-gap: var(--space-micro); }
+.pillarCard { display: grid; grid-template-rows: subgrid; grid-row: span 2; }
+.pillarLabel { margin-bottom: 0; }
+.briefTabs { min-width: 0; }
+.briefMetaRow { gap: var(--space-micro); flex-wrap: wrap; }
+
+@container application (max-width: 440px) {
+  .briefSelectorBar { flex-direction: column; align-items: stretch; }
+  .reasoningPillars { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; gap: var(--space-paragraph); }
+  .pillarCard { display: block; grid-row: auto; padding: 0; border-left: 0; }
+  .pillarCard + .pillarCard { border-top: 1px solid var(--work-rule); padding-top: var(--space-paragraph); }
+  .pillarLabel { margin-bottom: var(--space-micro); }
+}
+
+@container application (max-width: 440px) {
+  /* Narrow brief: the stream identity stacks one item per line, without dividers. */
+  .briefTags { flex-direction: column; align-items: flex-start; }
+  .briefDivider { display: none; }
+}
+
+
+/* Narrow memorandum: the criteria table and title row wrap inside the window instead of
+   pushing past it. Columns keep their proportions; type stays on its roles. */
+.assessmentTitleRow > div { min-width: 0; }
+@container application (max-width: 440px) {
+  .assessmentTable td:not(.colOutcome) { overflow-wrap: anywhere; hyphens: auto; }
+  .vetoTag,
+  .unevaluatedTag { white-space: normal; }
 }

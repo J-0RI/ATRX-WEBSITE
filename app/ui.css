@@ -1,0 +1,44 @@
+/*
+ * shadcn/ui foundation for ATRX application previews (decision-20261018-bubble-alert-standard).
+ * - No preflight: the site's own base styles stay authoritative.
+ * - Utilities are generated only from components/ui, never from page content.
+ * - Everything Tailwind emits is layered, so unlayered ATRX styles always win;
+ *   ATRX variants (components/AtrxUi.module.css) supply the brand rules.
+ * - shadcn colour slots map to --ui-* tokens; ATRX --accent etc. are never redefined.
+ */
+@layer theme, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+@source "../components/ui";
+
+:root {
+  /* Neutral values of the white ATRX application workspace. */
+  --ui-background: #ffffff;
+  --ui-foreground: #171717;
+  --ui-card: #ffffff;
+  --ui-card-foreground: #171717;
+  --ui-muted: #f4f4f5;
+  --ui-muted-foreground: #666666;
+  --ui-border: #e3e3e3;
+  --ui-primary: #18181b;
+  --ui-primary-foreground: #ffffff;
+  --ui-secondary: #f4f4f5;
+  --ui-secondary-foreground: #171717;
+  --ui-destructive: #18181b;
+}
+
+@theme inline {
+  --color-background: var(--ui-background);
+  --color-foreground: var(--ui-foreground);
+  --color-card: var(--ui-card);
+  --color-card-foreground: var(--ui-card-foreground);
+  --color-muted: var(--ui-muted);
+  --color-muted-foreground: var(--ui-muted-foreground);
+  --color-border: var(--ui-border);
+  --color-primary: var(--ui-primary);
+  --color-primary-foreground: var(--ui-primary-foreground);
+  --color-secondary: var(--ui-secondary);
+  --color-secondary-foreground: var(--ui-secondary-foreground);
+  --color-destructive: var(--ui-destructive);
+  --radius-lg: var(--radius-inner);
+}
