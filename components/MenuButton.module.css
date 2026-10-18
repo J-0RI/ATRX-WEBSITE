@@ -4,81 +4,240 @@
 }
 
 /*
- * Borderless elevated navigation surface: separated from the page by tone and a
- * broad neutral shadow, never by a perimeter stroke. Sized by its own content.
+ * Navigation panel: one substantial floating surface beneath the rail, centred on
+ * its trigger (MenuButton positions `left`). Square everywhere; separated from the
+ * page by tone and a broad neutral shadow, never by a perimeter stroke.
+ * Spacing tiers: panel inset > column gap > row padding > text rhythm.
  */
-.menu {
+.panel {
+  --panel-gutter: 48px;
+  --panel-pad: clamp(24px, 2.1vw, 36px);
+  --panel-gap: clamp(20px, 1.8vw, 32px);
+  --panel-bg: #121315;
+  --panel-stage: #191a1d;
+  --row-bg: rgba(255, 255, 255, 0.03);
+  --row-active: rgba(255, 255, 255, 0.075);
+  --panel-ease: cubic-bezier(0.23, 1, 0.32, 1);
   position: absolute;
-  top: calc(100% + var(--nav-dropdown-offset));
+  top: calc(50% + var(--nav-cell-h) / 2 + 12px);
   left: 0;
   z-index: 60;
-  min-width: 212px;
-  padding: var(--nav-dropdown-padding);
-  border-radius: var(--nav-dropdown-radius);
-  background: var(--nav-dropdown-bg);
-  box-shadow: var(--nav-dropdown-shadow);
-  /* Closed: removed from view, tab order and the accessibility tree. */
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--panel-gap);
+  width: min(max(58vw, 780px), 1080px, calc(100vw - var(--panel-gutter)));
+  padding: var(--panel-pad);
+  background: var(--panel-bg);
+  box-shadow: 0 28px 64px -20px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+  /* Closed: out of view, tab order and the accessibility tree. Closing is softer and quicker. */
   visibility: hidden;
   opacity: 0;
-  transform: translateY(-3px);
+  transform: translateY(6px);
   transition:
-    opacity var(--nav-dropdown-close-duration) ease,
-    transform var(--nav-dropdown-close-duration) ease,
-    visibility 0s linear var(--nav-dropdown-close-duration);
+    opacity 150ms ease-out,
+    transform 150ms ease-out,
+    visibility 0s linear 150ms;
 }
 
-.menu[data-open] {
+.panel[data-size="standard"] {
+  width: min(max(54vw, 720px), 960px, calc(100vw - var(--panel-gutter)));
+}
+
+/* Opening: a short upward settle with the whole composition arriving at once. */
+.panel[data-open] {
+  pointer-events: auto;
   visibility: visible;
   opacity: 1;
   transform: none;
   transition:
-    opacity var(--nav-dropdown-open-duration) ease,
-    transform var(--nav-dropdown-open-duration) ease,
+    opacity 200ms ease-out,
+    transform 240ms var(--panel-ease),
     visibility 0s;
 }
 
-/* Invisible pointer bridge across the visual gap: trigger and panel stay one region. */
-.menu::before {
+/* Category switch: the outgoing panel yields at once, the incoming one fades in place. */
+.panel[data-handoff] {
+  transition: none;
+}
+
+.panel[data-open][data-handoff] {
+  transition: opacity 160ms ease-out, visibility 0s;
+}
+
+/* Invisible pointer bridge across the gap: trigger and panel stay one region. */
+.panel::before {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
   bottom: 100%;
-  height: var(--nav-dropdown-offset);
+  height: 14px;
 }
 
-.end {
-  left: auto;
-  right: 0;
+/* ---------- navigation column ---------- */
+
+.navColumn {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 
-.item {
+.title {
+  font-size: 20px;
+  line-height: 1.25;
+  font-weight: 450;
+  color: var(--text);
+}
+
+.intro {
+  max-width: 36ch;
+  margin-top: 8px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 24px;
+}
+
+.row {
   display: flex;
   align-items: center;
-  min-height: 34px;
-  padding: 0 12px;
-  font-size: var(--nav-cell-size, 14px);
+  gap: 16px;
+  min-height: 64px;
+  padding: 0 18px 0 12px;
+  background: var(--row-bg);
+  font-size: 15.5px;
+  line-height: 1.3;
   color: var(--text-2);
-  white-space: nowrap;
-  transition: color var(--dur-fast) ease, background-color var(--dur-fast) ease;
+  transition: background-color var(--dur-fast) ease, color var(--dur-fast) ease;
 }
 
-.item:hover,
-.item:focus-visible {
-  background: var(--surface-raised);
+.row[data-active] {
+  background: var(--row-active);
   color: var(--text);
-  outline: none;
 }
 
-/* Keyboard focus adds the site's crisp inset rule (hover does not). */
-.item:focus-visible {
-  box-shadow: inset 2px 0 0 var(--accent);
+.row:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .menu,
-  .menu[data-open] {
-    transform: none;
-    transition: none;
+.thumb {
+  flex: none;
+  width: 48px;
+  height: 30px;
+}
+
+.thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.rowLabel {
+  flex: 1;
+  min-width: 0;
+}
+
+.rowArrow {
+  flex: none;
+  opacity: 0;
+  transform: translateX(-3px);
+  transition: opacity var(--dur-fast) ease, transform var(--dur-fast) ease;
+}
+
+.row[data-active] .rowArrow {
+  opacity: 0.85;
+  transform: none;
+}
+
+.parent {
+  align-self: flex-start;
+  margin-top: 20px;
+  border-radius: 0;
+}
+
+/* ---------- preview column: one continuous stage ---------- */
+
+.preview {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--panel-stage);
+}
+
+/* At least the artwork's own proportion; grows with a taller navigation column. */
+.stage {
+  position: relative;
+  flex: 1 0 auto;
+  aspect-ratio: 600 / 380;
+  margin: clamp(16px, 1.6vw, 28px) clamp(16px, 1.6vw, 28px) 0;
+}
+
+.art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.art[data-active] {
+  opacity: 1;
+}
+
+/* Every caption shares one grid cell, so the stage never changes height. */
+.captions {
+  display: grid;
+  padding: 20px clamp(20px, 1.8vw, 28px) clamp(20px, 1.8vw, 28px);
+}
+
+.caption {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.caption[data-active] {
+  opacity: 1;
+}
+
+.captionTitle {
+  font-size: 18px;
+  line-height: 1.3;
+  font-weight: 450;
+  color: var(--text);
+}
+
+.captionText {
+  margin-top: 8px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+
+@media (max-width: 1179px) {
+  .panel {
+    --panel-gutter: calc(2 * clamp(16px, 3vw, 24px));
+  }
+}
+
+/* Narrow tablets: the rows carry the panel; the preview would be too small to read. */
+@media (max-width: 719px) {
+  .panel,
+  .panel[data-size="standard"] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .preview {
+    display: none;
   }
 }

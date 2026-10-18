@@ -8,7 +8,8 @@ const OPEN_DELAY = 80;
 const CLOSE_DELAY = 150;
 
 type OpenReason = "hover" | "click" | "keyboard";
-type OpenState = { id: string; reason: OpenReason } | null;
+/** `handoff` marks a direct switch from one open menu to another (no closed state between). */
+type OpenState = { id: string; reason: OpenReason; handoff: boolean } | null;
 
 /** Only a real hovering pointer drives hover intent; touch never emulates it. */
 const isHoverPointer = (e: React.PointerEvent) =>
@@ -38,7 +39,8 @@ export function useNavDropdowns() {
 
   const open = useCallback((id: string, reason: OpenReason) => {
     clearTimers();
-    commit({ id, reason });
+    const current = stateRef.current;
+    commit({ id, reason, handoff: !!current && current.id !== id });
   }, [clearTimers, commit]);
 
   /** Closes `id` only if it is still the open menu, so a stale timer never closes another. */
@@ -61,11 +63,11 @@ export function useNavDropdowns() {
     else openTimer.current = setTimeout(() => open(id, "hover"), OPEN_DELAY);
   }, [clearTimers, open]);
 
-  const pointerLeave = useCallback((id: string, e: React.PointerEvent, region: HTMLElement | null) => {
+  const pointerLeave = useCallback((id: string, e: React.PointerEvent, regions: (HTMLElement | null)[]) => {
     if (!isHoverPointer(e)) return;
     clearTimeout(openTimer.current);
     // A keyboard user working inside the panel keeps it open.
-    if (region?.querySelector(":focus-visible")) return;
+    if (regions.some((region) => region?.querySelector(":focus-visible"))) return;
     clearTimeout(closeTimer.current);
     closeTimer.current = setTimeout(() => close(id), CLOSE_DELAY);
   }, [close]);
@@ -77,7 +79,7 @@ export function useNavDropdowns() {
     else open(id, "click");
   }, [close, open]);
 
-  return { openId: state?.id ?? null, open, close, toggle, pointerEnter, pointerLeave };
+  return { openId: state?.id ?? null, handoff: state?.handoff ?? false, open, close, toggle, pointerEnter, pointerLeave };
 }
 
 export type NavDropdowns = ReturnType<typeof useNavDropdowns>;

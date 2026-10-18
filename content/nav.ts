@@ -173,6 +173,50 @@ export const requestAccessMenu: NavItem[] = [
   { label: "Contact engineering", href: "/contact" },
 ];
 
+/** Desktop dropdown panel: one row per destination, each with its own editorial illustration. */
+export type NavPanelItem = NavItem & {
+  description: string;
+  /** Illustration in /public/nav-art, one of the shared watercolor series. */
+  art: string;
+};
+
+export type NavPanel = {
+  title: string;
+  intro: string;
+  items: NavPanelItem[];
+  /** Parent destination, shown beneath the rows when one exists. */
+  parent?: NavItem;
+};
+
+const panelItem = (href: string, description: string, art: string): NavPanelItem => {
+  const item = [...documentationMenu, ...requestAccessMenu].find((entry) => entry.href === href)!;
+  return { ...item, description, art };
+};
+
+/* Descriptions are taken from each destination's own page copy; no new claims. */
+export const documentationPanel: NavPanel = {
+  title: "Documentation",
+  intro: "Technical materials for quantitative evaluators and capital allocators.",
+  items: [
+    panelItem("/access", "ATRX is operating in a closed deployment phase. Three tiers, granted by application.", "access"),
+    panelItem("/architecture", "ATRX v4.0: seven structural pillars, a five-stage inference pipeline, and one absolute veto.", "architecture"),
+    panelItem("/partnerships", "ATRX integrates with enterprise trading desks as a parallel intelligence layer.", "tenancy"),
+    panelItem("/instruments", "Multi asset by architecture. Disciplined by deployment. Instrument vectors and roadmap.", "instruments"),
+    panelItem("/documentation#library", "Whitepapers, reports and disclosures, from structural philosophy to Phase 1 validation.", "library"),
+  ],
+  parent: { label: "Documentation overview", href: "/documentation" },
+};
+
+export const requestAccessPanel: NavPanel = {
+  title: "Request access",
+  intro: "A closed deployment phase. Every submission is reviewed by engineering.",
+  items: [
+    panelItem("/access", "Three tiers, granted by application: Prosumer Node, Capital Desk and Institutional.", "access"),
+    panelItem("/contact?engagement=documentation#request", "Whitepapers, ablation studies and risk disclosures, maintained for qualified evaluators.", "request"),
+    panelItem("/contact", "Apply for a deployment. Applications are evaluated against available compute capacity.", "engineering"),
+  ],
+};
+
 // Deeper product guides replace their matching enterprise-anchor search results.
 // Generic labels such as Overview must still retain each global domain's landing page.
 const productTopicLabels = new Set(productSection.groups.slice(2).flatMap((group) => group.items.map((item) => item.label)));

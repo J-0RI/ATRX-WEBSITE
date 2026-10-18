@@ -75,6 +75,13 @@
   padding: 0 24px;
 }
 
+/* Panel layer: spans the header row, passes pointers through except to an open panel. */
+.panels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
 /* Brand anchor left; all remaining space accumulates before the nav rail. */
 .logo {
   display: inline-flex;

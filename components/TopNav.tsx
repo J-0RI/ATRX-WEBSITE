@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { documentationMenu, primaryNav, requestAccessMenu } from "@/content/nav";
+import { documentationPanel, primaryNav, requestAccessPanel } from "@/content/nav";
 import MenuButton from "./MenuButton";
 import MobileNav from "./MobileNav";
 import Search, { type SearchState } from "./Search";
@@ -31,6 +31,7 @@ export default function TopNav() {
   const centerRef = useRef<HTMLElement>(null);
   const splitRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const [panelHost, setPanelHost] = useState<HTMLDivElement | null>(null);
 
   /*
    * The search region is measured from the live layout, never assumed:
@@ -120,7 +121,9 @@ export default function TopNav() {
                 <ChevronDown size={14} />
               </>
             }
-            items={documentationMenu}
+            panel={documentationPanel}
+            host={panelHost}
+            size="wide"
             buttonClassName={styles.link}
           />
           {primaryNav.map((item) => (
@@ -146,13 +149,15 @@ export default function TopNav() {
               controller={dropdowns}
               label={<ChevronDown size={14} />}
               ariaLabel="More access options"
-              items={requestAccessMenu}
+              panel={requestAccessPanel}
+              host={panelHost}
               buttonClassName={styles.splitToggle}
-              align="end"
             />
           </div>
           <MobileNav />
         </div>
+        {/* Dropdown panels render here: a sibling of the rails, outside the search-morph clip. */}
+        <div ref={setPanelHost} className={styles.panels} />
       </div>
     </header>
   );
