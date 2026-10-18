@@ -111,7 +111,7 @@
 }
 
 .action {
-  margin-top: 30px;
+  margin-top: var(--space-content-action);
 }
 
 @container content (max-width: 879px) {

@@ -6,6 +6,10 @@
 
 .page {
   --band-gap: clamp(72px, 6vw, 96px);
+  /* One inset for every panel on the page so card, strip, form and direct-contact
+     text share a left edge; slim bars keep a shorter block inset. */
+  --panel-inset: 32px;
+  --bar-block: 20px;
 }
 
 /* ---------- hero ---------- */
@@ -90,7 +94,7 @@
   display: flex;
   flex-direction: column;
   min-height: 300px;
-  padding: 32px;
+  padding: var(--panel-inset);
   background: var(--surface-flat);
   box-shadow: inset 0 0 0 1px var(--rule);
 }
@@ -140,7 +144,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 14px 24px;
-  padding: 20px 24px 20px 28px;
+  padding: var(--bar-block) var(--panel-inset);
   background: var(--surface-flat);
   box-shadow: inset 0 0 0 1px var(--rule);
   font-size: var(--type-body);
@@ -154,7 +158,7 @@
   max-width: 46em;
 }
 
-.strip :global(.btn) {
+.strip :global(.arrow-action) {
   flex: none;
 }
 
@@ -165,7 +169,7 @@
 
 /* ---------- application form ---------- */
 .formPanel {
-  padding: 28px;
+  padding: var(--panel-inset);
   background: var(--surface-flat);
   box-shadow: inset 0 0 0 1px var(--rule);
 }
@@ -280,7 +284,7 @@
   align-items: flex-end;
   justify-content: space-between;
   gap: 10px 24px;
-  padding: 22px 28px;
+  padding: var(--bar-block) var(--panel-inset);
   box-shadow: inset 0 0 0 1px var(--rule);
 }
 
@@ -363,17 +367,12 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
+  .page {
+    --panel-inset: 20px;
+    --bar-block: 18px;
+  }
+
   .card {
     min-height: 0;
-    padding: 22px;
-  }
-
-  .formPanel {
-    padding: 20px;
-  }
-
-  .strip,
-  .direct {
-    padding: 18px 20px;
   }
 }

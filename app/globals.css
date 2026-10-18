@@ -56,9 +56,9 @@
   --syn-plain: #aeb4bd;
   --syn-keyword: #858b94;
   --syn-string: #c4cfb1;
-  --syn-fn: #eff8e2;
+  --syn-fn: var(--accent);
   --syn-param: #d9dde3;
-  --syn-number: #eff8e2;
+  --syn-number: var(--accent);
   --syn-comment: #646a72;
 
   /* motion */
@@ -113,6 +113,26 @@
   --space-display-support: clamp(18px, 0.8cqi + 8px, 26px);
   --space-section-support: clamp(14px, 0.5cqi + 8px, 18px);
   --space-support-action: clamp(32px, 1.6cqi + 14px, 44px);
+
+  /*
+   * Spatial system — choose spacing by relationship, never by eye
+   * (permanent rule: decision-20261017-spatial-system). Closest → widest:
+   *   --space-micro            icon ↔ label, controls inside one group
+   *   --space-paragraph        paragraph → paragraph within one text group
+   *   --space-section-support  section title → its one-line lead
+   *   --space-title-content    section title (or lead) → the content it introduces
+   *   --space-content-action   copy / panel → the action row that follows it
+   *   --space-display-support  page/display title → its lead
+   *   --space-support-action   display title or lead → following body content / actions
+   *   --section-gap            major section → major section, and before the footer
+   *   --space-page-start       shell content top → first heading of every page
+   * Panels in section shells use --section-panel-padding (Shell.module.css).
+   */
+  --space-micro: 8px;
+  --space-paragraph: 16px;
+  --space-title-content: 24px;
+  --space-content-action: 24px;
+  --space-page-start: 8px;
 
   --type-body-lg: 17px;
   --leading-body-lg: 28px;
@@ -246,7 +266,8 @@ kbd {
 }
 
 /* ---------- shared buttons ---------- */
-/* Surface scales independently; labels stay fixed and marked CTA arrows translate. */
+/* Surface scales independently; labels stay fixed. Buttons never carry a directional
+   arrow: arrow-bearing actions use ArrowAction (.arrow-action) instead. */
 .btn {
   position: relative;
   isolation: isolate;
@@ -282,11 +303,6 @@ kbd {
   flex: none;
 }
 
-/* Explicit directional CTA arrows move independently of the stationary label. */
-.btn-arrow {
-  transition: transform var(--button-scale-transition);
-}
-
 .btn-primary {
   --button-surface: var(--button-primary-bg);
   color: var(--button-primary-ink);
@@ -307,10 +323,6 @@ kbd {
 @media (hover: hover) {
   .btn:not(:disabled, [aria-disabled="true"]):hover::before {
     transform: scale(var(--button-scale-hover));
-  }
-
-  .btn:not(:disabled, [aria-disabled="true"]):hover .btn-arrow {
-    transform: translateX(3px);
   }
 }
 
@@ -337,6 +349,47 @@ kbd {
   height: 44px;
   padding: 0 20px;
   font-size: var(--type-control);
+}
+
+/* ---------- text-and-arrow actions (components/ArrowAction.tsx) ---------- */
+/*
+ * HALDANE + ATRX PERMANENT RULE: every textual action with a directional arrow is
+ * borderless text + arrow in the accent. Never a fill, container or resting border.
+ * The 44px minimum height is an invisible touch target; inline padding stays 0 so
+ * the label sits on the content edge.
+ */
+.arrow-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-tag); /* shapes the focus outline only */
+  background: transparent;
+  color: var(--accent);
+  font-size: var(--type-control);
+  font-weight: 450;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+}
+
+.arrow-action-icon {
+  flex: none;
+  transition: transform var(--button-scale-transition);
+}
+
+@media (hover: hover) {
+  .arrow-action:not(:disabled, [aria-disabled="true"]):hover .arrow-action-icon {
+    transform: translateX(3px);
+  }
+}
+
+.arrow-action:disabled,
+.arrow-action[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
 /* ---------- syntax tokens ---------- */

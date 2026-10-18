@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CheckIcon, ChevronRight } from "@/components/Icons";
+import ArrowAction from "@/components/ArrowAction";
+import { CheckIcon } from "@/components/Icons";
 import ApplicationSection from "./ApplicationSection";
 import styles from "./contact.module.css";
 
@@ -69,10 +70,7 @@ export default function ContactPage() {
               <strong>Compare access tiers first.</strong> Pipeline scope, instrument topology and
               commercial model for each tier.
             </p>
-            <Link href="/access" className="btn btn-secondary">
-              View access tiers
-              <ChevronRight size={14} className="btn-arrow" />
-            </Link>
+            <ArrowAction href="/access">View access tiers</ArrowAction>
           </div>
         </div>
       </section>
@@ -84,10 +82,7 @@ export default function ContactPage() {
           Compute constrained. <span>Qualified allocators only.</span>
         </h2>
         <p className={styles.closingLead}>Pricing is provided upon technical qualification.</p>
-        <Link href="#request" className="btn btn-primary">
-          Begin application
-          <ChevronRight size={14} className="btn-arrow" />
-        </Link>
+        <ArrowAction href="#request">Begin application</ArrowAction>
       </section>
     </div>
   );

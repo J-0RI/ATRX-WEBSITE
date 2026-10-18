@@ -62,6 +62,11 @@
   --nav-dropdown-offset: 6px;
   --nav-dropdown-open-duration: 140ms;
   --nav-dropdown-close-duration: 100ms;
+  /* Inline search morph (Search.module.css). One duration/curve for every moving edge;
+     closing waits a beat for the field's controls to leave first. */
+  --search-duration: 300ms;
+  --search-ease: cubic-bezier(0.2, 0, 0, 1);
+  --search-delay: 0ms;
   display: flex;
   align-items: center;
   height: 100%;
@@ -92,6 +97,26 @@
 
 .center {
   margin-right: var(--nav-cell-gap);
+  /* The search surface absorbs these shells: their right edge retreats in lockstep with
+     the bar's leading edge, so labels are covered, never overlapped. Generous negative
+     insets keep dropdown panels, shadows and focus rings unclipped at rest. */
+  clip-path: inset(-8px 0 -100vh -64px);
+  transition:
+    clip-path var(--search-duration) var(--search-ease) var(--search-delay);
+}
+
+.inner[data-search="closing"] {
+  --search-delay: 80ms;
+}
+
+.inner[data-search="open"] .center {
+  clip-path: inset(-8px 100% -100vh -64px);
+}
+
+/* Labels dim as the surface approaches; on close they return at the nav's own pace. */
+.inner[data-search="open"] .link {
+  color: transparent;
+  transition: color var(--search-duration) ease;
 }
 
 .link {
@@ -215,6 +240,18 @@
 @media (max-width: 520px) {
   .logo img {
     height: 18px;
+  }
+
+  /* Narrow header: the field also spans the Request access cell, clipped edge for edge. */
+  .split {
+    clip-path: inset(-8px -8px -8px 0);
+    transition:
+      background-color var(--dur-fast) ease,
+      clip-path var(--search-duration) var(--search-ease) var(--search-delay);
+  }
+
+  .inner[data-search="open"] .split {
+    clip-path: inset(-8px -8px -8px 100%);
   }
 
   .splitToggle {

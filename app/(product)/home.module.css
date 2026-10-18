@@ -1,51 +1,62 @@
-/* ---------- hero ---------- */
+/* ---------- open editorial hero: headline → two editorial passages → actions ---------- */
+/* Starts where every page starts; the next section follows at the shared --section-gap. */
 .hero {
-  display: grid;
-  grid-template-columns: minmax(380px, 0.68fr) minmax(0, 1fr);
-  gap: 32px;
-  padding: 32px 28px 32px clamp(32px, 4.25cqi, 52px);
-  border-radius: var(--radius-window);
-  background: var(--surface);
-  box-shadow: var(--highlight);
+  padding-top: var(--space-page-start);
 }
 
-.heroText {
-  align-self: center;
-  padding: 16px 0;
-  min-width: 0;
-}
-
+/* The opening statement owns the full content width; no measure cap. */
 .heroTitle {
-  font-size: var(--section-display);
+  font-size: clamp(36px, 5.8cqi, 76px);
   font-weight: 480;
-  line-height: 1.1;
+  line-height: 1.06;
   letter-spacing: -0.03em;
   color: #ffffff;
+  text-wrap: balance;
 }
 
-.heroTitleMuted {
-  display: block;
-  color: var(--text-3);
-}
-
-.heroLead {
-  max-width: 24em;
-  margin-top: 22px;
-  font-size: var(--section-lead);
-  line-height: 1.5;
-  letter-spacing: -0.008em;
-  color: var(--text-2);
+.heroAccent {
+  color: var(--accent);
 }
 
 .heroActions {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 30px;
+  margin-top: 0;
 }
 
-.heroCode {
-  min-height: 336px;
+/* Two complementary passages (audience | approach), top-aligned beneath the headline. */
+.heroDetail {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  column-gap: clamp(32px, 4.5cqi, 64px);
+  /* Stacked, the passages read as one introduction: paragraph rhythm. */
+  row-gap: var(--space-paragraph);
+  margin-top: var(--space-support-action);
+  font-size: var(--type-body-lg);
+  line-height: var(--leading-body-lg);
+  color: var(--text-2);
+}
+
+.heroColumn {
+  max-width: 36em;
+  text-wrap: pretty;
+}
+
+.heroCtas {
+  /* The borderless text action has no surface, so it needs more optical room
+     before the framed secondary button than two framed buttons would. */
+  column-gap: 28px;
+  margin-top: var(--space-content-action);
+}
+
+/* Action row closing a section's content (e.g. after the quickstart panel). */
+.sectionActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: var(--space-content-action);
 }
 
 /* ---------- sections ---------- */
@@ -59,12 +70,16 @@
   line-height: 1.2;
   letter-spacing: -0.025em;
   color: #ffffff;
-  margin-bottom: 26px;
+  margin-bottom: var(--space-title-content);
+}
+
+/* A title with a one-line lead: the lead takes the content gap instead. */
+.sectionTitle:has(+ .sectionLead) {
+  margin-bottom: var(--space-section-support);
 }
 
 .sectionLead {
-  margin-top: calc(var(--space-section-support) - 26px);
-  margin-bottom: 26px;
+  margin-bottom: var(--space-title-content);
   font-size: var(--section-lead);
   line-height: var(--leading-section-support);
   color: var(--text-2);
@@ -77,29 +92,11 @@
 }
 
 @container content (max-width: 879px) {
-  .hero {
+  .heroDetail {
     grid-template-columns: minmax(0, 1fr);
-    gap: 28px;
-    padding: 32px 24px 24px;
   }
 
-  .heroText {
-    padding: 0 8px;
-  }
-
-  .heroCode {
-    min-height: 0;
-  }
-}
-
-@container content (max-width: 879px) {
   .cards {
     grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-@container content (max-width: 560px) {
-  .hero {
-    padding: 24px 16px 16px;
   }
 }
