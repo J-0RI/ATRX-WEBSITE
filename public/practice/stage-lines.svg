@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <!-- ATRX in practice stage artwork: causal routes branching and merging across the
+       canvas, in translucent ink so the stage tone shows through. Original asset. -->
+  <g stroke="#000" stroke-opacity="0.1" stroke-width="16">
+    <path d="M-40 640 C 260 600 420 420 700 400 S 1120 520 1640 300"/>
+    <path d="M320 -40 C 360 200 300 380 460 560 S 620 820 560 940"/>
+  </g>
+  <g stroke="#000" stroke-opacity="0.3" stroke-width="2.5">
+    <path d="M-40 640 C 260 600 420 420 700 400 S 1120 520 1640 300"/>
+    <path d="M700 400 C 860 380 940 220 1180 170 S 1500 110 1640 40"/>
+    <path d="M320 -40 C 360 200 300 380 460 560 S 620 820 560 940"/>
+    <path d="M460 560 C 640 600 820 700 1060 720 S 1420 760 1640 860"/>
+    <path d="M1180 170 C 1240 320 1200 460 1300 600 S 1460 800 1420 940"/>
+    <path d="M-40 220 C 140 240 220 120 360 110"/>
+  </g>
+  <g stroke="#000" stroke-opacity="0.24" stroke-width="1.75">
+    <path d="M60 820 H 260 Q 280 820 280 800 V 700 Q 280 680 300 680 H 460"/>
+    <path d="M1060 720 V 600 Q 1060 580 1080 580 H 1240 Q 1260 580 1260 560 V 470"/>
+    <path d="M880 60 H 1020 Q 1040 60 1040 80 V 150 Q 1040 170 1060 170 H 1180"/>
+    <path d="M140 400 H 300 Q 320 400 320 380 V 300"/>
+  </g>
+  <path d="M-40 640 C 260 600 420 420 700 400 S 1120 520 1640 300" stroke="#eff8e2" stroke-opacity="0.2" stroke-width="1.25"/>
+  <g fill="#000" fill-opacity="0.36">
+    <circle cx="700" cy="400" r="5"/>
+    <circle cx="460" cy="560" r="5"/>
+    <circle cx="1180" cy="170" r="5"/>
+    <circle cx="1060" cy="720" r="4"/>
+    <circle cx="1260" cy="470" r="4"/>
+    <circle cx="320" cy="300" r="4"/>
+    <circle cx="460" cy="680" r="4"/>
+  </g>
+  <circle cx="700" cy="400" r="5" fill="none" stroke="#eff8e2" stroke-opacity="0.22" stroke-width="1"/>
+</svg>

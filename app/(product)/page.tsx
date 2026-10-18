@@ -1,10 +1,9 @@
 import Link from "next/link";
 import DocsDirectory from "@/components/DocsDirectory";
+import Practice from "@/components/Practice";
 import Quickstart from "@/components/Quickstart";
-import TierCard from "@/components/TierCard";
 import ArrowAction from "@/components/ArrowAction";
 import { quickstart } from "@/content/code";
-import { tiers } from "@/content/tiers";
 import { tokenize } from "@/lib/highlight";
 import styles from "./home.module.css";
 
@@ -50,15 +49,11 @@ export default function OverviewPage() {
         </div>
       </section>
 
-      <section id="access" className={styles.section} aria-labelledby="access-title">
-        <h2 id="access-title" className={styles.sectionTitle}>
-          Access
+      <section id="practice" className={styles.section} aria-labelledby="practice-title">
+        <h2 id="practice-title" className={styles.sectionTitle}>
+          ATRX in practice
         </h2>
-        <div className={styles.cards}>
-          {tiers.map((tier) => (
-            <TierCard key={tier.id} tier={tier} />
-          ))}
-        </div>
+        <Practice />
       </section>
 
       <section id="quickstart" className={styles.section} aria-labelledby="quickstart-title">

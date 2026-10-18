@@ -122,6 +122,7 @@
    *   --space-section-support  section title → its one-line lead
    *   --space-title-content    section title (or lead) → the content it introduces
    *   --space-content-action   copy / panel → the action row that follows it
+   *   --space-module           sibling modules in a grid (row and column gutter)
    *   --space-display-support  page/display title → its lead
    *   --space-support-action   display title or lead → following body content / actions
    *   --section-gap            major section → major section, and before the footer
@@ -132,6 +133,7 @@
   --space-paragraph: 16px;
   --space-title-content: 24px;
   --space-content-action: 24px;
+  --space-module: clamp(32px, 3.2cqi, 48px);
   --space-page-start: 8px;
 
   --type-body-lg: 17px;

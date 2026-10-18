@@ -1,0 +1,348 @@
+/*
+ * ATRX in practice — layered showcase.
+ * Stage: muted Haldane-family tone + original routing-line artwork (public/practice/stage-lines.svg).
+ * Foreground: a compact context window (--surface-inset) and a larger software window
+ * (--surface) placed per function; two views are cropped by the stage edge.
+ * All compositions occupy the same stage cell and cross-fade, so height never changes.
+ */
+.showcase {
+  container: showcase / inline-size;
+}
+
+/* ---------- function selector (retained) ---------- */
+.tabs {
+  display: flex;
+  gap: var(--space-title-content);
+  margin-bottom: var(--space-title-content);
+  border-bottom: 1px solid var(--rule);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tabs button {
+  flex: 0 0 auto;
+  min-height: 44px;
+  padding: 0 0 var(--space-micro);
+  border: 0;
+  border-bottom: 1px solid transparent;
+  background: none;
+  color: var(--text-2);
+  font: inherit;
+  font-size: var(--type-control);
+  cursor: pointer;
+  transition: color var(--dur-fast) ease, border-color var(--dur-fast) ease;
+}
+
+.tabs button:hover {
+  color: var(--text);
+}
+
+.tabs button[aria-selected="true"] {
+  border-bottom-color: var(--accent);
+  color: var(--accent);
+}
+
+.tabs button:focus-visible {
+  outline-offset: -3px;
+}
+
+/* ---------- stage ---------- */
+.stage {
+  --stage-tone: #4f5a4c;
+  --window-shadow: var(--highlight), 0 28px 56px -28px rgba(0, 0, 0, 0.75);
+  position: relative;
+  display: grid;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--radius-window);
+  background-color: var(--stage-tone);
+  background-image: url("/practice/stage-lines.svg");
+  background-size: cover;
+  background-position: 50% 50%;
+  transition:
+    background-color var(--dur-std) var(--ease),
+    background-position 600ms var(--ease);
+}
+
+.stage[data-tone="sage"] { --stage-tone: #4f5a4c; background-position: 50% 50%; }
+.stage[data-tone="slate"] { --stage-tone: #47505a; background-position: 30% 70%; }
+.stage[data-tone="stone"] { --stage-tone: #59524a; background-position: 70% 30%; }
+.stage[data-tone="moss"] { --stage-tone: #414b43; background-position: 40% 20%; }
+
+.composition {
+  position: relative;
+  grid-area: 1 / 1;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 180ms ease,
+    visibility 0s linear 180ms;
+}
+
+.composition[data-active] {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 280ms ease 80ms, visibility 0s;
+}
+
+/* Windows settle a few pixels into place; nothing slides across the stage. */
+.context,
+.app {
+  position: absolute;
+  transform: translateY(8px);
+  transition: transform 360ms var(--ease);
+}
+
+.composition[data-active] .context,
+.composition[data-active] .app {
+  transform: none;
+}
+
+.composition[data-active] .app {
+  transition-delay: 60ms;
+}
+
+/* ---------- per-function placement (percent of the stage) ---------- */
+.composition[data-layout="chartLeft"] .app { left: 5%; top: 9%; width: 58%; max-height: 84%; }
+.composition[data-layout="chartLeft"] .context { right: 5%; top: 50%; width: 28%; translate: 0 -50%; }
+
+.composition[data-layout="docRight"] .context { left: 5%; bottom: 12%; width: 28%; }
+.composition[data-layout="docRight"] .app { right: 5%; top: 9%; bottom: -24px; width: 59%; }
+
+.composition[data-layout="reviewLeft"] .app { left: 5%; top: 9%; bottom: -24px; width: 59%; }
+.composition[data-layout="reviewLeft"] .context { right: 5%; top: 9%; width: 28%; }
+
+.composition[data-layout="recordRight"] .context { left: 5%; top: 9%; width: 28%; }
+.composition[data-layout="recordRight"] .app { right: 5%; top: 50%; width: 58%; max-height: 90%; translate: 0 -50%; }
+
+/* ---------- context window ---------- */
+.context {
+  padding: 18px;
+  border-radius: 12px;
+  background: var(--surface-inset);
+  box-shadow: var(--window-shadow);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+
+.contextTitle {
+  font-size: 15px;
+  font-weight: 450;
+  line-height: 1.3;
+  color: var(--text);
+}
+
+.contextBody {
+  margin-top: var(--space-micro);
+}
+
+.task {
+  margin-top: 14px;
+  padding: 10px 12px;
+  border-radius: var(--radius-inner);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.task p {
+  margin-top: 4px;
+  color: var(--text);
+}
+
+.inputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.inputs li {
+  padding: 4px 8px;
+  border-radius: var(--radius-tag);
+  background: var(--surface-raised);
+  font-size: 11.5px;
+  line-height: 1.2;
+  color: var(--text-2);
+}
+
+/* ---------- neutral software surfaces; each view owns its internal anatomy ---------- */
+.app {
+  --work-ink: #171717;
+  --work-muted: #666666;
+  --work-rule: #e3e3e3;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: var(--window-shadow);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--work-ink);
+}
+
+.appBar {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 12px;
+  min-height: 38px;
+  padding: 8px 16px;
+  background: #000000;
+}
+.appBar img { display: block; width: 44px; height: auto; }
+.crumb { font-size: 12px; color: var(--text-3); }
+.crumb strong { font-weight: 400; color: var(--text); }
+.sample { margin-left: auto; font-size: 11px; color: var(--text-3); white-space: nowrap; }
+
+.appBody {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #999999 #ffffff;
+  background: #ffffff;
+  color: var(--work-ink);
+}
+.appBody:focus-visible,
+.appBody button:focus-visible { outline: 2px solid #000000; outline-offset: -2px; }
+.appBody :is(h4, h5, h6) { margin: 0; color: var(--work-ink); font-weight: 500; }
+.appBody h4 { font-size: 18px; line-height: 1.3; }
+.appBody h5 { font-size: 15px; line-height: 1.4; }
+.appBody h6 { font-size: 13px; line-height: 1.5; }
+.appBody p { text-wrap: pretty; }
+.label { display: block; font-size: 11.5px; line-height: 1.4; color: var(--text-3); }
+.meta { display: block; font-size: 11.5px; line-height: 1.4; color: var(--work-muted); }
+
+/* A: monitoring inbox. The topic list and development have separate reading axes. */
+.monitoring { display: grid; grid-template-columns: 148px minmax(0, 1fr); background: #ffffff; }
+.topicRail { padding: 18px 12px; border-right: 1px solid var(--work-rule); }
+.topicRail h4 { padding-left: 8px; font-size: 12.5px; }
+.topicRail ul { margin-top: 12px; }
+.topicRail li + li { margin-top: 6px; }
+.topicRail button { width: 100%; min-height: 44px; padding: 8px; border: 0; border-left: 1px solid transparent; background: #ffffff; color: var(--work-muted); font: inherit; font-size: 12px; line-height: 1.5; text-align: left; cursor: pointer; }
+.topicRail button[aria-pressed="true"] { border-left-color: #000000; color: var(--work-ink); font-weight: 500; }
+.development { min-width: 0; padding: 18px; }
+.development > h4 { margin-top: 4px; }
+.development > h5 { margin-top: var(--space-paragraph); }
+.development > p { margin-top: var(--space-micro); }
+.relatedObservations { margin-top: var(--space-paragraph); }
+.relatedObservations h5, .openQuestion h5 { font-size: 13px; }
+.relatedObservations dl { margin-top: var(--space-micro); }
+.relatedObservations dl div + div { margin-top: 10px; }
+.relatedObservations dt { font-size: 12px; font-weight: 500; }
+.relatedObservations dd { margin: 2px 0 0; color: var(--work-muted); font-size: 12px; }
+.openQuestion { margin-top: var(--space-paragraph); padding-top: 12px; border-top: 1px solid var(--work-rule); }
+.openQuestion p { margin-top: 4px; font-size: 12.5px; }
+.development > .inputLine { margin-top: var(--space-paragraph); font-size: 11.5px; color: var(--work-muted); }
+
+/* B: research conversation. One submitted request, an open plan, then working output. */
+.researchPlanner { padding: 18px 22px 42px; background: #ffffff; }
+.submittedRequest { width: 88%; margin-left: auto; padding: 12px 14px; border: 1px solid var(--work-rule); border-radius: 4px; }
+.submittedRequest p { margin-top: 4px; }
+.investigation { margin-top: var(--space-title-content); }
+.investigation ol { display: grid; gap: var(--space-micro); margin: 12px 0 0; padding-left: 22px; list-style: decimal; }
+.investigation li { padding-left: 4px; }
+.workingOutput { margin-top: var(--space-title-content); padding-left: 14px; border-left: 1px solid #bdbdbd; }
+.workingOutput h5 { margin-top: 4px; }
+.workingOutput p { margin-top: var(--space-micro); }
+.evidenceGap { color: var(--work-muted); font-size: 12px; }
+.followupQuestion { margin-top: var(--space-title-content); padding-top: 12px; border-top: 1px solid var(--work-rule); }
+.followupQuestion p { margin-top: 4px; font-size: 12.5px; }
+
+/* C: assessment memorandum. Document hierarchy and a compact conditions table. */
+.assessment { padding: 20px 24px 42px; background: #ffffff; }
+.assessmentHeader { padding-bottom: var(--space-paragraph); border-bottom: 1px solid var(--work-rule); }
+.assessmentHeader h4 { font-size: 20px; }
+.assessmentHeader > p { margin-top: 6px; }
+.assessmentHeader dl { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; font-size: 11.5px; }
+.assessmentHeader dt { color: var(--work-muted); }
+.assessmentHeader dd { margin: 2px 0 0; }
+.assessment > section { margin-top: 18px; }
+.assessment section h5 { font-size: 13px; }
+.assessment section > p { margin-top: 6px; font-size: 12.5px; }
+.assessmentTable { width: 100%; margin-top: var(--space-micro); border-collapse: collapse; font-size: 12px; text-align: left; }
+.assessmentTable th, .assessmentTable td { padding: 8px 0; border-bottom: 1px solid var(--work-rule); vertical-align: top; }
+.assessmentTable th { font-weight: 500; }
+.assessmentTable thead th { padding-top: 0; font-size: 11.5px; color: var(--work-muted); font-weight: 400; }
+.assessmentTable th:first-child { width: 72%; padding-right: 16px; }
+.assessmentTable tbody th span { display: block; margin-top: 2px; color: var(--work-muted); font-size: 11.5px; font-weight: 400; }
+
+/* D: prepared-document library. Compact work products above a selected excerpt. */
+.decisionWorkspace { padding: 18px; background: #ffffff; }
+.decisionWorkspace > header > p { margin-top: 6px; }
+.documentLibrary { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-micro); margin-top: var(--space-paragraph); }
+.documentLibrary li { min-width: 0; }
+.documentLibrary button { display: flex; align-items: start; gap: var(--space-micro); width: 100%; height: 100%; min-height: 66px; padding: 10px; border: 1px solid var(--work-rule); border-radius: 0; background: #ffffff; color: var(--work-ink); font: inherit; text-align: left; cursor: pointer; }
+.documentLibrary button[aria-pressed="true"] { border-left-color: #000000; box-shadow: inset 1px 0 0 #000000; }
+.documentLibrary svg { flex: none; width: 14px; height: 14px; margin-top: 3px; fill: none; stroke: #666666; stroke-width: 1.25; stroke-linecap: round; stroke-linejoin: round; }
+.documentLibrary strong { display: block; font-size: 12.5px; line-height: 1.4; font-weight: 500; }
+.documentLibrary button > span > span { display: block; margin-top: 4px; font-size: 11.5px; line-height: 1.4; color: var(--work-muted); }
+.selectedBrief { margin-top: 18px; padding-top: var(--space-paragraph); border-top: 1px solid var(--work-rule); }
+.selectedBrief h5 { margin-top: 4px; font-size: 16px; }
+.selectedBrief > p { margin-top: var(--space-micro); }
+.selectedBrief h6 { margin-top: 14px; }
+.selectedBrief ul { margin-top: 6px; padding-left: 16px; list-style: disc; font-size: 12.5px; }
+.selectedBrief li + li { margin-top: 4px; }
+.briefNext p { margin-top: 4px; font-size: 12.5px; }
+
+.disclaimer {
+  margin-top: var(--space-title-content);
+  font-size: var(--section-small);
+  line-height: var(--section-small-leading);
+  color: var(--text-3);
+}
+
+/* ---------- narrower containers: windows stack inside the artwork ---------- */
+@container showcase (max-width: 879px) {
+  .stage {
+    aspect-ratio: auto;
+  }
+
+  .composition {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: clamp(20px, 5cqi, 32px);
+  }
+
+  /* Same specificity as the desktop placement rules, declared later, so it wins. */
+  .composition[data-layout] .context,
+  .composition[data-layout] .app {
+    position: static;
+    inset: auto;
+    width: auto;
+    max-height: none;
+    translate: none;
+  }
+
+  /* Keep the accepted responsive footprint as documents/disclosures change. */
+  .composition[data-layout] .app {
+    height: clamp(500px, calc(1064px - 71cqi), 900px);
+    flex-shrink: 0;
+  }
+}
+
+@container showcase (max-width: 480px) {
+  .appBar { gap: 8px; }
+  .sample { display: none; }
+  .composition[data-layout] .app {
+    height: clamp(640px, calc(1395px - 163.75cqi), 900px);
+  }
+  /* Keep the monitoring list beside its detail: it must still read as an inbox. */
+  .monitoring { grid-template-columns: 96px minmax(0, 1fr); }
+  .topicRail { padding: 14px 6px; }
+  .topicRail h4 { padding-left: 6px; font-size: 12px; }
+  .topicRail button { padding: 8px 6px; font-size: 11.5px; }
+  .development { padding: 14px 12px; }
+  .development > h4 { font-size: 16px; }
+  .development > h5 { font-size: 14px; }
+  .researchPlanner { padding: 16px 14px 32px; }
+  .submittedRequest { width: 94%; padding: 10px 12px; }
+  .assessment { padding: 18px 16px 32px; }
+  .assessmentHeader dl { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .assessmentTable th:first-child { width: 66%; padding-right: 12px; }
+  .decisionWorkspace { padding: 16px 14px; }
+  .documentLibrary button { padding: 8px; gap: 6px; }
+  .documentLibrary svg { display: none; }
+}

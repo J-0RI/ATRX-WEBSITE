@@ -85,18 +85,8 @@
   color: var(--text-2);
 }
 
-.cards {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-}
-
 @container content (max-width: 879px) {
   .heroDetail {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .cards {
     grid-template-columns: minmax(0, 1fr);
   }
 }
