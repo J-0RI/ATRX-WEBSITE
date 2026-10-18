@@ -85,6 +85,107 @@
   color: var(--text-2);
 }
 
+/* ---------- methodology (decision-20261018-methodology-composition) ---------- */
+/* Region A: one editorial statement. The thesis sentence is the heading; the argument
+   continues inline in the secondary foreground, so the two read as a single composition. */
+.methodStatement {
+  /* Sized for three composed lines at desktop widths: present, but subordinate to the
+     opening H1 and never a full-width banner. */
+  max-width: 48em;
+  font-size: clamp(20px, 1.2cqi + 9px, 24px);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: var(--text-2);
+  text-wrap: pretty;
+}
+
+.methodThesis,
+.methodArgument {
+  display: inline;
+  font: inherit;
+  letter-spacing: inherit;
+}
+
+.methodThesis {
+  color: #ffffff;
+}
+
+/* Region B: four equal stages. Each stage is a four-row subgrid (index · open space · title ·
+   descriptor), so indices share the top line, titles share one line and descriptors share one
+   top, whatever their wrapping. The open row is the composed negative space, not padding. */
+.methodStages {
+  --method-space: clamp(120px, 12cqi, 176px);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: auto minmax(var(--method-space), 1fr) auto auto;
+  margin-top: var(--section-gap);
+}
+
+.methodStage {
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+  padding: 0 var(--space-paragraph);
+  border-left: 1px solid var(--rule);
+}
+
+.methodIndex {
+  grid-row: 1;
+  font-size: var(--type-meta);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  color: var(--text-3);
+}
+
+.methodTitle {
+  grid-row: 3;
+  font-size: var(--type-lead);
+  font-weight: 450;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+  color: var(--text);
+}
+
+.methodDescriptor {
+  grid-row: 4;
+  margin-top: var(--space-micro);
+  font-size: var(--type-small);
+  line-height: var(--leading-small);
+  color: var(--text-3);
+  text-wrap: pretty;
+}
+
+/* Tablet: two by two in reading order; less open space, same anatomy. */
+@container content (max-width: 879px) {
+  .methodStages {
+    --method-space: var(--space-module);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: var(--space-module);
+  }
+}
+
+/* Phone: stacked, top hairlines; the open space shrinks to a short pause. */
+@container content (max-width: 519px) {
+  .methodStages {
+    --method-space: var(--space-title-content);
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 0;
+  }
+
+  .methodStage {
+    padding: var(--space-title-content) 0;
+    border-left: 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .methodStage:last-child {
+    padding-bottom: 0;
+  }
+}
+
 @container content (max-width: 879px) {
   .heroDetail {
     grid-template-columns: minmax(0, 1fr);

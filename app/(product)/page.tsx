@@ -10,6 +10,16 @@ import styles from "./home.module.css";
 const prepare = <T extends { code: string; lang: Parameters<typeof tokenize>[1] }>(samples: T[]) =>
   samples.map(({ lang, ...s }) => ({ ...s, lines: tokenize(s.code, lang) }));
 
+/* Four stages of institutional research discipline: concise by design. The statement above
+   them carries the argument; these give it structure. Principle-level wording only: no ATRX
+   capability, audit or predictive claim (decision-20261018-methodology-composition). */
+const methodStages = [
+  { title: "Isolate the signal", descriptor: "Distinguish market repricing from structural change." },
+  { title: "Trace transmission", descriptor: "Examine policy, liquidity, and positioning channels." },
+  { title: "Challenge the thesis", descriptor: "Test competing explanations, regimes, and constraints." },
+  { title: "Preserve the rationale", descriptor: "Keep evidence, assumptions, and limitations reviewable." },
+];
+
 export default function OverviewPage() {
   const categories = quickstart.map((c) => ({ ...c, samples: prepare(c.samples) }));
 
@@ -47,6 +57,33 @@ export default function OverviewPage() {
             Read architecture
           </Link>
         </div>
+      </section>
+
+      {/* Chapter 2 — methodology (decision-20261018-overview-narrative,
+          decision-20261018-methodology-composition): one editorial statement, then four
+          minimal stages. Grounded in general research practice, not ATRX capability claims. */}
+      <section id="method" className={styles.section} aria-labelledby="method-title">
+        <div className={styles.methodStatement}>
+          <h2 id="method-title" className={styles.methodThesis}>
+            A market move is an observation, not an investment thesis.
+          </h2>{" "}
+          <p className={styles.methodArgument}>
+            Institutional research must examine the economic transmission, challenge competing
+            explanations, establish where the thesis could fail, and preserve the evidence behind
+            the judgment.
+          </p>
+        </div>
+        <ol className={styles.methodStages}>
+          {methodStages.map((stage, i) => (
+            <li key={stage.title} className={styles.methodStage}>
+              <span className={styles.methodIndex} aria-hidden="true">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className={styles.methodTitle}>{stage.title}</h3>
+              <p className={styles.methodDescriptor}>{stage.descriptor}</p>
+            </li>
+          ))}
+        </ol>
       </section>
 
       <section id="practice" className={styles.section} aria-labelledby="practice-title">
