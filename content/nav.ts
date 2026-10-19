@@ -167,10 +167,14 @@ export const documentationMenu: NavItem[] = [
   { label: "Technical library", href: "/documentation#library" },
 ];
 
+/** Sign-in for existing clients lives on the ATRX suite, outside this site (URL supplied by the user). */
+export const LOGIN_URL = "https://suite.atrx.tech/login";
+
 export const requestAccessMenu: NavItem[] = [
   { label: "Access tiers", href: "/access" },
   { label: "Documentation request", href: "/contact?engagement=documentation#request" },
   { label: "Contact engineering", href: "/contact" },
+  { label: "Log in", href: LOGIN_URL },
 ];
 
 /** Desktop dropdown panel: one row per destination, each with its own editorial illustration. */
@@ -214,6 +218,7 @@ export const requestAccessPanel: NavPanel = {
     panelItem("/access", "Three tiers, granted by application: Prosumer Node, Capital Desk and Institutional.", "access"),
     panelItem("/contact?engagement=documentation#request", "Whitepapers, ablation studies and risk disclosures, maintained for qualified evaluators.", "request"),
     panelItem("/contact", "Apply for a deployment. Applications are evaluated against available compute capacity.", "engineering"),
+    panelItem(LOGIN_URL, "Already working with ATRX? Sign in to your account.", "login"),
   ],
 };
 
