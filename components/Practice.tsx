@@ -502,7 +502,6 @@ export default function Practice() {
           </div>
         ))}
       </div>
-      <p className={styles.disclaimer}>Illustrative interface with sample data. No live connection, quotes or executed trades.</p>
     </div>
   );
 }

@@ -1,0 +1,170 @@
+/*
+ * Homepage operating-cycle chapter (decision-20261018-workflow-chapter).
+ * Four stages, each a text column beside a painted plate. Compositions alternate: data and
+ * evaluation set text first, research mirrors it, and the live routing stage spans the canvas
+ * with a panoramic plate.
+ *
+ * Spacing by relationship (decision-20261018-spacing-hierarchy-interpretation):
+ *   stage → stage            --space-content-group   section rhythm
+ *   text ↔ plate             --space-module          sibling regions of one stage
+ *   title → summary          --space-section-support component rhythm
+ *   summary → details        --space-title-content   lead → the content it introduces
+ *   detail row inset         --space-paragraph       paragraphs inside one group
+ * Plates are full-bleed paintings from one illustration family, 'Records in material'
+ * (decision-20261018-records-in-material); desktop side plates take the text column's height.
+ */
+.workflow {
+  container: workflow / inline-size;
+  display: grid;
+  row-gap: var(--space-content-group);
+}
+
+.stage {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  column-gap: var(--space-module);
+  /* The plate takes the text column's height, so each stage reads as one composed spread. */
+  align-items: stretch;
+}
+
+.stage[data-layout="text-end"] {
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+}
+
+.stage[data-layout="text-end"] .text {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.stage[data-layout="text-end"] .plate {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+/* The routing stage: text above on the same 5:7 columns as its neighbours, plate across both. */
+.stage[data-layout="wide"] {
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: var(--space-module);
+}
+
+.stage[data-layout="wide"] .text {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  column-gap: var(--space-module);
+  align-items: start;
+}
+
+.stage[data-layout="wide"] .details {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--space-module);
+  margin-top: 0;
+}
+
+/* ---------- text ---------- */
+.text {
+  min-width: 0;
+  align-self: center;
+}
+
+.title {
+  font-size: var(--section-card-title);
+  font-weight: 450;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: #ffffff;
+  text-wrap: balance;
+}
+
+.summary {
+  margin-top: var(--space-section-support);
+  font-size: var(--type-body-lg);
+  line-height: var(--leading-body-lg);
+  color: var(--text-2);
+  text-wrap: pretty;
+}
+
+.details {
+  display: grid;
+  margin-top: var(--space-title-content);
+  font-size: var(--section-small);
+  line-height: var(--section-small-leading);
+}
+
+/* Run-in terms: the term leads its own sentence, so each row stays one compact paragraph. */
+.detail {
+  padding-block: var(--space-paragraph);
+  border-top: 1px solid var(--rule);
+  text-wrap: pretty;
+}
+
+.detail dt,
+.detail dd {
+  display: inline;
+}
+
+.detail dt {
+  margin-right: 0.35em;
+  font-weight: 450;
+  color: var(--text);
+}
+
+.detail dd {
+  color: var(--text-2);
+}
+
+.code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  letter-spacing: 0;
+}
+
+/* ---------- plate: one painting per stage, full bleed in a square-cornered frame ---------- */
+.plate {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  border-radius: 0;
+  background-color: var(--surface);
+}
+
+/* The routing stage's plate spans the canvas; a panorama, not a band. */
+.stage[data-layout="wide"] .plate {
+  aspect-ratio: 12 / 5;
+}
+
+.artImage {
+  object-fit: cover;
+}
+
+/* ---------- tablet and phone: every stage stacks text over plate ---------- */
+@container workflow (max-width: 879px) {
+  .stage,
+  .stage[data-layout="text-end"],
+  .stage[data-layout="wide"] .text {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--space-module);
+  }
+
+  .stage[data-layout="text-end"] .text,
+  .stage[data-layout="text-end"] .plate {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  /* Stacked, a painting has no text beside it to take its height from. */
+  .plate,
+  .stage[data-layout="wide"] .plate {
+    aspect-ratio: 4 / 3;
+  }
+
+  /* Stacked, the routing intro relates to its details like every other stage. */
+  .stage[data-layout="wide"] .text {
+    row-gap: var(--space-title-content);
+  }
+}
+
+@container workflow (max-width: 519px) {
+  .stage[data-layout="wide"] .details {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

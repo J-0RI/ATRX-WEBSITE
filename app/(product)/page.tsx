@@ -1,14 +1,10 @@
 import Link from "next/link";
-import DocsDirectory from "@/components/DocsDirectory";
 import Practice from "@/components/Practice";
-import Quickstart from "@/components/Quickstart";
+import Workflow from "@/components/Workflow";
 import ArrowAction from "@/components/ArrowAction";
-import { quickstart } from "@/content/code";
-import { tokenize } from "@/lib/highlight";
+import { Blocks, Scale, Signpost } from "lucide-react";
+import { tiers } from "@/content/tiers";
 import styles from "./home.module.css";
-
-const prepare = <T extends { code: string; lang: Parameters<typeof tokenize>[1] }>(samples: T[]) =>
-  samples.map(({ lang, ...s }) => ({ ...s, lines: tokenize(s.code, lang) }));
 
 /* Four stages of institutional research discipline: concise by design. The statement above
    them carries the argument; these give it structure. Principle-level wording only: no ATRX
@@ -20,9 +16,31 @@ const methodStages = [
   { title: "Preserve the rationale", descriptor: "Keep evidence, assumptions, and limitations reviewable." },
 ];
 
-export default function OverviewPage() {
-  const categories = quickstart.map((c) => ({ ...c, samples: prepare(c.samples) }));
+/* Icons are distinct from every glyph already on the page (Practice switcher, alerts).
+   The institution's side of adoption: the decision served, the operating model, and who stays
+   accountable. Considerations for the institution, not ATRX features or onboarding steps. */
+const fitPoints = [
+  {
+    icon: Signpost,
+    title: "Intelligence needs a decision to serve.",
+    text: "Identify the research question, portfolio judgment or investment decision ATRX would inform. Its relevance depends on the choice the institution faces, the horizon over which it matters and the boundaries of its mandate.",
+  },
+  {
+    icon: Blocks,
+    title: "Place it within the operating model.",
+    text: "Consider who interprets the intelligence, which risk requirements constrain its use and how it enters the existing research workflow. Analytical usefulness alone does not establish operational compatibility.",
+  },
+  {
+    icon: Scale,
+    title: "Keep responsibility explicit.",
+    text: "Assumptions, limitations and supporting evidence need to remain open to scrutiny. Establish who reviews the judgment and what would warrant reassessment in the institution’s own environment. Decision authority stays with the institution.",
+  },
+];
 
+/* The closing primary action opens the Capital Desk application (engagement preselected). */
+const capitalDesk = tiers.find((tier) => tier.id === "capital-desk")!;
+
+export default function OverviewPage() {
   return (
     <>
       <section className={styles.hero} aria-labelledby="hero-title">
@@ -93,27 +111,60 @@ export default function OverviewPage() {
         <Practice />
       </section>
 
-      <section id="quickstart" className={styles.section} aria-labelledby="quickstart-title">
-        <h2 id="quickstart-title" className={styles.sectionTitle}>
-          Jump straight in
+      {/* Chapter 4 — the operating cycle behind the views above (decision-20261018-workflow-chapter). */}
+      <section id="workflow" className={styles.section} aria-labelledby="workflow-title">
+        <h2 id="workflow-title" className={`${styles.sectionTitle} ${styles.sectionStatement}`}>
+          From point-in-time data to live directives and a record your desk can review.
         </h2>
-        <p className={styles.sectionLead}>
-          Webhooks, guardrails, attribution, and audit telemetry inside your existing stack
-        </p>
-        <Quickstart categories={categories} />
-        <div className={styles.sectionActions}>
-          <Link href="/quickstart" className="btn btn-secondary">
-            Open the quickstart guide
-          </Link>
-        </div>
+        <Workflow />
       </section>
 
-      <section id="directory" className={styles.section} aria-labelledby="directory-title">
-        <h2 id="directory-title" className={styles.sectionTitle}>
-          Explore the documentation
-        </h2>
-        <DocsDirectory />
-      </section>
+      {/* Research validity → institutional applicability → invitation. The editorial argument
+          follows the desk's authority in Native Risk Mandates, the review limitations in
+          Causal Attribution, and the governance role of Audit-Grade Ledgers. These are
+          considerations for the institution, not new ATRX features or onboarding requirements. */}
+      <div className={styles.conclusion}>
+        <section id="adoption" className={styles.fit} aria-labelledby="adoption-title">
+          <header className={styles.fitOpening}>
+            <h2 id="adoption-title" className={styles.fitTitle}>
+              A research judgment still has to meet the mandate.
+            </h2>
+            <p className={styles.fitStatement}>
+              A defensible result can still be unsuitable for a particular institution.
+              The mandate gives the research its decision context.
+            </p>
+          </header>
+
+          {/* Three considerations of equal weight, read left to right (reference layout,
+              2026-10-18): icon, title and text above a quiet left rule. Icons are decorative. */}
+          <div className={styles.fitPoints}>
+            {fitPoints.map(({ icon: Icon, title, text }) => (
+              <div key={title} className={styles.fitPoint}>
+                <Icon className={styles.fitIcon} size={24} strokeWidth={1.5} aria-hidden="true" />
+                <h3 className={styles.fitPointTitle}>{title}</h3>
+                <p className={styles.fitPointText}>{text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="begin" className={styles.closing} aria-labelledby="begin-title">
+          <h2 id="begin-title" className={styles.closingTitle}>
+            <span>
+              Power your <span className={styles.closingKeep}>most demanding</span>
+            </span>{" "}
+            <span>research with ATRX.</span>
+          </h2>
+          <div className={styles.closingActions}>
+            <Link href={capitalDesk.apply} className="btn btn-primary">
+              Get Capital Desk
+            </Link>
+            <Link href="/documentation" className="btn btn-secondary">
+              Explore documentation
+            </Link>
+          </div>
+        </section>
+      </div>
     </>
   );
 }

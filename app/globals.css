@@ -125,6 +125,8 @@
    *   --space-module           sibling modules in a grid (row and column gutter)
    *   --space-display-support  page/display title → its lead
    *   --space-support-action   display title or lead → following body content / actions
+   *   --space-content-group    content group → content group inside one section (an
+   *                            editorial premise → the framework that develops it)
    *   --section-gap            major section → major section, and before the footer
    *   --space-page-start       shell content top → first heading of every page
    * Panels in section shells use --section-panel-padding (Shell.module.css).
@@ -134,6 +136,11 @@
   --space-title-content: 24px;
   --space-content-action: 24px;
   --space-module: clamp(32px, 3.2cqi, 48px);
+  /* Section rhythm, not page rhythm: tracks a three-line editorial statement's footprint
+     (3 × 1.4 × (1.2cqi + 9px) ≈ 5cqi + 38px, capped at 3 × 24px × 1.4). Wider than
+     --section-gap on desktop because it separates a premise from a tall, open framework;
+     on phones it settles just above the --section-gap floor. Content container only. */
+  --space-content-group: clamp(56px, 5cqi + 38px, 100px);
   --space-page-start: 8px;
 
   --type-body-lg: 17px;

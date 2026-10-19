@@ -51,14 +51,6 @@
   margin-top: var(--space-content-action);
 }
 
-/* Action row closing a section's content (e.g. after the quickstart panel). */
-.sectionActions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: var(--space-content-action);
-}
-
 /* ---------- sections ---------- */
 .section {
   margin-top: var(--section-gap);
@@ -83,6 +75,20 @@
   font-size: var(--section-lead);
   line-height: var(--leading-section-support);
   color: var(--text-2);
+}
+
+/* A centred chapter statement (user direction, 2026-10-18): the one title on the page that
+   leaves the left axis, so the operating-cycle chapter opens as a premise rather than a label.
+   It relates to the spreads below as premise → development, the same step as the methodology
+   statement → stages (--space-content-group). Aeonik has no italic master: the slant is
+   browser-synthesised by request; the weight is the font's own Bold instance. */
+.sectionStatement {
+  margin-inline: auto;
+  margin-bottom: var(--space-content-group);
+  font-weight: 700;
+  font-style: italic;
+  text-align: center;
+  text-wrap: balance;
 }
 
 /* ---------- methodology (decision-20261018-methodology-composition) ---------- */
@@ -119,7 +125,8 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-auto-rows: auto minmax(var(--method-space), 1fr) auto auto;
-  margin-top: var(--section-gap);
+  /* Premise → framework: an internal group step, not a section boundary. */
+  margin-top: var(--space-content-group);
 }
 
 .methodStage {
@@ -189,5 +196,161 @@
 @container content (max-width: 879px) {
   .heroDetail {
     grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---------- concluding chapter: research validity → institutional applicability ---------- */
+.conclusion {
+  /* One section boundary before and after the editorial chapter. Internal relationships
+     are carried by its own opening → argument composition, not accumulated CTA padding. */
+  margin-top: var(--space-content-group);
+  display: grid;
+  row-gap: var(--space-content-group);
+  padding-bottom: var(--space-title-content);
+}
+
+.fitOpening {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+
+.fitTitle {
+  max-width: 28ch;
+  font-size: clamp(30px, 3.2cqi + 10px, 48px);
+  font-weight: 400;
+  line-height: 1.16;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  text-wrap: balance;
+}
+
+.fitStatement {
+  margin-top: var(--space-display-support);
+  max-width: 52ch;
+  font-size: var(--type-display-support);
+  line-height: var(--leading-section-support);
+  color: var(--text-2);
+  text-wrap: pretty;
+}
+
+/* Three considerations of equal weight beneath the centred opening (reference layout, user
+   direction 2026-10-18). Each column hangs from a quiet left rule: icon, then title and text.
+   Opening → columns keeps the premise → framework step (--space-content-group). */
+.fitPoints {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: auto;
+  margin-top: var(--space-content-group);
+}
+
+/* Each column is a three-row subgrid (icon · title · text), so titles of different lengths
+   still start every description on one line. Side inset ≈ the reference's 1:15 column ratio. */
+.fitPoint {
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+  align-content: start;
+  padding: var(--space-paragraph) var(--space-title-content) var(--space-title-content);
+  border-left: 1px solid var(--rule-strong);
+}
+
+.fitIcon {
+  color: var(--text-2);
+}
+
+/* Icon → title is a separate step from title → text, so the glyph reads as the column's mark
+   rather than part of the heading. */
+.fitPointTitle {
+  margin-top: var(--space-support-action);
+  font-size: var(--section-lead);
+  font-weight: 450;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  text-wrap: balance;
+}
+
+/* Small body, as in the workflow detail rows: keeps three columns readable on laptop canvases
+   and holds the reference's title-to-text proportion. */
+.fitPointText {
+  max-width: 34em;
+  margin-top: var(--space-section-support);
+  font-size: var(--section-small);
+  line-height: var(--section-small-leading);
+  color: var(--text-2);
+  text-wrap: pretty;
+}
+
+/* Below desktop the three columns would fall under a comfortable measure: stack them, each
+   still hanging from its rule. */
+@container content (max-width: 879px) {
+  .fitPoints {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--space-support-action);
+  }
+
+  .fitPoint {
+    max-width: 40em;
+    padding-block: 0;
+  }
+}
+
+@container content (max-width: 519px) {
+  .fitPoint {
+    padding-inline-end: 0;
+  }
+
+  .fitPointTitle {
+    margin-top: var(--space-title-content);
+  }
+}
+
+.closing {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+
+.closingTitle {
+  max-width: 100%;
+  font-size: clamp(34px, 3cqi + 24px, 64px);
+  font-weight: 480;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  text-wrap: balance;
+}
+
+/* Authored phrase breaks at wider widths; natural wrapping on phones. */
+.closingTitle > span {
+  display: block;
+}
+
+/* The closing buttons are the shared .btn exactly as "Read architecture" in the hero uses it
+   (user rule, 2026-10-18): same radius, height, padding and type, sized to their labels, in the
+   hero's 12px row gap. Never restyle .btn locally here. */
+.closingActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: var(--space-support-action);
+}
+
+@container content (max-width: 519px) {
+  .closingTitle {
+    font-size: clamp(32px, 9.5cqi, 38px);
+  }
+
+  .closingTitle > span {
+    display: inline;
+  }
+
+  /* Natural wrapping strands "demanding" on its own middle line at phone measure; holding the
+     phrase together gives Power your / most demanding / research with ATRX. */
+  .closingKeep {
+    white-space: nowrap;
   }
 }

@@ -13,10 +13,19 @@
   --panel-gutter: 48px;
   --panel-pad: clamp(24px, 2.1vw, 36px);
   --panel-gap: clamp(20px, 1.8vw, 32px);
-  --panel-bg: #121315;
-  --panel-stage: #191a1d;
-  --row-bg: rgba(255, 255, 255, 0.03);
-  --row-active: rgba(255, 255, 255, 0.075);
+  /*
+   * Material: the navbar's own family, given more body. The header blurs the page
+   * (12px) under a black .5 tint and lays translucent white cells on top; the panel
+   * blurs further and tints deeper because it carries reading content, then reuses
+   * the cells' translucent white steps for rows. Layers, densest last: glass < row <
+   * preview well (darker, so the artwork and captions sit on a calm ground).
+   */
+  --panel-glass: rgba(12, 13, 15, 0.8);
+  --panel-blur: blur(28px) saturate(1.05);
+  --panel-edge: inset 0 0 0 1px rgba(255, 255, 255, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --panel-well: rgba(0, 0, 0, 0.3);
+  --row-bg: rgba(255, 255, 255, 0.035);
+  --row-active: rgba(255, 255, 255, 0.085);
   --panel-ease: cubic-bezier(0.23, 1, 0.32, 1);
   position: absolute;
   top: calc(50% + var(--nav-cell-h) / 2 + 12px);
@@ -27,8 +36,10 @@
   gap: var(--panel-gap);
   width: min(max(58vw, 780px), 1080px, calc(100vw - var(--panel-gutter)));
   padding: var(--panel-pad);
-  background: var(--panel-bg);
-  box-shadow: 0 28px 64px -20px rgba(0, 0, 0, 0.8);
+  background: var(--panel-glass);
+  -webkit-backdrop-filter: var(--panel-blur);
+  backdrop-filter: var(--panel-blur);
+  box-shadow: var(--panel-edge), 0 24px 48px -28px rgba(0, 0, 0, 0.6);
   pointer-events: none;
   /* Closed: out of view, tab order and the accessibility tree. Closing is softer and quicker. */
   visibility: hidden;
@@ -169,7 +180,7 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
-  background: var(--panel-stage);
+  background: var(--panel-well);
 }
 
 /* At least the artwork's own proportion; grows with a taller navigation column. */
@@ -222,6 +233,14 @@
   font-size: 15px;
   line-height: 1.5;
   color: var(--text-2);
+}
+
+/* Without backdrop blur, translucency would let page text compete: fall back to a solid tone. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .panel {
+    --panel-glass: #121315;
+    --panel-well: #17181b;
+  }
 }
 
 @media (max-width: 1179px) {

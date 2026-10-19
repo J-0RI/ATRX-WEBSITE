@@ -1096,13 +1096,6 @@
 
 
 
-.disclaimer {
-  margin-top: var(--space-title-content);
-  font-size: var(--section-small);
-  line-height: var(--section-small-leading);
-  color: var(--text-3);
-}
-
 /* ---------- narrower containers: windows stack inside the artwork ---------- */
 @container showcase (max-width: 879px) {
   .stage {

@@ -32,7 +32,7 @@ export const productSection: LocalSection = {
   label: "Product",
   hideContext: true,
   groups: [
-    { title: "Get Started", items: [
+    { title: "Product", items: [
       { label: "Overview", href: "/", searchLabel: "ATRX Overview", keywords: "home operating model intelligence controls delivery" },
       { label: "Quickstart", href: "/quickstart", keywords: "onboarding Python JavaScript payload integration" },
       { label: "Access Tiers", href: "/access", keywords: "Prosumer Node Capital Desk Institutional pricing comparison" },
