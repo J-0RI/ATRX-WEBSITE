@@ -82,7 +82,7 @@
   pointer-events: none;
 }
 
-/* Brand anchor left; all remaining space accumulates before the nav rail. */
+/* Below the desktop rail: brand anchor left, remaining space accumulates before the actions. */
 .logo {
   display: inline-flex;
   align-items: center;
@@ -94,7 +94,7 @@
   width: auto;
 }
 
-/* One right-hand rail: center links + actions sit as adjoining cells. */
+/* Left rail and right actions: each a group of adjoining cells. */
 .center,
 .actions {
   display: flex;
@@ -102,28 +102,38 @@
   gap: var(--nav-cell-gap);
 }
 
-.center {
-  margin-right: var(--nav-cell-gap);
-  /* The search surface absorbs these shells: their right edge retreats in lockstep with
-     the bar's leading edge, so labels are covered, never overlapped. Generous negative
-     insets keep dropdown panels, shadows and focus rings unclipped at rest. */
-  clip-path: inset(-8px 0 -100vh -64px);
-  transition:
-    clip-path var(--search-duration) var(--search-ease) var(--search-delay);
+/*
+ * Desktop: three regions with a genuinely centered middle. The equal 1fr side columns put
+ * the logo on the header's (and viewport's) center line regardless of how wide each group
+ * is; their auto minimum means a group that ever outgrows its half displaces the logo
+ * rather than overlapping it.
+ */
+@media (min-width: 1180px) {
+  .inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    /* Below ~1350px the rail would crowd the centered logo at the original 1.5vw step:
+       the horizontal inset tightens with the viewport there (never wider than the original,
+       keeping >= 24px beside the logo at 1180px), and is unchanged above. */
+    --nav-cell-pad: clamp(11px, min(1.5vw, 6.25vw - 64px), 21px);
+  }
+
+  .center {
+    justify-self: start;
+  }
+
+  .logo {
+    justify-self: center;
+    margin-right: 0;
+  }
+
+  .actions {
+    justify-self: end;
+  }
 }
 
 .inner[data-search="closing"] {
   --search-delay: 80ms;
-}
-
-.inner[data-search="open"] .center {
-  clip-path: inset(-8px 100% -100vh -64px);
-}
-
-/* Labels dim as the surface approaches; on close they return at the nav's own pace. */
-.inner[data-search="open"] .link {
-  color: transparent;
-  transition: color var(--search-duration) ease;
 }
 
 .link {
@@ -183,7 +193,17 @@
   align-items: stretch;
   height: var(--nav-cell-h);
   background: var(--nav-cell);
-  transition: background-color var(--dur-fast) ease;
+  /* The search surface absorbs this adjoining shell: its right edge retreats by the same
+     measured distance as the bar's leading edge travels (--search-from-left), on the same
+     curve, so the two edges move as one line and the label is covered, never overlapped. */
+  clip-path: inset(-8px 0 -8px -8px);
+  transition:
+    background-color var(--dur-fast) ease,
+    clip-path var(--search-duration) var(--search-ease) var(--search-delay);
+}
+
+.inner[data-search="open"] .split {
+  clip-path: inset(-8px var(--search-from-left, 100%) -8px -8px);
 }
 
 .split:hover,
@@ -247,18 +267,6 @@
 @media (max-width: 520px) {
   .logo img {
     height: 18px;
-  }
-
-  /* Narrow header: the field also spans the Request access cell, clipped edge for edge. */
-  .split {
-    clip-path: inset(-8px -8px -8px 0);
-    transition:
-      background-color var(--dur-fast) ease,
-      clip-path var(--search-duration) var(--search-ease) var(--search-delay);
-  }
-
-  .inner[data-search="open"] .split {
-    clip-path: inset(-8px -8px -8px 100%);
   }
 
   .splitToggle {

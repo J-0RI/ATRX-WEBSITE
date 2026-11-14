@@ -1,0 +1,2626 @@
+[
+  {
+    "href": "/",
+    "title": "ATRX Overview",
+    "category": "Product",
+    "summary": "",
+    "headings": [
+      {
+        "text": "Isolate the signal",
+        "href": "/"
+      },
+      {
+        "text": "Trace transmission",
+        "href": "/"
+      },
+      {
+        "text": "Challenge the thesis",
+        "href": "/"
+      },
+      {
+        "text": "Preserve the rationale",
+        "href": "/"
+      },
+      {
+        "text": "Intelligence needs a decision to serve.",
+        "href": "/"
+      },
+      {
+        "text": "Place it within the operating model.",
+        "href": "/"
+      },
+      {
+        "text": "Keep responsibility explicit.",
+        "href": "/"
+      },
+      {
+        "text": "One integrated platform for a clearer strategic advantage.",
+        "href": "/#hero-title"
+      },
+      {
+        "text": "A market move is an observation, not an investment thesis.",
+        "href": "/#method-title"
+      },
+      {
+        "text": "ATRX in practice",
+        "href": "/#practice-title"
+      },
+      {
+        "text": "From point-in-time data to live directives and a record your desk can review.",
+        "href": "/#workflow-title"
+      },
+      {
+        "text": "A research judgment still has to meet the mandate.",
+        "href": "/#adoption-title"
+      },
+      {
+        "text": "Power your most demanding research with ATRX.",
+        "href": "/#begin-title"
+      },
+      {
+        "text": "Downward revision in expected US policy path requires cross-market relative context",
+        "href": "/"
+      },
+      {
+        "text": "US Policy and Currency Conditions",
+        "href": "/"
+      },
+      {
+        "text": "Macro Policy-Window Exposure Assessment",
+        "href": "/"
+      },
+      {
+        "text": "US Policy Divergence & Currency Sizing Brief",
+        "href": "/"
+      },
+      {
+        "text": "Market monitoring",
+        "href": "/"
+      },
+      {
+        "text": "Macro research",
+        "href": "/"
+      },
+      {
+        "text": "Risk review",
+        "href": "/"
+      },
+      {
+        "text": "Decision support",
+        "href": "/"
+      },
+      {
+        "text": "Point-in-time market data",
+        "href": "/"
+      },
+      {
+        "text": "Research in your own stack",
+        "href": "/"
+      },
+      {
+        "text": "Live directives, routed under mandate",
+        "href": "/"
+      },
+      {
+        "text": "Evaluation against the record",
+        "href": "/"
+      }
+    ],
+    "passages": [
+      {
+        "text": "Isolate the signal. Distinguish market repricing from structural change.",
+        "href": "/"
+      },
+      {
+        "text": "Trace transmission. Examine policy, liquidity, and positioning channels.",
+        "href": "/"
+      },
+      {
+        "text": "Challenge the thesis. Test competing explanations, regimes, and constraints.",
+        "href": "/"
+      },
+      {
+        "text": "Preserve the rationale. Keep evidence, assumptions, and limitations reviewable.",
+        "href": "/"
+      },
+      {
+        "text": "Intelligence needs a decision to serve. Identify the research question, portfolio judgment or investment decision ATRX would inform. Its relevance depends on the choice the institution faces, the horizon over which it matters and the boundaries of its mandate.",
+        "href": "/"
+      },
+      {
+        "text": "Place it within the operating model. Consider who interprets the intelligence, which risk requirements constrain its use and how it enters the existing research workflow. Analytical usefulness alone does not establish operational compatibility.",
+        "href": "/"
+      },
+      {
+        "text": "Keep responsibility explicit. Assumptions, limitations and supporting evidence need to remain open to scrutiny. Establish who reviews the judgment and what would warrant reassessment in the institution’s own environment. Decision authority stays with the institution.",
+        "href": "/"
+      },
+      {
+        "text": "ATRX is designed for systematic allocators, professional trading teams, and enterprise desks that need to interpret complex market conditions together rather than in isolation. Delivered through cloud compute and API distribution, the platform brings institutional market intelligence into existing workflows, supporting consistent research without requiring every organization to build the underlying infrastructure.",
+        "href": "/"
+      },
+      {
+        "text": "Rather than treating price movements as self-explanatory, ATRX examines the economic forces, policy developments, and changing conditions behind market opportunities. Assessments are considered alongside prevailing market conditions and risk controls, preserving context for research and review. Its purpose is to support accountable professional judgment, not promise certainty or replace institutional decision-making authority.",
+        "href": "/"
+      },
+      {
+        "text": "Institutional research must examine the economic transmission, challenge competing explanations, establish where the thesis could fail, and preserve the evidence behind the judgment.",
+        "href": "/#method"
+      },
+      {
+        "text": "Isolate the signal Distinguish market repricing from structural change.",
+        "href": "/#method"
+      },
+      {
+        "text": "Trace transmission Examine policy, liquidity, and positioning channels.",
+        "href": "/#method"
+      },
+      {
+        "text": "Challenge the thesis Test competing explanations, regimes, and constraints.",
+        "href": "/#method"
+      },
+      {
+        "text": "Preserve the rationale Keep evidence, assumptions, and limitations reviewable.",
+        "href": "/#method"
+      },
+      {
+        "text": "A defensible result can still be unsuitable for a particular institution. The mandate gives the research its decision context.",
+        "href": "/#adoption"
+      },
+      {
+        "text": "Follow market developments, then read them against the economic conditions around them.",
+        "href": "/"
+      },
+      {
+        "text": "Frame a question about policy and economic developments, then test whether a transmission mechanism explains the cross-market move.",
+        "href": "/"
+      },
+      {
+        "text": "Evaluate prevailing conditions and the desk’s mandate before anything proceeds. A blackout veto stops the review.",
+        "href": "/"
+      },
+      {
+        "text": "Review the evidence and reasoning behind an assessment before the desk decides. Capital authority stays with the desk.",
+        "href": "/"
+      },
+      {
+        "text": "Policy review window",
+        "href": "/"
+      },
+      {
+        "text": "Market-implied terminal rate shifted downward by 34 bps across the 12-month forward curve, initiating cross-asset repricing.",
+        "href": "/"
+      },
+      {
+        "text": "US-German 2Y spread compressed 14 bps, narrowing the dollar's nominal rate advantage against the euro.",
+        "href": "/"
+      },
+      {
+        "text": "Short-term cross-currency basis swaps remained stable, indicating orderly liquidity despite the rate shift.",
+        "href": "/"
+      },
+      {
+        "text": "Commercial positioning data shows moderate net dollar long exposure, leaving open the risk of unwinding flows.",
+        "href": "/"
+      },
+      {
+        "text": "Analytical transmission context",
+        "href": "/"
+      },
+      {
+        "text": "A downward revision in expected US policy rates tends to weaken the dollar via relative yield compression. However, if partner central banks adjust guidance simultaneously, the effective bilateral rate differential remains bounded.",
+        "href": "/"
+      },
+      {
+        "text": "Does the yield compression reflect genuine policy divergence, or are global central banks preparing symmetrical easing cycles?",
+        "href": "/"
+      },
+      {
+        "text": "Track upcoming European Central Bank and Bank of Japan commentary to evaluate relative policy transmission.",
+        "href": "/"
+      },
+      {
+        "text": "Scheduled central bank communications calendar",
+        "href": "/"
+      },
+      {
+        "text": "Examine how a lower expected US policy path could influence currency conditions. Separate the economic transmission mechanism from competing explanations and identify the evidence needed to distinguish them.",
+        "href": "/"
+      },
+      {
+        "text": "I've organized the investigation around the principal transmission channels and the evidence needed to test them.",
+        "href": "/"
+      },
+      {
+        "text": "Review economic evidence",
+        "href": "/"
+      },
+      {
+        "text": "Examine policy expectations, interest-rate differentials, and relevant currency-market observations.",
+        "href": "/"
+      },
+      {
+        "text": "Evaluate competing explanations",
+        "href": "/"
+      },
+      {
+        "text": "Consider relative yields, funding conditions, positioning, and factors affecting demand for the dollar.",
+        "href": "/"
+      },
+      {
+        "text": "Separate supported observations from hypotheses requiring more evidence.",
+        "href": "/"
+      },
+      {
+        "text": "Prepare research output",
+        "href": "/"
+      },
+      {
+        "text": "Organize the investigation into a reviewable briefing with explicit assumptions and unresolved questions.",
+        "href": "/"
+      },
+      {
+        "text": "A lower expected US policy path could weaken the dollar by narrowing relative interest-rate differentials. However, funding conditions, positioning, and changes in other central banks' policy expectations may alter that relationship.",
+        "href": "/"
+      },
+      {
+        "text": "Evidence still required",
+        "href": "/"
+      },
+      {
+        "text": "Compare relevant yield differentials with currency movements and check whether funding conditions support the proposed explanation.",
+        "href": "/"
+      },
+      {
+        "text": "Review the research briefing and evaluate whether funding conditions support the proposed transmission channel.",
+        "href": "/"
+      },
+      {
+        "text": "Awaiting yield-differential test before formal desk review",
+        "href": "/"
+      },
+      {
+        "text": "RR-2026-042 · G10 FX & Systematic Macro Desk",
+        "href": "/"
+      },
+      {
+        "text": "Event Calendar · Desk Mandate Rev 4.2",
+        "href": "/"
+      },
+      {
+        "text": "Macro blackout takes absolute precedence",
+        "href": "/"
+      },
+      {
+        "text": "Review of proposed currency position submitted ahead of scheduled Tier-1 central bank policy announcement. Risk protocol mandates calendar-based blackout verification prior to capital deployment or sizing authorization.",
+        "href": "/"
+      },
+      {
+        "text": "Mandate evaluation criteria",
+        "href": "/"
+      },
+      {
+        "text": "Criterion & policy basis · Observed condition · Review state",
+        "href": "/"
+      },
+      {
+        "text": "Macro policy blackout Mandatory freeze ±2 hours around scheduled FOMC rate decision · Overlaps policy announcement window · Veto enforced",
+        "href": "/"
+      },
+      {
+        "text": "Cumulative drawdown 1.25% maximum allowable daily portfolio impairment · Evaluation halted before limit calculation · Not evaluated",
+        "href": "/"
+      },
+      {
+        "text": "Instrument authorization Authorized spot & forward currency pairs only · Evaluation halted before compliance check · Not evaluated",
+        "href": "/"
+      },
+      {
+        "text": "Liquidity stress floor Minimum 90th-percentile interbank depth in target pairs · Evaluation halted before depth analysis · Not evaluated",
+        "href": "/"
+      },
+      {
+        "text": "Review finding & limit rationale",
+        "href": "/"
+      },
+      {
+        "text": "Review stopped at macro blackout",
+        "href": "/"
+      },
+      {
+        "text": "The scheduled macro blackout mandate triggered an immediate review veto. In accordance with risk governance rules, sizing calculations and limit validations were suspended. No capital deployment is permitted.",
+        "href": "/"
+      },
+      {
+        "text": "Conditions for reassessment",
+        "href": "/"
+      },
+      {
+        "text": "Verify the event window has closed and policy statement has been published.",
+        "href": "/"
+      },
+      {
+        "text": "Refresh realized volatility metrics and cross-currency liquidity depth.",
+        "href": "/"
+      },
+      {
+        "text": "Submit fresh assessment under post-announcement market state.",
+        "href": "/"
+      },
+      {
+        "text": "Submit a fresh mandate assessment once the blackout window has elapsed and post-announcement volatility stabilizes.",
+        "href": "/"
+      },
+      {
+        "text": "Mandatory trading freeze remains in effect under RR-2026-042",
+        "href": "/"
+      },
+      {
+        "text": "Executive decision brief",
+        "href": "/"
+      },
+      {
+        "text": "Policy divergence & FX sizing",
+        "href": "/"
+      },
+      {
+        "text": "Swap basis & liquidity friction",
+        "href": "/"
+      },
+      {
+        "text": "Asymmetric policy paths",
+        "href": "/"
+      },
+      {
+        "text": "brief-01 · Macro Strategy · Desk Review · Rev 1.2",
+        "href": "/"
+      },
+      {
+        "text": "Prepared for desk review",
+        "href": "/"
+      },
+      {
+        "text": "Relative yield vs funding dynamics",
+        "href": "/"
+      },
+      {
+        "text": "A lower expected US policy path creates prospective downward pressure on the dollar, but persistent funding frictions and European central bank divergence prevent a one-way trend. Sizing should remain defensive until cross-currency basis confirms genuine dollar weakness.",
+        "href": "/"
+      },
+      {
+        "text": "Supporting analytical reasoning",
+        "href": "/"
+      },
+      {
+        "text": "Narrowing 2-year yield differentials reduce the dollar's carry advantage, but nominal yield spreads alone have historically overpredicted rapid FX adjustments.",
+        "href": "/"
+      },
+      {
+        "text": "Dollar funding liquidity remains orderly across swap markets; foreign central banks do not aggressively ease in lockstep.",
+        "href": "/"
+      },
+      {
+        "text": "Recent dollar softening reflects speculative positioning unwind rather than an enduring structural regime transition.",
+        "href": "/"
+      },
+      {
+        "text": "Key uncertainties & review considerations",
+        "href": "/"
+      },
+      {
+        "text": "Short-end rate spreads have stabilized while long yields continue to reprice. Without cross-currency basis confirmation, funding market dislocation remains an unquantified risk.",
+        "href": "/"
+      },
+      {
+        "text": "Evaluate whether to hedge tail dollar-funding volatility before committing to directional currency sizing.",
+        "href": "/"
+      },
+      {
+        "text": "Capital authority remains with desk",
+        "href": "/"
+      },
+      {
+        "text": "A desk needs to separate a policy signal from the developments that still need confirmation.",
+        "href": "/"
+      },
+      {
+        "text": "Assess a change in the expected policy path. Record what the evidence supports and what remains open.",
+        "href": "/"
+      },
+      {
+        "text": "An FX assessment lands inside the desk’s policy window. Which checks ran, and why did it stop?",
+        "href": "/"
+      },
+      {
+        "text": "Locate prepared briefs, compare their assumptions and examine the material for the next desk review.",
+        "href": "/"
+      },
+      {
+        "text": "One instrument vector, such as MET_SAFE or FX_DM, at a stated timestamp.",
+        "href": "/"
+      },
+      {
+        "text": "Market state, economic variables and the regime classification known at that time. The schema is issued during onboarding.",
+        "href": "/"
+      },
+      {
+        "text": "What the record is evaluated against: structural viability, execution eligibility or the realized outcome.",
+        "href": "/"
+      },
+      {
+        "text": "Ledger exports keep decisions, state classifications and vetoes, so research studies the same record it will be reviewed against.",
+        "href": "/"
+      },
+      {
+        "text": "ATRX context, including the regime tag and structural identifier, beside your own positions, fills and house research.",
+        "href": "/"
+      },
+      {
+        "text": "Python, JavaScript or your existing environment. Integration runs tenant-side and credentials stay inside it.",
+        "href": "/"
+      },
+      {
+        "text": "A judgment needs an economic transmission channel. Historical correlation alone does not qualify.",
+        "href": "/"
+      },
+      {
+        "text": "Drawdown limits, exposure caps and blackout windows are written as rules. Capital Desk adds custom regime gating.",
+        "href": "/"
+      },
+      {
+        "text": "Every payload carries the instrument, a regime tag and a structural identifier, so each decision can be traced later.",
+        "href": "/"
+      },
+      {
+        "text": "Payloads are signed and replay-protected. Verification parameters are issued during onboarding.",
+        "href": "/"
+      },
+      {
+        "text": "Mandates apply before your risk engine receives the directive. Sizing and instrument permissions stay with the desk.",
+        "href": "/"
+      },
+      {
+        "text": "When the current state matches a known failure vector, Control stops the directive outright.",
+        "href": "/"
+      },
+      {
+        "text": "Realized P&L from your own fills, attributed by regime tag and structural identifier rather than as one aggregate.",
+        "href": "/"
+      },
+      {
+        "text": "State-gated decisions and risk vetoes, counted alongside the full decision set.",
+        "href": "/"
+      },
+      {
+        "text": "The desk sets the evaluation horizon and review cadence. ATRX supplies the context to read each window.",
+        "href": "/"
+      },
+      {
+        "text": "A grouped result does not prove causation. Regime decay, shocks and execution friction remain.",
+        "href": "/"
+      },
+      {
+        "text": "ATRX organizes market-state observations and systemic economic variables as structured records. Each record describes one instrument vector at a stated time. Read it as of that time: the fields hold what was known then, and the objective resolves only after the evaluation horizon.",
+        "href": "/"
+      },
+      {
+        "text": "Build models, decision rules and research workflows on ATRX records in the language and framework your desk already uses. The aim is a forward-looking judgment the desk can defend: a signal, a classification or a position view that rests on an economic mechanism rather than co-movement alone.",
+        "href": "/"
+      },
+      {
+        "text": "As new market state arrives, ATRX moves it through perception, synthesis, state gating and control. A directive that clears them reaches your endpoint as a signed, schema-validated payload. Your environment verifies it, keeps it, applies desk mandates and only then hands it to your risk engine.",
+        "href": "/"
+      },
+      {
+        "text": "Outputs are judged after the fact, over a review window the desk sets. Realized results are grouped by the regime and structure each payload carried, and ledger exports show what controls stopped, so a review covers decisions that never traded as well as those that did. Findings return to research and shape the next cycle.",
+        "href": "/"
+      }
+    ]
+  },
+  {
+    "href": "/access",
+    "title": "Access Tiers",
+    "category": "Product",
+    "summary": "ATRX is operating in a closed deployment phase. Three tiers, granted by application.",
+    "headings": [
+      {
+        "text": "Compute constrained. Qualified allocators only.",
+        "href": "/access"
+      },
+      {
+        "text": "Compare access tiers",
+        "href": "/access"
+      },
+      {
+        "text": "Prosumer Node",
+        "href": "/access"
+      },
+      {
+        "text": "Capital Desk",
+        "href": "/access"
+      },
+      {
+        "text": "Institutional",
+        "href": "/access"
+      },
+      {
+        "text": "Related",
+        "href": "/access"
+      }
+    ],
+    "passages": [
+      {
+        "text": "ATRX is operating in a closed deployment phase. Platform access is granted exclusively to qualified enterprise desks and quantitative prosumers.",
+        "href": "/access"
+      },
+      {
+        "text": "The core pipeline operates under a strict compute and latency budget. Access is granted by application to ensure infrastructure bandwidth and execution quality remain uncompromised. Pricing is provided upon technical qualification.",
+        "href": "/access"
+      },
+      {
+        "text": "Published deployment scope. Instrument activation status is listed separately in Market Coverage.",
+        "href": "/access"
+      },
+      {
+        "text": "Configuration · Prosumer Node Capital Desk Institutional",
+        "href": "/access"
+      },
+      {
+        "text": "Deployment · Single-tenant execution pipeline · Multi-node cohort allocation · Dedicated inference cluster · AWS/GCP",
+        "href": "/access"
+      },
+      {
+        "text": "Intelligence scope · Core FX & Metals vectors · Expanded Indices & Energy topology · Bespoke structural topology modeling",
+        "href": "/access"
+      },
+      {
+        "text": "Published distinction · API-level systemic guardrails · Custom regime gating & drawdown parameters · Whitepapers, ablation studies & governance telemetry",
+        "href": "/access"
+      },
+      {
+        "text": "Integration · Standard JSON webhook · Direct low-latency SDKs; priority latency routing · Direct engineering syncs",
+        "href": "/access"
+      },
+      {
+        "text": "Commercial basis · Monthly compute fee Base + Capacity Negotiated terms",
+        "href": "/access"
+      },
+      {
+        "text": "Tier scope is not a statement that every instrument is live. Market Coverage distinguishes Phase 1 live-traded FX and Metals from preparing-v4.0 and roadmap vectors.",
+        "href": "/access"
+      },
+      {
+        "text": "By application · Monthly compute fee",
+        "href": "/access"
+      },
+      {
+        "text": "Access to the core FX and Metals topological vectors",
+        "href": "/access"
+      },
+      {
+        "text": "Systemic guardrails enforced at the API level",
+        "href": "/access"
+      },
+      {
+        "text": "Standard JSON webhook delivery",
+        "href": "/access"
+      },
+      {
+        "text": "Tier II · Enterprise",
+        "href": "/access"
+      },
+      {
+        "text": "By application · Base + Capacity",
+        "href": "/access"
+      },
+      {
+        "text": "Multi-node deployment for cohort allocation",
+        "href": "/access"
+      },
+      {
+        "text": "Expanded instrument topology (Indices, Energy)",
+        "href": "/access"
+      },
+      {
+        "text": "Custom regime-gating and drawdown parameterization",
+        "href": "/access"
+      },
+      {
+        "text": "Direct low-latency integration SDKs",
+        "href": "/access"
+      },
+      {
+        "text": "By application · Negotiated terms",
+        "href": "/access"
+      },
+      {
+        "text": "Dedicated inference cluster (AWS/GCP)",
+        "href": "/access"
+      },
+      {
+        "text": "Full access to whitepapers and ablation studies",
+        "href": "/access"
+      },
+      {
+        "text": "Audit-grade telemetry logs for governance",
+        "href": "/access"
+      },
+      {
+        "text": "Applications are evaluated against available compute capacity and infrastructural alignment. ATRX reserves the right to decline access requests to preserve system integrity.",
+        "href": "/access"
+      }
+    ]
+  },
+  {
+    "href": "/quickstart",
+    "title": "Quickstart",
+    "category": "Product",
+    "summary": "A tenant-side ATRX integration walkthrough using the approved Python, JavaScript and illustrative payload examples.",
+    "headings": [
+      {
+        "text": "Connect intelligence to your execution environment.",
+        "href": "/quickstart"
+      },
+      {
+        "text": "Before connecting",
+        "href": "/quickstart"
+      },
+      {
+        "text": "Qualify the deployment",
+        "href": "/quickstart"
+      },
+      {
+        "text": "Receive the integration details",
+        "href": "/quickstart"
+      },
+      {
+        "text": "Keep capital controls local",
+        "href": "/quickstart"
+      },
+      {
+        "text": "Receive, verify and route",
+        "href": "/quickstart"
+      },
+      {
+        "text": "Follow the handoff",
+        "href": "/quickstart"
+      },
+      {
+        "text": "Verify receipt",
+        "href": "/quickstart"
+      },
+      {
+        "text": "Apply mandates",
+        "href": "/quickstart"
+      },
+      {
+        "text": "Route and retain",
+        "href": "/quickstart"
+      },
+      {
+        "text": "Validate the enterprise connection",
+        "href": "/quickstart"
+      },
+      {
+        "text": "Related",
+        "href": "/quickstart"
+      }
+    ],
+    "passages": [
+      {
+        "text": "Begin with technical qualification, then work through receipt, verification, desk controls and routing. The examples below describe the integration pattern; your onboarding supplies the parameters needed to implement it.",
+        "href": "/quickstart"
+      },
+      {
+        "text": "Qualify the deployment. Compare the access tiers and describe your execution environment and constraints in the application. ATRX operates in a closed deployment phase; pricing follows technical qualification.",
+        "href": "/quickstart"
+      },
+      {
+        "text": "Receive the integration details. Verification parameters and the payload schema are issued during onboarding. The public examples do not define an API host, signature algorithm, header names or an installable SDK package.",
+        "href": "/quickstart"
+      },
+      {
+        "text": "Keep capital controls local. Map the receiving endpoint in your own environment. Your desk controls gross exposure, sizing and instrument permissions, and retains its API credentials.",
+        "href": "/quickstart"
+      },
+      {
+        "text": "Verify receipt. The example rejects a request when signature verification fails. Implement verification using the onboarding-supplied parameters; the helper name does not specify the underlying scheme.",
+        "href": "/quickstart"
+      },
+      {
+        "text": "Apply mandates. Pass the payload through desk controls before routing. The mandate examples show blackout windows, drawdown and exposure limits, followed by desk-set sizing.",
+        "href": "/quickstart"
+      },
+      {
+        "text": "Route and retain. Route the resulting directive through your existing risk engine. The webhook walkthrough also retains the received payload for the desk’s own audit review.",
+        "href": "/quickstart"
+      },
+      {
+        "text": "Verify receipt The example rejects a request when signature verification fails. Implement verification using the onboarding-supplied parameters; the helper name does not specify the underlying scheme.",
+        "href": "/quickstart"
+      },
+      {
+        "text": "Apply mandates Pass the payload through desk controls before routing. The mandate examples show blackout windows, drawdown and exposure limits, followed by desk-set sizing.",
+        "href": "/quickstart"
+      },
+      {
+        "text": "Route and retain Route the resulting directive through your existing risk engine. The webhook walkthrough also retains the received payload for the desk’s own audit review.",
+        "href": "/quickstart"
+      },
+      {
+        "text": "The payload tab is an illustration, not a schema contract. The abbreviated handler does not implement the full validation or replay-protection mechanism.",
+        "href": "/quickstart"
+      },
+      {
+        "text": "Enterprise engagements begin with a technical architecture sync and proceed to a paper-trading parallel run inside the tenant environment. Conversion to live capital follows latency and slippage validation.",
+        "href": "/quickstart"
+      },
+      {
+        "text": "During review, use the payload’s regime and structural context for attribution, and inspect exported decisions, state classifications and veto events. The delivery and telemetry guides expand these patterns without introducing a separate API contract.",
+        "href": "/quickstart"
+      },
+      {
+        "text": "Webhook receipt examples",
+        "href": "/quickstart"
+      },
+      {
+        "text": "Implement desk mandates",
+        "href": "/quickstart"
+      },
+      {
+        "text": "Review exported telemetry",
+        "href": "/quickstart"
+      },
+      {
+        "text": "Attribute realized P&L",
+        "href": "/quickstart"
+      }
+    ]
+  },
+  {
+    "href": "/access/capital-desk",
+    "title": "Capital Desk",
+    "category": "Access Modes",
+    "summary": "Tier II: multi-node cohort allocation, custom regime gating, drawdown parameters and direct integration SDKs.",
+    "headings": [
+      {
+        "text": "A deployment shaped around the desk",
+        "href": "/access/capital-desk"
+      },
+      {
+        "text": "Cohort allocation",
+        "href": "/access/capital-desk"
+      },
+      {
+        "text": "Custom control parameters",
+        "href": "/access/capital-desk"
+      },
+      {
+        "text": "Direct integration",
+        "href": "/access/capital-desk"
+      },
+      {
+        "text": "Expanded topology",
+        "href": "/access/capital-desk"
+      },
+      {
+        "text": "Bring the connection into service",
+        "href": "/access/capital-desk"
+      },
+      {
+        "text": "Architecture sync",
+        "href": "/access/capital-desk"
+      },
+      {
+        "text": "Parallel run",
+        "href": "/access/capital-desk"
+      },
+      {
+        "text": "Validate execution",
+        "href": "/access/capital-desk"
+      },
+      {
+        "text": "Frame the desk request",
+        "href": "/access/capital-desk"
+      },
+      {
+        "text": "Related",
+        "href": "/access/capital-desk"
+      }
+    ],
+    "passages": [
+      {
+        "text": "Tier II · Enterprise",
+        "href": "/access/capital-desk"
+      },
+      {
+        "text": "Multi-node deployment for cohort allocation, with custom regime-gating and drawdown parameterization. The desk connects ATRX intelligence to its existing execution infrastructure while retaining authority over capital controls.",
+        "href": "/access/capital-desk"
+      },
+      {
+        "text": "Cohort allocation. Multi-node deployment provides the Tier II configuration for cohort allocation. Your desk continues to set gross exposure, lot sizing scalars and instrument permissions.",
+        "href": "/access/capital-desk"
+      },
+      {
+        "text": "Custom control parameters. Tier II includes custom regime gating and drawdown parameterization. Regime eligibility and desk limits remain distinct checks: a structural opportunity does not override the mandatory risk-control handoff.",
+        "href": "/access/capital-desk"
+      },
+      {
+        "text": "Direct integration. The tier includes direct low-latency integration SDKs and priority latency routing. Enterprise integration material describes translation to the venues and broker APIs already used by the desk.",
+        "href": "/access/capital-desk"
+      },
+      {
+        "text": "Expanded topology. The tier describes Indices and Energy alongside the core instrument context. The instrument register lists the corresponding global-index and energy nodes as preparing for v4.0; tier scope does not establish live activation. Consult Market Coverage for status.",
+        "href": "/access/capital-desk"
+      },
+      {
+        "text": "Architecture sync. Enterprise deployment begins with a technical architecture discussion around the receiving environment and integration.",
+        "href": "/access/capital-desk"
+      },
+      {
+        "text": "Parallel run. Paper trading runs inside the tenant environment before live capital is introduced.",
+        "href": "/access/capital-desk"
+      },
+      {
+        "text": "Validate execution. The process moves to live capital only after latency and slippage validation. The public tier description does not publish a numeric SLA.",
+        "href": "/access/capital-desk"
+      },
+      {
+        "text": "Architecture sync Enterprise deployment begins with a technical architecture discussion around the receiving environment and integration.",
+        "href": "/access/capital-desk"
+      },
+      {
+        "text": "Parallel run Paper trading runs inside the tenant environment before live capital is introduced.",
+        "href": "/access/capital-desk"
+      },
+      {
+        "text": "Validate execution The process moves to live capital only after latency and slippage validation. The public tier description does not publish a numeric SLA.",
+        "href": "/access/capital-desk"
+      },
+      {
+        "text": "Describe the team or desk, markets of interest, integration objective and risk or execution environment. Include operating constraints so the request reflects how the desk intends to use the multi-node deployment.",
+        "href": "/access/capital-desk"
+      },
+      {
+        "text": "The commercial basis is Base + Capacity, by application. Pricing follows technical qualification, and admission depends on available compute capacity and infrastructure alignment.",
+        "href": "/access/capital-desk"
+      },
+      {
+        "text": "No public package name, broker compatibility list or numeric delivery guarantee is specified by the existing integration material.",
+        "href": "/access/capital-desk"
+      },
+      {
+        "text": "Regime & State Analysis",
+        "href": "/access/capital-desk"
+      },
+      {
+        "text": "Native Risk Mandates",
+        "href": "/access/capital-desk"
+      }
+    ]
+  },
+  {
+    "href": "/access/institutional",
+    "title": "Institutional",
+    "category": "Access Modes",
+    "summary": "Tier III: a dedicated inference cluster, bespoke topology, research access, governance telemetry and direct engineering synchronization.",
+    "headings": [
+      {
+        "text": "Dedicated inference and structural scope",
+        "href": "/access/institutional"
+      },
+      {
+        "text": "Bespoke topology",
+        "href": "/access/institutional"
+      },
+      {
+        "text": "Research access",
+        "href": "/access/institutional"
+      },
+      {
+        "text": "Governance has an operational record",
+        "href": "/access/institutional"
+      },
+      {
+        "text": "Define the engagement",
+        "href": "/access/institutional"
+      },
+      {
+        "text": "Scope and infrastructure",
+        "href": "/access/institutional"
+      },
+      {
+        "text": "Deployment review",
+        "href": "/access/institutional"
+      },
+      {
+        "text": "Capital responsibility",
+        "href": "/access/institutional"
+      },
+      {
+        "text": "Negotiated terms",
+        "href": "/access/institutional"
+      },
+      {
+        "text": "Related",
+        "href": "/access/institutional"
+      }
+    ],
+    "passages": [
+      {
+        "text": "Dedicated inference cluster with bespoke structural topology modeling and direct engineering syncs. Tier III brings dedicated infrastructure, research access and governance telemetry into one qualified institutional engagement.",
+        "href": "/access/institutional"
+      },
+      {
+        "text": "Infrastructure. The published configuration is a dedicated inference cluster on AWS/GCP. Deployment details are part of the institutional technical discussion; the public tier does not prescribe a region or capacity figure.",
+        "href": "/access/institutional"
+      },
+      {
+        "text": "Bespoke topology. Structural topology modeling is scoped to the institutional engagement. Direct engineering syncs provide the working channel for the integration and research discussion.",
+        "href": "/access/institutional"
+      },
+      {
+        "text": "Research access. The tier includes full access to whitepapers and ablation studies. These complement the public architecture summary with material for the institution’s research review.",
+        "href": "/access/institutional"
+      },
+      {
+        "text": "Audit-grade telemetry logs are part of Tier III. Decision logs, state classifications and risk veto events can be exported in machine-readable formats for internal quantitative governance and review.",
+        "href": "/access/institutional"
+      },
+      {
+        "text": "The ledger guide shows how the approved example reads an export, identifies veto records and collects observed states. Export format and field names are confirmed during onboarding. “Audit-grade” describes the product’s telemetry role; it does not establish a regulatory certification.",
+        "href": "/access/institutional"
+      },
+      {
+        "text": "Scope and infrastructure. Describe the institutional scope, infrastructure context and integration objectives. The application also asks for governance or telemetry objectives so these can be considered with the deployment.",
+        "href": "/access/institutional"
+      },
+      {
+        "text": "Deployment review. The enterprise process begins with an architecture sync, followed by a paper-trading parallel run. Live capital follows latency and slippage validation.",
+        "href": "/access/institutional"
+      },
+      {
+        "text": "Capital responsibility. Dedicated compute does not transfer custody or discretionary authority over API keys and capital sizing to ATRX. The tenant’s execution, counterparty and governance responsibilities remain.",
+        "href": "/access/institutional"
+      },
+      {
+        "text": "Institutional access is by application, with negotiated terms. Pricing is provided upon technical qualification; applications are evaluated against compute availability and infrastructure alignment.",
+        "href": "/access/institutional"
+      }
+    ]
+  },
+  {
+    "href": "/access/prosumer-node",
+    "title": "Prosumer Node",
+    "category": "Access Modes",
+    "summary": "Tier I: a single-tenant ATRX execution pipeline, core FX and Metals vectors, API-level guardrails and JSON webhook delivery.",
+    "headings": [
+      {
+        "text": "The node’s scope",
+        "href": "/access/prosumer-node"
+      },
+      {
+        "text": "Market context",
+        "href": "/access/prosumer-node"
+      },
+      {
+        "text": "Controls and delivery",
+        "href": "/access/prosumer-node"
+      },
+      {
+        "text": "Place the node inside your workflow",
+        "href": "/access/prosumer-node"
+      },
+      {
+        "text": "Prepare the application",
+        "href": "/access/prosumer-node"
+      },
+      {
+        "text": "Deployment objective",
+        "href": "/access/prosumer-node"
+      },
+      {
+        "text": "Operating constraints",
+        "href": "/access/prosumer-node"
+      },
+      {
+        "text": "Commercial basis",
+        "href": "/access/prosumer-node"
+      },
+      {
+        "text": "Related",
+        "href": "/access/prosumer-node"
+      }
+    ],
+    "passages": [
+      {
+        "text": "Single-tenant execution pipeline with systemic guardrails enforced at the API level. Tier I pairs the core FX and Metals topological vectors with standard JSON webhook delivery for a qualified quantitative prosumer.",
+        "href": "/access/prosumer-node"
+      },
+      {
+        "text": "Deployment. A single-tenant execution pipeline is the Tier I access configuration. The receiving endpoint belongs to your execution environment.",
+        "href": "/access/prosumer-node"
+      },
+      {
+        "text": "Market context. The core scope is FX and Metals. The instrument record identifies MET_SAFE and FX_DM as live-traded vectors executed during Phase 1 validation. See Market Coverage for the distinction between validated, preparing and roadmap vectors.",
+        "href": "/access/prosumer-node"
+      },
+      {
+        "text": "Controls and delivery. Systemic guardrails are enforced at the API level. Execution payloads arrive through a standard JSON webhook; verification parameters and schema details come through onboarding.",
+        "href": "/access/prosumer-node"
+      },
+      {
+        "text": "The tenant-side integration begins by verifying the incoming payload. The approved example then applies desk mandates and passes the resulting directive to the local risk engine. The Quickstart provides Python and JavaScript versions of that handoff.",
+        "href": "/access/prosumer-node"
+      },
+      {
+        "text": "Keep the system guardrails and your capital decisions distinct. ATRX supplies intelligence and execution payloads; the tenant retains authority over API keys and deployment sizing. Model and execution risk remain, including feed latency, broker API downtime and slippage.",
+        "href": "/access/prosumer-node"
+      },
+      {
+        "text": "Deployment objective. Describe what you want the node to support, your markets of interest and the execution or research environment in which it would operate.",
+        "href": "/access/prosumer-node"
+      },
+      {
+        "text": "Operating constraints. Include the constraints relevant to your deployment. This gives technical qualification context for the requested single-tenant configuration.",
+        "href": "/access/prosumer-node"
+      },
+      {
+        "text": "Commercial basis. Monthly compute fee, by application. Pricing is provided upon technical qualification; access is evaluated against available compute capacity and infrastructure alignment.",
+        "href": "/access/prosumer-node"
+      },
+      {
+        "text": "Markets named in an application are interests for review, not confirmation of availability.",
+        "href": "/access/prosumer-node"
+      },
+      {
+        "text": "Native Risk Mandates",
+        "href": "/access/prosumer-node"
+      }
+    ]
+  },
+  {
+    "href": "/capabilities/causal-attribution",
+    "title": "Causal Attribution",
+    "category": "Intelligence",
+    "summary": "Relate realized P&L to the regime tags and structural identifiers carried by ATRX execution payloads.",
+    "headings": [
+      {
+        "text": "The context carried with a decision",
+        "href": "/capabilities/causal-attribution"
+      },
+      {
+        "text": "Regime tag",
+        "href": "/capabilities/causal-attribution"
+      },
+      {
+        "text": "Structural identifier",
+        "href": "/capabilities/causal-attribution"
+      },
+      {
+        "text": "Realized P&L",
+        "href": "/capabilities/causal-attribution"
+      },
+      {
+        "text": "Group results by their execution context",
+        "href": "/capabilities/causal-attribution"
+      },
+      {
+        "text": "Read the result with its limits",
+        "href": "/capabilities/causal-attribution"
+      },
+      {
+        "text": "Connect reasoning and review",
+        "href": "/capabilities/causal-attribution"
+      },
+      {
+        "text": "Related",
+        "href": "/capabilities/causal-attribution"
+      }
+    ],
+    "passages": [
+      {
+        "text": "Every execution payload carries a regime tag and a structural identifier. These give desks a way to attribute realized P&L back to the macroeconomic catalysts and volatility states associated with execution.",
+        "href": "/capabilities/causal-attribution"
+      },
+      {
+        "text": "Regime tag. Preserves the regime context attached to the execution payload. The attribution example uses it as one dimension when grouping realized results.",
+        "href": "/capabilities/causal-attribution"
+      },
+      {
+        "text": "Structural identifier. Identifies the structural context carried by the same payload. The example combines it with the regime tag rather than reducing all fills to one aggregate result.",
+        "href": "/capabilities/causal-attribution"
+      },
+      {
+        "text": "Realized P&L. The desk’s fill records supply realized P&L. The tenant-side example accumulates those values for each regime-and-structure pair over a selected period.",
+        "href": "/capabilities/causal-attribution"
+      },
+      {
+        "text": "The example groups fills for a month and prints the resulting totals. The period is an example query, not a reporting cadence or a claim about returns. Field names and the payload schema remain onboarding details.",
+        "href": "/capabilities/causal-attribution"
+      },
+      {
+        "text": "This is a way to organize observed P&L using the context attached to decisions. It does not publish a new causal-estimation methodology or establish that a grouped result alone proves causation.",
+        "href": "/capabilities/causal-attribution"
+      },
+      {
+        "text": "For the wider decision record, use Audit-Grade Ledgers. Those exports include state classifications and risk veto events as well as decision logs, supporting review beyond filled executions.",
+        "href": "/capabilities/causal-attribution"
+      },
+      {
+        "text": "Market Intelligence describes the economic-transmission requirement behind execution. Regime & State Analysis describes the gate that responds to conditions. Attribution makes their recorded context useful to the desk when examining realized outcomes, while the telemetry loop records localized failures in structural memory.",
+        "href": "/capabilities/causal-attribution"
+      },
+      {
+        "text": "Systemic Macro Intelligence",
+        "href": "/capabilities/causal-attribution"
+      }
+    ]
+  },
+  {
+    "href": "/capabilities/market-coverage",
+    "title": "Market Coverage",
+    "category": "Intelligence",
+    "summary": "ATRX instrument coverage, separating live-traded Phase 1 vectors from preparing-v4.0 and roadmap topology.",
+    "headings": [
+      {
+        "text": "Live traded · Phase 1 validation",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "Precious Metals Vector",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "Developed FX Vector",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "Preparing for v4.0",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "FX_DM_BASKET",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "DLR_INDEX_VEC",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "EQ_US_MEGA",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "ENG_FUT_VEC",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "Topological roadmap",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "TECH_CAPX_NODES",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "SOV_DUR_CURVES",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "VOL_SRF_SURFACES",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "Relate coverage to an access mode",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "Related",
+        "href": "/capabilities/market-coverage"
+      }
+    ],
+    "passages": [
+      {
+        "text": "Instrument topology and deployment status are different questions. ATRX’s published instrument record separates live-traded vectors from those preparing for v4.0 and those on the topological roadmap.",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "Precious Metals Vector. The Metals vector recorded as live traded and executed during the Phase 1 validation milestone.",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "Developed FX Vector. The developed-FX vector recorded as live traded and executed during the same validation milestone.",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "MET_SAFE Precious Metals Vector",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "FX_DM Developed FX Vector",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "This is the live-traded scope identified by the published instrument record. It does not establish availability for every tenant or expand the validation record to other vectors.",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "FX_DM_BASKET. Developed Currency Vectors",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "DLR_INDEX_VEC. Macro Sovereign Basket",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "EQ_US_MEGA. Global Index Topologies",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "ENG_FUT_VEC. Energy Infrastructure Node",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "These vectors are monitored by the causal query engine and listed for v4.0 pipeline activation. They remain in the preparing category; the record does not provide a launch date.",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "TECH_CAPX_NODES. Single-Name Equity Vectors",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "SOV_DUR_CURVES. Sovereign Fixed Income",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "VOL_SRF_SURFACES. Cross-Asset Volatility",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "Target expansion vectors for multi-domain MoE routing. Roadmap inclusion is not a statement of current live support.",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "Prosumer Node describes access to the core FX and Metals topological vectors. Capital Desk describes expanded topology for Indices and Energy, whose corresponding nodes are still listed above as preparing. Institutional provides bespoke structural topology modeling, without a separate published list of live markets.",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "Use these tier descriptions to frame the deployment discussion alongside the status record. Markets of interest supplied in an application express the requested scope; they do not confirm availability.",
+        "href": "/capabilities/market-coverage"
+      },
+      {
+        "text": "Compare access tiers",
+        "href": "/capabilities/market-coverage"
+      }
+    ]
+  },
+  {
+    "href": "/capabilities/market-intelligence",
+    "title": "Systemic Macro Intelligence",
+    "category": "Intelligence",
+    "summary": "How ATRX interprets market state and economic transmission to evaluate structural opportunities.",
+    "headings": [
+      {
+        "text": "What the intelligence evaluates",
+        "href": "/capabilities/market-intelligence"
+      },
+      {
+        "text": "Market context",
+        "href": "/capabilities/market-intelligence"
+      },
+      {
+        "text": "Economic transmission",
+        "href": "/capabilities/market-intelligence"
+      },
+      {
+        "text": "Structural viability",
+        "href": "/capabilities/market-intelligence"
+      },
+      {
+        "text": "An interpretation is subject to control",
+        "href": "/capabilities/market-intelligence"
+      },
+      {
+        "text": "Changing structure, recorded outcomes",
+        "href": "/capabilities/market-intelligence"
+      },
+      {
+        "text": "Adaptation",
+        "href": "/capabilities/market-intelligence"
+      },
+      {
+        "text": "Coverage",
+        "href": "/capabilities/market-intelligence"
+      },
+      {
+        "text": "Interpretation limits",
+        "href": "/capabilities/market-intelligence"
+      },
+      {
+        "text": "Related",
+        "href": "/capabilities/market-intelligence"
+      }
+    ],
+    "passages": [
+      {
+        "text": "ATRX connects market-state observations to underlying economic drivers. The product evaluates whether a causal structure supports capital deployment, with execution subject to regime and risk controls.",
+        "href": "/capabilities/market-intelligence"
+      },
+      {
+        "text": "Market context. Multidimensional market-state data and systemic economic variables provide the input context. The task is to interpret the environment in which an opportunity would operate.",
+        "href": "/capabilities/market-intelligence"
+      },
+      {
+        "text": "Economic transmission. Structural synthesis isolates underlying market drivers. The causal mandate requires an economic transmission mechanism behind execution, beyond historical co-movement.",
+        "href": "/capabilities/market-intelligence"
+      },
+      {
+        "text": "Structural viability. Inference routing evaluates the viability of the structure and informs capital deployment. A broken causal baseline prevents the strategy from proceeding to execution.",
+        "href": "/capabilities/market-intelligence"
+      },
+      {
+        "text": "Market context Multidimensional market-state data and systemic economic variables provide the input context. The task is to interpret the environment in which an opportunity would operate.",
+        "href": "/capabilities/market-intelligence"
+      },
+      {
+        "text": "Economic transmission Structural synthesis isolates underlying market drivers. The causal mandate requires an economic transmission mechanism behind execution, beyond historical co-movement.",
+        "href": "/capabilities/market-intelligence"
+      },
+      {
+        "text": "Structural viability Inference routing evaluates the viability of the structure and informs capital deployment. A broken causal baseline prevents the strategy from proceeding to execution.",
+        "href": "/capabilities/market-intelligence"
+      },
+      {
+        "text": "Structural reasoning is one part of the decision. Regime & State Analysis determines whether prevailing conditions permit execution. The Control protocol retains veto power over mandated exposure and structural limits.",
+        "href": "/capabilities/market-intelligence"
+      },
+      {
+        "text": "The result reaches the tenant as an execution payload with a regime tag and structural identifier. Those identifiers give the desk context for relating realized P&L to macroeconomic catalysts and volatility states; they do not transfer capital authority away from the desk.",
+        "href": "/capabilities/market-intelligence"
+      },
+      {
+        "text": "Adaptation. The published product philosophy describes mapping new causal chains as market structure changes. Closed-loop telemetry logs localized failures into structural memory for the decision stack.",
+        "href": "/capabilities/market-intelligence"
+      },
+      {
+        "text": "Coverage. The same causal framing extends across the instrument topology, but deployment status is specific to each vector. The current record distinguishes Phase 1 live-traded FX and Metals from preparing and roadmap vectors. Review coverage and status.",
+        "href": "/capabilities/market-intelligence"
+      },
+      {
+        "text": "Interpretation limits. Formal causal reasoning does not remove model misspecification, unexpected macroeconomic shocks or data-feed latency. These remain explicit risks of the system.",
+        "href": "/capabilities/market-intelligence"
+      }
+    ]
+  },
+  {
+    "href": "/capabilities/regime-state-analysis",
+    "title": "Regime & State Analysis",
+    "category": "Intelligence",
+    "summary": "Market-state interpretation, execution gating and the classifications carried into ATRX payloads and telemetry.",
+    "headings": [
+      {
+        "text": "From observed state to execution eligibility",
+        "href": "/capabilities/regime-state-analysis"
+      },
+      {
+        "text": "Observe conditions",
+        "href": "/capabilities/regime-state-analysis"
+      },
+      {
+        "text": "Gate the directive",
+        "href": "/capabilities/regime-state-analysis"
+      },
+      {
+        "text": "Apply the veto",
+        "href": "/capabilities/regime-state-analysis"
+      },
+      {
+        "text": "Keep classifications and mandates distinct",
+        "href": "/capabilities/regime-state-analysis"
+      },
+      {
+        "text": "Regime classification",
+        "href": "/capabilities/regime-state-analysis"
+      },
+      {
+        "text": "Desk conditions",
+        "href": "/capabilities/regime-state-analysis"
+      },
+      {
+        "text": "Tier II configuration",
+        "href": "/capabilities/regime-state-analysis"
+      },
+      {
+        "text": "Review the state behind an outcome",
+        "href": "/capabilities/regime-state-analysis"
+      },
+      {
+        "text": "Related",
+        "href": "/capabilities/regime-state-analysis"
+      }
+    ],
+    "passages": [
+      {
+        "text": "Market conditions affect whether a structural opportunity may proceed. ATRX’s state-gating layer dynamically restricts or permits execution according to prevailing market regimes.",
+        "href": "/capabilities/regime-state-analysis"
+      },
+      {
+        "text": "Observe conditions. Market-state data and systemic economic variables enter the intelligence process. Structural synthesis supplies context for interpreting the environment.",
+        "href": "/capabilities/regime-state-analysis"
+      },
+      {
+        "text": "Gate the directive. Conditioning evaluates the prevailing regime and can restrict execution. Permission at this stage still leads to a mandatory Control handoff.",
+        "href": "/capabilities/regime-state-analysis"
+      },
+      {
+        "text": "Apply the veto. Control enforces exposure and structural limits. The documented pipeline imposes a hard stop when the current state matches a known failure vector.",
+        "href": "/capabilities/regime-state-analysis"
+      },
+      {
+        "text": "Observe conditions Market-state data and systemic economic variables enter the intelligence process. Structural synthesis supplies context for interpreting the environment.",
+        "href": "/capabilities/regime-state-analysis"
+      },
+      {
+        "text": "Gate the directive Conditioning evaluates the prevailing regime and can restrict execution. Permission at this stage still leads to a mandatory Control handoff.",
+        "href": "/capabilities/regime-state-analysis"
+      },
+      {
+        "text": "Apply the veto Control enforces exposure and structural limits. The documented pipeline imposes a hard stop when the current state matches a known failure vector.",
+        "href": "/capabilities/regime-state-analysis"
+      },
+      {
+        "text": "Regime classification. A regime tag travels with every execution payload. Alongside the structural identifier, it supplies context for attribution to macroeconomic catalysts and volatility states.",
+        "href": "/capabilities/regime-state-analysis"
+      },
+      {
+        "text": "Desk conditions. Daily drawdown limits, exposure caps and macroeconomic blackout windows are desk mandates. They constrain execution even when a market interpretation is available. See Native Risk Mandates for the operational example.",
+        "href": "/capabilities/regime-state-analysis"
+      },
+      {
+        "text": "Tier II configuration. Capital Desk includes custom regime gating and drawdown parameterization. This is a published tier distinction, not a promise that every access mode exposes the same configuration.",
+        "href": "/capabilities/regime-state-analysis"
+      },
+      {
+        "text": "Attribution groups realized results using the regime and structural context carried by the payload. Ledger exports provide state classifications and risk veto events for internal quantitative review, including decisions that did not proceed to execution.",
+        "href": "/capabilities/regime-state-analysis"
+      },
+      {
+        "text": "The public material explains these relationships without publishing regime labels, proprietary node weights or classification thresholds. Use onboarding-supplied schemas when integrating the recorded context into your own review process.",
+        "href": "/capabilities/regime-state-analysis"
+      },
+      {
+        "text": "State gating does not eliminate model or market risk. The risk disclosure identifies regime decay, macroeconomic shocks and execution friction as continuing limitations.",
+        "href": "/capabilities/regime-state-analysis"
+      },
+      {
+        "text": "Systemic Macro Intelligence",
+        "href": "/capabilities/regime-state-analysis"
+      }
+    ]
+  },
+  {
+    "href": "/capabilities/risk-control",
+    "title": "Risk & Control",
+    "category": "Control & Delivery",
+    "summary": "ATRX execution eligibility, mandatory risk veto, desk mandates and retained tenant capital authority.",
+    "headings": [
+      {
+        "text": "The control sequence",
+        "href": "/capabilities/risk-control"
+      },
+      {
+        "text": "Establish eligibility",
+        "href": "/capabilities/risk-control"
+      },
+      {
+        "text": "Enforce the veto",
+        "href": "/capabilities/risk-control"
+      },
+      {
+        "text": "Respect desk limits",
+        "href": "/capabilities/risk-control"
+      },
+      {
+        "text": "Separate system controls from capital authority",
+        "href": "/capabilities/risk-control"
+      },
+      {
+        "text": "Systemic guardrails",
+        "href": "/capabilities/risk-control"
+      },
+      {
+        "text": "Desk authority",
+        "href": "/capabilities/risk-control"
+      },
+      {
+        "text": "Operational evidence",
+        "href": "/capabilities/risk-control"
+      },
+      {
+        "text": "Use mandates as the operational layer",
+        "href": "/capabilities/risk-control"
+      },
+      {
+        "text": "Controls do not remove trading risk",
+        "href": "/capabilities/risk-control"
+      },
+      {
+        "text": "Related",
+        "href": "/capabilities/risk-control"
+      }
+    ],
+    "passages": [
+      {
+        "text": "Intelligence does not bypass control. ATRX subjects execution to regime eligibility and a mandatory risk handoff, while the tenant retains authority over capital, sizing and instrument permissions.",
+        "href": "/capabilities/risk-control"
+      },
+      {
+        "text": "Establish eligibility. State gating restricts or permits execution according to prevailing market regimes. A structural interpretation alone is insufficient to authorize the handoff.",
+        "href": "/capabilities/risk-control"
+      },
+      {
+        "text": "Enforce the veto. The Control protocol has absolute veto power over mandated exposure and structural limits. A current state matching a known failure vector triggers the documented hard stop.",
+        "href": "/capabilities/risk-control"
+      },
+      {
+        "text": "Respect desk limits. Native mandates cover daily drawdown limits, exposure caps and macroeconomic blackout windows. Tenant-side integration applies desk mandates before routing directives.",
+        "href": "/capabilities/risk-control"
+      },
+      {
+        "text": "Establish eligibility State gating restricts or permits execution according to prevailing market regimes. A structural interpretation alone is insufficient to authorize the handoff.",
+        "href": "/capabilities/risk-control"
+      },
+      {
+        "text": "Enforce the veto The Control protocol has absolute veto power over mandated exposure and structural limits. A current state matching a known failure vector triggers the documented hard stop.",
+        "href": "/capabilities/risk-control"
+      },
+      {
+        "text": "Respect desk limits Native mandates cover daily drawdown limits, exposure caps and macroeconomic blackout windows. Tenant-side integration applies desk mandates before routing directives.",
+        "href": "/capabilities/risk-control"
+      },
+      {
+        "text": "Systemic guardrails. Tier I includes guardrails enforced at the API level. Tier II adds custom regime gating and drawdown parameterization; the access configuration defines the published scope.",
+        "href": "/capabilities/risk-control"
+      },
+      {
+        "text": "Desk authority. The desk controls gross exposure, lot sizing scalars and instrument permissions. The mandate example uses desk-supplied limits rather than prescribing universal thresholds.",
+        "href": "/capabilities/risk-control"
+      },
+      {
+        "text": "Operational evidence. Decision logs, state classifications and risk veto events can be exported for internal quantitative governance. A blocked directive belongs in the review of control behavior, alongside executed outcomes.",
+        "href": "/capabilities/risk-control"
+      },
+      {
+        "text": "The Native Risk Mandates guide shows an illustrative sequence: check blackout windows, evaluate desk limits and apply the desk’s sizing scalar. It explains one concrete mechanism within the broader control model.",
+        "href": "/capabilities/risk-control"
+      },
+      {
+        "text": "The state-analysis guide covers market interpretation and gating. These concepts meet at execution eligibility, but classification and a desk-set capital limit serve different purposes.",
+        "href": "/capabilities/risk-control"
+      },
+      {
+        "text": "ATRX does not custody capital or guarantee capital preservation. Model misspecification, unexpected macroeconomic shocks, feed latency and execution friction remain possible. The tenant retains responsibility for its brokerage relationship and authority over API keys and capital sizing.",
+        "href": "/capabilities/risk-control"
+      },
+      {
+        "text": "Read the risk disclosure with the deployment material. Risk vetoes describe system behavior; they are not a guarantee against loss.",
+        "href": "/capabilities/risk-control"
+      }
+    ]
+  },
+  {
+    "href": "/control/native-risk-mandates",
+    "title": "Native Risk Mandates",
+    "category": "Control & Delivery",
+    "summary": "Desk-set drawdown thresholds, exposure limits and macroeconomic blackout windows in the ATRX execution workflow.",
+    "headings": [
+      {
+        "text": "Express the desk’s boundaries",
+        "href": "/control/native-risk-mandates"
+      },
+      {
+        "text": "Drawdown thresholds",
+        "href": "/control/native-risk-mandates"
+      },
+      {
+        "text": "Exposure limits",
+        "href": "/control/native-risk-mandates"
+      },
+      {
+        "text": "Blackout windows",
+        "href": "/control/native-risk-mandates"
+      },
+      {
+        "text": "Instrument permissions",
+        "href": "/control/native-risk-mandates"
+      },
+      {
+        "text": "Apply policy before routing",
+        "href": "/control/native-risk-mandates"
+      },
+      {
+        "text": "Interpret the example",
+        "href": "/control/native-risk-mandates"
+      },
+      {
+        "text": "Review enforcement, including vetoes",
+        "href": "/control/native-risk-mandates"
+      },
+      {
+        "text": "Related",
+        "href": "/control/native-risk-mandates"
+      }
+    ],
+    "passages": [
+      {
+        "text": "The execution node respects daily drawdown limits, exposure caps and macroeconomic blackout windows. Your desk sets the operating constraints; mandates apply them within the execution workflow.",
+        "href": "/control/native-risk-mandates"
+      },
+      {
+        "text": "Drawdown thresholds. Daily drawdown limits form part of the desk mandate. The approved example reads the limit from the desk’s own configuration rather than publishing a default percentage.",
+        "href": "/control/native-risk-mandates"
+      },
+      {
+        "text": "Exposure limits. An exposure cap constrains deployment. Gross exposure and lot sizing remain under desk control; the example applies a desk-set sizing scalar after its checks.",
+        "href": "/control/native-risk-mandates"
+      },
+      {
+        "text": "Blackout windows. Macroeconomic blackout windows are checked before the example evaluates mandate limits. A request inside a window returns a veto instead of proceeding to sizing.",
+        "href": "/control/native-risk-mandates"
+      },
+      {
+        "text": "Instrument permissions. The desk retains instrument permissions. The illustrative mandate includes MET_SAFE and FX_DM; the example is not a complete tenant configuration or an availability contract.",
+        "href": "/control/native-risk-mandates"
+      },
+      {
+        "text": "The pattern checks for a macro blackout first, then delegates limit evaluation to the illustrative helper. A failed check returns a veto; otherwise the payload passes to sizing with the desk’s lot scalar. Helper behavior and field names are deliberately abstract.",
+        "href": "/control/native-risk-mandates"
+      },
+      {
+        "text": "This tenant-side pattern complements ATRX’s systemic Control protocol, which retains veto power over exposure and structural limits. Tier I includes API-level systemic guardrails; Tier II adds custom regime gating and drawdown parameterization.",
+        "href": "/control/native-risk-mandates"
+      },
+      {
+        "text": "Exported risk veto events, state classifications and decision logs provide material for internal quantitative review. The ledger examples show one way to inspect the recorded vetoes and observed states.",
+        "href": "/control/native-risk-mandates"
+      },
+      {
+        "text": "Policy enforcement is an operational capability, not a regulatory certification or a guarantee of capital preservation. Read it alongside the broader Risk & Control framework and the existing risk disclosure.",
+        "href": "/control/native-risk-mandates"
+      },
+      {
+        "text": "Regime & State Analysis",
+        "href": "/control/native-risk-mandates"
+      }
+    ]
+  },
+  {
+    "href": "/delivery/audit-grade-ledgers",
+    "title": "Audit-Grade Ledgers",
+    "category": "Control & Delivery",
+    "summary": "Machine-readable ATRX decision logs, state classifications and risk veto events for internal quantitative governance.",
+    "headings": [
+      {
+        "text": "What the record makes available",
+        "href": "/delivery/audit-grade-ledgers"
+      },
+      {
+        "text": "Decision logs",
+        "href": "/delivery/audit-grade-ledgers"
+      },
+      {
+        "text": "State classifications",
+        "href": "/delivery/audit-grade-ledgers"
+      },
+      {
+        "text": "Risk veto events",
+        "href": "/delivery/audit-grade-ledgers"
+      },
+      {
+        "text": "Inspect a ledger export",
+        "href": "/delivery/audit-grade-ledgers"
+      },
+      {
+        "text": "Use telemetry at two levels",
+        "href": "/delivery/audit-grade-ledgers"
+      },
+      {
+        "text": "Tenant review",
+        "href": "/delivery/audit-grade-ledgers"
+      },
+      {
+        "text": "Structural feedback",
+        "href": "/delivery/audit-grade-ledgers"
+      },
+      {
+        "text": "Attribution",
+        "href": "/delivery/audit-grade-ledgers"
+      },
+      {
+        "text": "Governance scope",
+        "href": "/delivery/audit-grade-ledgers"
+      },
+      {
+        "text": "Related",
+        "href": "/delivery/audit-grade-ledgers"
+      }
+    ],
+    "passages": [
+      {
+        "text": "ATRX exports decision logs, state classifications and risk veto events in machine-readable formats. The record supports internal quantitative governance and review, including decisions that did not become executions.",
+        "href": "/delivery/audit-grade-ledgers"
+      },
+      {
+        "text": "Decision logs. Provide a record for reviewing the decision process. The published export example reads decision records from a ledger supplied to the tenant.",
+        "href": "/delivery/audit-grade-ledgers"
+      },
+      {
+        "text": "State classifications. Preserve classified market-state context. The example collects the distinct states observed in the export for subsequent review.",
+        "href": "/delivery/audit-grade-ledgers"
+      },
+      {
+        "text": "Risk veto events. Identify recorded control vetoes. The example filters these events and counts them alongside the broader decision set.",
+        "href": "/delivery/audit-grade-ledgers"
+      },
+      {
+        "text": "Tenant review. The sample reads a JSON export, counts records and vetoes, and lists observed states. Its filename and fields illustrate the workflow; export format and field names are confirmed during onboarding.",
+        "href": "/delivery/audit-grade-ledgers"
+      },
+      {
+        "text": "Structural feedback. The architecture’s closed-loop telemetry generates signed logs and records localized failures in structural memory. This system feedback role complements the tenant’s governance review.",
+        "href": "/delivery/audit-grade-ledgers"
+      },
+      {
+        "text": "Attribution. For realized results, Causal Attribution groups P&L by the regime tag and structural identifier carried in each execution payload. Ledger review includes a broader decision and veto context.",
+        "href": "/delivery/audit-grade-ledgers"
+      },
+      {
+        "text": "The Institutional access tier explicitly includes audit-grade telemetry logs for governance, alongside research access and direct engineering syncs. Institutional applications can describe their governance and telemetry objectives as part of the requested deployment.",
+        "href": "/delivery/audit-grade-ledgers"
+      },
+      {
+        "text": "“Audit-grade” names the product’s record and review capability. The published material does not assert regulatory certification, a retention period, a particular export schedule or a storage guarantee. Use the confirmed onboarding details when integrating exports into internal review.",
+        "href": "/delivery/audit-grade-ledgers"
+      },
+      {
+        "text": "Native Risk Mandates",
+        "href": "/delivery/audit-grade-ledgers"
+      }
+    ]
+  },
+  {
+    "href": "/delivery/zero-latency-webhooks",
+    "title": "Zero-Latency Webhooks",
+    "category": "Control & Delivery",
+    "summary": "Signed, schema-validated ATRX execution payloads delivered into tenant infrastructure, with onboarding-supplied verification details.",
+    "headings": [
+      {
+        "text": "The delivery boundary",
+        "href": "/delivery/zero-latency-webhooks"
+      },
+      {
+        "text": "Tenant endpoint",
+        "href": "/delivery/zero-latency-webhooks"
+      },
+      {
+        "text": "Payload integrity",
+        "href": "/delivery/zero-latency-webhooks"
+      },
+      {
+        "text": "Access configuration",
+        "href": "/delivery/zero-latency-webhooks"
+      },
+      {
+        "text": "Receive a directive in your environment",
+        "href": "/delivery/zero-latency-webhooks"
+      },
+      {
+        "text": "Read the integration sequence",
+        "href": "/delivery/zero-latency-webhooks"
+      },
+      {
+        "text": "Verify",
+        "href": "/delivery/zero-latency-webhooks"
+      },
+      {
+        "text": "Retain",
+        "href": "/delivery/zero-latency-webhooks"
+      },
+      {
+        "text": "Constrain and route",
+        "href": "/delivery/zero-latency-webhooks"
+      },
+      {
+        "text": "Validate the downstream connection",
+        "href": "/delivery/zero-latency-webhooks"
+      },
+      {
+        "text": "Related",
+        "href": "/delivery/zero-latency-webhooks"
+      }
+    ],
+    "passages": [
+      {
+        "text": "The ATRX intelligence cloud streams signed, schema-validated execution payloads directly to tenant server infrastructure. The local integration connects those directives to the desk’s existing execution environment.",
+        "href": "/delivery/zero-latency-webhooks"
+      },
+      {
+        "text": "“Zero-Latency Webhooks” is the existing product name. It does not mean zero measured delivery time or establish a numeric latency guarantee.",
+        "href": "/delivery/zero-latency-webhooks"
+      },
+      {
+        "text": "Tenant endpoint. Subscribers map a local endpoint to receive JSON payloads from the intelligence cloud. API credentials remain inside the tenant environment.",
+        "href": "/delivery/zero-latency-webhooks"
+      },
+      {
+        "text": "Payload integrity. The published delivery model describes signed, schema-validated payloads and replay-protected directives. Verification parameters and the payload schema are supplied during onboarding.",
+        "href": "/delivery/zero-latency-webhooks"
+      },
+      {
+        "text": "Access configuration. Prosumer Node includes standard JSON webhook delivery. Capital Desk includes direct low-latency integration SDKs and priority latency routing; the public material does not specify a package name or numeric SLA.",
+        "href": "/delivery/zero-latency-webhooks"
+      },
+      {
+        "text": "Verify. The sample checks the signature and rejects a request that fails verification. The helper stands in for the onboarding-defined implementation.",
+        "href": "/delivery/zero-latency-webhooks"
+      },
+      {
+        "text": "Retain. The received payload is appended to the tenant’s ledger for its own audit review. This sample operation does not define a storage or retention policy.",
+        "href": "/delivery/zero-latency-webhooks"
+      },
+      {
+        "text": "Constrain and route. Desk mandates are applied before the local risk engine receives the directive. The desk keeps capital sizing and instrument permissions within its environment.",
+        "href": "/delivery/zero-latency-webhooks"
+      },
+      {
+        "text": "Verify The sample checks the signature and rejects a request that fails verification. The helper stands in for the onboarding-defined implementation.",
+        "href": "/delivery/zero-latency-webhooks"
+      },
+      {
+        "text": "Retain The received payload is appended to the tenant’s ledger for its own audit review. This sample operation does not define a storage or retention policy.",
+        "href": "/delivery/zero-latency-webhooks"
+      },
+      {
+        "text": "Constrain and route Desk mandates are applied before the local risk engine receives the directive. The desk keeps capital sizing and instrument permissions within its environment.",
+        "href": "/delivery/zero-latency-webhooks"
+      },
+      {
+        "text": "The abbreviated handler does not implement schema validation or replay protection. Their presence in the delivery model must not be confused with complete verification code in this illustration.",
+        "href": "/delivery/zero-latency-webhooks"
+      },
+      {
+        "text": "Enterprise integration material describes SDK translation to existing venues and broker APIs. Deployment begins with an architecture sync, proceeds to paper trading inside the tenant environment and moves to live capital after latency and slippage validation.",
+        "href": "/delivery/zero-latency-webhooks"
+      },
+      {
+        "text": "Delivery does not remove broker API downtime, spread widening or slippage. Keep the execution boundary and risk disclosure in view when connecting the payload to capital.",
+        "href": "/delivery/zero-latency-webhooks"
+      },
+      {
+        "text": "Native Risk Mandates",
+        "href": "/delivery/zero-latency-webhooks"
+      }
+    ]
+  },
+  {
+    "href": "/documentation",
+    "title": "Documentation",
+    "category": "Documentation",
+    "summary": "Technical library for evaluators: whitepapers, reports and disclosures.",
+    "headings": [
+      {
+        "text": "Systemic Macro Intelligence",
+        "href": "/documentation"
+      },
+      {
+        "text": "Structural Philosophy",
+        "href": "/documentation"
+      },
+      {
+        "text": "Phase 1 Validation Metrics",
+        "href": "/documentation"
+      },
+      {
+        "text": "Enterprise Tenancy",
+        "href": "/documentation"
+      },
+      {
+        "text": "Risk Protocol & Disclosure",
+        "href": "/documentation"
+      },
+      {
+        "text": "Technical library for evaluators.",
+        "href": "/documentation"
+      },
+      {
+        "text": "W-01",
+        "href": "/documentation#library"
+      },
+      {
+        "text": "E-01",
+        "href": "/documentation#library"
+      },
+      {
+        "text": "P-01",
+        "href": "/documentation#library"
+      },
+      {
+        "text": "P-02",
+        "href": "/documentation#library"
+      },
+      {
+        "text": "D-01",
+        "href": "/documentation#library"
+      }
+    ],
+    "passages": [
+      {
+        "text": "Systemic Macro Intelligence. Structural inference, state gating, and the dynamic router.",
+        "href": "/documentation"
+      },
+      {
+        "text": "Structural Philosophy. Alpha decay, causal reflexivity, and the self-compiling network.",
+        "href": "/documentation"
+      },
+      {
+        "text": "Phase 1 Validation Metrics. Q1 2026 · Sharpe 2.19 · Live execution ablation study.",
+        "href": "/documentation"
+      },
+      {
+        "text": "Enterprise Tenancy. Distributed execution, API architecture, and capital scaling.",
+        "href": "/documentation"
+      },
+      {
+        "text": "Risk Protocol & Disclosure. Algorithmic latency, structural decay, and execution limits.",
+        "href": "/documentation"
+      },
+      {
+        "text": "The materials below are maintained for qualified quantitative evaluators and capital allocators. The technical whitepaper provides deep structural insight into the architecture and the live production metrics.",
+        "href": "/documentation"
+      },
+      {
+        "text": "W-01. Systemic Macro Intelligence Structural inference, state gating, and the dynamic router. · Web",
+        "href": "/documentation#library"
+      },
+      {
+        "text": "E-01. Structural Philosophy Alpha decay, causal reflexivity, and the self-compiling network. · Web",
+        "href": "/documentation#library"
+      },
+      {
+        "text": "P-01. Phase 1 Validation Metrics Q1 2026 · Sharpe 2.19 · Live execution ablation study. · Web",
+        "href": "/documentation#library"
+      },
+      {
+        "text": "P-02. Enterprise Tenancy Distributed execution, API architecture, and capital scaling. · Web",
+        "href": "/documentation#library"
+      },
+      {
+        "text": "D-01. Risk Protocol & Disclosure Algorithmic latency, structural decay, and execution limits. · Web",
+        "href": "/documentation#library"
+      },
+      {
+        "text": "PDF editions of the whitepaper and ablation studies are released to qualified evaluators on request. Request technical documentation.",
+        "href": "/documentation#library"
+      }
+    ]
+  },
+  {
+    "href": "/instruments",
+    "title": "Instruments",
+    "category": "Documentation",
+    "summary": "Multi asset by architecture. Disciplined by deployment. ATRX instrument vectors and roadmap.",
+    "headings": [
+      {
+        "text": "Multi asset by architecture. Disciplined by deployment.",
+        "href": "/instruments"
+      },
+      {
+        "text": "Live traded",
+        "href": "/instruments#live"
+      },
+      {
+        "text": "MET_SAFE",
+        "href": "/instruments#live"
+      },
+      {
+        "text": "Preparing for v4.0",
+        "href": "/instruments#v4"
+      },
+      {
+        "text": "FX_DM_BASKET",
+        "href": "/instruments#v4"
+      },
+      {
+        "text": "DLR_INDEX_VEC",
+        "href": "/instruments#v4"
+      },
+      {
+        "text": "EQ_US_MEGA",
+        "href": "/instruments#v4"
+      },
+      {
+        "text": "ENG_FUT_VEC",
+        "href": "/instruments#v4"
+      },
+      {
+        "text": "Topological roadmap",
+        "href": "/instruments#roadmap"
+      },
+      {
+        "text": "TECH_CAPX_NODES",
+        "href": "/instruments#roadmap"
+      },
+      {
+        "text": "SOV_DUR_CURVES",
+        "href": "/instruments#roadmap"
+      },
+      {
+        "text": "VOL_SRF_SURFACES",
+        "href": "/instruments#roadmap"
+      },
+      {
+        "text": "Related",
+        "href": "/instruments"
+      }
+    ],
+    "passages": [
+      {
+        "text": "Forex, metals, indices, and commodities today. Equities, fixed income, and decentralized liquidity tomorrow. The same core architecture deploys everywhere.",
+        "href": "/instruments"
+      },
+      {
+        "text": "MET_SAFE. Precious Metals Vector",
+        "href": "/instruments#live"
+      },
+      {
+        "text": "Executed during the Phase 1 validation milestone.",
+        "href": "/instruments#live"
+      },
+      {
+        "text": "FX_DM_BASKET. Developed Currency Vectors",
+        "href": "/instruments#v4"
+      },
+      {
+        "text": "DLR_INDEX_VEC. Macro Sovereign Basket",
+        "href": "/instruments#v4"
+      },
+      {
+        "text": "EQ_US_MEGA. Global Index Topologies",
+        "href": "/instruments#v4"
+      },
+      {
+        "text": "ENG_FUT_VEC. Energy Infrastructure Node",
+        "href": "/instruments#v4"
+      },
+      {
+        "text": "Monitored by the causal query engine; scheduled for v4.0 pipeline activation.",
+        "href": "/instruments#v4"
+      },
+      {
+        "text": "TECH_CAPX_NODES. Single-Name Equity Vectors",
+        "href": "/instruments#roadmap"
+      },
+      {
+        "text": "SOV_DUR_CURVES. Sovereign Fixed Income",
+        "href": "/instruments#roadmap"
+      },
+      {
+        "text": "VOL_SRF_SURFACES. Cross-Asset Volatility",
+        "href": "/instruments#roadmap"
+      },
+      {
+        "text": "Target expansion vectors for multi-domain MoE routing.",
+        "href": "/instruments#roadmap"
+      },
+      {
+        "text": "Access tiers and instrument coverage",
+        "href": "/instruments"
+      }
+    ]
+  },
+  {
+    "href": "/philosophy",
+    "title": "Structural Philosophy",
+    "category": "Documentation",
+    "summary": "Alpha decay, causal reflexivity, and the self-compiling network.",
+    "headings": [
+      {
+        "text": "ATRX is a self-compiling organism.",
+        "href": "/philosophy"
+      },
+      {
+        "text": "A living, self-correcting network",
+        "href": "/philosophy#self-correcting"
+      },
+      {
+        "text": "The Causal Mandate",
+        "href": "/philosophy#causal-mandate"
+      },
+      {
+        "text": "The fight against alpha decay",
+        "href": "/philosophy#alpha-decay"
+      },
+      {
+        "text": "Innovation as structural physics",
+        "href": "/philosophy#structural-physics"
+      },
+      {
+        "text": "Why ATRX exists",
+        "href": "/philosophy#why"
+      },
+      {
+        "text": "Related",
+        "href": "/philosophy"
+      }
+    ],
+    "passages": [
+      {
+        "text": "ATRX exists for a reason that is simple to state and brutally difficult to execute. Institutional-grade quantitative trading has historically been monopolized by funds with billions in infrastructure capital. The core thesis of ATRX is that the exact same mathematical rigor, causal reasoning, and low-latency infrastructure can be completely decentralized. Not diluted. Decentralized.",
+        "href": "/philosophy"
+      },
+      {
+        "text": "That is the definitive purpose of this engine. ATRX delivers high-frequency causal infrastructure to systematic allocators, professional nodes, and enterprise desks. What was once locked behind closed corporate vaults is now delivered seamlessly via cloud compute and API distribution.",
+        "href": "/philosophy"
+      },
+      {
+        "text": "ATRX is not a static algorithmic script. It behaves as a living organism in a high-noise environment. The platform breathes through closed-loop telemetry. Execution failures are not ignored; they are explicitly logged into a structural ledger. The decision stack metabolizes these failures, ensuring the system can never repeat a contextual mistake. It is an architecture that structurally immunizes itself against market decay.",
+        "href": "/philosophy#self-correcting"
+      },
+      {
+        "text": "The platform operates on an unyielding principle: correlation is a trap. Standard models fail during regime shifts because they trade historical co-movement. ATRX enforces a Causal Transmission Architecture. Every execution must be mapped to a physical economic transmission mechanism. No strategy, however compelling its historical backtest, is permitted to execute if the underlying causal baseline is broken.",
+        "href": "/philosophy#causal-mandate"
+      },
+      {
+        "text": "Alpha is highly radioactive. The moment an edge is discovered, it begins to decay. Legacy systems combat this by throwing analysts at the problem. ATRX combats this via autonomous structural adaptation. Our perception models dynamically map new causal chains, and our dynamic routing layer reallocates capital on the fly.",
+        "href": "/philosophy#alpha-decay"
+      },
+      {
+        "text": "The next frontier of quantitative finance will be defined by systems that treat AI as a deterministic computational graph, not a chatbot. ATRX is built to this exact standard. The synthesis topologies and regime gates are engineered for maximum auditability and mathematical accountability.",
+        "href": "/philosophy#structural-physics"
+      },
+      {
+        "text": "ATRX exists to prove that world-class quantitative infrastructure can operate outside the traditional fund complex. That novelty, extreme rigor, and decentralized access can occupy the same architecture. Designed to dismantle the access gap. Aimed directly at the future of systematic capital.",
+        "href": "/philosophy#why"
+      }
+    ]
+  },
+  {
+    "href": "/architecture",
+    "title": "System Architecture",
+    "category": "Architecture",
+    "summary": "ATRX v4.0: seven structural pillars, a five-stage inference pipeline, and one absolute veto.",
+    "headings": [
+      {
+        "text": "Data Ingestion",
+        "href": "/architecture#perception"
+      },
+      {
+        "text": "Structural Topology",
+        "href": "/architecture#synthesis"
+      },
+      {
+        "text": "Inference Routing",
+        "href": "/architecture#projection"
+      },
+      {
+        "text": "State Gating",
+        "href": "/architecture#conditioning"
+      },
+      {
+        "text": "Capital Protection",
+        "href": "/architecture#control"
+      },
+      {
+        "text": "Latency Terminal",
+        "href": "/architecture#execution"
+      },
+      {
+        "text": "Telemetry Loop",
+        "href": "/architecture#adaptation"
+      },
+      {
+        "text": "Seven pillars. Five stages. One absolute veto.",
+        "href": "/architecture"
+      },
+      {
+        "text": "The structural pillars",
+        "href": "/architecture#pillars"
+      },
+      {
+        "text": "Inference pipeline",
+        "href": "/architecture#pipeline"
+      },
+      {
+        "text": "Transport layer",
+        "href": "/architecture#transport"
+      },
+      {
+        "text": "Engineering footprint",
+        "href": "/architecture#footprint"
+      },
+      {
+        "text": "Related",
+        "href": "/architecture"
+      }
+    ],
+    "passages": [
+      {
+        "text": "Data Ingestion. Continuous aggregation of multidimensional market state data and systemic economic variables.",
+        "href": "/architecture#perception"
+      },
+      {
+        "text": "Structural Topology. A multi-node processing matrix that isolates underlying market drivers without relying on standard historical correlation.",
+        "href": "/architecture#synthesis"
+      },
+      {
+        "text": "Inference Routing. A dynamic routing layer that evaluates structural viability and determines optimal capital deployment.",
+        "href": "/architecture#projection"
+      },
+      {
+        "text": "State Gating. A multidimensional estimation model that dynamically restricts or permits execution based on prevailing market regimes.",
+        "href": "/architecture#conditioning"
+      },
+      {
+        "text": "Capital Protection. A strict systemic risk protocol that enforces absolute veto power to maintain mandated exposure and structural limits.",
+        "href": "/architecture#control"
+      },
+      {
+        "text": "Latency Terminal. Venue-independent protocol adapters translating internal intelligence directives into secure, low-latency market execution.",
+        "href": "/architecture#execution"
+      },
+      {
+        "text": "Telemetry Loop. Every closed loop generates a signed log, embedding localized failures back into the system's structural memory.",
+        "href": "/architecture#adaptation"
+      },
+      {
+        "text": "Whitepaper summary · v4.0",
+        "href": "/architecture"
+      },
+      {
+        "text": "ATRX v4.0 is organized across seven infrastructural pillars, executed through a deterministic five-stage pipeline, linked to tenant environments via zero-latency webhooks, and refined continuously by a telemetry memory loop. The summary below outlines the computational topology without exposing the proprietary node weights.",
+        "href": "/architecture"
+      },
+      {
+        "text": "01 · Perception Data Ingestion",
+        "href": "/architecture#pillars"
+      },
+      {
+        "text": "02 · Synthesis Structural Topology",
+        "href": "/architecture#pillars"
+      },
+      {
+        "text": "03 · Projection Inference Routing",
+        "href": "/architecture#pillars"
+      },
+      {
+        "text": "04 · Conditioning State Gating",
+        "href": "/architecture#pillars"
+      },
+      {
+        "text": "05 · Control Capital Protection",
+        "href": "/architecture#pillars"
+      },
+      {
+        "text": "06 · Execution Latency Terminal",
+        "href": "/architecture#pillars"
+      },
+      {
+        "text": "07 · Adaptation Telemetry Loop",
+        "href": "/architecture#pillars"
+      },
+      {
+        "text": "Data flows linearly through Perception, Synthesis, Conditioning, and Control before reaching Execution. The Control layer receives a mandatory handoff. If the current market state matches a known failure vector, the protocol enforces a hard stop.",
+        "href": "/architecture#pipeline"
+      },
+      {
+        "text": "Subscribers map a local endpoint that receives a schema-validated JSON payload from the ATRX intelligence cloud. Execution directives are sub-second, replay-protected, and require zero user credentials to leave the tenant environment.",
+        "href": "/architecture#transport"
+      },
+      {
+        "text": "The architecture is built end-to-end using natively compiled runtime environments and highly optimized compute frameworks. From the core computational graph to compiled runtime telemetry, the entire stack is developed in-house. It is driven by our internally developed and engineered model, never an AI slogan.",
+        "href": "/architecture#footprint"
+      },
+      {
+        "text": "Currently in active R&D: we are advancing our systemic architecture to extend beyond trade execution, developing autonomous portfolio management frameworks capable of dynamic, multi-strategy capital allocation.",
+        "href": "/architecture#footprint"
+      },
+      {
+        "text": "Request the technical whitepaper",
+        "href": "/architecture"
+      }
+    ]
+  },
+  {
+    "href": "/partnerships",
+    "title": "Enterprise Tenancy",
+    "category": "Enterprise tenancy",
+    "summary": "ATRX integrates with enterprise trading desks as a parallel intelligence layer.",
+    "headings": [
+      {
+        "text": "A parallel intelligence layer for enterprise capital.",
+        "href": "/partnerships"
+      },
+      {
+        "text": "Distributed integration",
+        "href": "/partnerships#integration"
+      },
+      {
+        "text": "Engagement models",
+        "href": "/partnerships#engagement"
+      },
+      {
+        "text": "Dedicated Tenant Pipeline",
+        "href": "/partnerships#engagement"
+      },
+      {
+        "text": "Capital Allocation Partner",
+        "href": "/partnerships#engagement"
+      },
+      {
+        "text": "Deployment process",
+        "href": "/partnerships#deployment"
+      },
+      {
+        "text": "Related",
+        "href": "/partnerships"
+      }
+    ],
+    "passages": [
+      {
+        "text": "01. The execution node respects daily drawdown limits, exposure caps, and macroeconomic blackout windows natively. Capital protection is hard-coded into the telemetry layer.",
+        "href": "/partnerships#risk-mandates"
+      },
+      {
+        "text": "02. The ATRX intelligence cloud streams signed, schema-validated execution payloads directly to your server infrastructure. API credentials never leave your local environment.",
+        "href": "/partnerships#webhooks"
+      },
+      {
+        "text": "03. Every execution payload carries a regime tag and a structural identifier. Desks can attribute P&L back to exact macroeconomic catalysts and volatility states.",
+        "href": "/partnerships#attribution"
+      },
+      {
+        "text": "04. Provided enterprise-grade SDKs support translation to the venues and broker APIs your desk already operates on.",
+        "href": "/partnerships#venues"
+      },
+      {
+        "text": "05. Your desk controls gross exposure, lot sizing scalars, and instrument permissions. ATRX computes the structural intelligence. You control the capital.",
+        "href": "/partnerships#sovereignty"
+      },
+      {
+        "text": "06. Decision logs, state classifications, and risk veto events are exported in machine-readable formats for internal quantitative governance and review.",
+        "href": "/partnerships#ledgers"
+      },
+      {
+        "text": "ATRX is engineered to integrate with enterprise trading desks as a centralized intelligence core. Validated telemetry reaches the firm's execution nodes through their existing infrastructure. Zero replatforming. Zero migration risk.",
+        "href": "/partnerships"
+      },
+      {
+        "text": "Native Risk Mandates 01",
+        "href": "/partnerships#integration"
+      },
+      {
+        "text": "Zero-Latency Webhooks 02",
+        "href": "/partnerships#integration"
+      },
+      {
+        "text": "Causal Attribution 03",
+        "href": "/partnerships#integration"
+      },
+      {
+        "text": "Venue Independence 04",
+        "href": "/partnerships#integration"
+      },
+      {
+        "text": "Operational Sovereignty 05",
+        "href": "/partnerships#integration"
+      },
+      {
+        "text": "Audit-Grade Ledgers 06",
+        "href": "/partnerships#integration"
+      },
+      {
+        "text": "Dedicated Tenant Pipeline. The enterprise firm connects directly to the ATRX routing engine. ATRX provides the infrastructure, continuous model realignment, and sub-second signal delivery.",
+        "href": "/partnerships#engagement"
+      },
+      {
+        "text": "Capital Allocation Partner. For family offices and institutional allocators, ATRX engages as a quantitative manager with negotiated allocation limits, performance terms, and structural reporting.",
+        "href": "/partnerships#engagement"
+      },
+      {
+        "text": "Engagements open with a technical architecture sync. The relationship proceeds to a paper-trading parallel run inside your environment, converting to live capital only after latency and slippage validation.",
+        "href": "/partnerships#deployment"
+      }
+    ]
+  },
+  {
+    "href": "/performance",
+    "title": "Phase 1 Performance",
+    "category": "Performance",
+    "summary": "Phase 1 validation metrics, Q1 2026. Historical validation data does not guarantee future operational yield.",
+    "headings": [
+      {
+        "text": "Phase 1 performance metrics.",
+        "href": "/performance"
+      },
+      {
+        "text": "Validated paths by topology",
+        "href": "/performance#paths"
+      },
+      {
+        "text": "Verification & risk",
+        "href": "/performance#verification"
+      },
+      {
+        "text": "Related",
+        "href": "/performance"
+      }
+    ],
+    "passages": [
+      {
+        "text": "The metrics below validate the overarching systemic architecture during its live production deployment in Q1 2026.",
+        "href": "/performance"
+      },
+      {
+        "text": "Causal Transmission Paths",
+        "href": "/performance"
+      },
+      {
+        "text": "Phase 1 was conducted in a live-data execution environment. Historical validation data does not guarantee future operational yield.",
+        "href": "/performance"
+      },
+      {
+        "text": "Path ID · Topology · State Gate · Capture Rate",
+        "href": "/performance#paths"
+      },
+      {
+        "text": "Precious Metals Vector · High-Vol Regime Gate · 84.2%",
+        "href": "/performance#paths"
+      },
+      {
+        "text": "Developed FX Vector · Directional Bias Filter · 79.1%",
+        "href": "/performance#paths"
+      },
+      {
+        "text": "Developed FX Vector · Rate Divergence Lock · 91.5%",
+        "href": "/performance#paths"
+      },
+      {
+        "text": "Topological breakdowns reflect active structural reallocations executed during the Q1 2026 window. Full ablation studies are available in the technical whitepaper.",
+        "href": "/performance#paths"
+      },
+      {
+        "text": "Phase 1 was conducted in a live-data execution environment. Out-of-sample ablation studies comparing the system against standard correlation baselines are available to qualified allocators. Historical validation data does not guarantee future operational yield.",
+        "href": "/performance#verification"
+      },
+      {
+        "text": "Request ablation studies",
+        "href": "/performance"
+      }
+    ]
+  },
+  {
+    "href": "/contact",
+    "title": "Request Access",
+    "category": "Request access",
+    "summary": "Request pipeline access or technical documentation. Qualified inbound only.",
+    "headings": [
+      {
+        "text": "Request technical documentation",
+        "href": "/contact"
+      },
+      {
+        "text": "Request pipeline access or technical documentation.",
+        "href": "/contact"
+      },
+      {
+        "text": "Choose a pathway",
+        "href": "/contact#pathways-title"
+      },
+      {
+        "text": "Compute constrained. Qualified allocators only.",
+        "href": "/contact#closing-title"
+      }
+    ],
+    "passages": [
+      {
+        "text": "Request pipeline access. Apply for a Prosumer Node, Capital Desk or Institutional deployment. Applications are evaluated against available compute capacity and infrastructural alignment. Best if you represent a qualified desk or allocator with a defined deployment objective.",
+        "href": "/contact"
+      },
+      {
+        "text": "Request technical documentation. Whitepapers, ablation studies and risk disclosures, maintained for qualified quantitative evaluators and capital allocators. Best if you are evaluating the architecture and Phase 1 metrics before applying.",
+        "href": "/contact"
+      },
+      {
+        "text": "ATRX is operating in a closed deployment phase. Every submission is routed directly for engineering review.",
+        "href": "/contact"
+      },
+      {
+        "text": "Access is granted by application. Select the request that matches your evaluation stage.",
+        "href": "/contact"
+      },
+      {
+        "text": "Compare access tiers first. Pipeline scope, instrument topology and commercial model for each tier.",
+        "href": "/contact"
+      },
+      {
+        "text": "Pricing is provided upon technical qualification.",
+        "href": "/contact"
+      },
+      {
+        "text": "Contact Haldane regarding technical questions outside a formal application.",
+        "href": "/contact#request"
+      }
+    ]
+  },
+  {
+    "href": "/risk",
+    "title": "Risk Disclosure",
+    "category": "Disclosure",
+    "summary": "Systematic execution carries inherent structural risk. Disclosures governing deployment of the ATRX intelligence architecture.",
+    "headings": [
+      {
+        "text": "Systematic execution carries inherent structural risk.",
+        "href": "/risk"
+      },
+      {
+        "text": "Disclosures",
+        "href": "/risk#disclosures"
+      },
+      {
+        "text": "Historical Validation",
+        "href": "/risk#historical-validation"
+      },
+      {
+        "text": "Algorithmic & Causal Risk",
+        "href": "/risk#algorithmic-risk"
+      },
+      {
+        "text": "Execution & Counterparty",
+        "href": "/risk#counterparty"
+      },
+      {
+        "text": "Jurisdictional Governance",
+        "href": "/risk#jurisdiction"
+      },
+      {
+        "text": "System Capacity",
+        "href": "/risk#capacity"
+      },
+      {
+        "text": "Related",
+        "href": "/risk"
+      }
+    ],
+    "passages": [
+      {
+        "text": "The disclosures below govern the deployment of the ATRX intelligence architecture across all tenant endpoints and capital environments.",
+        "href": "/risk"
+      },
+      {
+        "text": "ATRX deploys deterministic quantitative models that carry inherent risk, including the potential for loss of principal capital. This disclosure outlines the specific mechanical and market-driven risks associated with autonomous execution.",
+        "href": "/risk"
+      },
+      {
+        "text": "Historical Validation. Performance metrics documented during the Q1 2026 validation window represent past execution data. Documented historical performance does not guarantee future operational yield. Market conditions, structural regime decay, and execution friction will materially impact forward returns.",
+        "href": "/risk#historical-validation"
+      },
+      {
+        "text": "Algorithmic & Causal Risk. While the architecture utilizes formal methodologies to suppress spurious correlation, algorithmic systems are subject to model misspecification, unanticipated macroeconomic shocks, and data feed latency. Interventional logic cannot perfectly predict market reflexivity.",
+        "href": "/risk#algorithmic-risk"
+      },
+      {
+        "text": "Execution & Counterparty. ATRX computes intelligence; it does not custody capital. The tenant assumes all counterparty risk associated with their chosen brokerage or liquidity provider. ATRX is not liable for broker insolvency, API downtime, spread widening, or slippage incurred during high-volatility regime shifts.",
+        "href": "/risk#counterparty"
+      },
+      {
+        "text": "Jurisdictional Governance. The deployment of automated trading pipelines is subject to varied global regulation. Enterprise tenants are strictly responsible for ensuring their use of the ATRX SDK complies with local financial law, capital reporting, and tax obligations.",
+        "href": "/risk#jurisdiction"
+      },
+      {
+        "text": "System Capacity. ATRX provides execution payloads and topological research. It does not provide individualized financial advice or guarantee capital preservation. Tenants retain ultimate discretionary authority over their API keys and capital deployment sizing.",
+        "href": "/risk#capacity"
+      }
+    ]
+  }
+]

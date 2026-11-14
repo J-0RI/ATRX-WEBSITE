@@ -6,13 +6,14 @@
  * the bar's leading edge and the shells' clipped edge move as one line.
  */
 
-/* ---------- trigger: an ordinary navigation cell at rest ---------- */
+/* ---------- trigger: an icon-only navigation cell at rest ---------- */
 .trigger {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  width: var(--nav-cell-h, 40px);
   height: var(--nav-cell-h, 40px);
-  padding: 0 var(--nav-cell-pad, 20px);
+  padding: 0;
   background: var(--nav-cell, var(--surface-inset));
   color: var(--nav-cell-text, var(--text-2));
   font-size: var(--nav-cell-size, 13.5px);
@@ -157,94 +158,4 @@
 
 .close:focus-visible {
   outline-offset: -2px;
-}
-
-/* ---------- results: nav-dropdown material anchored beneath the bar ---------- */
-.panel {
-  position: absolute;
-  top: calc(50% + var(--nav-cell-h) / 2 + var(--nav-dropdown-offset));
-  left: var(--search-left, 0);
-  z-index: 3;
-  width: var(--search-width, 0);
-  max-height: min(420px, calc(100dvh - var(--nav-h) - 24px));
-  overflow-y: auto;
-  padding: var(--nav-dropdown-padding);
-  border-radius: var(--nav-dropdown-radius);
-  background: var(--nav-dropdown-bg);
-  box-shadow: var(--nav-dropdown-shadow);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-3px);
-  transition:
-    opacity var(--nav-dropdown-close-duration) ease,
-    transform var(--nav-dropdown-close-duration) ease,
-    visibility 0s linear var(--nav-dropdown-close-duration);
-}
-
-.panel[data-visible] {
-  opacity: 1;
-  visibility: visible;
-  transform: none;
-  transition:
-    opacity var(--nav-dropdown-open-duration) ease,
-    transform var(--nav-dropdown-open-duration) ease,
-    visibility 0s;
-}
-
-.option {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  min-height: 34px;
-  padding: 6px 10px;
-  font-size: 14px;
-  line-height: 1.35;
-  color: var(--text-2);
-  cursor: pointer;
-  transition: background-color var(--dur-fast) ease, color var(--dur-fast) ease;
-}
-
-.option[aria-selected="true"] {
-  background: var(--surface-raised);
-  color: var(--text);
-}
-
-.section {
-  flex: none;
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-3);
-}
-
-.empty {
-  display: flex;
-  align-items: center;
-  min-height: 34px;
-  padding: 0 10px;
-  font-size: 14px;
-  color: var(--text-3);
-}
-
-/* Between the drawer breakpoint and 1300px the rail needs the room: icon-only cell. */
-@media (min-width: 1180px) and (max-width: 1300px), (max-width: 760px) {
-  .trigger {
-    width: var(--nav-cell-h, 40px);
-    padding: 0;
-    justify-content: center;
-  }
-
-  .triggerLabel {
-    display: none;
-  }
-}
-
-/* Below the desktop rail the results use the header's full inner width. */
-@media (max-width: 1179px) {
-  .panel {
-    left: clamp(16px, 3vw, 24px);
-    width: calc(100% - 2 * clamp(16px, 3vw, 24px));
-  }
 }

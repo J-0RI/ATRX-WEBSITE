@@ -155,7 +155,6 @@ const standalonePages: (NavItem & { section: string })[] = [
 export const primaryNav: NavItem[] = [
   { label: "Architecture", href: "/architecture" },
   { label: "Performance", href: "/performance" },
-  { label: "Partnerships", href: "/partnerships" },
 ];
 
 export const documentationMenu: NavItem[] = [

@@ -11,10 +11,8 @@ import { ChevronDown } from "./Icons";
 import { useNavDropdowns } from "./useNavDropdowns";
 import styles from "./TopNav.module.css";
 
-/** Below the desktop rail the bar may not reach closer to the logo than the header's edge inset. */
+/** The bar may never reach closer to the logo than the header's edge inset. */
 const LOGO_CLEARANCE = 16;
-/** Matches the narrow header where the bar also spans the Request access cell. */
-const NARROW_QUERY = "(max-width: 520px)";
 /** --search-delay (closing) + --search-duration + settle margin, in ms. */
 const CLOSE_SETTLE = 420;
 
@@ -24,7 +22,6 @@ export default function TopNav() {
   const [search, setSearch] = useState<SearchState>("closed");
   const searchRef = useRef<SearchState>("closed");
   const restoreFocus = useRef(false);
-  const [narrow, setNarrow] = useState(false);
   const settleTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
   const innerRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLAnchorElement>(null);
@@ -34,10 +31,11 @@ export default function TopNav() {
   const [panelHost, setPanelHost] = useState<HTMLDivElement | null>(null);
 
   /*
-   * The search region is measured from the live layout, never assumed:
-   * desktop = the shells left of Search through the Search cell;
-   * below the rail = from the logo's clearance to the Search cell;
-   * narrow = additionally across the Request access cell (never the menu or logo).
+   * The search region is measured from the live layout, never assumed. Its right edge is
+   * the Search cell's right edge. On desktop it covers exactly the combined footprint of the
+   * Request access cell, the seam and the Search cell. Below the rail (where the cells are
+   * smaller and Request access may be hidden) it reaches back to the logo's clearance.
+   * The logo and menu button are never covered.
    */
   const measure = useCallback(() => {
     const inner = innerRef.current;
@@ -48,14 +46,14 @@ export default function TopNav() {
     const cell = trigger.getBoundingClientRect();
     const center = centerRef.current?.getBoundingClientRect();
     const split = splitRef.current?.getBoundingClientRect();
-    const isNarrow = window.matchMedia(NARROW_QUERY).matches;
-    const start = center && center.width > 0 ? center.left : logo.getBoundingClientRect().right + LOGO_CLEARANCE;
-    const end = isNarrow && split && split.width > 0 ? split.right : cell.right;
+    const desktop = !!center && center.width > 0;
+    const start =
+      desktop && split && split.width > 0 ? split.left : logo.getBoundingClientRect().right + LOGO_CLEARANCE;
+    const end = cell.right;
     inner.style.setProperty("--search-left", `${start - box.left}px`);
     inner.style.setProperty("--search-width", `${end - start}px`);
     inner.style.setProperty("--search-from-left", `${cell.left - start}px`);
     inner.style.setProperty("--search-from-right", `${end - cell.right}px`);
-    setNarrow(isNarrow);
   }, []);
 
   useLayoutEffect(() => {
@@ -106,12 +104,8 @@ export default function TopNav() {
   return (
     <header className={styles.header}>
       <div ref={innerRef} className={styles.inner} data-search={search}>
-        <Link ref={logoRef} href="/" className={styles.logo} aria-label="ATRX home">
-          {/* Supplied brand asset, rendered at its native 1012:204 ratio. */}
-          <img src="/brand/atrx.svg" alt="ATRX" width={84} height={17} />
-        </Link>
-
-        <nav ref={centerRef} className={styles.center} aria-label="Global navigation" inert={searching}>
+        {/* Left rail, centered logo, right actions: DOM order matches visual and tab order. */}
+        <nav ref={centerRef} className={styles.center} aria-label="Global navigation">
           <MenuButton
             id="documentation"
             controller={dropdowns}
@@ -138,9 +132,14 @@ export default function TopNav() {
           ))}
         </nav>
 
+        <Link ref={logoRef} href="/" className={styles.logo} aria-label="ATRX home">
+          {/* Supplied brand asset, rendered at its native 1012:204 ratio. */}
+          <img src="/brand/atrx.svg" alt="ATRX" width={84} height={17} />
+        </Link>
+
         <div className={styles.actions}>
-          <Search state={search} onOpen={openSearch} onClose={closeSearch} triggerRef={triggerRef} />
-          <div ref={splitRef} className={styles.split} inert={searching && narrow}>
+          {/* The search bar grows leftward over this cell; it is covered (and inert) while open. */}
+          <div ref={splitRef} className={styles.split} inert={searching}>
             <Link href="/contact" className={styles.splitMain}>
               Request access
             </Link>
@@ -154,6 +153,7 @@ export default function TopNav() {
               buttonClassName={styles.splitToggle}
             />
           </div>
+          <Search state={search} onOpen={openSearch} onClose={closeSearch} triggerRef={triggerRef} />
           <MobileNav />
         </div>
         {/* Dropdown panels render here: a sibling of the rails, outside the search-morph clip. */}
