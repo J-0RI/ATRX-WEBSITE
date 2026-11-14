@@ -56,6 +56,22 @@ export function CheckIcon({ size = 14, className }: IconProps) {
   );
 }
 
+/**
+ * Knight — the ATRX capability marker (decision-20261114-knight-capability-marker).
+ * A simplified monoline profile on the shared 16px grid: base rule, chest, muzzle, ear and
+ * mane in one stroke, with a single eye point. Used only as a list marker, never as an
+ * illustration or badge.
+ */
+export function KnightIcon({ size = 16, className }: IconProps) {
+  return (
+    <svg {...base(size)} className={className}>
+      <path d="M4 13.5h8" />
+      <path d="M5.25 13.5c0-2.6 1.6-3.4 2.5-4.6l-2 .7-1.4-1.4 3-4.2.6-1.6 1.2 1.1c2.3.9 3.3 3.5 2.7 10" />
+      <circle cx="8" cy="6" r=".55" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
 export function SearchIcon({ size = 16, className }: IconProps) {
   return (
     <svg {...base(size)} className={className}>

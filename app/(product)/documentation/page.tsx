@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 const library = [
   { code: "W-01", title: "Systemic Macro Intelligence", body: "Structural inference, state gating, and the dynamic router.", href: "/architecture" },
-  { code: "E-01", title: "Structural Philosophy", body: "Alpha decay, causal reflexivity, and the self-compiling network.", href: "/philosophy" },
+  { code: "E-01", title: "Structural Philosophy", body: "Alpha decay, the Causal Mandate and structural adaptation.", href: "/philosophy" },
   { code: "P-01", title: "Phase 1 Validation Metrics", body: "Q1 2026 · Sharpe 2.19 · Live execution ablation study.", href: "/performance" },
   { code: "P-02", title: "Enterprise Tenancy", body: "Distributed execution, API architecture, and capital scaling.", href: "/partnerships" },
   { code: "D-01", title: "Risk Protocol & Disclosure", body: "Algorithmic latency, structural decay, and execution limits.", href: "/risk" },
@@ -21,8 +21,8 @@ export default function DocumentationPage() {
       <DocHeader title="Technical library for evaluators.">
         <p>
           The materials below are maintained for qualified quantitative evaluators and capital
-          allocators. The technical whitepaper provides deep structural insight into the
-          architecture and the live production metrics.
+          allocators. The technical whitepaper sets out the architecture and the Phase 1
+          production metrics in detail.
         </p>
       </DocHeader>
 

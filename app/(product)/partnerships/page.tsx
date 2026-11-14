@@ -12,7 +12,7 @@ const integration = [
     id: "risk-mandates",
     label: "Native Risk Mandates",
     title: "01",
-    body: "The execution node respects daily drawdown limits, exposure caps, and macroeconomic blackout windows natively. Capital protection is hard-coded into the telemetry layer.",
+    body: "The execution node applies daily drawdown limits, exposure caps and macroeconomic blackout windows natively, within the execution workflow.",
   },
   {
     id: "webhooks",
@@ -24,13 +24,13 @@ const integration = [
     id: "attribution",
     label: "Causal Attribution",
     title: "03",
-    body: "Every execution payload carries a regime tag and a structural identifier. Desks can attribute P&L back to exact macroeconomic catalysts and volatility states.",
+    body: "Every execution payload carries a regime tag and a structural identifier. Desks can attribute realized P&L to the macroeconomic catalysts and volatility states recorded at execution.",
   },
   {
     id: "venues",
     label: "Venue Independence",
     title: "04",
-    body: "Provided enterprise-grade SDKs support translation to the venues and broker APIs your desk already operates on.",
+    body: "Integration SDKs support translation to the venues and broker APIs your desk already uses.",
   },
   {
     id: "sovereignty",
@@ -51,9 +51,9 @@ export default function PartnershipsPage() {
     <>
       <DocHeader title="A parallel intelligence layer for enterprise capital.">
         <p>
-          ATRX is engineered to integrate with enterprise trading desks as a centralized
-          intelligence core. Validated telemetry reaches the firm&apos;s execution nodes through
-          their existing infrastructure. Zero replatforming. Zero migration risk.
+          ATRX integrates with enterprise trading desks as a central intelligence layer. Validated
+          telemetry reaches the firm&apos;s execution nodes through its existing infrastructure, so the
+          desk keeps its venues, broker connections and controls without replatforming.
         </p>
       </DocHeader>
 
@@ -66,7 +66,7 @@ export default function PartnershipsPage() {
           entries={[
             {
               label: "Dedicated Tenant Pipeline",
-              body: "The enterprise firm connects directly to the ATRX routing engine. ATRX provides the infrastructure, continuous model realignment, and sub-second signal delivery.",
+              body: "The enterprise firm connects directly to the ATRX routing engine. ATRX provides the infrastructure, continuous model realignment and low-latency signal delivery.",
             },
             {
               label: "Capital Allocation Partner",
@@ -93,7 +93,7 @@ export default function PartnershipsPage() {
 
       <Related
         links={[
-          { label: "Access tiers", href: "/access" },
+          { label: "Access modes", href: "/explore" },
           { label: "System architecture", href: "/architecture" },
           { label: "Risk disclosure", href: "/risk" },
         ]}

@@ -16,18 +16,31 @@
   text-wrap: balance;
 }
 
+/* Title → switcher takes the first-section title → content step; the switcher relates to
+ * the cards it controls as a control row to its content (--space-title-content). */
+.modeSwitch {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-first-section-content);
+}
+
 .modes {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   column-gap: 16px;
   row-gap: 16px;
-  margin-top: var(--space-support-action);
+  margin-top: var(--space-title-content);
+}
+
+/* Two-plan families keep the three-column card width and sit centred. */
+.modes[data-count="2"] {
+  grid-template-columns: repeat(2, calc((100% - 32px) / 3));
+  justify-content: center;
 }
 
 .mode {
-  position: relative;
   display: grid;
-  grid-row: span 6;
+  grid-row: span 5;
   grid-template-rows: subgrid;
   row-gap: 0;
   min-width: 0;
@@ -37,20 +50,10 @@
   box-shadow: inset 0 0 0 1px var(--rule);
 }
 
-.mode::after {
-  content: "";
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  width: 6px;
-  height: 6px;
-  border-top: 1px solid var(--accent-mark);
-  border-right: 1px solid var(--accent-mark);
-  pointer-events: none;
-}
-
+/* Portrait media field: the image is ≈ 50% of the card height (Upload 2
+ * proportion) in the three-column geometry; stacked cards use 4:5 for the same share. */
 .media {
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 2 / 3;
   min-width: 0;
   overflow: hidden;
   border-radius: var(--radius-inner);
@@ -102,6 +105,10 @@
   fill: var(--accent);
 }
 
+.visualEndMuted {
+  fill: var(--rule-strong);
+}
+
 .title {
   margin-top: var(--space-title-content);
   color: var(--text);
@@ -118,20 +125,11 @@
   line-height: var(--section-body-leading);
 }
 
-.terms {
-  margin-top: var(--space-paragraph);
-  color: var(--text-2);
-  font-size: var(--section-small);
-  line-height: var(--section-small-leading);
-}
-
 .highlights {
   display: grid;
   align-content: start;
   gap: 12px;
   margin-top: var(--space-title-content);
-  padding-top: var(--space-paragraph);
-  border-top: 1px solid var(--rule);
   color: var(--text);
   font-size: var(--section-small);
   line-height: var(--section-small-leading);
@@ -145,7 +143,8 @@
 
 .highlights svg {
   flex: none;
-  margin-top: 5px;
+  /* 16px Knight marker centred on the 24px text line ((24 − 16) / 2); static, no hover. */
+  margin-top: calc((var(--section-small-leading) - 16px) / 2);
   color: var(--accent);
 }
 
@@ -157,8 +156,10 @@
 
 /* ---------- comparison ---------- */
 
+/* Section-title composition (globals.css). Normal-flow spacing only: the sticky thead
+ * offset (--nav-bottom) is untouched. */
 .compareSection {
-  margin-top: var(--section-gap);
+  margin-top: var(--space-section-title);
 }
 
 .compareTitle {
@@ -171,8 +172,10 @@
   text-wrap: balance;
 }
 
+/* Section title → the workspace it introduces. Margin sits on the wrapper (normal flow),
+ * so .comparison::before stays flush with thead. */
 .comparison {
-  margin-top: var(--space-title-content);
+  margin-top: var(--space-section-content);
 }
 
 /* Structural scroll-occlusion shield: shares thead's top edge at rest (0px protrusion
@@ -252,13 +255,7 @@
     color var(--dur-fast) ease;
 }
 
-@media (hover: hover) {
-  .search:hover {
-    background: var(--surface-inset);
-    box-shadow: inset 0 0 0 1px var(--rule-strong);
-  }
-}
-
+/* Fields never react to pointer presence; only focus changes the surface. */
 .search:focus-within {
   background: var(--surface-inset);
   box-shadow:
@@ -454,10 +451,13 @@ tbody:not([hidden]) + .groupHead .groupToggle {
   width: max-content;
   max-width: min(280px, calc(100vw - 32px));
   padding: 10px 14px;
-  border: 1px solid var(--rule-strong);
-  border-radius: var(--radius-control);
-  background: var(--surface-inset);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.72);
+  /* The central navbar dropdown material (globals.css --nav-panel-*), at tooltip scale:
+     glass + blur, inset hairline edge, the panel's own shadow; the smallest ATRX radius. */
+  border-radius: var(--radius-tag);
+  background: var(--nav-panel-glass);
+  -webkit-backdrop-filter: var(--nav-panel-blur);
+  backdrop-filter: var(--nav-panel-blur);
+  box-shadow: var(--nav-panel-edge), var(--nav-panel-shadow);
   color: var(--text);
   font-size: 12.5px;
   font-weight: 400;
@@ -469,26 +469,39 @@ tbody:not([hidden]) + .groupHead .groupToggle {
   pointer-events: auto;
 }
 
+/* Pointer: same glass, blur and hairline as the body. Clipped to the half outside the body so
+ * the translucent layers never overlap into a darker seam; only its two outer edges are drawn. */
 .tooltipArrow {
   position: absolute;
   left: var(--arrow-x, 22px);
   width: 8px;
   height: 8px;
-  background: var(--surface-inset);
+  background: var(--nav-panel-glass);
+  -webkit-backdrop-filter: var(--nav-panel-blur);
+  backdrop-filter: var(--nav-panel-blur);
   transform: translateX(-50%) rotate(45deg);
   pointer-events: none;
 }
 
 .tooltip[data-side="bottom"] .tooltipArrow {
-  top: -4.5px;
-  border-top: 1px solid var(--rule-strong);
-  border-left: 1px solid var(--rule-strong);
+  top: -4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
+  clip-path: polygon(0 0, 100% 0, 0 100%);
 }
 
 .tooltip[data-side="top"] .tooltipArrow {
-  bottom: -4.5px;
-  border-right: 1px solid var(--rule-strong);
-  border-bottom: 1px solid var(--rule-strong);
+  bottom: -4px;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .tooltip,
+  .tooltipArrow {
+    background: var(--nav-panel-glass-solid);
+  }
 }
 
 .tooltipBody {
@@ -514,9 +527,36 @@ tbody:not([hidden]) + .groupHead .groupToggle {
   color: var(--accent);
 }
 
-.unavailable,
-.unspecified {
+.unavailable {
   color: var(--text-3);
+}
+
+/* "Optional" cell (user reference, 2026-11-14): a quiet outlined value chip with a lowercase
+ * qualifier beneath it, replacing the ambiguous dash. Static — no hover. */
+.optional {
+  display: inline-grid;
+  justify-items: center;
+  row-gap: 4px;
+  vertical-align: middle;
+}
+
+.optionalChip {
+  padding: 1px 8px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 450;
+  line-height: 20px;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+}
+
+.optionalNote {
+  color: var(--text-3);
+  font-size: 12.5px;
+  line-height: 16px;
+  white-space: nowrap;
 }
 
 .noMatch {
@@ -543,6 +583,9 @@ tbody:not([hidden]) + .groupHead .groupToggle {
  * column remains visible, so each O, X or dash stays attached to a named capability. */
 @container content (max-width: 800px) {
   .comparisonViewport {
+    /* Containing block for the cells' absolutely positioned .visually-hidden labels, so
+     * they stay inside this scrollport instead of widening the page (390px → 632px). */
+    position: relative;
     overflow-x: auto;
     overscroll-behavior-x: contain;
     scrollbar-color: var(--rule-strong) transparent;
@@ -595,8 +638,14 @@ tbody:not([hidden]) + .groupHead .groupToggle {
 
 /* The three-card family stays intact on laptops; small canvases gain a readable stack. */
 @container content (max-width: 800px) {
-  .modes {
+  .modes,
+  .modes[data-count="2"] {
     grid-template-columns: minmax(0, 1fr);
     max-width: 600px;
+    margin-inline: auto;
+  }
+
+  .media {
+    aspect-ratio: 4 / 5;
   }
 }

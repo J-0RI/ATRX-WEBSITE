@@ -57,7 +57,7 @@ export default function RiskPage() {
       <Related
         links={[
           { label: "Phase 1 performance", href: "/performance" },
-          { label: "Access tiers", href: "/access" },
+          { label: "Access modes", href: "/explore" },
           { label: "Contact engineering", href: "/contact" },
         ]}
       />

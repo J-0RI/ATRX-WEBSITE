@@ -194,6 +194,9 @@
   --result-pad: clamp(26px, 2.4vw, 34px);
   position: relative;
   padding: var(--result-pad) 0;
+  /* The whole shell toggles its summary (decision-20261114-search-result-shell-toggle);
+     the cursor is its only pointer cue — no hover styling. */
+  cursor: pointer;
 }
 
 .result + .result {
@@ -219,18 +222,6 @@
   line-height: 1.25;
   letter-spacing: -0.02em;
   overflow-wrap: anywhere;
-}
-
-.title a {
-  transition: color var(--dur-fast) ease;
-}
-
-.title a:hover {
-  color: var(--accent);
-}
-
-.title a:focus-visible {
-  outline-offset: 4px;
 }
 
 .excerpt {

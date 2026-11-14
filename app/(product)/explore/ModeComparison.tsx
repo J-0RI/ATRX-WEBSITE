@@ -9,7 +9,7 @@ import styles from "./explore.module.css";
 type Mode = { id: string; name: string };
 
 function cellText(cell: ComparisonCell) {
-  return cell.kind === "included" ? "Included" : cell.kind === "unavailable" ? "Unavailable" : "Not specified";
+  return cell.kind === "included" ? "Included" : cell.kind === "unavailable" ? "Unavailable" : "Optional, varies by plan";
 }
 
 function statusBadge(status: DeliveryStatus): string | null {
@@ -70,11 +70,16 @@ function Cell({ cell }: { cell: ComparisonCell }) {
       </span>
     );
   }
-  if (cell.kind === "unspecified") {
+  if (cell.kind === "optional") {
     return (
-      <span className={`${styles.indicator} ${styles.unspecified}`} title="Not specified in the mode’s published scope">
-        <span aria-hidden="true">—</span>
-        <span className="visually-hidden">Not specified in published scope</span>
+      <span className={styles.optional}>
+        <span className={styles.optionalChip} aria-hidden="true">
+          Optional
+        </span>
+        <span className={styles.optionalNote} aria-hidden="true">
+          varies by plan
+        </span>
+        <span className="visually-hidden">Optional, can be included depending on plan</span>
       </span>
     );
   }
@@ -258,8 +263,8 @@ export default function ModeComparison({ groups, modes }: { groups: ComparisonGr
       >
         <table id={`${uid}-table`} className={styles.table}>
           <caption className="visually-hidden">
-            Published ATRX access mode capability matrix. O means included, X means unavailable, and a dash means not
-            specified in published scope.
+            Published ATRX access mode capability matrix. O means included, X means unavailable, and Optional means
+            the capability can be included depending on the plan.
           </caption>
           <colgroup>
             <col className={styles.labelCol} />

@@ -23,7 +23,7 @@ const pillars = [
     id: "projection",
     label: "03 · Projection",
     title: "Inference Routing",
-    body: "A dynamic routing layer that evaluates structural viability and determines optimal capital deployment.",
+    body: "A dynamic routing layer that evaluates structural viability and informs capital deployment.",
   },
   {
     id: "conditioning",
@@ -82,8 +82,8 @@ export default function ArchitecturePage() {
         <Prose>
           <p>
             Subscribers map a local endpoint that receives a schema-validated JSON payload from the
-            ATRX intelligence cloud. Execution directives are sub-second, replay-protected, and
-            require zero user credentials to leave the tenant environment.
+            ATRX intelligence cloud. Execution directives are low-latency and replay-protected, and
+            user credentials never leave the tenant environment.
           </p>
         </Prose>
       </DocSection>
@@ -91,10 +91,9 @@ export default function ArchitecturePage() {
       <DocSection id="footprint" title="Engineering footprint">
         <Prose>
           <p>
-            The architecture is built end-to-end using natively compiled runtime environments and
-            highly optimized compute frameworks. From the core computational graph to compiled
-            runtime telemetry, the entire stack is developed in-house. It is driven by our
-            internally developed and engineered model, never an AI slogan.
+            The architecture runs on natively compiled runtime environments and optimized compute
+            frameworks. The full stack, from the core computational graph to runtime telemetry, is
+            developed in-house and driven by ATRX&apos;s own internally developed model.
           </p>
           <p>
             Currently in active R&amp;D: we are advancing our systemic architecture to extend beyond

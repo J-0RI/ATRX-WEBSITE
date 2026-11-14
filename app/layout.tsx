@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s | ATRX",
   },
   description:
-    "ATRX is autonomous quantitative infrastructure built to combat alpha decay through systemic macro intelligence, disciplined risk controls, and execution precision.",
+    "ATRX provides systemic macro intelligence, regime-aware risk controls and auditable execution delivery for systematic allocators and institutional trading desks.",
   applicationName: "ATRX",
   authors: [{ name: "Haldane Technologies Inc" }],
 };

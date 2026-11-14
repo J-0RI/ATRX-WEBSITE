@@ -29,6 +29,6 @@ export default function RiskControlPage() {
     <DocSection title="Controls do not remove trading risk">
       <Prose><p>ATRX does not custody capital or guarantee capital preservation. Model misspecification, unexpected macroeconomic shocks, feed latency and execution friction remain possible. The tenant retains responsibility for its brokerage relationship and authority over API keys and capital sizing.</p><p>Read the <Link href="/risk">risk disclosure</Link> with the deployment material. Risk vetoes describe system behavior; they are not a guarantee against loss.</p></Prose>
     </DocSection>
-    <Related links={[{ label: "Native Risk Mandates", href: "/control/native-risk-mandates" }, { label: "Audit-Grade Ledgers", href: "/delivery/audit-grade-ledgers" }, { label: "Access Tiers", href: "/access" }]} />
+    <Related links={[{ label: "Native Risk Mandates", href: "/control/native-risk-mandates" }, { label: "Audit-Grade Ledgers", href: "/delivery/audit-grade-ledgers" }, { label: "Access modes", href: "/explore" }]} />
   </>;
 }

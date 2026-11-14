@@ -52,8 +52,9 @@
 }
 
 /* ---------- sections ---------- */
+/* Section-title composition shared site-wide (globals.css). */
 .section {
-  margin-top: var(--section-gap);
+  margin-top: var(--space-section-title);
 }
 
 .sectionTitle {
@@ -62,7 +63,7 @@
   line-height: 1.2;
   letter-spacing: -0.025em;
   color: #ffffff;
-  margin-bottom: var(--space-title-content);
+  margin-bottom: var(--space-section-content);
 }
 
 /* A title with a one-line lead: the lead takes the content gap instead. */
@@ -71,7 +72,7 @@
 }
 
 .sectionLead {
-  margin-bottom: var(--space-title-content);
+  margin-bottom: var(--space-section-content);
   font-size: var(--section-lead);
   line-height: var(--leading-section-support);
   color: var(--text-2);
@@ -84,7 +85,7 @@
    browser-synthesised by request; the weight is the font's own Bold instance. */
 .sectionStatement {
   margin-inline: auto;
-  margin-bottom: var(--space-content-group);
+  margin-bottom: var(--space-section-content);
   font-weight: 700;
   font-style: italic;
   text-align: center;
@@ -125,8 +126,8 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-auto-rows: auto minmax(var(--method-space), 1fr) auto auto;
-  /* Premise → framework: an internal group step, not a section boundary. */
-  margin-top: var(--space-content-group);
+  /* Section statement → framework: the shared section-title → content step. */
+  margin-top: var(--space-section-content);
 }
 
 .methodStage {
@@ -203,7 +204,7 @@
 .conclusion {
   /* One section boundary before and after the editorial chapter. Internal relationships
      are carried by its own opening → argument composition, not accumulated CTA padding. */
-  margin-top: var(--space-content-group);
+  margin-top: var(--space-section-title);
   display: grid;
   row-gap: var(--space-content-group);
   padding-bottom: var(--space-title-content);
@@ -241,7 +242,7 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-auto-rows: auto;
-  margin-top: var(--space-content-group);
+  margin-top: var(--space-section-content);
 }
 
 /* Each column is a three-row subgrid (icon · title · text), so titles of different lengths

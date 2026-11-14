@@ -212,7 +212,7 @@
         "href": "/"
       },
       {
-        "text": "I've organized the investigation around the principal transmission channels and the evidence needed to test them.",
+        "text": "The investigation is organized around the principal transmission channels and the evidence needed to test each one.",
         "href": "/"
       },
       {
@@ -502,136 +502,184 @@
     ]
   },
   {
-    "href": "/access",
-    "title": "Access Tiers",
+    "href": "/faq",
+    "title": "Frequently Asked Questions",
     "category": "Product",
-    "summary": "ATRX is operating in a closed deployment phase. Three tiers, granted by application.",
+    "summary": "Answers on ATRX access and eligibility, market intelligence and coverage, risk and execution, deployment, governance and commercial terms.",
     "headings": [
       {
-        "text": "Compute constrained. Qualified allocators only.",
-        "href": "/access"
+        "text": "Access and eligibility",
+        "href": "/faq#access-heading"
       },
       {
-        "text": "Compare access tiers",
-        "href": "/access"
+        "text": "Who is ATRX designed for?",
+        "href": "/faq#audience"
       },
       {
-        "text": "Prosumer Node",
-        "href": "/access"
+        "text": "How is access to ATRX granted?",
+        "href": "/faq#access-process"
       },
       {
-        "text": "Capital Desk",
-        "href": "/access"
+        "text": "How do the access modes differ?",
+        "href": "/faq#modes"
       },
       {
-        "text": "Institutional",
-        "href": "/access"
+        "text": "How do I select a plan?",
+        "href": "/faq#plans"
       },
       {
-        "text": "Related",
-        "href": "/access"
+        "text": "Research and market intelligence",
+        "href": "/faq#research-heading"
+      },
+      {
+        "text": "What market intelligence does ATRX provide?",
+        "href": "/faq#intelligence"
+      },
+      {
+        "text": "Which markets and instruments are covered?",
+        "href": "/faq#coverage"
+      },
+      {
+        "text": "How are research outputs evaluated and documented?",
+        "href": "/faq#evaluation"
+      },
+      {
+        "text": "Risk and execution",
+        "href": "/faq#execution-heading"
+      },
+      {
+        "text": "Does ATRX execute trades or control capital?",
+        "href": "/faq#capital"
+      },
+      {
+        "text": "How does ATRX integrate with existing trading systems?",
+        "href": "/faq#integration"
+      },
+      {
+        "text": "What risk controls apply to ATRX directives?",
+        "href": "/faq#risk-controls"
+      },
+      {
+        "text": "Deployment and institutional requirements",
+        "href": "/faq#deployment-heading"
+      },
+      {
+        "text": "What deployment options are available?",
+        "href": "/faq#deployment-options"
+      },
+      {
+        "text": "Does ATRX support dedicated institutional environments?",
+        "href": "/faq#dedicated"
+      },
+      {
+        "text": "How are permissions, governance and auditability managed?",
+        "href": "/faq#governance"
+      },
+      {
+        "text": "Commercial and support",
+        "href": "/faq#commercial-heading"
+      },
+      {
+        "text": "How is ATRX priced?",
+        "href": "/faq#pricing"
+      },
+      {
+        "text": "How do we request institutional access?",
+        "href": "/faq#institutional-request"
+      },
+      {
+        "text": "Where can I find technical documentation?",
+        "href": "/faq#documentation"
+      },
+      {
+        "text": "How can I contact the ATRX team?",
+        "href": "/faq#contact"
       }
     ],
     "passages": [
       {
-        "text": "ATRX is operating in a closed deployment phase. Platform access is granted exclusively to qualified enterprise desks and quantitative prosumers.",
-        "href": "/access"
+        "text": "Access and eligibility",
+        "href": "/faq"
       },
       {
-        "text": "The core pipeline operates under a strict compute and latency budget. Access is granted by application to ensure infrastructure bandwidth and execution quality remain uncompromised. Pricing is provided upon technical qualification.",
-        "href": "/access"
+        "text": "Research and market intelligence",
+        "href": "/faq"
       },
       {
-        "text": "Published deployment scope. Instrument activation status is listed separately in Market Coverage.",
-        "href": "/access"
+        "text": "Deployment and institutional requirements",
+        "href": "/faq"
       },
       {
-        "text": "Configuration · Prosumer Node Capital Desk Institutional",
-        "href": "/access"
+        "text": "Commercial and support",
+        "href": "/faq"
       },
       {
-        "text": "Deployment · Single-tenant execution pipeline · Multi-node cohort allocation · Dedicated inference cluster · AWS/GCP",
-        "href": "/access"
+        "text": "ATRX serves systematic allocators, hedge fund and asset management teams, institutional trading desks and qualified quantitative prosumers. Teams use it to evaluate market regimes and macroeconomic transmission within their own risk mandates. See Use cases.",
+        "href": "/faq#audience"
       },
       {
-        "text": "Intelligence scope · Core FX & Metals vectors · Expanded Indices & Energy topology · Bespoke structural topology modeling",
-        "href": "/access"
+        "text": "Access is granted by application during ATRX’s closed deployment phase. Engineering reviews each application against compute capacity and infrastructure alignment, and pricing follows technical qualification. Enterprise engagements complete an architecture sync and paper-trading parallel run before live capital. Submit an application.",
+        "href": "/faq#access-process"
       },
       {
-        "text": "Published distinction · API-level systemic guardrails · Custom regime gating & drawdown parameters · Whitepapers, ablation studies & governance telemetry",
-        "href": "/access"
+        "text": "Prosumer Node serves qualified individual market participants. Capital Desk supports institutional trading teams requiring broader integration and allocation capabilities. Institutional is designed for organizations requiring dedicated infrastructure and governance. See Explore for the full comparison.",
+        "href": "/faq#modes"
       },
       {
-        "text": "Integration · Standard JSON webhook · Direct low-latency SDKs; priority latency routing · Direct engineering syncs",
-        "href": "/access"
+        "text": "Each access mode offers two or three plans on Explore. Select a mode to review its plans and apply from the relevant card; plan allocations are provisional and confirmed during technical qualification.",
+        "href": "/faq#plans"
       },
       {
-        "text": "Commercial basis · Monthly compute fee Base + Capacity Negotiated terms",
-        "href": "/access"
+        "text": "ATRX provides market regime classification, transition probabilities, structural break detection, macro event impact analysis and causal factor attribution, with cross-asset transmission analysis in Capital Desk and Institutional. Every output is grounded in economic transmission mechanisms rather than correlation alone. See Systemic Macro Intelligence.",
+        "href": "/faq#intelligence"
       },
       {
-        "text": "Tier scope is not a statement that every instrument is live. Market Coverage distinguishes Phase 1 live-traded FX and Metals from preparing-v4.0 and roadmap vectors.",
-        "href": "/access"
+        "text": "Developed FX and Precious Metals were live-traded during Phase 1 validation. Broader currency baskets, equity index topologies and energy vectors are in preparation for v4.0 activation without a published release date, while single-name equities, sovereign rates and volatility remain planned. See Market Coverage.",
+        "href": "/faq#coverage"
       },
       {
-        "text": "By application · Monthly compute fee",
-        "href": "/access"
+        "text": "Outputs are evaluated post-trade across desk-defined review windows, grouping realized results by regime tag and structural identifier alongside decisions halted by risk controls. Methodology and out-of-sample ablation studies are documented in the whitepaper. See Phase 1 performance.",
+        "href": "/faq#evaluation"
       },
       {
-        "text": "Access to the core FX and Metals topological vectors",
-        "href": "/access"
+        "text": "No—across the standard access modes, ATRX is non-custodial and delivers directives to your endpoint while you retain control over API keys, sizing, brokerage execution and counterparty risk. A separate Capital Allocation Partner mandate under negotiated limits is available through Enterprise tenancy.",
+        "href": "/faq#capital"
       },
       {
-        "text": "Systemic guardrails enforced at the API level",
-        "href": "/access"
+        "text": "ATRX delivers signed, schema-validated JSON payloads via webhooks and REST API across all modes, with streaming delivery and low-latency execution SDKs in Capital Desk and Institutional. OMS/EMS connectivity is in development and FIX protocol support is planned. See Quickstart.",
+        "href": "/faq#integration"
       },
       {
-        "text": "Standard JSON webhook delivery",
-        "href": "/access"
+        "text": "Every directive passes through regime gating and the Control protocol, which vetoes exposure breaches and known failure vectors before tenant-side drawdown limits, exposure caps and macro blackout windows apply. These controls govern system behavior and are not a guarantee against loss. See Risk & Control.",
+        "href": "/faq#risk-controls"
       },
       {
-        "text": "Tier II · Enterprise",
-        "href": "/access"
+        "text": "ATRX deploys as a single-tenant pipeline (Prosumer Node), a multi-node cohort architecture (Capital Desk) or a dedicated AWS or GCP inference cluster (Institutional). Credentials remain inside the tenant environment, and enterprise deployments validate latency and slippage in paper trading first.",
+        "href": "/faq#deployment-options"
       },
       {
-        "text": "By application · Base + Capacity",
-        "href": "/access"
+        "text": "Yes. Institutional provides a dedicated AWS or GCP inference cluster with custom structural modeling and direct engineering support. Private cloud or network connectivity, regional placement and contractual service levels are scoped during technical qualification. See Institutional.",
+        "href": "/faq#dedicated"
       },
       {
-        "text": "Multi-node deployment for cohort allocation",
-        "href": "/access"
+        "text": "All modes enforce multi-factor authentication, tenant permissions, IP allowlisting, encryption and credential rotation; role-based access control is in development and single sign-on is planned. Decision logs and risk vetoes export in machine-readable formats, with audit-grade telemetry in Institutional (describing record completeness, not regulatory certification). See Audit-Grade Ledgers.",
+        "href": "/faq#governance"
       },
       {
-        "text": "Expanded instrument topology (Indices, Energy)",
-        "href": "/access"
+        "text": "Commercial terms are shared after technical qualification: a monthly compute fee for Prosumer Node, base plus capacity for Capital Desk, and custom terms for Institutional. Admission remains subject to available compute capacity.",
+        "href": "/faq#pricing"
       },
       {
-        "text": "Custom regime-gating and drawdown parameterization",
-        "href": "/access"
+        "text": "Submit an Institutional application outlining your deployment scope, infrastructure environment, integration requirements and governance objectives. Qualified engagements proceed directly to an engineering architecture review.",
+        "href": "/faq#institutional-request"
       },
       {
-        "text": "Direct low-latency integration SDKs",
-        "href": "/access"
+        "text": "Visit Documentation for system architecture, methodology, Phase 1 validation metrics and risk disclosures, or Quickstart for payload integration. Full whitepaper and ablation study PDFs are available via documentation request.",
+        "href": "/faq#documentation"
       },
       {
-        "text": "By application · Negotiated terms",
-        "href": "/access"
-      },
-      {
-        "text": "Dedicated inference cluster (AWS/GCP)",
-        "href": "/access"
-      },
-      {
-        "text": "Full access to whitepapers and ablation studies",
-        "href": "/access"
-      },
-      {
-        "text": "Audit-grade telemetry logs for governance",
-        "href": "/access"
-      },
-      {
-        "text": "Applications are evaluated against available compute capacity and infrastructural alignment. ATRX reserves the right to decline access requests to preserve system integrity.",
-        "href": "/access"
+        "text": "Submit access or documentation inquiries through the contact page, or email contact@haldane.xyz for direct technical questions.",
+        "href": "/faq#contact"
       }
     ]
   },
@@ -696,7 +744,7 @@
         "href": "/quickstart"
       },
       {
-        "text": "Qualify the deployment. Compare the access tiers and describe your execution environment and constraints in the application. ATRX operates in a closed deployment phase; pricing follows technical qualification.",
+        "text": "Qualify the deployment. Compare the access modes and describe your execution environment and constraints in the application. ATRX operates in a closed deployment phase; pricing follows technical qualification.",
         "href": "/quickstart"
       },
       {
@@ -1070,14 +1118,6 @@
     "summary": "The three ATRX access modes side by side: who each serves, how it is deployed, and a searchable comparison of published scope.",
     "headings": [
       {
-        "text": "Prosumer Node",
-        "href": "/explore#modes"
-      },
-      {
-        "text": "Capital Desk",
-        "href": "/explore#modes"
-      },
-      {
         "text": "Compare features across modes",
         "href": "/explore#compare-heading"
       },
@@ -1119,66 +1159,6 @@
       }
     ],
     "passages": [
-      {
-        "text": "A qualified quantitative prosumer running ATRX inside a single execution environment.",
-        "href": "/explore#modes"
-      },
-      {
-        "text": "By application · Monthly compute fee",
-        "href": "/explore#modes"
-      },
-      {
-        "text": "Single-tenant execution pipeline",
-        "href": "/explore#modes"
-      },
-      {
-        "text": "Core FX and Metals vectors",
-        "href": "/explore#modes"
-      },
-      {
-        "text": "Standard JSON webhook delivery",
-        "href": "/explore#modes"
-      },
-      {
-        "text": "Enterprise desks allocating across cohorts through their existing execution infrastructure.",
-        "href": "/explore#modes"
-      },
-      {
-        "text": "By application · Base + Capacity",
-        "href": "/explore#modes"
-      },
-      {
-        "text": "Expanded topology, including Indices and Energy",
-        "href": "/explore#modes"
-      },
-      {
-        "text": "Direct low-latency integration SDKs",
-        "href": "/explore#modes"
-      },
-      {
-        "text": "Priority latency routing",
-        "href": "/explore#modes"
-      },
-      {
-        "text": "Institutions that need dedicated infrastructure, research access and governance telemetry.",
-        "href": "/explore#modes"
-      },
-      {
-        "text": "By application · Negotiated terms",
-        "href": "/explore#modes"
-      },
-      {
-        "text": "Dedicated inference cluster on AWS or GCP",
-        "href": "/explore#modes"
-      },
-      {
-        "text": "Whitepapers and ablation studies",
-        "href": "/explore#modes"
-      },
-      {
-        "text": "Audit-grade telemetry logs",
-        "href": "/explore#modes"
-      },
       {
         "text": "Systemic macro intelligence",
         "href": "/explore#compare"
@@ -1496,11 +1476,19 @@
         "href": "/explore#compare"
       },
       {
-        "text": "Scope describes each mode’s published configuration. It does not confirm instrument activation, capacity or a delivery-time guarantee; Market Coverage records instrument status, and applications are evaluated against available compute capacity.",
+        "text": "Scope describes each mode’s published configuration. It does not confirm instrument activation, capacity or a delivery-time guarantee; Market Coverage records instrument status, and applications are evaluated against available compute capacity. Plan allocations within each mode are provisional and are confirmed during application.",
         "href": "/explore"
       },
       {
-        "text": "Published ATRX access mode capability matrix. O means included, X means unavailable, and a dash means not specified in published scope.",
+        "text": "Frequently Asked Questions",
+        "href": "/explore"
+      },
+      {
+        "text": "Optional, can be included depending on plan",
+        "href": "/explore"
+      },
+      {
+        "text": "Published ATRX access mode capability matrix. O means included, X means unavailable, and Optional means the capability can be included depending on the plan.",
         "href": "/explore"
       },
       {
@@ -1716,7 +1704,7 @@
         "href": "/capabilities/market-coverage"
       },
       {
-        "text": "Compare access tiers",
+        "text": "Compare access modes",
         "href": "/capabilities/market-coverage"
       }
     ]
@@ -2386,7 +2374,7 @@
         "href": "/documentation"
       },
       {
-        "text": "Structural Philosophy. Alpha decay, causal reflexivity, and the self-compiling network.",
+        "text": "Structural Philosophy. Alpha decay, the Causal Mandate and structural adaptation.",
         "href": "/documentation"
       },
       {
@@ -2402,7 +2390,7 @@
         "href": "/documentation"
       },
       {
-        "text": "The materials below are maintained for qualified quantitative evaluators and capital allocators. The technical whitepaper provides deep structural insight into the architecture and the live production metrics.",
+        "text": "The materials below are maintained for qualified quantitative evaluators and capital allocators. The technical whitepaper sets out the architecture and the Phase 1 production metrics in detail.",
         "href": "/documentation"
       },
       {
@@ -2410,7 +2398,7 @@
         "href": "/documentation#library"
       },
       {
-        "text": "E-01. Structural Philosophy Alpha decay, causal reflexivity, and the self-compiling network. · Web",
+        "text": "E-01. Structural Philosophy Alpha decay, the Causal Mandate and structural adaptation. · Web",
         "href": "/documentation#library"
       },
       {
@@ -2492,7 +2480,7 @@
     ],
     "passages": [
       {
-        "text": "Forex, metals, indices, and commodities today. Equities, fixed income, and decentralized liquidity tomorrow. The same core architecture deploys everywhere.",
+        "text": "FX and Metals are live-traded today; indices and energy are preparing for v4.0. Single-name equities, sovereign fixed income and cross-asset volatility are on the topological roadmap, each an extension of the same core architecture.",
         "href": "/instruments"
       },
       {
@@ -2540,7 +2528,7 @@
         "href": "/instruments#roadmap"
       },
       {
-        "text": "Access tiers and instrument coverage",
+        "text": "Access modes and instrument coverage",
         "href": "/instruments"
       }
     ]
@@ -2549,14 +2537,14 @@
     "href": "/philosophy",
     "title": "Structural Philosophy",
     "category": "Documentation",
-    "summary": "Alpha decay, causal reflexivity, and the self-compiling network.",
+    "summary": "Why ATRX requires an economic transmission mechanism rather than historical correlation, and how it responds to alpha decay.",
     "headings": [
       {
-        "text": "ATRX is a self-compiling organism.",
+        "text": "Market structure, not historical correlation.",
         "href": "/philosophy"
       },
       {
-        "text": "A living, self-correcting network",
+        "text": "Learning from recorded failures",
         "href": "/philosophy#self-correcting"
       },
       {
@@ -2564,11 +2552,11 @@
         "href": "/philosophy#causal-mandate"
       },
       {
-        "text": "The fight against alpha decay",
+        "text": "Responding to alpha decay",
         "href": "/philosophy#alpha-decay"
       },
       {
-        "text": "Innovation as structural physics",
+        "text": "Accountable model design",
         "href": "/philosophy#structural-physics"
       },
       {
@@ -2582,31 +2570,31 @@
     ],
     "passages": [
       {
-        "text": "ATRX exists for a reason that is simple to state and brutally difficult to execute. Institutional-grade quantitative trading has historically been monopolized by funds with billions in infrastructure capital. The core thesis of ATRX is that the exact same mathematical rigor, causal reasoning, and low-latency infrastructure can be completely decentralized. Not diluted. Decentralized.",
+        "text": "Rigorous quantitative research and execution infrastructure has largely been available only to firms able to fund it internally. ATRX is built on the premise that the same causal methodology, risk discipline and low-latency delivery can be provided to qualified allocators and desks as shared infrastructure, without lowering the standard.",
         "href": "/philosophy"
       },
       {
-        "text": "That is the definitive purpose of this engine. ATRX delivers high-frequency causal infrastructure to systematic allocators, professional nodes, and enterprise desks. What was once locked behind closed corporate vaults is now delivered seamlessly via cloud compute and API distribution.",
+        "text": "ATRX delivers causal market intelligence and execution infrastructure to systematic allocators, independent quantitative traders and enterprise desks. It reaches them through cloud compute and API distribution, inside the research, risk and execution environments they already operate.",
         "href": "/philosophy"
       },
       {
-        "text": "ATRX is not a static algorithmic script. It behaves as a living organism in a high-noise environment. The platform breathes through closed-loop telemetry. Execution failures are not ignored; they are explicitly logged into a structural ledger. The decision stack metabolizes these failures, ensuring the system can never repeat a contextual mistake. It is an architecture that structurally immunizes itself against market decay.",
+        "text": "ATRX is designed to adapt as the markets it models change. Closed-loop telemetry records each execution outcome, and localized failures are logged to a structural ledger that informs the decision stack. When the current market state matches a known failure vector, the Control protocol enforces a hard stop. The objective is to reduce repeated contextual errors as market structure shifts, not to claim immunity from them.",
         "href": "/philosophy#self-correcting"
       },
       {
-        "text": "The platform operates on an unyielding principle: correlation is a trap. Standard models fail during regime shifts because they trade historical co-movement. ATRX enforces a Causal Transmission Architecture. Every execution must be mapped to a physical economic transmission mechanism. No strategy, however compelling its historical backtest, is permitted to execute if the underlying causal baseline is broken.",
+        "text": "ATRX treats historical correlation as insufficient evidence. Models that rely on co-movement tend to fail at regime shifts, when the relationships they were fitted to break down. Under the Causal Transmission Architecture, every execution must be mapped to an economic transmission mechanism. A strategy does not proceed to execution if its causal baseline is broken, however strong its historical backtest.",
         "href": "/philosophy#causal-mandate"
       },
       {
-        "text": "Alpha is highly radioactive. The moment an edge is discovered, it begins to decay. Legacy systems combat this by throwing analysts at the problem. ATRX combats this via autonomous structural adaptation. Our perception models dynamically map new causal chains, and our dynamic routing layer reallocates capital on the fly.",
+        "text": "An edge begins to decay once it is identified and traded. Many firms respond by adding research capacity. ATRX responds through structural adaptation: perception models map new causal chains as market structure changes, and the inference routing layer reassesses capital deployment as those structures shift.",
         "href": "/philosophy#alpha-decay"
       },
       {
-        "text": "The next frontier of quantitative finance will be defined by systems that treat AI as a deterministic computational graph, not a chatbot. ATRX is built to this exact standard. The synthesis topologies and regime gates are engineered for maximum auditability and mathematical accountability.",
+        "text": "ATRX models are built as a deterministic computational graph whose decisions can be traced and examined, rather than as an opaque predictive system. Synthesis topologies and regime gates are designed for auditability: decision logs, state classifications and risk veto events are recorded for review.",
         "href": "/philosophy#structural-physics"
       },
       {
-        "text": "ATRX exists to prove that world-class quantitative infrastructure can operate outside the traditional fund complex. That novelty, extreme rigor, and decentralized access can occupy the same architecture. Designed to dismantle the access gap. Aimed directly at the future of systematic capital.",
+        "text": "ATRX is intended to show that institutional-standard quantitative infrastructure can operate outside the traditional fund structure, and that broader access need not come at the expense of methodological rigor or risk discipline.",
         "href": "/philosophy#why"
       }
     ]
@@ -2680,7 +2668,7 @@
         "href": "/architecture#synthesis"
       },
       {
-        "text": "Inference Routing. A dynamic routing layer that evaluates structural viability and determines optimal capital deployment.",
+        "text": "Inference Routing. A dynamic routing layer that evaluates structural viability and informs capital deployment.",
         "href": "/architecture#projection"
       },
       {
@@ -2712,11 +2700,11 @@
         "href": "/architecture#pipeline"
       },
       {
-        "text": "Subscribers map a local endpoint that receives a schema-validated JSON payload from the ATRX intelligence cloud. Execution directives are sub-second, replay-protected, and require zero user credentials to leave the tenant environment.",
+        "text": "Subscribers map a local endpoint that receives a schema-validated JSON payload from the ATRX intelligence cloud. Execution directives are low-latency and replay-protected, and user credentials never leave the tenant environment.",
         "href": "/architecture#transport"
       },
       {
-        "text": "The architecture is built end-to-end using natively compiled runtime environments and highly optimized compute frameworks. From the core computational graph to compiled runtime telemetry, the entire stack is developed in-house. It is driven by our internally developed and engineered model, never an AI slogan.",
+        "text": "The architecture runs on natively compiled runtime environments and optimized compute frameworks. The full stack, from the core computational graph to runtime telemetry, is developed in-house and driven by ATRX's own internally developed model.",
         "href": "/architecture#footprint"
       },
       {
@@ -3000,7 +2988,7 @@
     ],
     "passages": [
       {
-        "text": "01. The execution node respects daily drawdown limits, exposure caps, and macroeconomic blackout windows natively. Capital protection is hard-coded into the telemetry layer.",
+        "text": "01. The execution node applies daily drawdown limits, exposure caps and macroeconomic blackout windows natively, within the execution workflow.",
         "href": "/partnerships#risk-mandates"
       },
       {
@@ -3008,11 +2996,11 @@
         "href": "/partnerships#webhooks"
       },
       {
-        "text": "03. Every execution payload carries a regime tag and a structural identifier. Desks can attribute P&L back to exact macroeconomic catalysts and volatility states.",
+        "text": "03. Every execution payload carries a regime tag and a structural identifier. Desks can attribute realized P&L to the macroeconomic catalysts and volatility states recorded at execution.",
         "href": "/partnerships#attribution"
       },
       {
-        "text": "04. Provided enterprise-grade SDKs support translation to the venues and broker APIs your desk already operates on.",
+        "text": "04. Integration SDKs support translation to the venues and broker APIs your desk already uses.",
         "href": "/partnerships#venues"
       },
       {
@@ -3024,11 +3012,11 @@
         "href": "/partnerships#ledgers"
       },
       {
-        "text": "ATRX is engineered to integrate with enterprise trading desks as a centralized intelligence core. Validated telemetry reaches the firm's execution nodes through their existing infrastructure. Zero replatforming. Zero migration risk.",
+        "text": "ATRX integrates with enterprise trading desks as a central intelligence layer. Validated telemetry reaches the firm's execution nodes through its existing infrastructure, so the desk keeps its venues, broker connections and controls without replatforming.",
         "href": "/partnerships"
       },
       {
-        "text": "Dedicated Tenant Pipeline. The enterprise firm connects directly to the ATRX routing engine. ATRX provides the infrastructure, continuous model realignment, and sub-second signal delivery.",
+        "text": "Dedicated Tenant Pipeline. The enterprise firm connects directly to the ATRX routing engine. ATRX provides the infrastructure, continuous model realignment and low-latency signal delivery.",
         "href": "/partnerships#engagement"
       },
       {
@@ -3066,7 +3054,7 @@
     ],
     "passages": [
       {
-        "text": "The metrics below validate the overarching systemic architecture during its live production deployment in Q1 2026.",
+        "text": "The metrics below record the system's live production deployment during the Q1 2026 validation window.",
         "href": "/performance"
       },
       {
@@ -3148,7 +3136,11 @@
         "href": "/contact"
       },
       {
-        "text": "Compare access tiers first. Pipeline scope, instrument topology and commercial model for each tier.",
+        "text": "Compare access modes first. Plans, pipeline scope and the full capability comparison for each mode.",
+        "href": "/contact"
+      },
+      {
+        "text": "Explore access modes",
         "href": "/contact"
       },
       {

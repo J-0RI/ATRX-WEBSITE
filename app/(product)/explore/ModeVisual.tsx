@@ -1,54 +1,84 @@
-import type { ModeId } from "@/content/tiers";
+import type { PlanId } from "@/content/tiers";
 import styles from "./explore.module.css";
 
-const descriptions: Record<ModeId, string> = {
-  "prosumer-node": "One isolated execution environment receiving market vectors and sending one controlled output.",
-  "capital-desk": "Multiple execution nodes coordinated through one allocation path to the desk.",
-  institutional: "A dedicated system boundary containing inference, research and governance records.",
+const descriptions: Record<PlanId, string> = {
+  standard: "One isolated environment with its market inputs highlighted: the plan studies incoming state before any output.",
+  "api-access": "One isolated environment with its internal rule set highlighted: inputs are processed into configured signals.",
+  "execution-access": "One isolated environment with its controlled output highlighted: directives leave for a single execution venue.",
+  "single-desk": "One execution node connected to the desk through a single allocation path.",
+  "multi-desk": "Three execution nodes coordinated through one allocation path to the desk.",
+  "custom-routing": "Three execution nodes with every connection to the desk path highlighted for custom routing.",
+  "dedicated-deployment": "A dedicated system boundary containing inference, research and governance records.",
+  "multi-entity-deployment": "Two governed boundaries joined by one coordinating oversight path.",
 };
 
-/** Compact architecture studies, drawn from each mode's published deployment model. */
-export default function ModeVisual({ mode }: { mode: ModeId }) {
+/**
+ * Compact architecture studies from each mode's published deployment model, composed for
+ * the card's portrait 2:3 media field (vertical flow: inputs above, output below). Plans
+ * within a mode share one drawing and differ only in which part carries the accent.
+ */
+export default function ModeVisual({ plan }: { plan: PlanId }) {
+  const accent = (on: boolean) => (on ? styles.visualOutput : styles.visualRule);
+  const end = (on: boolean) => (on ? styles.visualEnd : styles.visualEndMuted);
+
   return (
-    <svg viewBox="0 0 420 300" role="img" aria-label={descriptions[mode]} preserveAspectRatio="xMidYMid meet">
-      {mode === "prosumer-node" && (
+    <svg viewBox="0 0 300 450" role="img" aria-label={descriptions[plan]} preserveAspectRatio="xMidYMid meet">
+      {(plan === "standard" || plan === "api-access" || plan === "execution-access") && (
         <>
-          <path d="M38 104h75l24 32m-99 60h75l24-32" className={styles.visualRule} />
-          <circle cx="38" cy="104" r="3" className={styles.visualPoint} />
-          <circle cx="38" cy="196" r="3" className={styles.visualPoint} />
-          <rect x="137" y="57" width="146" height="186" className={styles.visualModule} />
-          <rect x="162" y="82" width="96" height="136" className={styles.visualInner} />
-          <path d="M184 113h52m-52 18h52m-52 18h36m-36 37h52" className={styles.visualDetail} />
-          <path d="M283 150h93" className={styles.visualOutput} />
-          <rect x="373" y="146" width="8" height="8" className={styles.visualEnd} />
+          <path d="M108 42v52l27 30M192 42v52l-27 30" className={accent(plan === "standard")} />
+          <circle cx="108" cy="42" r="3" className={end(plan === "standard")} />
+          <circle cx="192" cy="42" r="3" className={end(plan === "standard")} />
+          <rect x="56" y="124" width="188" height="212" className={styles.visualModule} />
+          <rect x="84" y="152" width="132" height="156" className={plan === "api-access" ? styles.visualOutput : styles.visualInner} />
+          <path d="M108 186h84m-84 22h84m-84 22h54m-54 44h84" className={styles.visualDetail} />
+          <path d="M150 336v68" className={accent(plan === "execution-access")} />
+          <rect x="146" y="404" width="8" height="8" className={end(plan === "execution-access")} />
         </>
       )}
-      {mode === "capital-desk" && (
+      {(plan === "single-desk" || plan === "multi-desk" || plan === "custom-routing") && (
         <>
-          {[46, 154, 262].map((x) => (
-            <g key={x}>
-              <rect x={x} y="70" width="74" height="125" className={styles.visualModule} />
-              <path d={`M${x + 18} 99h38m-38 20h38m-38 20h25`} className={styles.visualDetail} />
-              <path d={`M${x + 37} 195v38`} className={styles.visualRule} />
-            </g>
-          ))}
-          <path d="M83 233h286" className={styles.visualOutput} />
-          <rect x="369" y="229" width="8" height="8" className={styles.visualEnd} />
-        </>
-      )}
-      {mode === "institutional" && (
-        <>
-          <rect x="43" y="40" width="334" height="220" className={styles.visualBoundary} />
-          <path d="M43 65V40h25m284 0h25v25" className={styles.visualOutput} />
-          {[78, 131, 184].map((y) => (
+          {(plan === "single-desk" ? [168] : [48, 168, 288]).map((y) => (
             <g key={y}>
-              <rect x="91" y={y} width="238" height="39" className={styles.visualModule} />
-              <path d={`M111 ${y + 13}h77m-77 13h44m103-13h51m-51 13h32`} className={styles.visualDetail} />
+              <rect x="44" y={y} width="160" height="96" className={styles.visualModule} />
+              <path d={`M68 ${y + 30}h82m-82 18h82m-82 18h52`} className={styles.visualDetail} />
+              <path d={`M204 ${y + 48}h46`} className={accent(plan === "custom-routing")} />
             </g>
           ))}
-          <path d="M72 97h19m-19 53h19m-19 53h19M329 97h19m-19 53h19m-19 53h19M72 97v106m276-106v106" className={styles.visualRule} />
-          <path d="M210 223v20h138" className={styles.visualOutput} />
-          <rect x="344" y="239" width="8" height="8" className={styles.visualEnd} />
+          <path d={plan === "single-desk" ? "M250 216v186" : "M250 96v306"} className={styles.visualOutput} />
+          <rect x="246" y="402" width="8" height="8" className={styles.visualEnd} />
+        </>
+      )}
+      {plan === "dedicated-deployment" && (
+        <>
+          <rect x="28" y="32" width="244" height="356" className={styles.visualBoundary} />
+          <path d="M28 57V32h25m194 0h25v25" className={styles.visualOutput} />
+          {[72, 168, 264].map((y) => (
+            <g key={y}>
+              <rect x="70" y={y} width="160" height="72" className={styles.visualModule} />
+              <path d={`M90 ${y + 28}h64m-64 16h38m58-16h28m-28 16h18`} className={styles.visualDetail} />
+            </g>
+          ))}
+          <path d="M50 108h20m-20 96h20m-20 96h20M230 108h20m-20 96h20m-20 96h20M50 108v192m200-192v192" className={styles.visualRule} />
+          <path d="M150 336v76h96" className={styles.visualOutput} />
+          <rect x="242" y="408" width="8" height="8" className={styles.visualEnd} />
+        </>
+      )}
+      {plan === "multi-entity-deployment" && (
+        <>
+          {[28, 230].map((b) => (
+            <g key={b}>
+              <rect x="28" y={b} width="200" height="168" className={styles.visualBoundary} />
+              <path d={`M28 ${b + 20}V${b}h20m160 0h20v20`} className={styles.visualOutput} />
+              {[b + 32, b + 92].map((y) => (
+                <g key={y}>
+                  <rect x="50" y={y} width="156" height="46" className={styles.visualModule} />
+                  <path d={`M68 ${y + 16}h64m-64 14h36`} className={styles.visualDetail} />
+                </g>
+              ))}
+            </g>
+          ))}
+          <path d="M228 112h34M228 314h34M262 112v302" className={styles.visualOutput} />
+          <rect x="258" y="414" width="8" height="8" className={styles.visualEnd} />
         </>
       )}
     </svg>

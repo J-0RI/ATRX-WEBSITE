@@ -90,6 +90,14 @@
   --radius-tag: 2px;
   --radius-pill: 999px;
 
+  /* Floating glass surface — the central navbar dropdown material (MenuButton .panel), shared
+     with the comparison information tooltips (decision-20261114-tooltip-nav-surface). */
+  --nav-panel-glass: rgba(12, 13, 15, 0.8);
+  --nav-panel-glass-solid: #121315; /* when backdrop blur is unsupported */
+  --nav-panel-blur: blur(28px) saturate(1.05);
+  --nav-panel-edge: inset 0 0 0 1px rgba(255, 255, 255, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --nav-panel-shadow: 0 24px 48px -28px rgba(0, 0, 0, 0.6);
+
   --section-gap: clamp(48px, 4.4vw, 68px);
 
   /* type scale (standalone pages + footer; section shells keep their calibrated sizes).
@@ -144,6 +152,18 @@
      on phones it settles just above the --section-gap floor. Content container only. */
   --space-content-group: clamp(56px, 5cqi + 38px, 100px);
   --space-page-start: 8px;
+  /* Section-title composition (user direction 2026-11-14, decision-20261114-section-title-spacing),
+     shared by every page and section title on the site:
+       previous section → section title   --space-section-title   (≈96 → 136px)
+       page/section title (or lead) → content   --space-section-content (≈56 → 100px)
+     Applied as normal-flow margins only; sticky offsets (--nav-bottom) never include them. */
+  --space-section-title: calc(var(--section-gap) * 2);
+  --space-section-content: var(--space-content-group);
+  /* A page's FIRST section title is tighter (user reference, 2026-11-14,
+     decision-20261114-first-section-title-spacing): ≈66px above / ≈52px below at desktop,
+     scaling with --section-gap (48–68 above, 38–54 below). */
+  --space-first-section-title: var(--section-gap);
+  --space-first-section-content: calc(var(--section-gap) * 0.8);
 
   --type-body-lg: 17px;
   --leading-body-lg: 28px;

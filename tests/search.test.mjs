@@ -18,8 +18,8 @@ test("the generated index covers each existing content route once", () => {
 test("content rendered by page components and data modules is indexed", () => {
   const home = documents.find((document) => document.href === "/");
   assert.match(text(home), /us-german 2y spread compressed 14 bps/);
-  const access = documents.find((document) => document.href === "/access");
-  assert.match(text(access), /monthly compute fee/);
+  const faq = documents.find((document) => document.href === "/faq");
+  assert.match(text(faq), /monthly compute fee/);
   const institutional = documents.find((document) => document.href === "/access/institutional");
   assert.match(text(institutional), /dedicated inference cluster/);
 });
@@ -99,7 +99,7 @@ test("expanded summaries are short, indexed sentences that add to the excerpt", 
 test("action labels describe the destination and the action keeps the result URL", () => {
   assert.equal(destinationLabel("/quickstart"), "View guide");
   assert.equal(destinationLabel("/risk#counterparty"), "View disclosure");
-  assert.equal(destinationLabel("/access"), "View access tiers");
+  assert.equal(destinationLabel("/faq"), "View answers");
   assert.equal(destinationLabel("/access/capital-desk"), "View access mode");
   assert.equal(destinationLabel("/contact"), "Request access");
   assert.equal(destinationLabel("/unknown"), "View page");

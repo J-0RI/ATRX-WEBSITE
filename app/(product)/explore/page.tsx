@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Note, Related } from "@/components/Doc";
-import { CheckIcon } from "@/components/Icons";
 import { accessComparison, tiers } from "@/content/tiers";
 import ModeComparison from "./ModeComparison";
-import ModeVisual from "./ModeVisual";
+import AccessPlans from "./AccessPlans";
 import styles from "./explore.module.css";
 
 export const metadata: Metadata = {
@@ -20,31 +19,7 @@ export default function ExplorePage() {
         <h1 id="modes-heading" className={styles.pageTitle}>
           Access modes
         </h1>
-        <div className={styles.modes}>
-          {tiers.map((tier) => (
-            <article key={tier.id} className={styles.mode} aria-labelledby={`${tier.id}-mode`}>
-              <div className={styles.media}>
-                <ModeVisual mode={tier.id} />
-              </div>
-              <h3 id={`${tier.id}-mode`} className={styles.title}>
-                {tier.name}
-              </h3>
-              <p className={styles.description}>{tier.audience}</p>
-              <p className={styles.terms}>By application · {tier.commercial}</p>
-              <ul className={styles.highlights}>
-                {tier.highlights.map((item) => (
-                  <li key={item}>
-                    <CheckIcon size={14} />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <Link href={tier.apply} className={`btn btn-primary ${styles.cta}`} aria-label={`Apply for ${tier.name}`}>
-                Apply
-              </Link>
-            </article>
-          ))}
-        </div>
+        <AccessPlans />
       </section>
 
       <section id="compare" className={styles.compareSection} aria-labelledby="compare-heading">
@@ -60,12 +35,13 @@ export default function ExplorePage() {
       <Note>
         Scope describes each mode’s published configuration. It does not confirm instrument activation, capacity or a
         delivery-time guarantee; <Link href="/capabilities/market-coverage">Market Coverage</Link> records instrument
-        status, and applications are evaluated against available compute capacity.
+        status, and applications are evaluated against available compute capacity. Plan allocations within each mode
+        are provisional and are confirmed during application.
       </Note>
 
       <Related
         links={[
-          { label: "Access tiers", href: "/access" },
+          { label: "Frequently Asked Questions", href: "/faq" },
           { label: "Deployment process", href: "/partnerships#deployment" },
           { label: "Risk disclosure", href: "/risk" },
         ]}

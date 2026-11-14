@@ -11,8 +11,9 @@ export default function InstrumentsPage() {
     <>
       <DocHeader title="Multi asset by architecture. Disciplined by deployment.">
         <p>
-          Forex, metals, indices, and commodities today. Equities, fixed income, and decentralized
-          liquidity tomorrow. The same core architecture deploys everywhere.
+          FX and Metals are live-traded today; indices and energy are preparing for v4.0. Single-name
+          equities, sovereign fixed income and cross-asset volatility are on the topological roadmap,
+          each an extension of the same core architecture.
         </p>
       </DocHeader>
 
@@ -54,7 +55,7 @@ export default function InstrumentsPage() {
 
       <Related
         links={[
-          { label: "Access tiers and instrument coverage", href: "/access" },
+          { label: "Access modes and instrument coverage", href: "/explore" },
           { label: "System architecture", href: "/architecture" },
           { label: "Phase 1 performance", href: "/performance" },
         ]}

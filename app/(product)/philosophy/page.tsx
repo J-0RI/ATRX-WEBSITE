@@ -3,36 +3,35 @@ import { DocHeader, DocSection, Prose, Related } from "@/components/Doc";
 
 export const metadata: Metadata = {
   title: "Structural Philosophy",
-  description: "Alpha decay, causal reflexivity, and the self-compiling network.",
+  description: "Why ATRX requires an economic transmission mechanism rather than historical correlation, and how it responds to alpha decay.",
 };
 
 export default function PhilosophyPage() {
   return (
     <>
-      <DocHeader title="ATRX is a self-compiling organism.">
+      <DocHeader title="Market structure, not historical correlation.">
         <p>
-          ATRX exists for a reason that is simple to state and brutally difficult to execute.
-          Institutional-grade quantitative trading has historically been monopolized by funds with
-          billions in infrastructure capital. The core thesis of ATRX is that the exact same
-          mathematical rigor, causal reasoning, and low-latency infrastructure can be completely
-          decentralized. Not diluted. Decentralized.
+          Rigorous quantitative research and execution infrastructure has largely been available only
+          to firms able to fund it internally. ATRX is built on the premise that the same causal
+          methodology, risk discipline and low-latency delivery can be provided to qualified
+          allocators and desks as shared infrastructure, without lowering the standard.
         </p>
         <p>
-          That is the definitive purpose of this engine. ATRX delivers high-frequency causal
-          infrastructure to systematic allocators, professional nodes, and enterprise desks. What
-          was once locked behind closed corporate vaults is now delivered seamlessly via cloud
-          compute and API distribution.
+          ATRX delivers causal market intelligence and execution infrastructure to systematic
+          allocators, independent quantitative traders and enterprise desks. It reaches them through
+          cloud compute and API distribution, inside the research, risk and execution environments
+          they already operate.
         </p>
       </DocHeader>
 
-      <DocSection id="self-correcting" title="A living, self-correcting network">
+      <DocSection id="self-correcting" title="Learning from recorded failures">
         <Prose>
           <p>
-            ATRX is not a static algorithmic script. It behaves as a living organism in a high-noise
-            environment. The platform breathes through closed-loop telemetry. Execution failures are
-            not ignored; they are explicitly logged into a structural ledger. The decision stack
-            metabolizes these failures, ensuring the system can never repeat a contextual mistake.
-            It is an architecture that structurally immunizes itself against market decay.
+            ATRX is designed to adapt as the markets it models change. Closed-loop telemetry records
+            each execution outcome, and localized failures are logged to a structural ledger that
+            informs the decision stack. When the current market state matches a known failure vector,
+            the Control protocol enforces a hard stop. The objective is to reduce repeated contextual
+            errors as market structure shifts, not to claim immunity from them.
           </p>
         </Prose>
       </DocSection>
@@ -40,33 +39,33 @@ export default function PhilosophyPage() {
       <DocSection id="causal-mandate" title="The Causal Mandate">
         <Prose>
           <p>
-            The platform operates on an unyielding principle: correlation is a trap. Standard models
-            fail during regime shifts because they trade historical co-movement. ATRX enforces a
-            Causal Transmission Architecture. Every execution must be mapped to a physical economic
-            transmission mechanism. No strategy, however compelling its historical backtest, is
-            permitted to execute if the underlying causal baseline is broken.
+            ATRX treats historical correlation as insufficient evidence. Models that rely on
+            co-movement tend to fail at regime shifts, when the relationships they were fitted to
+            break down. Under the Causal Transmission Architecture, every execution must be mapped to
+            an economic transmission mechanism. A strategy does not proceed to execution if its causal
+            baseline is broken, however strong its historical backtest.
           </p>
         </Prose>
       </DocSection>
 
-      <DocSection id="alpha-decay" title="The fight against alpha decay">
+      <DocSection id="alpha-decay" title="Responding to alpha decay">
         <Prose>
           <p>
-            Alpha is highly radioactive. The moment an edge is discovered, it begins to decay.
-            Legacy systems combat this by throwing analysts at the problem. ATRX combats this via
-            autonomous structural adaptation. Our perception models dynamically map new causal
-            chains, and our dynamic routing layer reallocates capital on the fly.
+            An edge begins to decay once it is identified and traded. Many firms respond by adding
+            research capacity. ATRX responds through structural adaptation: perception models map new
+            causal chains as market structure changes, and the inference routing layer reassesses
+            capital deployment as those structures shift.
           </p>
         </Prose>
       </DocSection>
 
-      <DocSection id="structural-physics" title="Innovation as structural physics">
+      <DocSection id="structural-physics" title="Accountable model design">
         <Prose>
           <p>
-            The next frontier of quantitative finance will be defined by systems that treat AI as a
-            deterministic computational graph, not a chatbot. ATRX is built to this exact standard.
-            The synthesis topologies and regime gates are engineered for maximum auditability and
-            mathematical accountability.
+            ATRX models are built as a deterministic computational graph whose decisions can be traced
+            and examined, rather than as an opaque predictive system. Synthesis topologies and regime
+            gates are designed for auditability: decision logs, state classifications and risk veto
+            events are recorded for review.
           </p>
         </Prose>
       </DocSection>
@@ -74,10 +73,9 @@ export default function PhilosophyPage() {
       <DocSection id="why" title="Why ATRX exists">
         <Prose>
           <p>
-            ATRX exists to prove that world-class quantitative infrastructure can operate outside
-            the traditional fund complex. That novelty, extreme rigor, and decentralized access can
-            occupy the same architecture. Designed to dismantle the access gap. Aimed directly at
-            the future of systematic capital.
+            ATRX is intended to show that institutional-standard quantitative infrastructure can
+            operate outside the traditional fund structure, and that broader access need not come at
+            the expense of methodological rigor or risk discipline.
           </p>
         </Prose>
       </DocSection>

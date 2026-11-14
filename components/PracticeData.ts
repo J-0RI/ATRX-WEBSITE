@@ -92,7 +92,7 @@ export const monitoredTopics = [
    ========================================================================= */
 export const research = {
   request: "Examine how a lower expected US policy path could influence currency conditions. Separate the economic transmission mechanism from competing explanations and identify the evidence needed to distinguish them.",
-  response: "I've organized the investigation around the principal transmission channels and the evidence needed to test them.",
+  response: "The investigation is organized around the principal transmission channels and the evidence needed to test each one.",
   planTitle: "US Policy and Currency Conditions",
   plan: [
     {

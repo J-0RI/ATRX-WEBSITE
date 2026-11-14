@@ -39,17 +39,27 @@
   color: var(--text-2);
 }
 
+/* Section-title composition shared site-wide (globals.css). */
 .section {
-  margin-top: var(--section-gap);
+  margin-top: var(--space-section-title);
+}
+
+/* The page's first section title (first <section> after the header) is tighter. */
+.section:first-of-type {
+  margin-top: var(--space-first-section-title);
 }
 
 .sectionTitle {
-  margin-bottom: var(--space-title-content);
+  margin-bottom: var(--space-section-content);
   font-size: clamp(22px, 2.3cqi, 26px);
   font-weight: 400;
   line-height: 1.25;
   letter-spacing: -0.02em;
   color: #ffffff;
+}
+
+.section:first-of-type > .sectionTitle {
+  margin-bottom: var(--space-first-section-content);
 }
 
 .prose {

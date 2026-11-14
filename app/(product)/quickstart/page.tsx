@@ -12,7 +12,7 @@ export default function QuickstartPage() {
     <DocHeader title="Connect intelligence to your execution environment."><p>Begin with technical qualification, then work through receipt, verification, desk controls and routing. The examples below describe the integration pattern; your onboarding supplies the parameters needed to implement it.</p></DocHeader>
     <DocSection title="Before connecting">
       <EntryList entries={[
-        { label: "Qualify the deployment", body: <>Compare the <Link href="/access">access tiers</Link> and describe your execution environment and constraints in the application. ATRX operates in a closed deployment phase; pricing follows technical qualification.</> },
+        { label: "Qualify the deployment", body: <>Compare the <Link href="/explore">access modes</Link> and describe your execution environment and constraints in the application. ATRX operates in a closed deployment phase; pricing follows technical qualification.</> },
         { label: "Receive the integration details", body: "Verification parameters and the payload schema are issued during onboarding. The public examples do not define an API host, signature algorithm, header names or an installable SDK package." },
         { label: "Keep capital controls local", body: "Map the receiving endpoint in your own environment. Your desk controls gross exposure, sizing and instrument permissions, and retains its API credentials." },
       ]} />

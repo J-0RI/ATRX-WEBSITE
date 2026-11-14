@@ -1,0 +1,176 @@
+/*
+ * /faq — Five-level editorial hierarchy within the ProductShell page container:
+ *   Level 1: .title          — Page heading ("Frequently Asked Questions")
+ *   Level 2: .categoryTitle  — Restrained section heading introducing each FAQ group
+ *   Level 3: .question       — Individual question heading
+ *   Level 4: .answer         — Concise body prose within a controlled measure
+ *   Level 5: .toc            — Compact, category-only "On this page" navigation
+ */
+
+.page {
+  padding-bottom: var(--section-gap);
+}
+
+/* ---------- Level 1: page title ---------- */
+
+.header {
+  margin-top: var(--space-page-start);
+}
+
+.title {
+  max-width: 24ch;
+  color: #ffffff;
+  /* Same page-title scale as /explore "Access modes" (.pageTitle). */
+  font-size: var(--section-display);
+  font-weight: 480;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+/* ---------- two-column editorial composition ---------- */
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  margin-top: clamp(32px, 3.6cqi, 44px);
+}
+
+.content {
+  min-width: 0;
+  max-width: 660px;
+}
+
+/* ---------- Level 2: category headings ---------- */
+
+.section {
+  scroll-margin-top: calc(var(--nav-h) + 24px);
+}
+
+.section + .section {
+  margin-top: clamp(48px, 4.8cqi, 60px);
+}
+
+.categoryTitle {
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--text);
+  font-size: clamp(19px, 1.85cqi, 21px);
+  font-weight: 450;
+  line-height: 1.25;
+  letter-spacing: -0.016em;
+  text-wrap: balance;
+}
+
+/* ---------- Level 3 & Level 4: questions and answers ---------- */
+
+.item {
+  padding-block: 24px;
+  border-top: 1px solid var(--rule);
+}
+
+.item:first-of-type {
+  padding-top: 22px;
+  border-top: 0;
+}
+
+.item:last-of-type {
+  padding-bottom: 0;
+}
+
+.question {
+  max-width: 42ch;
+  color: var(--text);
+  font-size: clamp(16px, 1.45cqi, 17.5px);
+  font-weight: 450;
+  line-height: 1.35;
+  letter-spacing: -0.011em;
+  text-wrap: balance;
+}
+
+.answer {
+  max-width: 60ch;
+  margin-top: 10px;
+  color: var(--text-2);
+  font-size: var(--type-small);
+  line-height: 24px;
+  font-weight: 400;
+  text-wrap: pretty;
+}
+
+.answer a {
+  color: var(--text);
+  text-decoration: underline 1px;
+  text-decoration-color: var(--text-3);
+  text-underline-offset: 4px;
+}
+
+/* ---------- Level 5: secondary "On this page" navigation ---------- */
+
+.toc {
+  margin-bottom: 36px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.tocTitle {
+  margin-bottom: 10px;
+  color: var(--text-2);
+  font-size: 12.5px;
+  font-weight: 450;
+  line-height: 18px;
+  letter-spacing: -0.005em;
+}
+
+.tocList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tocLink {
+  display: inline-block;
+  padding-block: 2px;
+  color: var(--text-3);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18.5px;
+  letter-spacing: -0.005em;
+}
+
+@container content (min-width: 860px) {
+  .layout {
+    grid-template-columns: minmax(0, 660px) 212px;
+    justify-content: space-between;
+    column-gap: clamp(48px, 6.5cqi, 96px);
+    margin-top: clamp(40px, 4.2cqi, 52px);
+  }
+
+  .content {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .toc {
+    position: sticky;
+    top: calc(var(--nav-h) + 24px);
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .tocList {
+    display: grid;
+    gap: 8px;
+  }
+
+  .tocLink {
+    display: block;
+  }
+}

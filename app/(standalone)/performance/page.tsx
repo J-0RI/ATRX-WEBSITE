@@ -27,8 +27,8 @@ export default function PerformancePage() {
     <>
       <DocHeader title="Phase 1 performance metrics.">
         <p>
-          The metrics below validate the overarching systemic architecture during its live
-          production deployment in Q1 2026.
+          The metrics below record the system&apos;s live production deployment during the Q1 2026
+          validation window.
         </p>
       </DocHeader>
 

@@ -29,7 +29,7 @@ export type SearchResult = {
  */
 const DESTINATIONS: [prefix: string, label: string][] = [
   ["/access/", "View access mode"],
-  ["/access", "View access tiers"],
+  ["/faq", "View answers"],
   ["/explore", "View comparison"],
   ["/quickstart", "View guide"],
   ["/capabilities/", "View capability"],

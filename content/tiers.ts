@@ -86,9 +86,158 @@ export const tiers: Tier[] = [
   },
 ];
 
+/* ---------- Plan families (/explore first section) ----------
+ * Each access mode offers a small family of plans (decision-20261114-access-plan-families).
+ * Plan names and positioning are proposed product tiers; plan-level allocations are
+ * PROVISIONAL. They are deliberately separate from the mode-level comparison matrix below:
+ * a capability included in a mode is not automatically included in every plan of that mode.
+ * Every capability named here is one the matrix marks as included and available for the
+ * parent mode, or one already published in that mode's `features`. No prices, latency,
+ * capacity or certification commitments are implied. Apply reuses the mode's request route
+ * because the application form does not yet accept a plan field.
+ */
+export type PlanId =
+  | "standard"
+  | "api-access"
+  | "execution-access"
+  | "single-desk"
+  | "multi-desk"
+  | "custom-routing"
+  | "dedicated-deployment"
+  | "multi-entity-deployment";
+
+export type AccessPlan = {
+  id: PlanId;
+  mode: ModeId;
+  /** Descriptive licence / deployment name (decision-20261114-plan-naming). */
+  name: string;
+  /** One concise card description (20–35 words). */
+  summary: string;
+  /**
+   * Proposed access qualification. Not rendered on the plan cards; retained for the
+   * application and onboarding flow.
+   */
+  requirement: string;
+  capabilities: [string, string, string];
+  allocation: "provisional";
+};
+
+export const accessPlans: Record<ModeId, AccessPlan[]> = {
+  "prosumer-node": [
+    {
+      id: "standard",
+      mode: "prosumer-node",
+      name: "Standard",
+      summary: "For independent quantitative researchers assessing market regimes and causal drivers on the ATRX platform, without signal delivery or execution routing.",
+      requirement: "Research use, without execution routing",
+      capabilities: [
+        "Market regime analysis",
+        "Causal factor attribution",
+        "Historical research export",
+      ],
+      allocation: "provisional",
+    },
+    {
+      id: "api-access",
+      mode: "prosumer-node",
+      name: "API Access",
+      summary: "Structured market intelligence for independent systematic strategies, delivered by API and webhook into the trader’s existing research and execution workflow.",
+      requirement: "Requires a defined strategy and a receiving endpoint",
+      capabilities: [
+        "REST API and webhook delivery",
+        "Signal confidence scoring",
+        "Structural break detection",
+      ],
+      allocation: "provisional",
+    },
+    {
+      id: "execution-access",
+      mode: "prosumer-node",
+      name: "Execution Access",
+      summary: "For independent systematic traders integrating ATRX directives with their own execution infrastructure, with pre-trade controls applied before any order is routed.",
+      requirement: "Requires integration sandbox review before live routing",
+      capabilities: [
+        "Single-tenant execution pipeline",
+        "Pre-trade risk checks",
+        "Emergency execution halt",
+      ],
+      allocation: "provisional",
+    },
+  ],
+  "capital-desk": [
+    {
+      id: "single-desk",
+      mode: "capital-desk",
+      name: "Single Desk",
+      summary: "For a professional trading desk adding systemic macro intelligence and real-time portfolio exposure to its established research, risk and execution processes.",
+      requirement: "Requires a named desk owner and an existing risk environment",
+      capabilities: [
+        "Cross-asset transmission analysis",
+        "Real-time portfolio exposure",
+        "Streaming API and low-latency SDKs",
+      ],
+      allocation: "provisional",
+    },
+    {
+      id: "multi-desk",
+      mode: "capital-desk",
+      name: "Multi-Desk",
+      summary: "For firms allocating across several desks or strategy cohorts that require coordinated allocation, consolidated performance oversight and a common audit record.",
+      requirement: "Requires defined cohort and allocation mandates",
+      capabilities: [
+        "Multi-node allocation",
+        "Model performance monitoring",
+        "Immutable audit records",
+      ],
+      allocation: "provisional",
+    },
+    {
+      id: "custom-routing",
+      mode: "capital-desk",
+      name: "Custom Routing",
+      summary: "For professional desks with latency-sensitive execution that requires routing configured to their own venues, latency requirements and available compute capacity.",
+      requirement: "Subject to available compute capacity",
+      capabilities: [
+        "Custom execution routing",
+        "Latency telemetry",
+        "Horizontal scaling",
+      ],
+      allocation: "provisional",
+    },
+  ],
+  institutional: [
+    {
+      id: "dedicated-deployment",
+      mode: "institutional",
+      name: "Dedicated Deployment",
+      summary: "For an institution requiring ATRX within its own dedicated infrastructure boundary, with access to research material and direct engineering syncs.",
+      requirement: "Requires institutional onboarding and an infrastructure review",
+      capabilities: [
+        "Dedicated inference clusters",
+        "Research ablation studies",
+        "Technical implementation support",
+      ],
+      allocation: "provisional",
+    },
+    {
+      id: "multi-entity-deployment",
+      mode: "institutional",
+      name: "Multi-Entity Deployment",
+      summary: "For institutions coordinating one ATRX deployment across multiple business units or legal entities, with separate permissions and consolidated governance oversight.",
+      requirement: "Requires a governance owner across participating units",
+      capabilities: [
+        "Tenant-level permissions",
+        "Audit-grade telemetry logs",
+        "Historical decision reconstruction",
+      ],
+      allocation: "provisional",
+    },
+  ],
+};
+
 /* ---------- Access-mode comparison (/explore) ----------
  * Institutional capability matrix across the eight core evaluation domains.
- * Entitlement indicators (included / unavailable / unspecified) are stored separately from
+ * Entitlement indicators (included / unavailable / optional) are stored separately from
  * capability delivery status (available / in-development / planned / qualification) so
  * prospective tenants can distinguish access-mode scope from live operational readiness.
  */
@@ -98,7 +247,8 @@ export type ModeId = "prosumer-node" | "capital-desk" | "institutional";
 export type ComparisonCell =
   | { kind: "included" }
   | { kind: "unavailable" }
-  | { kind: "unspecified" };
+  /** Can be included depending on the plan within the mode (user, 2026-11-14). */
+  | { kind: "optional" };
 
 export type DeliveryStatus =
   | "available"
@@ -136,7 +286,7 @@ export type ComparisonGroup = {
 
 const yes: ComparisonCell = { kind: "included" };
 const no: ComparisonCell = { kind: "unavailable" };
-const unspecified: ComparisonCell = { kind: "unspecified" };
+const optional: ComparisonCell = { kind: "optional" };
 
 type RowMeta = {
   id: string;
@@ -327,7 +477,7 @@ export const accessComparison: ComparisonGroup[] = [
         keywords: ["energy", "oil", "crude", "natural gas", "wti", "brent", "eng_fut_vec", "commodities"],
         source: "/capabilities/market-coverage",
       }),
-      row("Rates and fixed income", no, unspecified, yes, {
+      row("Rates and fixed income", no, optional, yes, {
         id: "rates-and-fixed-income",
         category: "market-coverage",
         status: "planned",
@@ -336,7 +486,7 @@ export const accessComparison: ComparisonGroup[] = [
         keywords: ["rates", "fixed income", "bonds", "treasuries", "yield curve", "duration", "sov_dur_curves", "sovereign"],
         source: "/capabilities/market-coverage",
       }),
-      row("Equity market coverage", no, unspecified, yes, {
+      row("Equity market coverage", no, optional, yes, {
         id: "equity-market-coverage",
         category: "market-coverage",
         status: "planned",
@@ -345,7 +495,7 @@ export const accessComparison: ComparisonGroup[] = [
         keywords: ["equities", "single-name", "stocks", "tech_capx_nodes", "sector", "cash equities"],
         source: "/capabilities/market-coverage",
       }),
-      row("Futures and derivatives", no, unspecified, yes, {
+      row("Futures and derivatives", no, optional, yes, {
         id: "futures-and-derivatives",
         category: "market-coverage",
         status: "planned",
@@ -597,7 +747,7 @@ export const accessComparison: ComparisonGroup[] = [
         category: "execution-integration",
         status: "available",
         description:
-          "Persistent low-latency streaming channels for desks consuming continuous state telemetry and sub-second directive updates.",
+          "Persistent low-latency streaming channels for desks consuming continuous state telemetry and directive updates.",
         keywords: ["streaming", "api", "websocket", "sse", "grpc", "low-latency", "real-time"],
         source: "/delivery/zero-latency-webhooks",
       }),
@@ -610,7 +760,7 @@ export const accessComparison: ComparisonGroup[] = [
         keywords: ["sdk", "sdks", "python", "typescript", "javascript", "client library", "api"],
         source: "/access/capital-desk",
       }),
-      row("FIX protocol integration", no, unspecified, yes, {
+      row("FIX protocol integration", no, optional, yes, {
         id: "fix-protocol-integration",
         category: "execution-integration",
         status: "planned",
@@ -697,7 +847,7 @@ export const accessComparison: ComparisonGroup[] = [
         keywords: ["sandbox", "paper trading", "parallel run", "staging", "test environment", "simulation"],
         source: "/partnerships",
       }),
-      row("Custom integration adapters", no, unspecified, yes, {
+      row("Custom integration adapters", no, optional, yes, {
         id: "custom-integration-adapters",
         category: "execution-integration",
         status: "qualification",
@@ -828,7 +978,7 @@ export const accessComparison: ComparisonGroup[] = [
         keywords: ["human override", "manual intervention", "sovereignty", "veto", "operator control"],
         source: "/partnerships",
       }),
-      row("Model change approvals", no, unspecified, yes, {
+      row("Model change approvals", no, optional, yes, {
         id: "model-change-approvals",
         category: "model-governance",
         status: "planned",
@@ -929,7 +1079,7 @@ export const accessComparison: ComparisonGroup[] = [
         keywords: ["ip allowlist", "whitelist", "cidr", "firewall", "network security", "egress"],
         source: "/delivery/zero-latency-webhooks",
       }),
-      row("Private network connectivity", no, unspecified, yes, {
+      row("Private network connectivity", no, optional, yes, {
         id: "private-network-connectivity",
         category: "enterprise-security",
         status: "qualification",
@@ -1032,7 +1182,7 @@ export const accessComparison: ComparisonGroup[] = [
         keywords: ["dedicated cluster", "inference cluster", "isolated compute", "bare metal", "gpu"],
         source: "/access/institutional",
       }),
-      row("AWS deployment", unspecified, unspecified, yes, {
+      row("AWS deployment", optional, optional, yes, {
         id: "aws-deployment",
         category: "infrastructure-reliability",
         status: "available",
@@ -1041,7 +1191,7 @@ export const accessComparison: ComparisonGroup[] = [
         keywords: ["aws", "amazon web services", "cloud", "ec2", "eks", "vpc"],
         source: "/access/institutional",
       }),
-      row("GCP deployment", unspecified, unspecified, yes, {
+      row("GCP deployment", optional, optional, yes, {
         id: "gcp-deployment",
         category: "infrastructure-reliability",
         status: "available",
@@ -1050,7 +1200,7 @@ export const accessComparison: ComparisonGroup[] = [
         keywords: ["gcp", "google cloud", "cloud", "gke", "vpc"],
         source: "/access/institutional",
       }),
-      row("Private cloud connectivity", no, unspecified, yes, {
+      row("Private cloud connectivity", no, optional, yes, {
         id: "private-cloud-connectivity",
         category: "infrastructure-reliability",
         status: "qualification",
@@ -1059,7 +1209,7 @@ export const accessComparison: ComparisonGroup[] = [
         keywords: ["private cloud", "direct connect", "cloud interconnect", "vpc", "hybrid cloud"],
         source: "/access/institutional",
       }),
-      row("Regional deployment options", no, unspecified, yes, {
+      row("Regional deployment options", no, optional, yes, {
         id: "regional-deployment-options",
         category: "infrastructure-reliability",
         status: "qualification",
@@ -1115,7 +1265,7 @@ export const accessComparison: ComparisonGroup[] = [
         keywords: ["backup", "restore", "recovery", "snapshot", "persistence", "resilience"],
         source: "ATRX Product Specification · v4.0",
       }),
-      row("Disaster recovery planning", no, unspecified, yes, {
+      row("Disaster recovery planning", no, optional, yes, {
         id: "disaster-recovery-planning",
         category: "infrastructure-reliability",
         status: "qualification",
@@ -1134,7 +1284,7 @@ export const accessComparison: ComparisonGroup[] = [
         keywords: ["incident", "notifications", "alerts", "outage", "advisory", "status"],
         source: "ATRX Product Specification · v4.0",
       }),
-      row("Contractual service-level agreements", no, unspecified, yes, {
+      row("Contractual service-level agreements", no, optional, yes, {
         id: "contractual-service-level-agreements",
         category: "infrastructure-reliability",
         status: "qualification",

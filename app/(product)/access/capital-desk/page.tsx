@@ -28,7 +28,7 @@ export default function CapitalDeskPage() {
     {/* Sources: contact/engagements.ts capital desk; tiers/access. */}
     <DocSection title="Frame the desk request">
       <Prose><p>Describe the team or desk, markets of interest, integration objective and risk or execution environment. Include operating constraints so the request reflects how the desk intends to use the multi-node deployment.</p><p>The commercial basis is <strong>Base + Capacity</strong>, by application. Pricing follows technical qualification, and admission depends on available compute capacity and infrastructure alignment.</p></Prose>
-      <Actions><Link href={tier.apply} className="btn btn-primary">Apply for Capital Desk</Link><Link href="/access" className="btn btn-secondary">Compare tiers</Link></Actions>
+      <Actions><Link href={tier.apply} className="btn btn-primary">Apply for Capital Desk</Link><Link href="/explore" className="btn btn-secondary">Compare access modes</Link></Actions>
       <Note>No public package name, broker compatibility list or numeric delivery guarantee is specified by the existing integration material.</Note>
     </DocSection>
     <Related links={[{ label: "Regime & State Analysis", href: "/capabilities/regime-state-analysis" }, { label: "Native Risk Mandates", href: "/control/native-risk-mandates" }, { label: "Causal Attribution", href: "/capabilities/causal-attribution" }]} />

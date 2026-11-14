@@ -34,6 +34,6 @@ export default function MarketCoveragePage() {
     <DocSection title="Relate coverage to an access mode">
       <Prose><p><Link href="/access/prosumer-node">Prosumer Node</Link> describes access to the core FX and Metals topological vectors. <Link href="/access/capital-desk">Capital Desk</Link> describes expanded topology for Indices and Energy, whose corresponding nodes are still listed above as preparing. <Link href="/access/institutional">Institutional</Link> provides bespoke structural topology modeling, without a separate published list of live markets.</p><p>Use these tier descriptions to frame the deployment discussion alongside the status record. Markets of interest supplied in an application express the requested scope; they do not confirm availability.</p></Prose>
     </DocSection>
-    <Related links={[{ label: "Compare access tiers", href: "/access" }, { label: "Instrument register", href: "/instruments" }, { label: "Phase 1 performance", href: "/performance" }]} />
+    <Related links={[{ label: "Compare access modes", href: "/explore#compare" }, { label: "Instrument register", href: "/instruments" }, { label: "Phase 1 performance", href: "/performance" }]} />
   </>;
 }

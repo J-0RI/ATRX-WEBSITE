@@ -67,10 +67,10 @@ export default function ContactPage() {
 
           <div className={styles.strip}>
             <p>
-              <strong>Compare access tiers first.</strong> Pipeline scope, instrument topology and
-              commercial model for each tier.
+              <strong>Compare access modes first.</strong> Plans, pipeline scope and the full
+              capability comparison for each mode.
             </p>
-            <ArrowAction href="/access">View access tiers</ArrowAction>
+            <ArrowAction href="/explore">Explore access modes</ArrowAction>
           </div>
         </div>
       </section>

@@ -20,9 +20,9 @@
    * the cells' translucent white steps for rows. Layers, densest last: glass < row <
    * preview well (darker, so the artwork and captions sit on a calm ground).
    */
-  --panel-glass: rgba(12, 13, 15, 0.8);
-  --panel-blur: blur(28px) saturate(1.05);
-  --panel-edge: inset 0 0 0 1px rgba(255, 255, 255, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --panel-glass: var(--nav-panel-glass);
+  --panel-blur: var(--nav-panel-blur);
+  --panel-edge: var(--nav-panel-edge);
   --panel-well: rgba(0, 0, 0, 0.3);
   --row-bg: rgba(255, 255, 255, 0.035);
   --row-active: rgba(255, 255, 255, 0.085);
@@ -39,7 +39,7 @@
   background: var(--panel-glass);
   -webkit-backdrop-filter: var(--panel-blur);
   backdrop-filter: var(--panel-blur);
-  box-shadow: var(--panel-edge), 0 24px 48px -28px rgba(0, 0, 0, 0.6);
+  box-shadow: var(--panel-edge), var(--nav-panel-shadow);
   pointer-events: none;
   /* Closed: out of view, tab order and the accessibility tree. Closing is softer and quicker. */
   visibility: hidden;
@@ -238,7 +238,7 @@
 /* Without backdrop blur, translucency would let page text compete: fall back to a solid tone. */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .panel {
-    --panel-glass: #121315;
+    --panel-glass: var(--nav-panel-glass-solid);
     --panel-well: #17181b;
   }
 }

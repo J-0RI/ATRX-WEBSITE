@@ -26,7 +26,7 @@ export default function ProsumerNodePage() {
         { label: "Operating constraints", body: "Include the constraints relevant to your deployment. This gives technical qualification context for the requested single-tenant configuration." },
         { label: "Commercial basis", body: "Monthly compute fee, by application. Pricing is provided upon technical qualification; access is evaluated against available compute capacity and infrastructure alignment." },
       ]} />
-      <Actions><Link href={tier.apply} className="btn btn-primary">Apply for Prosumer Node</Link><Link href="/access" className="btn btn-secondary">Compare tiers</Link></Actions>
+      <Actions><Link href={tier.apply} className="btn btn-primary">Apply for Prosumer Node</Link><Link href="/explore" className="btn btn-secondary">Compare access modes</Link></Actions>
       <Note>Markets named in an application are interests for review, not confirmation of availability.</Note>
     </DocSection>
     <Related links={[{ label: "Native Risk Mandates", href: "/control/native-risk-mandates" }, { label: "Zero-Latency Webhooks", href: "/delivery/zero-latency-webhooks" }, { label: "Risk disclosure", href: "/risk" }]} />

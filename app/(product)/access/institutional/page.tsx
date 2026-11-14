@@ -26,7 +26,7 @@ export default function InstitutionalPage() {
         { label: "Deployment review", body: "The enterprise process begins with an architecture sync, followed by a paper-trading parallel run. Live capital follows latency and slippage validation." },
         { label: "Capital responsibility", body: "Dedicated compute does not transfer custody or discretionary authority over API keys and capital sizing to ATRX. The tenant’s execution, counterparty and governance responsibilities remain." },
       ]} />
-      <Actions><Link href={tier.apply} className="btn btn-primary">Apply for Institutional</Link><Link href="/access" className="btn btn-secondary">Compare tiers</Link></Actions>
+      <Actions><Link href={tier.apply} className="btn btn-primary">Apply for Institutional</Link><Link href="/explore" className="btn btn-secondary">Compare access modes</Link></Actions>
     </DocSection>
     <DocSection title="Negotiated terms">
       <Prose><p>Institutional access is by application, with negotiated terms. Pricing is provided upon technical qualification; applications are evaluated against compute availability and infrastructure alignment.</p></Prose>

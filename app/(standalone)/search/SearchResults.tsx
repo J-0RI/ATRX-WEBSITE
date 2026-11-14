@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useId, useLayoutEffect, useRef, useState } from "react";
 import ArrowAction from "@/components/ArrowAction";
 import { CloseIcon, MoreIcon } from "@/components/Icons";
@@ -156,17 +155,25 @@ export default function SearchResults({ query, results, areas, initialSelected, 
                   className={styles.result}
                   data-open={open || undefined}
                   data-settling={settling === id || undefined}
+                  /* The whole shell is the summary toggle's pointer surface. Clicks on its own
+                     interactive children (the toggle itself, the View action) are theirs alone, and a
+                     text selection is not a click. Keyboard users operate the toggle button. */
+                  onClick={(event) => {
+                    if ((event.target as Element).closest("a, button")) return;
+                    const selection = window.getSelection();
+                    if (selection && !selection.isCollapsed && event.currentTarget.contains(selection.anchorNode)) return;
+                    toggleDetail(id);
+                  }}
                 >
                   <p className={styles.category}>{result.category}</p>
                   <h2 className={styles.title}>
-                    <Link href={result.href}>
-                      <Highlight text={result.title} query={query} />
-                    </Link>
+                    <Highlight text={result.title} query={query} />
                   </h2>
                   <p className={styles.excerpt}>
                     <Highlight text={result.excerpt} query={query} />
                   </p>
-                  {/* After the title link in tab order; placed top-right by CSS. */}
+                  {/* The result's one expand/collapse control; placed top-right by CSS. Only the
+                      View action inside the summary navigates. */}
                   <button
                     type="button"
                     className={styles.more}

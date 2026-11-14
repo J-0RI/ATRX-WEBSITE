@@ -35,10 +35,10 @@ export const productSection: LocalSection = {
     { title: "Product", items: [
       { label: "Overview", href: "/", searchLabel: "ATRX Overview", keywords: "home operating model intelligence controls delivery" },
       { label: "Quickstart", href: "/quickstart", keywords: "onboarding Python JavaScript payload integration" },
-      { label: "Access Tiers", href: "/access", keywords: "Prosumer Node Capital Desk Institutional pricing comparison" },
+      { label: "FAQs", href: "/faq", searchLabel: "Frequently Asked Questions", keywords: "questions answers access eligibility pricing deployment integration governance coverage" },
     ] },
     { title: "Access Modes", items: [
-      { label: "Explore", href: "/explore", searchLabel: "Explore access modes", keywords: "compare access modes tiers eligibility deployment onboarding" },
+      { label: "Explore", href: "/explore", searchLabel: "Explore access modes", keywords: "compare access modes tiers plans pricing commercial basis eligibility deployment onboarding" },
       { label: "Prosumer Node", href: "/access/prosumer-node", keywords: "Tier I single tenant FX metals" },
       { label: "Capital Desk", href: "/access/capital-desk", keywords: "Tier II enterprise cohort SDK drawdown" },
       { label: "Institutional", href: "/access/institutional", keywords: "Tier III dedicated cluster AWS GCP governance" },
@@ -72,7 +72,7 @@ const domainSearchSections = {
       },
       {
         title: "Research",
-        items: [{ label: "Structural Philosophy", href: "/philosophy", keywords: "essay alpha decay causal mandate" }],
+        items: [{ label: "Structural Philosophy", href: "/philosophy", keywords: "essay alpha decay causal mandate transmission correlation" }],
       },
       {
         title: "Instruments",
@@ -170,7 +170,7 @@ export const useCasesMenu: NavItem[] = [
 
 export const documentationMenu: NavItem[] = [
   { label: "Overview", href: "/documentation" },
-  { label: "Access tiers", href: "/access" },
+  { label: "Access modes", href: "/explore" },
   { label: "System architecture", href: "/architecture" },
   { label: "Enterprise tenancy", href: "/partnerships" },
   { label: "Instruments", href: "/instruments" },
@@ -181,7 +181,7 @@ export const documentationMenu: NavItem[] = [
 export const LOGIN_URL = "https://suite.atrx.tech/login";
 
 export const requestAccessMenu: NavItem[] = [
-  { label: "Access tiers", href: "/access" },
+  { label: "Access modes", href: "/explore" },
   { label: "Documentation request", href: "/contact?engagement=documentation#request" },
   { label: "Contact engineering", href: "/contact" },
   { label: "Log in", href: LOGIN_URL },
@@ -214,7 +214,7 @@ export const documentationPanel: NavPanel = {
   title: "Documentation",
   intro: "Technical materials for quantitative evaluators and capital allocators.",
   items: [
-    panelItem("/access", "ATRX is operating in a closed deployment phase. Three tiers, granted by application.", "access"),
+    panelItem("/explore", "Three access modes and their plans, with a searchable capability comparison.", "access"),
     panelItem("/architecture", "ATRX v4.0: seven structural pillars, a five-stage inference pipeline, and one absolute veto.", "architecture"),
     panelItem("/partnerships", "ATRX integrates with enterprise trading desks as a parallel intelligence layer.", "tenancy"),
     panelItem("/instruments", "Multi asset by architecture. Disciplined by deployment. Instrument vectors and roadmap.", "instruments"),
@@ -245,7 +245,7 @@ export const requestAccessPanel: NavPanel = {
   title: "Request access",
   intro: "A closed deployment phase. Every submission is reviewed by engineering.",
   items: [
-    panelItem("/access", "Three tiers, granted by application: Prosumer Node, Capital Desk and Institutional.", "access"),
+    panelItem("/explore", "Prosumer Node, Capital Desk and Institutional, granted by application.", "access"),
     panelItem("/contact?engagement=documentation#request", "Whitepapers, ablation studies and risk disclosures, maintained for qualified evaluators.", "request"),
     panelItem("/contact", "Apply for a deployment. Applications are evaluated against available compute capacity.", "engineering"),
     panelItem(LOGIN_URL, "Already working with ATRX? Sign in to your account.", "login"),
@@ -321,17 +321,17 @@ const footerTaxonomy: FooterColumn[] = [
         title: "Product",
         links: [
           { label: "Overview", href: "/" },
-          { label: "Access", href: "/access" },
+          { label: "Access modes", href: "/explore" },
           { label: "Performance", href: "/performance" },
           { label: "Request access", href: "/contact" },
         ],
       },
       {
-        title: "Access tiers",
+        title: "Access modes",
         links: [
-          { label: "Prosumer Node", href: "/access#prosumer-node" },
-          { label: "Capital Desk", href: "/access#capital-desk" },
-          { label: "Institutional", href: "/access#institutional" },
+          { label: "Prosumer Node", href: "/access/prosumer-node" },
+          { label: "Capital Desk", href: "/access/capital-desk" },
+          { label: "Institutional", href: "/access/institutional" },
         ],
       },
       {

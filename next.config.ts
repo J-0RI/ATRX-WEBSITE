@@ -10,6 +10,9 @@ const nextConfig: NextConfig = {
       { source: "/founder", destination: "/", permanent: true },
       // The homepage is the canonical product Overview; keep the former duplicate URL resolving.
       { source: "/overview", destination: "/", permanent: true },
+      // Access Tiers duplicated Explore; Explore is the canonical access-mode destination.
+      // Exact match only: /access/prosumer-node, /capital-desk and /institutional stay live.
+      { source: "/access", destination: "/explore", permanent: true },
     ];
   },
 };
