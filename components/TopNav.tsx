@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { documentationPanel, primaryNav, requestAccessPanel } from "@/content/nav";
+import { documentationPanel, primaryNav, requestAccessPanel, useCasesPanel } from "@/content/nav";
 import MenuButton from "./MenuButton";
 import MobileNav from "./MobileNav";
 import Search, { type SearchState } from "./Search";
@@ -130,6 +130,19 @@ export default function TopNav() {
               {item.label}
             </Link>
           ))}
+          <MenuButton
+            id="use-cases"
+            controller={dropdowns}
+            label={
+              <>
+                Use cases
+                <ChevronDown size={14} />
+              </>
+            }
+            panel={useCasesPanel}
+            host={panelHost}
+            buttonClassName={styles.link}
+          />
         </nav>
 
         <Link ref={logoRef} href="/" className={styles.logo} aria-label="ATRX home">

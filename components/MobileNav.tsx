@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
-import { documentationMenu, primaryNav, requestAccessMenu, type NavItem } from "@/content/nav";
+import { documentationMenu, primaryNav, requestAccessMenu, useCasesMenu, type NavItem } from "@/content/nav";
 import { CloseIcon, MenuIcon } from "./Icons";
 import styles from "./MobileNav.module.css";
 
@@ -67,6 +67,7 @@ export default function MobileNav() {
                 </li>
               ))}
             </ul>
+            <Group title="Use cases" items={useCasesMenu} onNavigate={close} />
             <Group title="Request access" items={requestAccessMenu} onNavigate={close} />
           </nav>
         </div>

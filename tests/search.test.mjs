@@ -3,14 +3,14 @@ import { readFileSync } from "node:fs";
 import { test } from "node:test";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
-import { highlightSegments, normalizeSearch, searchPages } from "../lib/search.ts";
+import { destinationLabel, highlightSegments, normalizeSearch, searchPages } from "../lib/search.ts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const documents = JSON.parse(readFileSync(path.join(root, "content/search-index.generated.json"), "utf8"));
 const text = (document) => [document.title, document.summary, ...document.headings.map((item) => item.text), ...document.passages.map((item) => item.text)].join(" ").toLowerCase();
 
 test("the generated index covers each existing content route once", () => {
-  assert.equal(documents.length, 22);
+  assert.equal(documents.length, 24);
   assert.equal(new Set(documents.map((document) => document.href)).size, documents.length);
   assert.ok(documents.every((document) => document.title && document.category && document.passages.length));
 });
@@ -29,6 +29,8 @@ test("categories follow the site taxonomy", () => {
   assert.equal(byHref["/capabilities/risk-control"], "Control & Delivery");
   assert.equal(byHref["/access/capital-desk"], "Access Modes");
   assert.equal(byHref["/architecture"], "Architecture");
+  assert.equal(byHref["/explore"], "Access Modes");
+  assert.equal(byHref["/use-cases"], "Use cases");
 });
 
 test("single characters match as case-insensitive substrings of real content", () => {
@@ -78,4 +80,29 @@ test("highlighting preserves the source text and capitalisation", () => {
   const phrase = highlightSegments("Relate realized P&L to market risk", "market risk p&l");
   assert.deepEqual(phrase.filter((part) => part.match).map((part) => part.text), ["P&L", "market", "risk"]);
   assert.deepEqual(highlightSegments("a.b(c)", ".("), [{ text: "a.b(c)", match: false }]);
+});
+
+test("expanded summaries are short, indexed sentences that add to the excerpt", () => {
+  const corpus = documents.map(text).join(" ");
+  for (const query of ["e", "veto", "causal mandate", "webhook"]) {
+    for (const result of searchPages(query, documents)) {
+      if (!result.detail) continue;
+      const count = result.detail.split(" ").length;
+      assert.ok(count <= 65, `${result.href}: ${count} words`);
+      assert.ok((result.detail.match(/[.!?](\s|$)/g) ?? []).length <= 3, result.href);
+      assert.notEqual(result.detail, result.excerpt);
+      for (const sentence of result.detail.split(/(?<=[.!?])\s+/)) assert.ok(corpus.includes(sentence.toLowerCase()), sentence);
+    }
+  }
+});
+
+test("action labels describe the destination and the action keeps the result URL", () => {
+  assert.equal(destinationLabel("/quickstart"), "View guide");
+  assert.equal(destinationLabel("/risk#counterparty"), "View disclosure");
+  assert.equal(destinationLabel("/access"), "View access tiers");
+  assert.equal(destinationLabel("/access/capital-desk"), "View access mode");
+  assert.equal(destinationLabel("/contact"), "Request access");
+  assert.equal(destinationLabel("/unknown"), "View page");
+  const labels = new Set(searchPages("e", documents).map((result) => result.action));
+  assert.ok(labels.size >= 10);
 });

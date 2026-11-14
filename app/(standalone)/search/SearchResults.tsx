@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useId, useRef, useState } from "react";
+import { useId, useLayoutEffect, useRef, useState } from "react";
+import ArrowAction from "@/components/ArrowAction";
+import { CloseIcon, MoreIcon } from "@/components/Icons";
 import { highlightSegments, type SearchResult } from "@/lib/search";
 import styles from "./search.module.css";
 
@@ -23,6 +25,30 @@ export default function SearchResults({ query, results, areas, initialSelected, 
   const [selected, setSelected] = useState(initialSelected);
   const titleId = useId();
   const filtersRef = useRef<HTMLFieldSetElement>(null);
+  // One expanded result at a time, keyed by page identity (stable across filter changes).
+  const [expanded, setExpanded] = useState<string | null>(null);
+  // A result closed because another opened collapses without animating, so the page above the
+  // newly opened result settles in one step and the scroll correction below can hold it still.
+  const [settling, setSettling] = useState<string | null>(null);
+  const rows = useRef(new Map<string, HTMLLIElement>());
+  const anchor = useRef<{ id: string; top: number } | null>(null);
+
+  useLayoutEffect(() => {
+    const held = anchor.current;
+    anchor.current = null;
+    const row = held && rows.current.get(held.id);
+    if (!held || !row) return;
+    const shift = row.getBoundingClientRect().top - held.top;
+    if (Math.abs(shift) >= 1) window.scrollBy({ top: shift, behavior: "instant" });
+  }, [expanded]);
+
+  const toggleDetail = (id: string) => {
+    const switching = expanded !== null && expanded !== id;
+    const row = rows.current.get(id);
+    anchor.current = switching && row ? { id, top: row.getBoundingClientRect().top } : null;
+    setSettling(switching ? expanded : null);
+    setExpanded(expanded === id ? null : id);
+  };
 
   const counts = new Map<string, number>();
   for (const result of results) counts.set(result.category, (counts.get(result.category) ?? 0) + 1);
@@ -31,6 +57,7 @@ export default function SearchResults({ query, results, areas, initialSelected, 
   // Selection lives in the URL (?area=…) so refresh and shared links keep it; it never adds history entries.
   const commit = (next: string[]) => {
     setSelected(next);
+    setExpanded(null);
     const params = new URLSearchParams({ q: query });
     for (const area of next) params.append("area", area);
     window.history.replaceState(null, "", `/search?${params}`);
@@ -115,19 +142,56 @@ export default function SearchResults({ query, results, areas, initialSelected, 
           </div>
         ) : (
           <ol className={styles.list}>
-            {visible.map((result) => (
-              <li key={result.href + result.title} className={styles.result}>
-                <p className={styles.category}>{result.category}</p>
-                <h2 className={styles.title}>
-                  <Link href={result.href}>
-                    <Highlight text={result.title} query={query} />
-                  </Link>
-                </h2>
-                <p className={styles.excerpt}>
-                  <Highlight text={result.excerpt} query={query} />
-                </p>
-              </li>
-            ))}
+            {visible.map((result, index) => {
+              const id = result.href + result.title;
+              const open = expanded === id;
+              const detailId = `${titleId}-detail-${index}`;
+              return (
+                <li
+                  key={id}
+                  ref={(node) => {
+                    if (node) rows.current.set(id, node);
+                    else rows.current.delete(id);
+                  }}
+                  className={styles.result}
+                  data-open={open || undefined}
+                  data-settling={settling === id || undefined}
+                >
+                  <p className={styles.category}>{result.category}</p>
+                  <h2 className={styles.title}>
+                    <Link href={result.href}>
+                      <Highlight text={result.title} query={query} />
+                    </Link>
+                  </h2>
+                  <p className={styles.excerpt}>
+                    <Highlight text={result.excerpt} query={query} />
+                  </p>
+                  {/* After the title link in tab order; placed top-right by CSS. */}
+                  <button
+                    type="button"
+                    className={styles.more}
+                    aria-expanded={open}
+                    aria-controls={detailId}
+                    aria-label={`${open ? "Hide" : "Show"} summary of ${result.title}`}
+                    onClick={() => toggleDetail(id)}
+                  >
+                    {open ? <CloseIcon size={14} /> : <MoreIcon size={16} />}
+                  </button>
+                  <div id={detailId} className={styles.detail} inert={!open}>
+                    <div className={styles.detailInner}>
+                      {result.detail ? (
+                        <p className={styles.detailText}>
+                          <Highlight text={result.detail} query={query} />
+                        </p>
+                      ) : null}
+                      <ArrowAction href={result.href} className={styles.detailAction}>
+                        {result.action}
+                      </ArrowAction>
+                    </div>
+                  </div>
+                </li>
+              );
+            })}
           </ol>
         )}
       </section>

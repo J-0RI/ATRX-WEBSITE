@@ -191,7 +191,9 @@
 }
 
 .result {
-  padding: clamp(26px, 2.4vw, 34px) 0;
+  --result-pad: clamp(26px, 2.4vw, 34px);
+  position: relative;
+  padding: var(--result-pad) 0;
 }
 
 .result + .result {
@@ -199,6 +201,7 @@
 }
 
 .category {
+  padding-right: 48px; /* clear of the summary control */
   color: var(--text-3);
   font-family: var(--font-mono);
   font-size: var(--type-meta);
@@ -237,6 +240,78 @@
   font-size: var(--type-body);
   line-height: var(--leading-body);
   overflow-wrap: anywhere;
+}
+
+/* ---------- expandable summary ---------- */
+
+/*
+ * Summary control: the established square icon control (as the code copy button), centred
+ * on the category line so the row keeps its collapsed height. Icon tone is the only hover.
+ */
+.more {
+  position: absolute;
+  top: calc(var(--result-pad) - 7px);
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--rule);
+  color: var(--button-icon);
+  transition: color var(--button-transition);
+}
+
+.result[data-open] .more {
+  color: var(--button-icon-hover);
+}
+
+@media (hover: hover) {
+  .more:hover {
+    color: var(--button-icon-hover);
+  }
+}
+
+/* The shell grows to fit the summary; height only, no fade or movement of the content. */
+.detail {
+  display: grid;
+  grid-template-rows: 0fr;
+  /* A 4px bleed keeps the action's focus ring inside the clipped area; content stays aligned. */
+  margin: 0 -4px -4px;
+  visibility: hidden;
+  transition:
+    grid-template-rows var(--dur-std) var(--ease),
+    visibility 0s linear var(--dur-std);
+}
+
+.result[data-open] .detail {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition: grid-template-rows var(--dur-std) var(--ease);
+}
+
+.result[data-settling] .detail {
+  transition: none;
+}
+
+.detailInner {
+  min-height: 0;
+  overflow: hidden;
+  padding: 0 4px 4px;
+}
+
+.detailText {
+  max-width: 78ch;
+  padding-top: var(--space-paragraph);
+  color: var(--text-2);
+  font-size: var(--type-body);
+  line-height: var(--leading-body);
+  overflow-wrap: anywhere;
+}
+
+/* Copy → action at --space-content-action, measured to the label, not the 44px hit area. */
+.detailAction {
+  margin-top: calc(var(--space-content-action) - (44px - 1.2em) / 2);
 }
 
 /* Matches: a quiet accent field with brighter ink; no padding, so text never shifts. */

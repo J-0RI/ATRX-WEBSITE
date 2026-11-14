@@ -260,3 +260,55 @@
     display: none;
   }
 }
+
+/* ---------- directory layout: text rows, no preview stage ---------- */
+/*
+ * Same material, title, intro, row tones, active arrow and motion as the preview panels.
+ * Rows show their own description, so the panel is one column of content set as a
+ * two-column grid of rows where there is room.
+ */
+.panel[data-layout="directory"] {
+  grid-template-columns: minmax(0, 1fr);
+  width: min(max(52vw, 680px), 800px, calc(100vw - var(--panel-gutter)));
+}
+
+.panel[data-layout="directory"] .rows {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.panel[data-layout="directory"] .row {
+  align-items: flex-start;
+  min-height: 0;
+  height: 100%;
+  padding: 14px 16px 15px;
+}
+
+.panel[data-layout="directory"] .rowArrow {
+  margin-top: 3px;
+}
+
+.rowText {
+  display: grid;
+  flex: 1;
+  gap: 4px;
+  min-width: 0;
+}
+
+.rowDescription {
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--text-3);
+  transition: color var(--dur-fast) ease;
+}
+
+.row[data-active] .rowDescription {
+  color: var(--text-2);
+}
+
+@media (max-width: 719px) {
+  .panel[data-layout="directory"] .rows {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

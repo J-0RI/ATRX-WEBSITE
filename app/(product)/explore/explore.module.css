@@ -1,0 +1,602 @@
+/* /explore: one shared card grid above the existing ruled comparison. */
+
+/* ---------- access mode cards ---------- */
+
+.modesSection {
+  padding-top: var(--space-page-start);
+}
+
+.pageTitle {
+  color: #ffffff;
+  font-size: var(--section-display);
+  font-weight: 480;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.modes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 16px;
+  row-gap: 16px;
+  margin-top: var(--space-support-action);
+}
+
+.mode {
+  position: relative;
+  display: grid;
+  grid-row: span 6;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+  min-width: 0;
+  padding: var(--section-panel-padding);
+  border-radius: var(--radius-panel);
+  background: var(--surface-flat);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+
+.mode::after {
+  content: "";
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 6px;
+  height: 6px;
+  border-top: 1px solid var(--accent-mark);
+  border-right: 1px solid var(--accent-mark);
+  pointer-events: none;
+}
+
+.media {
+  aspect-ratio: 4 / 3;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: var(--radius-inner);
+  background: var(--surface-inset);
+  box-shadow: inset 0 0 0 1px var(--rule-inset);
+}
+
+.media svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.visualRule,
+.visualDetail,
+.visualOutput,
+.visualBoundary,
+.visualModule,
+.visualInner {
+  fill: none;
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.visualRule,
+.visualBoundary,
+.visualModule {
+  stroke: var(--rule-strong);
+}
+
+.visualModule {
+  fill: var(--surface-flat);
+}
+
+.visualInner {
+  stroke: var(--rule-inset);
+}
+
+.visualDetail {
+  stroke: var(--text-3);
+}
+
+.visualOutput {
+  stroke: var(--accent-mark);
+}
+
+.visualPoint,
+.visualEnd {
+  fill: var(--accent);
+}
+
+.title {
+  margin-top: var(--space-title-content);
+  color: var(--text);
+  font-size: var(--section-card-title);
+  font-weight: 450;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+.description {
+  margin-top: 10px;
+  color: var(--text-2);
+  font-size: var(--section-body);
+  line-height: var(--section-body-leading);
+}
+
+.terms {
+  margin-top: var(--space-paragraph);
+  color: var(--text-2);
+  font-size: var(--section-small);
+  line-height: var(--section-small-leading);
+}
+
+.highlights {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  margin-top: var(--space-title-content);
+  padding-top: var(--space-paragraph);
+  border-top: 1px solid var(--rule);
+  color: var(--text);
+  font-size: var(--section-small);
+  line-height: var(--section-small-leading);
+}
+
+.highlights li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.highlights svg {
+  flex: none;
+  margin-top: 5px;
+  color: var(--accent);
+}
+
+.cta {
+  width: 100%;
+  align-self: end;
+  margin-top: var(--space-content-action);
+}
+
+/* ---------- comparison ---------- */
+
+.compareSection {
+  margin-top: var(--section-gap);
+}
+
+.compareTitle {
+  color: #ffffff;
+  font-size: var(--section-display);
+  font-weight: 480;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.comparison {
+  margin-top: var(--space-title-content);
+}
+
+/* Structural scroll-occlusion shield: shares thead's top edge at rest (0px protrusion
+ * above .comparison) and sticks at top: 0 (y = 0..--nav-bottom) behind the fixed navbar
+ * once thead locks at --nav-bottom, preventing scrolled rows from bleeding through. */
+.comparison::before {
+  content: "";
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: block;
+  height: var(--nav-bottom);
+  margin-bottom: calc(-1 * var(--nav-bottom));
+  background: var(--bg);
+  pointer-events: none;
+}
+
+.comparisonViewport {
+  min-width: 0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+.labelCol {
+  width: 31%;
+}
+
+/* The search and the three mode headers share the same column geometry as every row.
+ * Sticks flush against the navbar's visible bottom edge (--nav-bottom). */
+.table thead th {
+  position: sticky;
+  top: var(--nav-bottom);
+  z-index: 5;
+  padding: 12px 12px 16px;
+  border-bottom: 1px solid var(--rule-strong);
+  background: var(--bg);
+  vertical-align: middle;
+}
+
+.table thead .corner {
+  padding-left: 0;
+  text-align: left;
+}
+
+.modeHead {
+  text-align: center;
+}
+
+.modeName {
+  display: block;
+  color: var(--text);
+  font-size: clamp(15px, 1.5cqi, 17px);
+  font-weight: 450;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: var(--space-micro);
+  width: min(100%, 220px);
+  height: 36px;
+  padding: 0 12px;
+  border-radius: var(--radius-panel);
+  background: var(--surface-flat);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  color: var(--text-3);
+  transition:
+    background-color var(--dur-fast) ease,
+    box-shadow var(--dur-fast) ease,
+    color var(--dur-fast) ease;
+}
+
+@media (hover: hover) {
+  .search:hover {
+    background: var(--surface-inset);
+    box-shadow: inset 0 0 0 1px var(--rule-strong);
+  }
+}
+
+.search:focus-within {
+  background: var(--surface-inset);
+  box-shadow:
+    inset 0 0 0 1px var(--rule-strong),
+    inset 0 -1px 0 var(--accent);
+}
+
+.search > svg {
+  flex: none;
+  color: var(--text-3);
+  opacity: 0.8;
+}
+
+.search input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: -0.005em;
+  outline: none;
+  appearance: none;
+}
+
+.search input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.search input::placeholder {
+  color: var(--text-3);
+  opacity: 1;
+}
+
+.clearSearch {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-right: -4px;
+  color: var(--text-3);
+  transition: color var(--dur-fast) ease;
+}
+
+.clearSearch:hover {
+  color: var(--text);
+}
+
+.clearSearch:focus-visible {
+  outline-offset: -2px;
+}
+
+.groupHead th {
+  padding: 0;
+  text-align: left;
+}
+
+.groupToggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 32px 0 14px;
+  border-bottom: 1px solid var(--rule-strong);
+  color: #ffffff;
+  font-size: var(--section-card-title);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  text-align: left;
+}
+
+tbody:not([hidden]) + .groupHead .groupToggle {
+  padding-top: 44px;
+}
+
+.groupToggle svg {
+  flex: none;
+  margin-left: auto;
+  color: var(--text-2);
+  transition: transform var(--dur-fast) ease, color var(--dur-fast) ease;
+}
+
+@media (hover: hover) {
+  .groupToggle:hover svg {
+    color: var(--text);
+  }
+}
+
+.groupToggle[aria-expanded="false"] svg {
+  transform: rotate(-90deg);
+}
+
+.row th,
+.row td {
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--rule);
+  font-size: var(--section-small);
+  line-height: var(--section-small-leading);
+  vertical-align: middle;
+}
+
+.row th {
+  position: relative;
+  padding-left: 0;
+  color: var(--text-2);
+  font-weight: 400;
+  text-align: left;
+}
+
+.featureHead {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: var(--space-micro);
+  row-gap: 4px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.featureName {
+  min-width: 0;
+  overflow-wrap: break-word;
+  color: var(--text-2);
+}
+
+.statusTag {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 6px;
+  border-radius: var(--radius-tag);
+  background: var(--surface-flat);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  color: var(--text-3);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.statusTag[data-status="in-development"],
+.statusTag[data-status="planned"] {
+  box-shadow: inset 0 0 0 1px var(--accent-line);
+  color: var(--accent);
+}
+
+.infoButton {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin: -2px -1px;
+  border-radius: var(--radius-tag);
+  color: var(--text-3);
+  opacity: 0.72;
+  transition:
+    color var(--dur-fast) ease,
+    opacity var(--dur-fast) ease;
+}
+
+@media (hover: hover) {
+  .infoButton:hover {
+    color: var(--text);
+    opacity: 1;
+  }
+}
+
+.infoButton:focus-visible,
+.infoButton[aria-expanded="true"] {
+  color: var(--text);
+  opacity: 1;
+}
+
+.infoButton:focus-visible {
+  outline: 1px solid var(--accent-line);
+  outline-offset: 0;
+}
+
+.tooltip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 30;
+  width: max-content;
+  max-width: min(280px, calc(100vw - 32px));
+  padding: 10px 14px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-control);
+  background: var(--surface-inset);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.72);
+  color: var(--text);
+  font-size: 12.5px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  text-align: left;
+  text-wrap: pretty;
+  white-space: normal;
+  pointer-events: auto;
+}
+
+.tooltipArrow {
+  position: absolute;
+  left: var(--arrow-x, 22px);
+  width: 8px;
+  height: 8px;
+  background: var(--surface-inset);
+  transform: translateX(-50%) rotate(45deg);
+  pointer-events: none;
+}
+
+.tooltip[data-side="bottom"] .tooltipArrow {
+  top: -4.5px;
+  border-top: 1px solid var(--rule-strong);
+  border-left: 1px solid var(--rule-strong);
+}
+
+.tooltip[data-side="top"] .tooltipArrow {
+  bottom: -4.5px;
+  border-right: 1px solid var(--rule-strong);
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+.tooltipBody {
+  display: block;
+  color: var(--text);
+}
+
+.row td {
+  text-align: center;
+}
+
+.indicator {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.included {
+  color: var(--accent);
+}
+
+.unavailable,
+.unspecified {
+  color: var(--text-3);
+}
+
+.noMatch {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--rule);
+  color: var(--text-2);
+  font-size: var(--type-body);
+}
+
+.textButton {
+  margin-top: 8px;
+  color: var(--text);
+  font-size: 14px;
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 4px;
+}
+
+.textButton:hover {
+  text-decoration-color: currentColor;
+}
+
+/* On narrow canvases, keep the same four columns and let the table scroll. The feature
+ * column remains visible, so each O, X or dash stays attached to a named capability. */
+@container content (max-width: 800px) {
+  .comparisonViewport {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-color: var(--rule-strong) transparent;
+  }
+
+  .table {
+    min-width: 700px;
+  }
+
+  .labelCol {
+    width: 28%;
+  }
+
+  /* A horizontal scrollport becomes the sticky containing block. Keep the header in
+   * normal vertical flow here, otherwise top: var(--nav-bottom) covers the first category. */
+  .comparison::before {
+    display: none;
+  }
+
+  .table thead th {
+    position: static;
+  }
+
+  .table thead .corner,
+  .row th {
+    position: sticky;
+    left: 0;
+    top: auto;
+    background: var(--bg);
+  }
+
+  .table thead .corner {
+    z-index: 6;
+  }
+
+  .row th {
+    z-index: 1;
+  }
+
+  .groupToggle > span:first-child {
+    transform: translateX(var(--compare-scroll, 0px));
+  }
+
+  .groupToggle svg {
+    position: sticky;
+    right: 0;
+    background: var(--bg);
+  }
+}
+
+/* The three-card family stays intact on laptops; small canvases gain a readable stack. */
+@container content (max-width: 800px) {
+  .modes {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 600px;
+  }
+}

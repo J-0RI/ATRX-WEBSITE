@@ -214,6 +214,8 @@ function tagName(opening) {
 const SKIP_TAGS = new Set(["code", "pre", "svg", "Image", "img", "ProductExample", "style", "script"]);
 /** Interactive chrome: CTA and link labels never become passages of their own. */
 const CHROME_TAGS = new Set(["Link", "a", "button", "Actions", "Related", "option", "select", "input", "textarea", "label"]);
+/** Form controls: their labels and placeholders are interface, never page copy. */
+const FORM_TAGS = new Set(["label", "select", "option", "input", "textarea"]);
 const BLOCK_TAGS = new Set(["p", "li", "td", "dd", "dt", "blockquote", "figcaption", "caption", "Note", "summary"]);
 
 /** Consts declared in a function body (`const topic = monitoredTopics[selected]`). */
@@ -264,6 +266,42 @@ function attribute(opening, key, scope) {
   return clean(visibleText(item.initializer, scope));
 }
 
+/** Runtime-only text (counts, echoed input): a call or unresolved template inside the block. */
+function isDynamic(node, scope) {
+  let dynamic = false;
+  const visit = (current) => {
+    if (dynamic) return;
+    if (ts.isTemplateExpression(current) && current.templateSpans.some((span) => !visibleText(span.expression, scope).trim())) dynamic = true;
+    else if (ts.isCallExpression(current) && ts.isJsxExpression(current.parent) && !mapExpansions(current, scope)) dynamic = true;
+    if (!dynamic) ts.forEachChild(current, visit);
+  };
+  visit(node);
+  return dynamic;
+}
+
+/** Structured data handed to a component as a prop: one passage per row-like call, headings from titles. */
+function walkData(node, scope, target, headings, passages, add, depth = 0) {
+  if (!node || depth > 12) return;
+  if (ts.isCallExpression(node) && node.arguments[0] && ts.isStringLiteralLike(node.arguments[0])) {
+    const parts = [];
+    const collect = (value) => {
+      if (!value) return;
+      if (ts.isSpreadElement(value)) return collect(value.expression);
+      if (ts.isCallExpression(value)) return value.arguments.forEach(collect);
+      const textValue = clean(visibleText(value, scope));
+      if (textValue) parts.push(textValue);
+    };
+    node.arguments.forEach(collect);
+    add(passages, [...new Set(parts)].join(" · "), target);
+    return;
+  }
+  if (ts.isObjectLiteralExpression(node)) {
+    const title = property(node, "title");
+    if (title && ts.isStringLiteralLike(title)) add(headings, title.text, target);
+  }
+  ts.forEachChild(node, (child) => walkData(child, scope, target, headings, passages, add, depth + 1));
+}
+
 /** Direct copy: literal JSX text, or an expression that resolves to a string (`{research.request}`). */
 function hasDirectText(element, scope) {
   return element.children.some((item) => {
@@ -300,13 +338,14 @@ function category(href) {
   if (productGroups.has(href)) return productGroups.get(href);
   if (["/documentation", "/philosophy", "/instruments"].includes(href)) return "Documentation";
   if (href === "/architecture") return "Architecture";
+  if (href === "/use-cases") return "Use cases";
   if (href === "/partnerships") return "Enterprise tenancy";
   if (href === "/performance") return "Performance";
   if (href === "/risk") return "Disclosure";
   if (href === "/contact") return "Request access";
   return "Product";
 }
-const CATEGORY_ORDER = [...new Set([...productGroups.values()]), "Documentation", "Architecture", "Enterprise tenancy", "Performance", "Request access", "Disclosure"];
+const CATEGORY_ORDER = [...new Set([...productGroups.values()]), "Documentation", "Architecture", "Use cases", "Enterprise tenancy", "Performance", "Request access", "Disclosure"];
 
 /* ---------- page indexing ---------- */
 
@@ -376,7 +415,7 @@ function indexPage(file, followed) {
     if (ts.isJsxElement(node) || ts.isJsxSelfClosingElement(node)) {
       const opening = ts.isJsxElement(node) ? node.openingElement : node;
       const tag = tagName(opening);
-      if (SKIP_TAGS.has(tag)) return;
+      if (SKIP_TAGS.has(tag) || FORM_TAGS.has(tag)) return;
       const id = staticId(opening);
       const current = id && (tag === "DocSection" || /^[a-z]/.test(tag)) ? `${href}#${id}` : target;
       const title = attribute(opening, "title", scope);
@@ -388,7 +427,17 @@ function indexPage(file, followed) {
           if (value.split(" ").length >= 3) add(passages, value, current);
         }
       }
-      for (const part of opening.attributes.properties) if (ts.isJsxAttribute(part) && part.initializer) walk(part.initializer, current, scope);
+      for (const part of opening.attributes.properties) {
+        if (!ts.isJsxAttribute(part) || !part.initializer) continue;
+        walk(part.initializer, current, scope);
+        // A prop bound to data declared elsewhere (`groups={accessComparison}`) is rendered content.
+        const expression = ts.isJsxExpression(part.initializer) ? part.initializer.expression : null;
+        const data = expression && ts.isIdentifier(expression) ? resolve(expression, scope) : null;
+        if (data?.node && data.node !== expression && (ts.isArrayLiteralExpression(data.node) || ts.isObjectLiteralExpression(data.node))
+          && !NON_COPY_PROPS.test(part.name.getText())) {
+          walkData(data.node, data.scope, current, headings, passages, add);
+        }
+      }
       const call = componentCall(opening, scope);
       if (call && !active.has(call.fn)) {
         active.add(call.fn);
@@ -410,7 +459,7 @@ function indexPage(file, followed) {
         return;
       }
       if (BLOCK_TAGS.has(tag) || (!CHROME_TAGS.has(tag) && hasDirectText(node, scope))) {
-        add(passages, visibleText(node, scope), current);
+        if (!isDynamic(node, scope)) add(passages, visibleText(node, scope), current);
         return;
       }
       for (const item of node.children) walk(item, current, scope);

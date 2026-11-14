@@ -73,10 +73,28 @@ export function MenuIcon({ size = 18, className }: IconProps) {
   );
 }
 
+/** Horizontal "more" glyph: three round-capped points on the 16px grid. */
+export function MoreIcon({ size = 16, className }: IconProps) {
+  return (
+    <svg {...base(size)} strokeWidth={2} className={className}>
+      <path d="M3.5 8h.01M8 8h.01M12.5 8h.01" />
+    </svg>
+  );
+}
+
 export function CloseIcon({ size = 16, className }: IconProps) {
   return (
     <svg {...base(size)} className={className}>
       <path d="M4 4l8 8M12 4l-8 8" />
+    </svg>
+  );
+}
+
+export function InfoIcon({ size = 14, className }: IconProps) {
+  return (
+    <svg {...base(size)} className={className}>
+      <circle cx="8" cy="8" r="6" />
+      <path d="M8 7.25v3.5M8 5.25h.01" />
     </svg>
   );
 }

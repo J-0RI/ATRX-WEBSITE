@@ -139,12 +139,15 @@ export default function MenuButton({ id, controller, label, ariaLabel, panel, ho
   const inRegion = (node: Node | null) =>
     !!node && (!!rootRef.current?.contains(node) || !!panelRef.current?.contains(node));
 
+  const directory = panel.layout === "directory";
+
   const surface = (
     <div
       ref={panelRef}
       id={panelId}
       className={styles.panel}
       data-size={size}
+      data-layout={directory ? "directory" : undefined}
       data-open={open || undefined}
       data-handoff={controller.handoff || undefined}
     >
@@ -159,15 +162,28 @@ export default function MenuButton({ id, controller, label, ariaLabel, panel, ho
                 className={styles.row}
                 data-active={i === active || undefined}
                 aria-current={i === current ? "page" : undefined}
+                aria-label={directory ? item.label : undefined}
                 aria-describedby={`${panelId}-d${i}`}
                 onPointerEnter={() => setActive(i)}
                 onFocus={() => setActive(i)}
                 onClick={() => close(id)}
               >
-                <span className={styles.thumb} aria-hidden="true">
-                  <img src={`/nav-art/${item.art}.svg`} alt="" width={600} height={380} />
-                </span>
-                <span className={styles.rowLabel}>{item.label}</span>
+                {directory ? (
+                  /* Directory rows carry their own description; there is no preview stage. */
+                  <span className={styles.rowText}>
+                    <span className={styles.rowLabel}>{item.label}</span>
+                    <span id={`${panelId}-d${i}`} className={styles.rowDescription}>
+                      {item.description}
+                    </span>
+                  </span>
+                ) : (
+                  <>
+                    <span className={styles.thumb} aria-hidden="true">
+                      <img src={`/nav-art/${item.art}.svg`} alt="" width={600} height={380} />
+                    </span>
+                    <span className={styles.rowLabel}>{item.label}</span>
+                  </>
+                )}
                 <ChevronRight size={14} className={styles.rowArrow} />
               </Link>
             </li>
@@ -182,7 +198,7 @@ export default function MenuButton({ id, controller, label, ariaLabel, panel, ho
       </div>
 
       {/* One stage: every illustration and caption is stacked in place, only opacity changes. */}
-      <div className={styles.preview} aria-hidden="true">
+      {!directory && <div className={styles.preview} aria-hidden="true">
         <div className={styles.stage}>
           {panel.items.map((item, i) => (
             <img
@@ -206,7 +222,7 @@ export default function MenuButton({ id, controller, label, ariaLabel, panel, ho
             </div>
           ))}
         </div>
-      </div>
+      </div>}
     </div>
   );
 

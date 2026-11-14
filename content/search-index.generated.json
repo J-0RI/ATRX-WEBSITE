@@ -148,22 +148,6 @@
         "href": "/#method"
       },
       {
-        "text": "Isolate the signal Distinguish market repricing from structural change.",
-        "href": "/#method"
-      },
-      {
-        "text": "Trace transmission Examine policy, liquidity, and positioning channels.",
-        "href": "/#method"
-      },
-      {
-        "text": "Challenge the thesis Test competing explanations, regimes, and constraints.",
-        "href": "/#method"
-      },
-      {
-        "text": "Preserve the rationale Keep evidence, assumptions, and limitations reviewable.",
-        "href": "/#method"
-      },
-      {
         "text": "A defensible result can still be unsuitable for a particular institution. The mandate gives the research its decision context.",
         "href": "/#adoption"
       },
@@ -1080,6 +1064,456 @@
     ]
   },
   {
+    "href": "/explore",
+    "title": "Access modes",
+    "category": "Access Modes",
+    "summary": "The three ATRX access modes side by side: who each serves, how it is deployed, and a searchable comparison of published scope.",
+    "headings": [
+      {
+        "text": "Prosumer Node",
+        "href": "/explore#modes"
+      },
+      {
+        "text": "Capital Desk",
+        "href": "/explore#modes"
+      },
+      {
+        "text": "Compare features across modes",
+        "href": "/explore#compare-heading"
+      },
+      {
+        "text": "Market Intelligence & Research",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Market Coverage & Data",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Portfolio Risk & Controls",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Execution & System Integration",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Model Governance & Auditability",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Enterprise Security & Administration",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Infrastructure & Reliability",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Institutional Workflows & Collaboration",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Related",
+        "href": "/explore"
+      }
+    ],
+    "passages": [
+      {
+        "text": "A qualified quantitative prosumer running ATRX inside a single execution environment.",
+        "href": "/explore#modes"
+      },
+      {
+        "text": "By application · Monthly compute fee",
+        "href": "/explore#modes"
+      },
+      {
+        "text": "Single-tenant execution pipeline",
+        "href": "/explore#modes"
+      },
+      {
+        "text": "Core FX and Metals vectors",
+        "href": "/explore#modes"
+      },
+      {
+        "text": "Standard JSON webhook delivery",
+        "href": "/explore#modes"
+      },
+      {
+        "text": "Enterprise desks allocating across cohorts through their existing execution infrastructure.",
+        "href": "/explore#modes"
+      },
+      {
+        "text": "By application · Base + Capacity",
+        "href": "/explore#modes"
+      },
+      {
+        "text": "Expanded topology, including Indices and Energy",
+        "href": "/explore#modes"
+      },
+      {
+        "text": "Direct low-latency integration SDKs",
+        "href": "/explore#modes"
+      },
+      {
+        "text": "Priority latency routing",
+        "href": "/explore#modes"
+      },
+      {
+        "text": "Institutions that need dedicated infrastructure, research access and governance telemetry.",
+        "href": "/explore#modes"
+      },
+      {
+        "text": "By application · Negotiated terms",
+        "href": "/explore#modes"
+      },
+      {
+        "text": "Dedicated inference cluster on AWS or GCP",
+        "href": "/explore#modes"
+      },
+      {
+        "text": "Whitepapers and ablation studies",
+        "href": "/explore#modes"
+      },
+      {
+        "text": "Audit-grade telemetry logs",
+        "href": "/explore#modes"
+      },
+      {
+        "text": "Systemic macro intelligence",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Market regime classification",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Regime transition probabilities",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Cross-asset transmission analysis",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Causal factor attribution",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Structural break detection",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Macro event impact analysis",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Signal confidence scoring",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Forecast uncertainty estimates",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Historical regime replay",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Research signal provenance",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Equity index coverage",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Energy market coverage",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Rates and fixed income",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Equity market coverage",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Futures and derivatives",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Real-time market data",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Historical market data",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Cross-asset data normalization",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Data quality monitoring",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Source timestamp tracking",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Real-time portfolio exposure",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Portfolio factor decomposition",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Concentration risk monitoring",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Liquidity risk analysis",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Expected Shortfall (CVaR)",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Historical stress testing",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Custom stress scenarios",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Position limit enforcement",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Pre-trade risk checks",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Post-trade risk monitoring",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Mandatory risk-control handoff",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Human approval thresholds",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Automated risk escalation",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Emergency execution halt",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Standard JSON webhooks",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Streaming API delivery",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "FIX protocol integration",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Custom execution routing",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Retry and failover handling",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Idempotent event delivery",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Execution latency monitoring",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Custom integration adapters",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Model version governance",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Research methodology documentation",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Model validation workflows",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Model performance monitoring",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Explainable signal attribution",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Reproducible research outputs",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Immutable audit records",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Historical decision reconstruction",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Policy-based model controls",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Human override controls",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Model change approvals",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Research ablation studies",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Single sign-on (SSO)",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "SCIM user provisioning",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Role-based access control",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Attribute-based access control",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Private network connectivity",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Encryption in transit",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Customer-managed encryption keys",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Secrets and credential rotation",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Data residency controls",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Administrative audit logs",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Dedicated inference clusters",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Private cloud connectivity",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Regional deployment options",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Service health monitoring",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Disaster recovery planning",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Contractual service-level agreements",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Shared research workspaces",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Team access controls",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Research approval workflows",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Research history and archiving",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Scheduled intelligence delivery",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Custom intelligence dashboards",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Custom reporting integrations",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Technical implementation support",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Scope describes each mode’s published configuration. It does not confirm instrument activation, capacity or a delivery-time guarantee; Market Coverage records instrument status, and applications are evaluated against available compute capacity.",
+        "href": "/explore"
+      },
+      {
+        "text": "Published ATRX access mode capability matrix. O means included, X means unavailable, and a dash means not specified in published scope.",
+        "href": "/explore"
+      },
+      {
+        "text": "Search the comparison",
+        "href": "/explore"
+      },
+      {
+        "text": "No features match “”. Clear search",
+        "href": "/explore"
+      }
+    ]
+  },
+  {
     "href": "/capabilities/causal-attribution",
     "title": "Causal Attribution",
     "category": "Intelligence",
@@ -1231,14 +1665,6 @@
       },
       {
         "text": "Developed FX Vector. The developed-FX vector recorded as live traded and executed during the same validation milestone.",
-        "href": "/capabilities/market-coverage"
-      },
-      {
-        "text": "MET_SAFE Precious Metals Vector",
-        "href": "/capabilities/market-coverage"
-      },
-      {
-        "text": "FX_DM Developed FX Vector",
         "href": "/capabilities/market-coverage"
       },
       {
@@ -2282,34 +2708,6 @@
         "href": "/architecture"
       },
       {
-        "text": "01 · Perception Data Ingestion",
-        "href": "/architecture#pillars"
-      },
-      {
-        "text": "02 · Synthesis Structural Topology",
-        "href": "/architecture#pillars"
-      },
-      {
-        "text": "03 · Projection Inference Routing",
-        "href": "/architecture#pillars"
-      },
-      {
-        "text": "04 · Conditioning State Gating",
-        "href": "/architecture#pillars"
-      },
-      {
-        "text": "05 · Control Capital Protection",
-        "href": "/architecture#pillars"
-      },
-      {
-        "text": "06 · Execution Latency Terminal",
-        "href": "/architecture#pillars"
-      },
-      {
-        "text": "07 · Adaptation Telemetry Loop",
-        "href": "/architecture#pillars"
-      },
-      {
         "text": "Data flows linearly through Perception, Synthesis, Conditioning, and Control before reaching Execution. The Control layer receives a mandatory handoff. If the current market state matches a known failure vector, the protocol enforces a hard stop.",
         "href": "/architecture#pipeline"
       },
@@ -2328,6 +2726,240 @@
       {
         "text": "Request the technical whitepaper",
         "href": "/architecture"
+      }
+    ]
+  },
+  {
+    "href": "/use-cases",
+    "title": "Use cases",
+    "category": "Use cases",
+    "summary": "How hedge funds, asset managers, trading desks, risk teams, quantitative researchers and prosumers apply ATRX within their own controls.",
+    "headings": [
+      {
+        "text": "Where ATRX fits in professional practice.",
+        "href": "/use-cases"
+      },
+      {
+        "text": "Hedge funds",
+        "href": "/use-cases#hedge-funds"
+      },
+      {
+        "text": "Regime awareness",
+        "href": "/use-cases#hedge-funds"
+      },
+      {
+        "text": "Attribution",
+        "href": "/use-cases#hedge-funds"
+      },
+      {
+        "text": "Fund mandates",
+        "href": "/use-cases#hedge-funds"
+      },
+      {
+        "text": "Typical access",
+        "href": "/use-cases#hedge-funds"
+      },
+      {
+        "text": "Asset managers",
+        "href": "/use-cases#asset-managers"
+      },
+      {
+        "text": "Macro research",
+        "href": "/use-cases#asset-managers"
+      },
+      {
+        "text": "Decision support",
+        "href": "/use-cases#asset-managers"
+      },
+      {
+        "text": "Scope discipline",
+        "href": "/use-cases#asset-managers"
+      },
+      {
+        "text": "Enterprise trading desks",
+        "href": "/use-cases#trading-desks"
+      },
+      {
+        "text": "Delivery",
+        "href": "/use-cases#trading-desks"
+      },
+      {
+        "text": "Venues",
+        "href": "/use-cases#trading-desks"
+      },
+      {
+        "text": "Deployment",
+        "href": "/use-cases#trading-desks"
+      },
+      {
+        "text": "Risk & governance teams",
+        "href": "/use-cases#risk-governance"
+      },
+      {
+        "text": "Residual risk",
+        "href": "/use-cases#risk-governance"
+      },
+      {
+        "text": "Quantitative researchers",
+        "href": "/use-cases#quantitative-research"
+      },
+      {
+        "text": "Working with records",
+        "href": "/use-cases#quantitative-research"
+      },
+      {
+        "text": "Integration walkthrough",
+        "href": "/use-cases#quantitative-research"
+      },
+      {
+        "text": "Research material",
+        "href": "/use-cases#quantitative-research"
+      },
+      {
+        "text": "Quantitative prosumers",
+        "href": "/use-cases#prosumers"
+      },
+      {
+        "text": "Controls",
+        "href": "/use-cases#prosumers"
+      },
+      {
+        "text": "Related",
+        "href": "/use-cases"
+      }
+    ],
+    "passages": [
+      {
+        "text": "ATRX is designed for systematic allocators, professional trading teams and enterprise desks that need to interpret complex market conditions together rather than in isolation. Each team below brings a different question and a different operating environment; in every case, decision and capital authority remain with the team.",
+        "href": "/use-cases"
+      },
+      {
+        "text": "Systematic and macro strategies need to know whether a structural opportunity holds under prevailing conditions before capital moves. ATRX evaluates the economic mechanism behind a market move, classifies the regime and delivers an execution payload that the fund’s environment verifies and passes through its own mandates before its risk engine.",
+        "href": "/use-cases#hedge-funds"
+      },
+      {
+        "text": "Regime awareness. State gating restricts or permits execution according to prevailing market regimes, and the classification travels with the payload. See Regime & State Analysis.",
+        "href": "/use-cases#hedge-funds"
+      },
+      {
+        "text": "Attribution. Each payload carries a regime tag and a structural identifier, so realized P&L can be attributed to the conditions it was taken in. See Causal Attribution.",
+        "href": "/use-cases#hedge-funds"
+      },
+      {
+        "text": "Fund mandates. Drawdown thresholds, exposure limits and macroeconomic blackout windows are set by the desk. See Native Risk Mandates.",
+        "href": "/use-cases#hedge-funds"
+      },
+      {
+        "text": "Typical access. Capital Desk: multi-node cohort allocation with custom regime gating and drawdown parameterization.",
+        "href": "/use-cases#hedge-funds"
+      },
+      {
+        "text": "An allocation decision depends on a judgment the institution can defend: the mechanism behind a move, where the thesis could fail and how it bears on the mandate. ATRX supports that research and keeps the evidence and reasoning available for review. It does not promise certainty or replace institutional decision-making authority.",
+        "href": "/use-cases#asset-managers"
+      },
+      {
+        "text": "Macro research. ATRX connects market-state observations to underlying economic drivers and evaluates whether a causal structure supports capital deployment. See Systemic Macro Intelligence.",
+        "href": "/use-cases#asset-managers"
+      },
+      {
+        "text": "Decision support. Prepared briefs set out their assumptions and evidence so they can be compared before the next review. See ATRX in practice.",
+        "href": "/use-cases#asset-managers"
+      },
+      {
+        "text": "Scope discipline. Phase 1 live-traded FX and Metals vectors are recorded separately from preparing and roadmap topology, so scope is never read as availability. See Market Coverage.",
+        "href": "/use-cases#asset-managers"
+      },
+      {
+        "text": "Typical access. Capital Desk for a desk allocation, or Institutional for a dedicated engagement with research access.",
+        "href": "/use-cases#asset-managers"
+      },
+      {
+        "text": "ATRX integrates with enterprise trading desks as a parallel intelligence layer. Validated telemetry reaches the firm’s execution nodes through its existing infrastructure, so the desk keeps its venues, broker connections and controls.",
+        "href": "/use-cases#trading-desks"
+      },
+      {
+        "text": "Delivery. Signed, schema-validated execution payloads arrive in tenant infrastructure; verification parameters come through onboarding. See Zero-Latency Webhooks.",
+        "href": "/use-cases#trading-desks"
+      },
+      {
+        "text": "Venues. Enterprise integration material describes translation to the venues and broker APIs the desk already uses. See Venue Independence.",
+        "href": "/use-cases#trading-desks"
+      },
+      {
+        "text": "Deployment. An architecture sync is followed by a paper-trading parallel run inside the tenant environment; live capital follows latency and slippage validation. See Deployment Process.",
+        "href": "/use-cases#trading-desks"
+      },
+      {
+        "text": "Typical access. Capital Desk: direct low-latency integration SDKs and priority latency routing.",
+        "href": "/use-cases#trading-desks"
+      },
+      {
+        "text": "Intelligence does not bypass control. ATRX subjects execution to regime eligibility and a mandatory risk handoff, the tenant retains authority over capital, sizing and instrument permissions, and the record of what was decided remains available for internal review.",
+        "href": "/use-cases#risk-governance"
+      },
+      {
+        "text": "Control. Regime eligibility and the risk veto are distinct checks; a structural opportunity does not override the mandatory risk-control handoff. See Risk & Control.",
+        "href": "/use-cases#risk-governance"
+      },
+      {
+        "text": "Record. Decision logs, state classifications and risk veto events export in machine-readable formats for internal quantitative governance. “Audit-grade” describes the telemetry role, not a regulatory certification. See Audit-Grade Ledgers.",
+        "href": "/use-cases#risk-governance"
+      },
+      {
+        "text": "Residual risk. Model and execution risk remain, including feed latency, broker API downtime and slippage. See the Risk Disclosure.",
+        "href": "/use-cases#risk-governance"
+      },
+      {
+        "text": "Typical access. Institutional: audit-grade telemetry logs for governance.",
+        "href": "/use-cases#risk-governance"
+      },
+      {
+        "text": "Research teams build models, decision rules and research workflows on ATRX records in the language and framework the desk already uses, from point-in-time data to live directives, and judge outputs after the fact over a review window the desk sets.",
+        "href": "/use-cases#quantitative-research"
+      },
+      {
+        "text": "Working with records. The homepage sets out how ATRX data, directives and evaluation fit a research workflow. See Working with ATRX.",
+        "href": "/use-cases#quantitative-research"
+      },
+      {
+        "text": "Integration walkthrough. Python and JavaScript examples cover receipt, verification, desk controls and routing of a payload. See Quickstart.",
+        "href": "/use-cases#quantitative-research"
+      },
+      {
+        "text": "Research material. Whitepapers and ablation studies are maintained for qualified evaluators and available through a documentation request. The System Architecture summary is public.",
+        "href": "/use-cases#quantitative-research"
+      },
+      {
+        "text": "Typical access. Institutional: full access to whitepapers and ablation studies, with direct engineering syncs.",
+        "href": "/use-cases#quantitative-research"
+      },
+      {
+        "text": "A qualified quantitative prosumer can run ATRX inside a single execution environment: a single-tenant pipeline whose receiving endpoint belongs to that environment, with the prosumer’s own mandates applied before the local risk engine.",
+        "href": "/use-cases#prosumers"
+      },
+      {
+        "text": "Scope. The core FX and Metals topological vectors; MET_SAFE and FX_DM were live-traded during Phase 1 validation. See Market Coverage.",
+        "href": "/use-cases#prosumers"
+      },
+      {
+        "text": "Controls. Systemic guardrails are enforced at the API level, and capital decisions remain with the prosumer.",
+        "href": "/use-cases#prosumers"
+      },
+      {
+        "text": "Delivery. A standard JSON webhook; verification parameters and schema details come through onboarding.",
+        "href": "/use-cases#prosumers"
+      },
+      {
+        "text": "Typical access. Prosumer Node: monthly compute fee, by application.",
+        "href": "/use-cases#prosumers"
+      },
+      {
+        "text": "Use cases describe how documented ATRX scope applies to each kind of team. They do not imply access, instrument availability or performance; access is granted by application after technical qualification.",
+        "href": "/use-cases"
+      },
+      {
+        "text": "Explore access modes",
+        "href": "/use-cases"
       }
     ]
   },
@@ -2394,30 +3026,6 @@
       {
         "text": "ATRX is engineered to integrate with enterprise trading desks as a centralized intelligence core. Validated telemetry reaches the firm's execution nodes through their existing infrastructure. Zero replatforming. Zero migration risk.",
         "href": "/partnerships"
-      },
-      {
-        "text": "Native Risk Mandates 01",
-        "href": "/partnerships#integration"
-      },
-      {
-        "text": "Zero-Latency Webhooks 02",
-        "href": "/partnerships#integration"
-      },
-      {
-        "text": "Causal Attribution 03",
-        "href": "/partnerships#integration"
-      },
-      {
-        "text": "Venue Independence 04",
-        "href": "/partnerships#integration"
-      },
-      {
-        "text": "Operational Sovereignty 05",
-        "href": "/partnerships#integration"
-      },
-      {
-        "text": "Audit-Grade Ledgers 06",
-        "href": "/partnerships#integration"
       },
       {
         "text": "Dedicated Tenant Pipeline. The enterprise firm connects directly to the ATRX routing engine. ATRX provides the infrastructure, continuous model realignment, and sub-second signal delivery.",

@@ -72,6 +72,8 @@
 
   /* geometry */
   --nav-h: 80px;
+  --nav-cell-h: 37px;
+  --nav-bottom: calc((var(--nav-h) + var(--nav-cell-h)) / 2);
   --rail-w: 272px;            /* sidebar column incl. its 16px outer inset */
   --gutter: clamp(32px, 3.8vw, 56px);
   --edge: clamp(24px, 2.7vw, 40px);
@@ -151,6 +153,12 @@
   --leading-small: 23px;
   --type-control: 15px;
   --type-meta: 12px;
+}
+
+@media (max-width: 1179px) {
+  :root {
+    --nav-cell-h: 40px;
+  }
 }
 
 *,

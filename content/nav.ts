@@ -38,6 +38,7 @@ export const productSection: LocalSection = {
       { label: "Access Tiers", href: "/access", keywords: "Prosumer Node Capital Desk Institutional pricing comparison" },
     ] },
     { title: "Access Modes", items: [
+      { label: "Explore", href: "/explore", searchLabel: "Explore access modes", keywords: "compare access modes tiers eligibility deployment onboarding" },
       { label: "Prosumer Node", href: "/access/prosumer-node", keywords: "Tier I single tenant FX metals" },
       { label: "Capital Desk", href: "/access/capital-desk", keywords: "Tier II enterprise cohort SDK drawdown" },
       { label: "Institutional", href: "/access/institutional", keywords: "Tier III dedicated cluster AWS GCP governance" },
@@ -152,9 +153,19 @@ const standalonePages: (NavItem & { section: string })[] = [
 ];
 
 /** Centre group of the global navigation. */
+/** Plain global links. Performance stays reachable through the footer, documentation and search. */
 export const primaryNav: NavItem[] = [
   { label: "Architecture", href: "/architecture" },
-  { label: "Performance", href: "/performance" },
+];
+
+/** Professional audiences, each a section of /use-cases (mobile drawer reads this list). */
+export const useCasesMenu: NavItem[] = [
+  { label: "Hedge funds", href: "/use-cases#hedge-funds" },
+  { label: "Asset managers", href: "/use-cases#asset-managers" },
+  { label: "Enterprise trading desks", href: "/use-cases#trading-desks" },
+  { label: "Risk & governance teams", href: "/use-cases#risk-governance" },
+  { label: "Quantitative researchers", href: "/use-cases#quantitative-research" },
+  { label: "Quantitative prosumers", href: "/use-cases#prosumers" },
 ];
 
 export const documentationMenu: NavItem[] = [
@@ -176,16 +187,18 @@ export const requestAccessMenu: NavItem[] = [
   { label: "Log in", href: LOGIN_URL },
 ];
 
-/** Desktop dropdown panel: one row per destination, each with its own editorial illustration. */
+/** Desktop dropdown panel row. Preview panels give each row an editorial illustration. */
 export type NavPanelItem = NavItem & {
   description: string;
-  /** Illustration in /public/nav-art, one of the shared watercolor series. */
-  art: string;
+  /** Illustration in /public/nav-art, one of the shared watercolor series (preview layout only). */
+  art?: string;
 };
 
 export type NavPanel = {
   title: string;
   intro: string;
+  /** "preview": rows beside an illustration stage. "directory": text rows, each showing its description. */
+  layout?: "preview" | "directory";
   items: NavPanelItem[];
   /** Parent destination, shown beneath the rows when one exists. */
   parent?: NavItem;
@@ -208,6 +221,24 @@ export const documentationPanel: NavPanel = {
     panelItem("/documentation#library", "Whitepapers, reports and disclosures, from structural philosophy to Phase 1 validation.", "library"),
   ],
   parent: { label: "Documentation overview", href: "/documentation" },
+};
+
+/* Audiences named or served by existing ATRX copy; each description restates documented scope. */
+const useCase = (href: string, description: string): NavPanelItem => ({ ...useCasesMenu.find((item) => item.href === href)!, description });
+
+export const useCasesPanel: NavPanel = {
+  title: "Use cases",
+  intro: "How professional teams bring ATRX into their own research and execution environments.",
+  layout: "directory",
+  items: [
+    useCase("/use-cases#hedge-funds", "Regime-aware macro intelligence routed through the fund’s own mandates and risk engine."),
+    useCase("/use-cases#asset-managers", "Evidence-backed macro assessments for allocation decisions that stay with the institution."),
+    useCase("/use-cases#trading-desks", "A parallel intelligence layer connected to the venues and broker APIs a desk already uses."),
+    useCase("/use-cases#risk-governance", "Risk veto events, decision logs and state classifications exported for internal review."),
+    useCase("/use-cases#quantitative-research", "Models and decision rules built on ATRX records in the desk’s own language and framework."),
+    useCase("/use-cases#prosumers", "A single-tenant node with core FX and Metals vectors and JSON webhook delivery."),
+  ],
+  parent: { label: "All use cases", href: "/use-cases" },
 };
 
 export const requestAccessPanel: NavPanel = {

@@ -15,8 +15,99 @@ export type SearchResult = {
   title: string;
   category: string;
   excerpt: string;
+  /** Extra context for the expanded result: 2–3 indexed sentences that the excerpt does not already say. May be empty. */
+  detail: string;
+  /** Action label naming what the destination is ("View guide", "View disclosure"…). */
+  action: string;
   score: number;
 };
+
+/*
+ * What each route is, expressed as the label of the action that opens it. Derived from the
+ * pages themselves (a walkthrough is a guide, /risk is a disclosure), not from the filter
+ * areas, which group pages by topic. Most specific prefix wins; unknown routes are pages.
+ */
+const DESTINATIONS: [prefix: string, label: string][] = [
+  ["/access/", "View access mode"],
+  ["/access", "View access tiers"],
+  ["/explore", "View comparison"],
+  ["/quickstart", "View guide"],
+  ["/capabilities/", "View capability"],
+  ["/control/", "View capability"],
+  ["/delivery/", "View capability"],
+  ["/documentation", "View documentation"],
+  ["/instruments", "View instruments"],
+  ["/philosophy", "View paper"],
+  ["/architecture", "View architecture"],
+  ["/use-cases", "View use cases"],
+  ["/partnerships", "View tenancy model"],
+  ["/performance", "View metrics"],
+  ["/contact", "Request access"],
+  ["/risk", "View disclosure"],
+];
+
+export function destinationLabel(href: string) {
+  const path = href.split(/[?#]/)[0] || "/";
+  if (path === "/") return "View overview";
+  return DESTINATIONS.find(([prefix]) => prefix.endsWith("/") ? path.startsWith(prefix) : path === prefix || path.startsWith(`${prefix}/`))?.[1] ?? "View page";
+}
+
+const DETAIL_MIN_WORDS = 40;
+const DETAIL_MAX_WORDS = 65;
+
+/** Share of `a`'s words that also appear in `b` — catches restatements, not just exact repeats. */
+function overlap(a: string, b: Set<string>) {
+  const list = normalizeSearch(a).split(" ").filter((word) => word.length > 2);
+  return list.length ? list.filter((word) => b.has(word)).length / list.length : 1;
+}
+
+/** Openings that lean on a previous passage ("That is…", "It does not…") and read wrongly alone. */
+const DANGLING = /^(It|Its|They|Their|These|Those|That|This is|This was)\b/;
+
+/**
+ * Two or three sentences from the page's own indexed copy: the destination section first, then
+ * the published description, then the page body in order. Each pick is the opening of one
+ * passage, so sentences keep the context they were written in (a "Regime tag." label stays
+ * with its definition). Table rows, fragments, dangling openings and anything the excerpt or an
+ * earlier pick already says are skipped. Nothing is written here; an empty string is valid.
+ */
+function detail(document: SearchDocument, href: string, shown: string) {
+  const section = href.includes("#") ? document.passages.filter((item) => item.href === href) : [];
+  const sources = [...section.map((item) => item.text), document.summary ?? "", ...document.passages.map((item) => item.text)];
+
+  const split = (text: string) => text.split(/(?<=[.!?])\s+(?=[A-Z“"\d])/).map((sentence) => sentence.trim());
+  // Cards are sometimes indexed twice, once as "Label. Text" and once run together as
+  // "Label Text"; both count as label-led.
+  const labelled = new Set(document.passages.filter((item) => words(split(item.text)[0]) < 5).map((item) => normalizeSearch(item.text)));
+
+  const seen = new Set(normalizeSearch(shown).split(" "));
+  const picked: string[] = [];
+  let count = 0;
+  let total = 0;
+  for (const text of sources) {
+    if (total >= 3 || count >= DETAIL_MIN_WORDS) break;
+    if (!text || text.includes(" · ") || DANGLING.test(text) || labelled.has(normalizeSearch(text))) continue;
+    const sentences = split(text);
+    // A passage led by a label ("Decision logs.", "01.") is a definition item whose next
+    // sentence leans on that label; it does not read as prose on its own.
+    if (words(sentences[0]) < 5) continue;
+    // The longest complete opening of this passage that still fits the budget.
+    const opening: string[] = [];
+    for (const sentence of sentences) {
+      if (!/[.!?]["”]?$/.test(sentence) || words(sentence) < 5 || total + opening.length === 3) break;
+      if (count + words([...opening, sentence].join(" ")) > DETAIL_MAX_WORDS) break;
+      opening.push(sentence);
+      if (count + words(opening.join(" ")) >= DETAIL_MIN_WORDS) break;
+    }
+    const value = opening.join(" ");
+    if (words(value) < 10 || overlap(value, seen) > 0.5) continue;
+    picked.push(value);
+    count += words(value);
+    total += opening.length;
+    for (const word of normalizeSearch(value).split(" ")) seen.add(word);
+  }
+  return picked.join(" ");
+}
 
 /** Case-, accent- and punctuation-insensitive form used for matching (`P&L` → `pl`). */
 export function normalizeSearch(value: string) {
@@ -136,7 +227,8 @@ export function searchPages(query: string, documents: SearchDocument[]): SearchR
     }
     const source = best?.text ?? document.summary ?? document.passages[0]?.text ?? "";
 
-    return [{ href, title: document.title, category: document.category, excerpt: excerpt(source, terms, phrase), score }];
+    const shown = excerpt(source, terms, phrase);
+    return [{ href, title: document.title, category: document.category, excerpt: shown, detail: detail(document, href, source), action: destinationLabel(document.href), score }];
   }).sort((a, b) => b.score - a.score || a.title.localeCompare(b.title));
 }
 
