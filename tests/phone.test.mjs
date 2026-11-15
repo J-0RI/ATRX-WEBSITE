@@ -5,7 +5,10 @@ import { existsSync } from 'node:fs';
 // Match the application's bundler aliases/extensionless TS imports in the native Node runner.
 registerHooks({ resolve(specifier, context, next) {
   let url;
-  if (specifier.startsWith('@/')) url = new URL('../' + specifier.slice(2) + '.ts', import.meta.url);
+  if (specifier.startsWith('@/')) {
+    url = new URL('../' + specifier.slice(2) + '.ts', import.meta.url);
+    if (!existsSync(url)) url = new URL('../' + specifier.slice(2) + '/index.ts', import.meta.url);
+  }
   else if (specifier.startsWith('.') && context.parentURL) {
     const candidate = new URL(specifier + '.ts', context.parentURL);
     if (existsSync(candidate)) url = candidate;
@@ -82,9 +85,9 @@ test('E.164 normalization and strict rejection remain independent of formatting'
 });
 test('submission rejects invalid phones and preserves geographic country',()=>{
  const identity={...emptyIdentity(),name:'Test Applicant',email:'test@example.com',country:'CA',region:'CA-BC',...edit(initial('CA'),'+2348031234567').state};
- const good=validateApplication('tier-1','execution-access',identity,{intendedUse:'Evaluate research integration.'});
+ const good=validateApplication('tier-1','execution-access',identity,{applicant:'individual',intendedUse:'Evaluate research integration.'});
  assert.equal(good.ok,true,JSON.stringify(good));assert.equal(identity.country,'CA');assert.equal(identity.region,'CA-BC');
- const bad=validateApplication('tier-1','execution-access',{...identity,phone:'123'},{intendedUse:'Evaluate research integration.'});
+ const bad=validateApplication('tier-1','execution-access',{...identity,phone:'123'},{applicant:'individual',intendedUse:'Evaluate research integration.'});
  assert.equal(bad.ok,false);assert.ok(bad.errors.phone);
 });
 

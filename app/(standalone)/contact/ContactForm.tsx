@@ -8,7 +8,7 @@ import { FieldError, invalidProps, type Feedback } from "./fieldFeedback";
 import PhoneField from "./PhoneField";
 import {
   contactPolicy, emptyEngagementAnswers, emptyIdentity, engagementOptions, engagements, limits, modeOf, parseEngagement, plansFor,
-  OTHER_FUNCTION, prepareRequest, primaryFunctions, requestMailto, validateApplication, type Engagement, type FieldErrors, type Identity,
+  OTHER_FUNCTION, PERSONAL_EMAIL_ERROR, prepareRequest, primaryFunctions, requestMailto, validateApplication, type Engagement, type FieldErrors, type Identity,
 } from "./engagements";
 import styles from "./contact.module.css";
 
@@ -38,8 +38,13 @@ function ContactFields({ policy, value, onChange, feedback, onPhoneChange }: Fie
       <input name="email" type="email" autoComplete="email" required maxLength={limits.email} spellCheck={false}
         placeholder={policy.emailLabel === "Business email" ? "name@company.com" : "name@example.com"}
         value={value.email} onChange={(e) => onChange({ ...value, email: e.target.value })} onBlur={() => feedback.touch("email")}
-        {...invalidProps(feedback, "email")} />
+        {...invalidProps(feedback, "email", feedback.errors.email === PERSONAL_EMAIL_ERROR ? "request-email-review" : undefined)} />
       <FieldError feedback={feedback} name="email" />
+      {feedback.errors.email === PERSONAL_EMAIL_ERROR ? (
+        <p id="request-email-review" className={styles.fieldHint}>
+          If your organization does not use its own email domain, contact {CONTACT_EMAIL} to request review.
+        </p>
+      ) : null}
     </label>,
     <label key="organization" className={styles.field}>
       <span>Company / Organization{optional(policy.organization)}</span>
@@ -263,7 +268,7 @@ export default function ContactForm({ engagement, plan, onEngagementChange, onPl
       {engagement && config ? <>
         <ContactFields policy={contactPolicy(engagement)} value={{ ...identity, ...phoneValue.current }} onChange={setIdentity} feedback={feedback} onPhoneChange={onPhoneChange} />
         <LocationFields value={identity} onChange={setIdentity} feedback={feedback} />
-        <EngagementFields engagement={engagement} answers={answers[engagement]} feedback={feedback} onChange={(key, value) => {
+        <EngagementFields engagement={engagement} plan={plan} answers={answers[engagement]} feedback={feedback} onChange={(key, value) => {
           setAnswers((current) => ({ ...current, [engagement]: { ...current[engagement], [key]: value } }));
         }} />
         <div className={styles.submitRow}>

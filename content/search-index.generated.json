@@ -1228,6 +1228,10 @@
         "href": "/explore#compare"
       },
       {
+        "text": "Data entitlement controls",
+        "href": "/explore#compare"
+      },
+      {
         "text": "Real-time portfolio exposure",
         "href": "/explore#compare"
       },
@@ -1316,6 +1320,10 @@
         "href": "/explore#compare"
       },
       {
+        "text": "Integration approval controls",
+        "href": "/explore#compare"
+      },
+      {
         "text": "Model version governance",
         "href": "/explore#compare"
       },
@@ -1341,6 +1349,10 @@
       },
       {
         "text": "Immutable audit records",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Research activity logging",
         "href": "/explore#compare"
       },
       {
@@ -1404,6 +1416,34 @@
         "href": "/explore#compare"
       },
       {
+        "text": "Organization-wide security policies",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Network-level access policies",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "API credential governance",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Custom data retention controls",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Data export and deletion",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Security incident notification",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "ATRX Security (beta)",
+        "href": "/explore#compare"
+      },
+      {
         "text": "Dedicated inference clusters",
         "href": "/explore#compare"
       },
@@ -1433,6 +1473,18 @@
       },
       {
         "text": "Team access controls",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Controlled research sharing",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Spending and usage limits",
+        "href": "/explore#compare"
+      },
+      {
+        "text": "Security and legal review support",
         "href": "/explore#compare"
       },
       {

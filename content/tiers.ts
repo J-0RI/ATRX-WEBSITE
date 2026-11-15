@@ -585,6 +585,16 @@ export const accessComparison: ComparisonGroup[] = [
         keywords: ["timestamp", "clock", "latency", "ntp", "ptp", "point-in-time", "sequencing"],
         source: "/delivery/zero-latency-webhooks",
       }),
+      row("Data entitlement controls", no, yes, yes, {
+        id: "data-entitlement-controls",
+        category: "market-coverage",
+        status: "planned",
+        tooltip: true,
+        description:
+          "Administrators control which users and groups can access each instrument universe, dataset, and research output, in line with third-party market-data licensing terms.",
+        keywords: ["entitlements", "data access", "market data licensing", "data governance", "permissions", "dataset access"],
+        source: "ATRX Institutional Capability Roadmap",
+      }),
     ],
   },
   {
@@ -881,6 +891,15 @@ export const accessComparison: ComparisonGroup[] = [
         keywords: ["custom adapter", "bespoke integration", "kafka", "ibmmq", "engineering sync", "bridge"],
         source: "/access/institutional",
       }),
+      row("Integration approval controls", no, yes, yes, {
+        id: "integration-approval-controls",
+        category: "execution-integration",
+        status: "planned",
+        description:
+          "Administrators approve webhook endpoints, SDK clients, and third-party integrations before they can receive tenant data, with each approval recorded.",
+        keywords: ["integration governance", "endpoint approval", "third-party integrations", "webhook approval", "admin approval"],
+        source: "ATRX Institutional Capability Roadmap",
+      }),
     ],
   },
   {
@@ -973,6 +992,16 @@ export const accessComparison: ComparisonGroup[] = [
         keywords: ["immutable", "audit", "audit records", "ledger", "ledgers", "tamper-evident", "compliance"],
         source: "/delivery/audit-grade-ledgers",
       }),
+      row("Research activity logging", no, yes, yes, {
+        id: "research-activity-logging",
+        category: "model-governance",
+        status: "planned",
+        tooltip: true,
+        description:
+          "Records who viewed, exported, or shared research outputs and analytical results, supporting supervisory review of research use.",
+        keywords: ["research audit", "activity log", "analytical activity", "supervision", "recordkeeping", "export log"],
+        source: "ATRX Institutional Capability Roadmap",
+      }),
       row("Historical decision reconstruction", no, yes, yes, {
         id: "historical-decision-reconstruction",
         category: "model-governance",
@@ -1055,14 +1084,14 @@ export const accessComparison: ComparisonGroup[] = [
         keywords: ["saml", "oidc", "openid connect", "oauth", "sso", "authentication", "idp"],
         source: "ATRX Institutional Capability Roadmap",
       }),
-      row("SCIM user provisioning", no, no, yes, {
+      row("SCIM user provisioning", no, optional, yes, {
         id: "scim-user-provisioning",
         category: "enterprise-security",
         status: "planned",
         tooltip: true,
         description:
-          "Automates user onboarding, group synchronization, and immediate deprovisioning from enterprise directory services.",
-        keywords: ["scim", "provisioning", "deprovisioning", "directory sync", "active directory", "iam"],
+          "System for Cross-domain Identity Management: automates user onboarding, group synchronization, and immediate deprovisioning across the identity lifecycle from enterprise directory services.",
+        keywords: ["scim", "provisioning", "deprovisioning", "directory sync", "identity lifecycle", "onboarding", "offboarding", "active directory", "iam"],
         source: "ATRX Institutional Capability Roadmap",
       }),
       row("Role-based access control", no, yes, yes, {
@@ -1070,8 +1099,8 @@ export const accessComparison: ComparisonGroup[] = [
         category: "enterprise-security",
         status: "in-development",
         description:
-          "Predefined and custom permission roles separating researcher, trader, risk officer, and system administrator responsibilities.",
-        keywords: ["rbac", "role-based", "permissions", "access control", "least privilege", "iam"],
+          "Predefined and custom roles with fine-grained permissions over administrative privileges, workspaces, research resources, and authorized actions, separating researcher, trader, risk officer, and administrator duties.",
+        keywords: ["rbac", "role-based", "permissions", "fine-grained", "custom roles", "admin roles", "access control", "least privilege", "iam"],
         source: "ATRX Product Specification · v4.0",
       }),
       row("Attribute-based access control", no, no, yes, {
@@ -1166,9 +1195,131 @@ export const accessComparison: ComparisonGroup[] = [
         category: "enterprise-security",
         status: "in-development",
         description:
-          "Records authentication events, role assignments, API key rotations, and mandate configuration changes for security and SIEM ingestion.",
-        keywords: ["admin audit", "audit logs", "siem", "security logs", "access logs", "activity log"],
+          "Searchable, exportable records of administrative, authentication, user, and system activity, including role assignments, API key changes, and mandate configuration changes.",
+        keywords: ["admin audit", "audit logs", "audit trail", "siem", "security logs", "access logs", "activity log", "authentication events"],
         source: "ATRX Product Specification · v4.0",
+      }),
+      row("Group-based permissions", no, yes, yes, {
+        id: "group-based-permissions",
+        category: "enterprise-security",
+        status: "planned",
+        description:
+          "Assigns roles and data entitlements to groups, whether defined in ATRX or synchronized from the identity provider, instead of to individual users.",
+        keywords: ["groups", "group permissions", "directory groups", "rbac", "access control", "iam"],
+        source: "ATRX Institutional Capability Roadmap",
+      }),
+      row("Organization-wide security policies", no, yes, yes, {
+        id: "organization-wide-security-policies",
+        category: "enterprise-security",
+        status: "planned",
+        description:
+          "Administrators enforce MFA, SSO-only sign-in, and API key expiry consistently across every user and workspace in the organization.",
+        keywords: ["organization policy", "security policy", "enforce mfa", "sso enforcement", "admin policy", "governance"],
+        source: "ATRX Institutional Capability Roadmap",
+      }),
+      row("Session controls", yes, yes, yes, {
+        id: "session-controls",
+        category: "enterprise-security",
+        status: "planned",
+        description:
+          "Users can review and revoke their active sessions; organization administrators can also set idle timeouts, session lifetimes, and forced sign-out.",
+        keywords: ["session", "timeout", "idle timeout", "sign out", "session management", "revoke"],
+        source: "ATRX Institutional Capability Roadmap",
+      }),
+      row("Network-level access policies", no, yes, yes, {
+        id: "network-level-access-policies",
+        category: "enterprise-security",
+        status: "planned",
+        tooltip: true,
+        description:
+          "Restricts console and API access by network origin, such as approved corporate networks, VPN egress, or private connectivity, alongside IP allowlisting.",
+        keywords: ["network access", "network policy", "conditional access", "vpn", "corporate network", "zero trust"],
+        source: "ATRX Institutional Capability Roadmap",
+      }),
+      row("API credential governance", no, yes, yes, {
+        id: "api-credential-governance",
+        category: "enterprise-security",
+        status: "planned",
+        description:
+          "Gives administrators oversight of every API key in the organization: named ownership, scoped permissions, expiry policies, and immediate revocation.",
+        keywords: ["api keys", "credential governance", "key management", "token", "revocation", "service accounts"],
+        source: "ATRX Institutional Capability Roadmap",
+      }),
+      row("SIEM integration", no, optional, yes, {
+        id: "siem-integration",
+        category: "enterprise-security",
+        status: "planned",
+        description:
+          "Exports authentication, administrative, and audit events in standard log formats for ingestion by the institution’s security information and event management platform.",
+        keywords: ["siem", "splunk", "sentinel", "security monitoring", "log export", "soc"],
+        source: "ATRX Institutional Capability Roadmap",
+      }),
+      row("Compliance API", no, optional, yes, {
+        id: "compliance-api",
+        category: "enterprise-security",
+        status: "planned",
+        tooltip: true,
+        description:
+          "Read-only programmatic access to audit, administrative, access, and retention activity for compliance monitoring and observability tooling.",
+        keywords: ["compliance api", "observability", "monitoring", "audit api", "compliance", "surveillance"],
+        source: "ATRX Institutional Capability Roadmap",
+      }),
+      row("Custom data retention controls", no, optional, yes, {
+        id: "custom-data-retention-controls",
+        category: "enterprise-security",
+        status: "planned",
+        tooltip: true,
+        description:
+          "Configurable retention and deletion periods for telemetry, audit records, and research history, set within contractual and legal recordkeeping obligations.",
+        keywords: ["data retention", "retention policy", "deletion", "recordkeeping", "records management", "compliance"],
+        source: "ATRX Institutional Capability Roadmap",
+      }),
+      row("Legal hold", no, no, yes, {
+        id: "legal-hold",
+        category: "enterprise-security",
+        status: "planned",
+        description:
+          "Suspends scheduled deletion for records subject to regulatory inquiry, litigation, or internal investigation until the hold is released.",
+        keywords: ["legal hold", "litigation hold", "preservation", "ediscovery", "recordkeeping", "regulatory inquiry"],
+        source: "ATRX Institutional Capability Roadmap",
+      }),
+      row("Data export and deletion", yes, yes, yes, {
+        id: "data-export-and-deletion",
+        category: "enterprise-security",
+        status: "planned",
+        description:
+          "Exports account or organization data in machine-readable formats and deletes it on request or at contract end, subject to retention obligations.",
+        keywords: ["data export", "data deletion", "portability", "offboarding", "privacy", "gdpr"],
+        source: "ATRX Institutional Capability Roadmap",
+      }),
+      row("Security incident notification", no, optional, yes, {
+        id: "security-incident-notification",
+        category: "enterprise-security",
+        status: "qualification",
+        description:
+          "Agreed notification timelines and named contacts for security incidents affecting the tenant, defined within institutional agreements.",
+        keywords: ["security incident", "breach notification", "incident response", "notification", "contractual"],
+        source: "/access/institutional",
+      }),
+      row("HIPAA-ready offering", no, no, yes, {
+        id: "hipaa-ready-offering",
+        category: "enterprise-security",
+        status: "planned",
+        tooltip: true,
+        description:
+          "A planned offering for eligible organizations whose ATRX use involves protected health information. Not available until the required safeguards are implemented, verified, and covered by a business associate agreement.",
+        keywords: ["hipaa", "phi", "protected health information", "baa", "healthcare", "compliance"],
+        source: "ATRX Institutional Capability Roadmap",
+      }),
+      row("ATRX Security (beta)", no, optional, yes, {
+        id: "atrx-security-beta",
+        category: "enterprise-security",
+        status: "planned",
+        tooltip: true,
+        description:
+          "A planned ATRX security capability for institutional tenants. Its scope will be published with the approved product specification; it is not an operational security service today.",
+        keywords: ["atrx security", "security", "beta", "security monitoring"],
+        source: "Product specification pending",
       }),
     ],
   },
@@ -1340,6 +1491,70 @@ export const accessComparison: ComparisonGroup[] = [
           "Centralized seat, cohort, and credential administration for multi-user trading desks and research teams.",
         keywords: ["team access", "team access management", "seat management", "user management", "desk admin", "organization"],
         source: "ATRX Product Specification · v4.0",
+      }),
+      row("Controlled research sharing", no, yes, yes, {
+        id: "controlled-research-sharing",
+        category: "institutional-workflows",
+        status: "planned",
+        description:
+          "Limits sharing of research outputs to named users and groups, with external sharing disabled by default and every share recorded.",
+        keywords: ["research sharing", "sharing controls", "access restrictions", "collaboration", "external sharing"],
+        source: "ATRX Institutional Capability Roadmap",
+      }),
+      row("Multiple user seats", no, yes, yes, {
+        id: "multiple-user-seats",
+        category: "institutional-workflows",
+        status: "in-development",
+        description:
+          "Provisions named seats for researchers, traders, risk officers, and administrators under one organization account.",
+        keywords: ["seats", "users", "licenses", "team", "multi-user", "seat count"],
+        source: "ATRX Institutional Capability Roadmap",
+      }),
+      row("Usage reporting", yes, yes, yes, {
+        id: "usage-reporting",
+        category: "institutional-workflows",
+        status: "planned",
+        description:
+          "Shows compute and API consumption for the individual account, with breakdowns by user, team, and organization for administrators.",
+        keywords: ["usage", "usage reporting", "consumption", "analytics", "api usage", "billing"],
+        source: "ATRX Institutional Capability Roadmap",
+      }),
+      row("Spending and usage limits", no, yes, yes, {
+        id: "spending-and-usage-limits",
+        category: "institutional-workflows",
+        status: "planned",
+        tooltip: true,
+        description:
+          "Administrators set usage and expenditure limits for individual users, teams, and the whole organization, with alerts before limits are reached.",
+        keywords: ["spend limits", "spending controls", "budget", "usage limits", "cost control", "quotas"],
+        source: "ATRX Institutional Capability Roadmap",
+      }),
+      row("Centralized billing", no, yes, yes, {
+        id: "centralized-billing",
+        category: "institutional-workflows",
+        status: "available",
+        description:
+          "One organization-level invoice covering all seats and capacity, in place of individual billing.",
+        keywords: ["billing", "invoice", "centralized billing", "procurement", "finance"],
+        source: "/explore",
+      }),
+      row("Tailored contracts", no, optional, yes, {
+        id: "tailored-contracts",
+        category: "institutional-workflows",
+        status: "available",
+        description:
+          "Negotiated terms covering usage commitments, product bundling, contract duration, and billing arrangements.",
+        keywords: ["contract", "custom contract", "usage commitment", "bundling", "enterprise agreement", "negotiated terms", "msa"],
+        source: "/explore",
+      }),
+      row("Security and legal review support", no, optional, yes, {
+        id: "security-and-legal-review-support",
+        category: "institutional-workflows",
+        status: "qualification",
+        description:
+          "Engagement with the institution’s security, legal, and procurement reviews, including vendor due-diligence questionnaires and contractual data terms.",
+        keywords: ["security review", "legal review", "procurement", "vendor due diligence", "questionnaire", "dpa"],
+        source: "ATRX Institutional Capability Roadmap",
       }),
       row("Multi-team collaboration", no, no, yes, {
         id: "multi-team-collaboration",

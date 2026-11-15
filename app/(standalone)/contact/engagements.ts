@@ -1,16 +1,25 @@
 /** Canonical request content, grounded in content/tiers.ts and the technical library. */
 import { accessPlans, findPlan, tiers, type AccessPlan, type ModeId, type Tier } from "@/content/tiers";
+import { classifyEmail, normaliseEmail } from "@/lib/email-domains";
 import { REGION_NOT_APPLICABLE, resolveLocation, type Location } from "@/lib/geography";
 import { resolvePhone, type Phone } from "@/lib/phone";
 
-type RequestField = {
+type FieldOption = { value: string; label: string };
+export type RequestField = {
   key: string;
   label: string;
-  kind: "text" | "textarea";
+  kind: "text" | "textarea" | "select";
   required?: boolean;
   hint?: string;
   placeholder?: string;
   maxLength?: number;
+  /** Select fields only: the accepted answers, serialised by label. */
+  options?: readonly FieldOption[];
+  /**
+   * Conditional question: rendered, validated and submitted only while another answer in the
+   * same engagement (or the selected plan, key "plan") is one of the listed values.
+   */
+  when?: { key: string; in: readonly string[] };
 };
 
 /** Whether a contact field is asked for, and if so whether it is compulsory, for an engagement. */
@@ -46,6 +55,86 @@ const intendedUse: RequestField = {
   placeholder: "Briefly describe your intended use of ATRX",
   hint: `Briefly describe what you expect to evaluate or use ATRX for, in up to ${INTENDED_USE_MAX} characters. Do not include confidential strategies, models, positions, holdings or account details.`,
 };
+/* ---------- Mode-aware qualification questions ----------
+ * Each question maps to a capability in the /explore comparison (content/tiers.ts) and is asked
+ * only of the modes that include it: seats, spending limits, SSO/SCIM and tailored contracts for
+ * Capital Desk and Institutional; network, residency, retention, SLA and HIPAA for Institutional.
+ * No question asks for strategies, positions, holdings, AUM or credentials.
+ */
+const opt = (value: string, label: string): FieldOption => ({ value, label });
+const NOT_DETERMINED = opt("undetermined", "Not yet determined");
+
+const seatBands = [opt("1-5", "1–5"), opt("6-15", "6–15"), opt("16-50", "16–50"), opt("51-100", "51–100"), opt("100+", "More than 100")];
+const seats: RequestField = {
+  key: "seats", label: "How many seats does your team need?", kind: "select", required: true, options: seatBands,
+  hint: "Initial named users, including researchers, traders, risk officers and administrators.",
+};
+const projectedSeats: RequestField = {
+  key: "projectedSeats", label: "Projected seats within 12 months", kind: "select",
+  options: [opt("no-change", "No change expected"), ...seatBands, NOT_DETERMINED],
+};
+const regulated: RequestField = {
+  key: "regulated", label: "Is your organization regulated by a financial authority?", kind: "select",
+  options: [opt("yes", "Yes"), opt("no", "No"), opt("discuss", "Prefer to discuss")],
+};
+const regulators: RequestField = {
+  key: "regulators", label: "Primary regulator(s)", kind: "text", when: { key: "regulated", in: ["yes"] },
+  placeholder: "e.g. SEC, FCA, MAS",
+  hint: "Informs recordkeeping, retention and review requirements.",
+};
+const usageVolume: RequestField = {
+  key: "usageVolume", label: "Expected usage volume", kind: "text",
+  placeholder: "e.g. 6 strategies, 40 instruments, 20,000 API requests per day",
+  hint: "An approximate figure is enough to scope capacity.",
+};
+const identityOptions = [
+  opt("none", "Not required at this stage"),
+  opt("sso", "Single sign-on (SAML or OIDC)"),
+  opt("sso-scim", "Single sign-on with SCIM provisioning"),
+  NOT_DETERMINED,
+];
+const identityProvider: RequestField = {
+  key: "identityProvider", label: "Identity provider", kind: "text", when: { key: "identity", in: ["sso", "sso-scim"] },
+  placeholder: "e.g. Okta, Microsoft Entra ID, Ping Identity",
+};
+const spendControls: RequestField = {
+  key: "spendControls", label: "Will administrators need to set spending or usage limits?", kind: "select",
+  options: [
+    opt("organization", "Organization-wide limits only"),
+    opt("team", "Limits per team or desk"),
+    opt("user", "Limits per user, team and organization"),
+    opt("none", "Not required"),
+    NOT_DETERMINED,
+  ],
+};
+const contractDetails: RequestField = {
+  key: "contractDetails", label: "Contract requirements", kind: "textarea", when: { key: "contract", in: ["tailored", "own-paper"] },
+  hint: "Describe any usage commitments, product bundling, billing arrangements and preferred contract duration.",
+};
+const procurement: RequestField = {
+  key: "procurement", label: "What review will your organization require before contracting?", kind: "select",
+  options: [
+    opt("none", "No formal review"),
+    opt("security", "Security review"),
+    opt("security-legal", "Security and legal review"),
+    opt("due-diligence", "Vendor due diligence with procurement approval"),
+    NOT_DETERMINED,
+  ],
+};
+const evaluation: RequestField = {
+  key: "evaluation", label: "Evaluation approach", kind: "select",
+  options: [
+    opt("sandbox", "Integration sandbox"),
+    opt("parallel-run", "Pilot with a paper-trading parallel run"),
+    opt("direct", "Proceed directly to deployment"),
+    NOT_DETERMINED,
+  ],
+};
+const timeline: RequestField = {
+  key: "timeline", label: "Intended adoption timeline", kind: "select",
+  options: [opt("1m", "Within 1 month"), opt("1-3m", "1–3 months"), opt("3-6m", "3–6 months"), opt("6m+", "More than 6 months"), opt("exploratory", "Exploratory, no fixed date")],
+};
+
 type EngagementConfig = {
   /** Access mode this engagement applies for; absent for non-access requests. */
   mode?: ModeId;
@@ -70,9 +159,16 @@ export const engagements = {
     action: "Prepare application",
     contact: individualContact,
     fields: [
+      { key: "applicant", label: "Are you applying as an individual or for an organization?", kind: "select", required: true,
+        options: [opt("individual", "Individual professional"), opt("organization", "On behalf of an organization")] },
+      { ...seats, when: { key: "applicant", in: ["organization"] },
+        hint: "Prosumer Node is licensed to a single operator. Teams that need several seats, central administration or single sign-on are usually better served by Capital Desk." },
       intendedUse,
       { key: "markets", label: "Markets / instruments of interest", kind: "text", placeholder: "e.g. EUR/USD, XAU/USD", hint: "Prosumer Node covers the core FX and Metals vectors. Describe your interests; this does not confirm instrument availability." },
       { key: "environment", label: "Current execution or research environment", kind: "text", placeholder: "e.g. Python research stack, broker API" },
+      { key: "endpoint", label: "Receiving endpoint and integration method", kind: "text", when: { key: "plan", in: ["api-access", "execution-access"] },
+        placeholder: "e.g. HTTPS webhook receiver, REST client, broker API" },
+      timeline,
       { key: "constraints", label: "Relevant constraints / additional context", kind: "textarea" },
     ],
   },
@@ -85,10 +181,48 @@ export const engagements = {
     action: "Prepare application",
     contact: organisationContact,
     fields: [
+      { key: "orgType", label: "Organization type", kind: "select", required: true,
+        options: [
+          opt("hedge-fund", "Hedge fund"),
+          opt("asset-manager", "Asset manager"),
+          opt("proprietary-trading", "Proprietary trading firm"),
+          opt("bank-broker-dealer", "Bank or broker-dealer"),
+          opt("family-office", "Family office"),
+          opt("corporate-treasury", "Corporate treasury"),
+          opt("other", "Other"),
+        ] },
+      regulated,
+      regulators,
+      seats,
+      projectedSeats,
       intendedUse,
       { key: "desk", label: "Desk / team context", kind: "text", placeholder: "e.g. Macro desk, four portfolio managers" },
       { key: "markets", label: "Primary markets / instruments", kind: "text", placeholder: "e.g. G10 FX, gold, equity indices", hint: "Describe the markets relevant to your desk, including any interest in the expanded Indices and Energy topology." },
       { key: "environment", label: "Existing risk / execution environment", kind: "textarea" },
+      { key: "integration", label: "Primary integration path", kind: "select",
+        options: [
+          opt("rest-webhooks", "REST API and webhooks"),
+          opt("streaming-sdk", "Streaming API and low-latency SDKs"),
+          opt("fix", "FIX protocol"),
+          opt("oms-ems", "OMS / EMS connectivity"),
+          NOT_DETERMINED,
+        ] },
+      usageVolume,
+      { key: "identity", label: "Identity and access requirements", kind: "select", options: identityOptions },
+      identityProvider,
+      spendControls,
+      { key: "security", label: "Security and governance requirements", kind: "textarea",
+        hint: "For example: role-based permissions, audit logs, IP allowlisting or network restrictions, data retention, SIEM or Compliance API access." },
+      { key: "contract", label: "Does your team need a tailored contract?", kind: "select",
+        options: [
+          opt("standard", "Standard Capital Desk terms"),
+          opt("tailored", "Tailored contract (usage commitments, product bundling)"),
+          NOT_DETERMINED,
+        ] },
+      contractDetails,
+      procurement,
+      evaluation,
+      timeline,
       { key: "constraints", label: "Additional operational constraints", kind: "textarea" },
     ],
   },
@@ -101,12 +235,69 @@ export const engagements = {
     action: "Prepare application",
     contact: { ...organisationContact, website: "optional" },
     fields: [
+      { key: "orgType", label: "Organization type", kind: "select", required: true,
+        options: [
+          opt("bank-broker-dealer", "Bank or broker-dealer"),
+          opt("asset-manager", "Asset manager"),
+          opt("hedge-fund", "Hedge fund"),
+          opt("pension-endowment", "Pension fund or endowment"),
+          opt("sovereign-central-bank", "Sovereign wealth fund or central bank"),
+          opt("insurer", "Insurer"),
+          opt("healthcare-affiliated", "Healthcare-affiliated organization"),
+          opt("other", "Other"),
+        ] },
+      regulated,
+      regulators,
+      seats,
+      projectedSeats,
       intendedUse,
       { key: "scope", label: "Deployment scope", kind: "text", required: true, placeholder: "e.g. Two regional trading desks" },
+      { key: "entities", label: "Participating business units or legal entities", kind: "textarea", required: true,
+        when: { key: "plan", in: ["multi-entity-deployment"] },
+        hint: "List each unit or entity and where it operates. This determines tenant permissions, information barriers and data residency." },
       { key: "infrastructure", label: "Infrastructure / environment context", kind: "text", placeholder: "e.g. AWS, on-premises data centre", hint: "Describe your current environment and any relevant AWS or GCP context." },
       { key: "integration", label: "Integration requirements", kind: "textarea" },
-      { key: "governance", label: "Governance / risk requirements", kind: "textarea" },
-      { key: "telemetry", label: "Audit / telemetry requirements", kind: "textarea" },
+      usageVolume,
+      { key: "identity", label: "Identity and access requirements", kind: "select", required: true, options: identityOptions },
+      identityProvider,
+      spendControls,
+      { key: "network", label: "Network access requirements", kind: "select",
+        options: [
+          opt("ip-allowlisting", "Public endpoints restricted by IP allowlisting"),
+          opt("private-connectivity", "Private connectivity (PrivateLink, Private Service Connect or VPC peering)"),
+          NOT_DETERMINED,
+        ] },
+      { key: "residency", label: "Data residency requirements", kind: "select",
+        options: [opt("none", "No specific requirement"), opt("regional", "Data must remain in specific regions"), NOT_DETERMINED] },
+      { key: "regions", label: "Required regions or jurisdictions", kind: "text", required: true, when: { key: "residency", in: ["regional"] },
+        placeholder: "e.g. European Union, United Kingdom" },
+      { key: "retention", label: "Data retention requirements", kind: "select",
+        options: [
+          opt("standard", "Standard retention"),
+          opt("custom", "Custom retention and deletion periods"),
+          opt("custom-legal-hold", "Custom retention with legal hold"),
+          NOT_DETERMINED,
+        ] },
+      { key: "phi", label: "Will your use of ATRX involve protected health information?", kind: "select",
+        when: { key: "orgType", in: ["insurer", "healthcare-affiliated"] },
+        options: [opt("no", "No"), opt("yes", "Yes, a HIPAA-ready offering would be required"), NOT_DETERMINED],
+        hint: "The HIPAA-ready offering is planned and not yet available." },
+      { key: "governance", label: "Governance / risk requirements", kind: "textarea",
+        hint: "For example: role and group permissions, information barriers, research access restrictions, model change approvals." },
+      { key: "telemetry", label: "Audit / telemetry requirements", kind: "textarea",
+        hint: "For example: audit log export, Compliance API access, SIEM integration, recordkeeping obligations." },
+      { key: "contract", label: "Commercial arrangement", kind: "select",
+        options: [
+          opt("tailored", "Tailored contract (usage commitments, product bundling)"),
+          opt("own-paper", "Enterprise agreement on our own paper"),
+          NOT_DETERMINED,
+        ] },
+      contractDetails,
+      { key: "sla", label: "Service-level expectations", kind: "select",
+        options: [opt("standard", "Standard operational commitments"), opt("contractual", "Contractual SLA with security incident notification terms"), NOT_DETERMINED] },
+      procurement,
+      evaluation,
+      timeline,
     ],
   },
   documentation: {
@@ -157,7 +348,7 @@ export const primaryFunctions = [
 type PrimaryFunction = (typeof primaryFunctions)[number];
 
 export const OTHER_FUNCTION = "other";
-export const limits = { name: 120, primaryFunctionOther: 120, email: 254, organization: 160, jobTitle: 120, website: 200, text: 200, textarea: 2000 } as const;
+export const limits = { name: 120, primaryFunctionOther: 120, email: 254, organization: 160, jobTitle: 120, website: 200, text: 200, textarea: 2000, select: 80 } as const;
 export type EngagementAnswers = {
   [K in Engagement]: Record<(typeof engagements)[K]["fields"][number]["key"], string>;
 };
@@ -165,6 +356,12 @@ export const engagementOptions = Object.keys(engagements) as Engagement[];
 export const requestFields = (engagement: Engagement): readonly RequestField[] => engagements[engagement].fields;
 export const contactPolicy = (engagement: Engagement): ContactPolicy => (engagements[engagement] as EngagementConfig).contact;
 export const fieldLimit = (field: RequestField) => field.maxLength ?? limits[field.kind];
+
+/** Questions that apply given the current answers and plan; hidden ones are never validated or sent. */
+export function visibleFields(engagement: Engagement, answers: Readonly<Record<string, string>>, plan: string): readonly RequestField[] {
+  const values: Readonly<Record<string, string>> = { ...answers, plan };
+  return requestFields(engagement).filter((field) => !field.when || field.when.in.includes(values[field.when.key] ?? ""));
+}
 
 export function parseEngagement(value: string | null): Engagement | "" {
   return value && Object.hasOwn(engagements, value) ? value as Engagement : "";
@@ -220,11 +417,16 @@ export type Application = {
 const FORBIDDEN_LOCAL = /[\s@<>()[\]\\,;:"]/u;
 const DOMAIN_LABEL = /^(?!-)[\p{L}\p{N}-]{1,63}(?<!-)$/u;
 
+export const PERSONAL_EMAIL_ERROR = "Please use your business email address. Personal email addresses are not accepted.";
+export const DISPOSABLE_EMAIL_ERROR = "Temporary or disposable email addresses are not accepted.";
+
 /**
- * Syntax check for a single address (international characters allowed). A well-formed
- * address proves nothing about who owns it; it is never treated as verified.
+ * Syntax check for a single address (international characters allowed), then the provider
+ * registry (lib/email-domains): disposable services are refused on every application email
+ * field, consumer providers only where the field asks for a business email. Unfamiliar domains
+ * pass. A well-formed address proves nothing about who owns it; it is never treated as verified.
  */
-export function emailError(value: string, label: string): string | undefined {
+export function emailError(value: string, label: string, business = label === "Business email"): string | undefined {
   const email = value.trim();
   if (!email) return `${label} is required.`;
   const at = email.lastIndexOf("@");
@@ -240,7 +442,11 @@ export function emailError(value: string, label: string): string | undefined {
     labels.length >= 2 &&
     labels.every((part) => DOMAIN_LABEL.test(part)) &&
     /^(\p{L}{2,}|xn--[a-z\d-]+)$/iu.test(labels.at(-1)!);
-  return valid ? undefined : "Enter a valid email address.";
+  if (!valid || !normaliseEmail(email)) return "Enter a valid email address.";
+  const provider = classifyEmail(email);
+  if (provider === "disposable") return DISPOSABLE_EMAIL_ERROR;
+  if (business && provider === "personal") return PERSONAL_EMAIL_ERROR;
+  return undefined;
 }
 
 /** Accepts "company.com" or a full http(s) URL; returns the normalised https URL or undefined. */
@@ -284,9 +490,9 @@ export function validateApplication(
   if (!name || !/\p{L}/u.test(name)) errors.name = "Full name is required.";
   else if (name.length > limits.name) errors.name = `Use ${limits.name} characters or fewer.`;
 
-  const email = identity.email.trim();
-  const emailProblem = emailError(email, policy.emailLabel);
+  const emailProblem = emailError(identity.email, policy.emailLabel);
   if (emailProblem) errors.email = emailProblem;
+  const email = normaliseEmail(identity.email) ?? identity.email.trim();
 
   let phone: Phone | undefined;
   if (policy.phone === "required" || identity.phone.trim()) {
@@ -337,10 +543,17 @@ export function validateApplication(
   if (!located.ok) errors[located.field] = located.field === "country" ? "Select a country." : "Select a state or region.";
 
   const cleanAnswers: Application["answers"] = [];
-  for (const field of requestFields(engagement)) {
+  for (const field of visibleFields(engagement, answers, plan?.id ?? "")) {
     const value = (answers[field.key] ?? "").trim();
     if (!value) {
-      if (field.required) errors[field.key] = `${field.label} is required.`;
+      if (field.required) errors[field.key] = field.kind === "select" ? "Select an option." : `${field.label} is required.`;
+      continue;
+    }
+    if (field.options) {
+      // Selects re-resolve against their options, so stale or manipulated values never reach the request.
+      const chosen = field.options.find((option) => option.value === value);
+      if (chosen) cleanAnswers.push({ key: field.key, label: field.label, value: chosen.label });
+      else errors[field.key] = "Select an option.";
       continue;
     }
     if (value.length > fieldLimit(field)) errors[field.key] = `Use ${fieldLimit(field)} characters or fewer.`;
