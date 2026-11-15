@@ -7,23 +7,28 @@
  */
 import { AsYouType, getCountries, getCountryCallingCode, getExampleNumber, parsePhoneNumberFromString, type CountryCode } from "libphonenumber-js/max";
 import examples from "libphonenumber-js/mobile/examples";
-import { findCountry } from "./geography";
+import { findCountry, nameCollator } from "./geography";
 
 export type DialCode = { country: string; callingCode: string; name: string };
 export type Phone = { e164: string; international: string; country: string };
 
-const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
-const collator = new Intl.Collator("en", { sensitivity: "base" });
-
-/** One entry per dialling region (ISO code, "+N", name), alphabetical by name. */
-export const dialCodes: DialCode[] = getCountries()
-  .map((country) => {
-    const name = findCountry(country)?.name ?? regionNames.of(country) ?? country;
-    const callingCode = `+${getCountryCallingCode(country)}`;
-    return { country, callingCode, name };
-  })
-  .sort((a, b) => collator.compare(a.name, b.name));
-export const findDialCode = (country: string) => dialCodes.find((d) => d.country === country);
+let dialCodes: DialCode[] | undefined;
+/**
+ * One entry per dialling region (ISO code, "+N", name), alphabetical by name. Built on first call:
+ * every page prefetches /contact, and the Intl objects this needs are expensive to construct.
+ */
+export function dialCodeList(): DialCode[] {
+  if (dialCodes) return dialCodes;
+  const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
+  return (dialCodes = getCountries()
+    .map((country) => {
+      const name = findCountry(country)?.name ?? regionNames.of(country) ?? country;
+      const callingCode = `+${getCountryCallingCode(country)}`;
+      return { country, callingCode, name };
+    })
+    .sort((a, b) => nameCollator().compare(a.name, b.name)));
+}
+export const findDialCode = (country: string) => dialCodeList().find((d) => d.country === country);
 
 const dialCountries = new Set<string>(getCountries());
 export const isDialCountry = (value: string): value is CountryCode => dialCountries.has(value);

@@ -1,0 +1,97 @@
+/*
+ * ATRX "On this page" — one continuous neutral rail, one accent marker.
+ * The active label and the marker share --accent and are driven by the same state.
+ * No hover treatment: hover is not selection (design guardrail).
+ */
+
+.root {
+  min-width: 0;
+}
+
+.root[data-sticky] {
+  position: var(--on-this-page-position, sticky);
+  top: var(--on-this-page-top, calc(var(--nav-h) + 24px));
+  /* Tall indexes scroll inside the viewport rather than clipping links. */
+  max-height: var(--on-this-page-max-height, calc(100dvh - var(--nav-h) - 48px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+.title {
+  margin: 0 0 12px;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 450;
+  line-height: 20px;
+  letter-spacing: -0.005em;
+}
+
+.rail {
+  position: relative;
+}
+
+/* The continuous rail: a single 1px structural line for the whole list. */
+.rail::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  background: var(--rule-strong);
+  pointer-events: none;
+}
+
+/* Active marker: a short accent segment over the rail, sized to the active label's text. */
+.marker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 2px;
+  height: 20px;
+  background: var(--accent);
+  pointer-events: none;
+  will-change: transform;
+  transition:
+    transform var(--dur-std) var(--ease),
+    height var(--dur-std) var(--ease);
+}
+
+.marker[hidden] {
+  display: none;
+}
+
+.list {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.link {
+  display: block;
+  padding: 6px 0 6px 16px;
+  color: var(--text-2);
+  font-size: 13.5px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.005em;
+  text-wrap: pretty;
+  transition: color var(--dur-fast) ease;
+}
+
+.link[aria-current="location"] {
+  color: var(--accent);
+}
+
+/* Inside a rail / scroll body the focus ring sits inset (design guardrail). */
+.link:focus-visible {
+  outline-offset: -2px;
+}
+
+.label {
+  display: block;
+}

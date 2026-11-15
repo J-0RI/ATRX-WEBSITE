@@ -58,25 +58,39 @@ const slug = (value: string) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
 
-const collator = new Intl.Collator("en", { sensitivity: "base" });
+/*
+ * Every page prefetches the /contact route, which evaluates this module. Constructing an
+ * Intl.Collator costs ~75–95 ms on a 4×-throttled mobile CPU, so the collator, the sorted
+ * country list and each country's region list are built on first use, not at import.
+ */
+let collator: Intl.Collator | undefined;
+/** Shared English, accent-insensitive name collation (also used by lib/phone). */
+export const nameCollator = () => (collator ??= new Intl.Collator("en", { sensitivity: "base" }));
 
-type Entry = { country: Country; regions: Region[] };
+type Raw = (typeof allCountries)[number][2];
+type Entry = { country: Country; raw: Raw; regions?: Region[] };
 
 const entries = new Map<string, Entry>();
-for (const [datasetName, code, rawRegions] of allCountries) {
-  const name = displayNames[code] ?? datasetName;
-  const excluded = excludedRegions[code];
-  const regions = rawRegions
-    .filter(([, short]) => !(short && excluded?.has(short)))
-    .map(([regionName, short]) => ({ id: `${code}-${short || slug(regionName)}`, name: regionName }))
-    .sort((a, b) => collator.compare(a.name, b.name));
-  // A single entry restating the territory itself (Hong Kong, Gibraltar…) is not a subdivision.
-  entries.set(code, { country: { code, name }, regions: regions.length > 1 ? regions : [] });
+for (const [datasetName, code, raw] of allCountries) {
+  entries.set(code, { country: { code, name: displayNames[code] ?? datasetName }, raw });
 }
 
-export const countries: Country[] = [...entries.values()]
-  .map(({ country }) => country)
-  .sort((a, b) => collator.compare(a.name, b.name));
+function buildRegions(code: string, raw: Raw): Region[] {
+  const excluded = excludedRegions[code];
+  const regions = raw
+    .filter(([, short]) => !(short && excluded?.has(short)))
+    .map(([regionName, short]) => ({ id: `${code}-${short || slug(regionName)}`, name: regionName }))
+    .sort((a, b) => nameCollator().compare(a.name, b.name));
+  // A single entry restating the territory itself (Hong Kong, Gibraltar…) is not a subdivision.
+  return regions.length > 1 ? regions : [];
+}
+
+let sortedCountries: Country[] | undefined;
+/** Every country, alphabetical by display name. Built once, on first call. */
+export const countryList = (): Country[] =>
+  (sortedCountries ??= [...entries.values()]
+    .map(({ country }) => country)
+    .sort((a, b) => nameCollator().compare(a.name, b.name)));
 
 export function findCountry(code: string | null | undefined): Country | undefined {
   return code ? entries.get(code)?.country : undefined;
@@ -84,7 +98,9 @@ export function findCountry(code: string | null | undefined): Country | undefine
 
 /** First-level regions for a country; an empty list means "Not applicable" is the only answer. */
 export function regionsFor(code: string | null | undefined): Region[] {
-  return (code && entries.get(code)?.regions) || [];
+  const entry = code ? entries.get(code) : undefined;
+  if (!entry) return [];
+  return (entry.regions ??= buildRegions(entry.country.code, entry.raw));
 }
 
 export type Location = {

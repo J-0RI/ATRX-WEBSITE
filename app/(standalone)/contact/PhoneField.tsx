@@ -1,13 +1,15 @@
 "use client";
 
 import { useId, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { changePhoneCountry, dialCodes, editPhoneInput, findDialCode, formatPhoneInput, isCodeOnly, phoneExample, type PhoneInputState } from "@/lib/phone";
+import { changePhoneCountry, dialCodeList, editPhoneInput, findDialCode, formatPhoneInput, isCodeOnly, phoneExample, type PhoneInputState } from "@/lib/phone";
 import styles from "./contact.module.css";
 
 const CODE_ERROR = "Select an international calling code.";
 
-/** The option list never changes; built once rather than on every keystroke. */
-const codeOptions = dialCodes.map((d) => <option key={d.country} value={d.country}>{d.name} ({d.callingCode})</option>);
+/** The option list never changes; built once (on first render, not at import) rather than on every keystroke. */
+let options: React.ReactElement[] | undefined;
+const codeOptions = () =>
+  (options ??= dialCodeList().map((d) => <option key={d.country} value={d.country}>{d.name} ({d.callingCode})</option>));
 
 /**
  * One telephone control: a compact calling-code trigger and the number share a single border,
@@ -97,7 +99,7 @@ export default function PhoneField({ country: initialCountry, number: initialNum
             <option value="">Select calling code</option>
             {/* A detected shared code (e.g. +1) whose country is not yet known: selectable value, not a list entry. */}
             {codeOnly ? <option value={country} disabled hidden>{country}</option> : null}
-            {codeOptions}
+            {codeOptions()}
           </select>
           <span aria-hidden="true" className={selected || codeOnly ? undefined : styles.dialPlaceholder}>
             {selected?.callingCode ?? (codeOnly ? country : "Code")}

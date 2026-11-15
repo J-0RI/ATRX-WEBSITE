@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CONTACT_EMAIL } from "@/content/nav";
+import OnThisPage from "@/components/OnThisPage";
 import styles from "./faq.module.css";
 
 export const metadata: Metadata = {
@@ -11,11 +12,11 @@ export const metadata: Metadata = {
 
 /* Category navigation for "On this page". Each id matches a category section below. */
 const categories = [
-  { id: "access", title: "Access and eligibility" },
-  { id: "research", title: "Research and market intelligence" },
-  { id: "execution", title: "Risk and execution" },
-  { id: "deployment", title: "Deployment and institutional requirements" },
-  { id: "commercial", title: "Commercial and support" },
+  { id: "access", label: "Access and eligibility" },
+  { id: "research", label: "Research and market intelligence" },
+  { id: "execution", label: "Risk and execution" },
+  { id: "deployment", label: "Deployment and institutional requirements" },
+  { id: "commercial", label: "Commercial and support" },
 ];
 
 export default function FaqPage() {
@@ -26,18 +27,7 @@ export default function FaqPage() {
       </header>
 
       <div className={styles.layout}>
-        <nav className={styles.toc} aria-label="On this page">
-          <p className={styles.tocTitle}>On this page</p>
-          <ol className={styles.tocList}>
-            {categories.map((category) => (
-              <li key={category.id}>
-                <a href={`#${category.id}`} className={styles.tocLink}>
-                  {category.title}
-                </a>
-              </li>
-            ))}
-          </ol>
-        </nav>
+        <OnThisPage sections={categories} sticky className={styles.toc} />
 
         <div className={styles.content}>
           <section id="access" className={styles.section} aria-labelledby="access-heading">

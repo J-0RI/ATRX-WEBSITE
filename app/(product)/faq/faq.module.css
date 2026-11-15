@@ -107,40 +107,16 @@
   text-underline-offset: 4px;
 }
 
-/* ---------- Level 5: secondary "On this page" navigation ---------- */
+/* ---------- Level 5: secondary "On this page" navigation ----------
+ * Shared component (components/OnThisPage); this page only places it. Above the
+ * content and non-sticky in a single column; sticky in its own column from 860px. */
 
 .toc {
+  --on-this-page-position: static;
+  --on-this-page-max-height: none;
   margin-bottom: 36px;
-  padding-bottom: 18px;
+  padding-bottom: 24px;
   border-bottom: 1px solid var(--rule);
-}
-
-.tocTitle {
-  margin-bottom: 10px;
-  color: var(--text-2);
-  font-size: 12.5px;
-  font-weight: 450;
-  line-height: 18px;
-  letter-spacing: -0.005em;
-}
-
-.tocList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 20px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.tocLink {
-  display: inline-block;
-  padding-block: 2px;
-  color: var(--text-3);
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 18.5px;
-  letter-spacing: -0.005em;
 }
 
 @container content (min-width: 860px) {
@@ -157,22 +133,13 @@
   }
 
   .toc {
-    position: sticky;
-    top: calc(var(--nav-h) + 24px);
+    --on-this-page-position: sticky;
+    --on-this-page-max-height: calc(100dvh - var(--nav-h) - 48px);
     grid-column: 2;
     grid-row: 1;
     align-self: start;
     margin-bottom: 0;
     padding-bottom: 0;
     border-bottom: 0;
-  }
-
-  .tocList {
-    display: grid;
-    gap: 8px;
-  }
-
-  .tocLink {
-    display: block;
   }
 }

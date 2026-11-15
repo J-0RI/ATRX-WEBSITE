@@ -24,11 +24,11 @@ export const planImages: Record<PlanId, PlanImage> = {
     position: "50% 42%",
   },
   "api-access": {
-    src: "/plans/akbar-nemati-8dhaTzoxYYM-unsplash.webp",
-    width: 1800,
-    height: 1200,
-    alt: "Close-up of a honeybee covered in yellow pollen, feeding on small white flowers.",
-    position: "40% 50%",
+    src: "/plans/pexels-bertellifotografia-31853362.webp",
+    width: 1200,
+    height: 1800,
+    alt: "Close-up of a honeybee feeding on a white and lilac flower against a soft green background.",
+    position: "50% 45%",
   },
   "execution-access": {
     src: "/plans/shubham-dhage-y-spk3B7IO0-unsplash.webp",

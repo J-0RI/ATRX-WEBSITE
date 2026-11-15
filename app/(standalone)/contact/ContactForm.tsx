@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type RefObject } from "react";
 import { CONTACT_EMAIL } from "@/content/nav";
-import { countries, regionsFor, REGION_NOT_APPLICABLE, REGION_NOT_APPLICABLE_LABEL } from "@/lib/geography";
+import { countryList, regionsFor, REGION_NOT_APPLICABLE, REGION_NOT_APPLICABLE_LABEL } from "@/lib/geography";
 import EngagementFields from "./EngagementFields";
 import { FieldError, invalidProps, type Feedback } from "./fieldFeedback";
 import PhoneField from "./PhoneField";
@@ -128,7 +128,7 @@ function LocationFields({ value, onChange, feedback }: Omit<FieldsProps, "policy
               onChange({ ...value, country, region: country && regionsFor(country).length === 0 ? REGION_NOT_APPLICABLE : "" });
             }}>
             <option value="">Select country</option>
-            {countries.map((c) => <option key={c.code} value={c.code}>{c.name}</option>)}
+            {countryList().map((c) => <option key={c.code} value={c.code}>{c.name}</option>)}
           </select>
           <FieldError feedback={feedback} name="country" />
         </label>

@@ -42,7 +42,7 @@ export default function AccessPlans() {
         className={styles.modes}
         data-count={plans.length}
       >
-        {plans.map((plan) => (
+        {plans.map((plan, index) => (
           <article key={plan.id} className={styles.mode} aria-labelledby={`${plan.id}-plan`}>
             <div className={styles.media}>
               <Image
@@ -50,7 +50,10 @@ export default function AccessPlans() {
                 alt={planImages[plan.id].alt}
                 fill
                 sizes="(max-width: 1179px) min(600px, 100vw), 400px"
-                loading="eager"
+                /* Only the selected mode renders. Its first photo is the page's LCP element; on phones
+                   the later cards stack below the fold, so they load when they approach the viewport. */
+                loading={index === 0 ? "eager" : "lazy"}
+                fetchPriority={index === 0 ? "high" : undefined}
                 className={styles.mediaImage}
                 style={{ objectPosition: planImages[plan.id].position }}
               />
