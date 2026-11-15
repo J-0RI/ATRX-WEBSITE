@@ -90,6 +90,27 @@
   --radius-tag: 2px;
   --radius-pill: 999px;
 
+  /*
+   * Panel standard (decision-20261115-panel-standard). Source of truth: the /explore Access
+   * Modes plan card. Neutral greys + translucent white only; square content panels, 2px
+   * nested/floating surfaces; no hover change. Use these for every content panel, card,
+   * code block, form container and tooltip. The central navbar, its cells and its dropdowns
+   * are EXCLUDED and keep their own --nav-* materials below.
+   *   --panel-surface         standard panel / card (on the page black)
+   *   --panel-edge            1px inset hairline of a standard panel
+   *   --panel-nested          embedded surface inside a panel (translucent lift)
+   *   --panel-edge-nested     its quieter hairline
+   *   --panel-floating        opaque floating information surface (= panel + nested lift)
+   */
+  --panel-surface: #0d0d0e;
+  --panel-edge: rgba(255, 255, 255, 0.075);
+  --panel-nested: rgba(255, 255, 255, 0.028);
+  --panel-edge-nested: rgba(255, 255, 255, 0.045);
+  --panel-floating: #141415;
+  --panel-floating-shadow: 0 24px 48px -28px rgba(0, 0, 0, 0.6);
+  --panel-radius: var(--radius-panel);
+  --panel-radius-nested: var(--radius-tag);
+
   /* Floating glass surface — the central navbar dropdown material (MenuButton .panel), shared
      with the comparison information tooltips (decision-20261114-tooltip-nav-surface). */
   --nav-panel-glass: rgba(12, 13, 15, 0.8);

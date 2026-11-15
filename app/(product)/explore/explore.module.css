@@ -39,78 +39,51 @@
 }
 
 .mode {
+  /* Full-bleed photograph (decision-20261115-plan-full-bleed): the card is the only container.
+   * Named columns separate the edge-to-edge image track from the padded content track, so the
+   * photo meets the top and side edges while title → description → capabilities → Apply keep
+   * their inset. Rows stay a subgrid so titles, lists and CTAs align across the family. */
+  --plan-pad: var(--section-panel-padding);
   display: grid;
   grid-row: span 5;
   grid-template-rows: subgrid;
+  grid-template-columns: [full-start] var(--plan-pad) [content-start] minmax(0, 1fr) [content-end] var(--plan-pad) [full-end];
   row-gap: 0;
   min-width: 0;
-  padding: var(--section-panel-padding);
-  border-radius: var(--radius-panel);
-  background: var(--surface-flat);
-  box-shadow: inset 0 0 0 1px var(--rule);
+  padding-bottom: var(--plan-pad);
+  overflow: hidden; /* clips the photo to the card's own corner geometry */
+  /* The reference panel for the whole site: these values ARE the globals.css --panel-* standard
+   * (decision-20261115-panel-standard). Card = --panel-surface. */
+  border-radius: var(--panel-radius);
+  background: var(--panel-surface);
+  box-shadow: inset 0 0 0 1px var(--panel-edge);
 }
 
-/* Portrait media field: the image is ≈ 50% of the card height (Upload 2
- * proportion) in the three-column geometry; stacked cards use 4:5 for the same share. */
+.mode > * {
+  grid-column: content;
+}
+
+/* Photograph area: full card width, flush with the top and side edges; no frame, surface,
+ * border or radius of its own. 3:4 portrait (Upload 1) on every layout. */
+.mode > .media {
+  grid-column: full;
+}
+
 .media {
-  aspect-ratio: 2 / 3;
+  position: relative; /* containing block for the fill image */
+  aspect-ratio: 3 / 4;
   min-width: 0;
-  overflow: hidden;
-  border-radius: var(--radius-inner);
-  background: var(--surface-inset);
-  box-shadow: inset 0 0 0 1px var(--rule-inset);
 }
 
-.media svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.visualRule,
-.visualDetail,
-.visualOutput,
-.visualBoundary,
-.visualModule,
-.visualInner {
-  fill: none;
-  stroke-width: 1.5;
-  vector-effect: non-scaling-stroke;
-}
-
-.visualRule,
-.visualBoundary,
-.visualModule {
-  stroke: var(--rule-strong);
-}
-
-.visualModule {
-  fill: var(--surface-flat);
-}
-
-.visualInner {
-  stroke: var(--rule-inset);
-}
-
-.visualDetail {
-  stroke: var(--text-3);
-}
-
-.visualOutput {
-  stroke: var(--accent-mark);
-}
-
-.visualPoint,
-.visualEnd {
-  fill: var(--accent);
-}
-
-.visualEndMuted {
-  fill: var(--rule-strong);
+/* Plan photograph (decision-20261115-plan-photography): cropped per image via object-position
+ * (planImages.ts). No overlay, tint, filter or hover change. */
+.mediaImage {
+  object-fit: cover;
 }
 
 .title {
-  margin-top: var(--space-title-content);
+  /* Photo → title matches the card's side inset, so the content block reads as one padded field. */
+  margin-top: var(--plan-pad);
   color: var(--text);
   font-size: var(--section-card-title);
   font-weight: 450;
@@ -451,13 +424,11 @@ tbody:not([hidden]) + .groupHead .groupToggle {
   width: max-content;
   max-width: min(280px, calc(100vw - 32px));
   padding: 10px 14px;
-  /* The central navbar dropdown material (globals.css --nav-panel-*), at tooltip scale:
-     glass + blur, inset hairline edge, the panel's own shadow; the smallest ATRX radius. */
-  border-radius: var(--radius-tag);
-  background: var(--nav-panel-glass);
-  -webkit-backdrop-filter: var(--nav-panel-blur);
-  backdrop-filter: var(--nav-panel-blur);
-  box-shadow: var(--nav-panel-edge), var(--nav-panel-shadow);
+  /* Floating panel standard (globals.css --panel-floating): opaque, so table text never
+     bleeds through; panel hairline; the existing floating shadow; nested 2px radius. */
+  border-radius: var(--panel-radius-nested);
+  background: var(--panel-floating);
+  box-shadow: inset 0 0 0 1px var(--panel-edge), var(--panel-floating-shadow);
   color: var(--text);
   font-size: 12.5px;
   font-weight: 400;
@@ -476,33 +447,25 @@ tbody:not([hidden]) + .groupHead .groupToggle {
   left: var(--arrow-x, 22px);
   width: 8px;
   height: 8px;
-  background: var(--nav-panel-glass);
-  -webkit-backdrop-filter: var(--nav-panel-blur);
-  backdrop-filter: var(--nav-panel-blur);
+  background: var(--panel-floating);
   transform: translateX(-50%) rotate(45deg);
   pointer-events: none;
 }
 
 .tooltip[data-side="bottom"] .tooltipArrow {
   top: -4px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  border-left: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid var(--panel-edge);
+  border-left: 1px solid var(--panel-edge);
   clip-path: polygon(0 0, 100% 0, 0 100%);
 }
 
 .tooltip[data-side="top"] .tooltipArrow {
   bottom: -4px;
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-right: 1px solid var(--panel-edge);
+  border-bottom: 1px solid var(--panel-edge);
   clip-path: polygon(100% 0, 100% 100%, 0 100%);
 }
 
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .tooltip,
-  .tooltipArrow {
-    background: var(--nav-panel-glass-solid);
-  }
-}
 
 .tooltipBody {
   display: block;
@@ -643,9 +606,5 @@ tbody:not([hidden]) + .groupHead .groupToggle {
     grid-template-columns: minmax(0, 1fr);
     max-width: 600px;
     margin-inline: auto;
-  }
-
-  .media {
-    aspect-ratio: 4 / 5;
   }
 }

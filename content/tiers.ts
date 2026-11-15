@@ -12,8 +12,12 @@ export type Tier = {
   specs: { label: string; value: string }[];
   commercial: string;
   features: string[];
+  /** Stable Request Access engagement key for this mode (`/contact?engagement=…`). */
+  engagement: ModeEngagement;
   apply: string;
 };
+
+export type ModeEngagement = "tier-1" | "tier-2" | "tier-3";
 
 export const tiers: Tier[] = [
   {
@@ -36,6 +40,7 @@ export const tiers: Tier[] = [
       "Systemic guardrails enforced at the API level",
       "Standard JSON webhook delivery",
     ],
+    engagement: "tier-1",
     apply: "/contact?engagement=tier-1#request",
   },
   {
@@ -59,6 +64,7 @@ export const tiers: Tier[] = [
       "Direct low-latency integration SDKs",
       "Priority latency routing",
     ],
+    engagement: "tier-2",
     apply: "/contact?engagement=tier-2#request",
   },
   {
@@ -82,6 +88,7 @@ export const tiers: Tier[] = [
       "Audit-grade telemetry logs for governance",
       "Direct engineering syncs",
     ],
+    engagement: "tier-3",
     apply: "/contact?engagement=tier-3#request",
   },
 ];
@@ -93,8 +100,8 @@ export const tiers: Tier[] = [
  * a capability included in a mode is not automatically included in every plan of that mode.
  * Every capability named here is one the matrix marks as included and available for the
  * parent mode, or one already published in that mode's `features`. No prices, latency,
- * capacity or certification commitments are implied. Apply reuses the mode's request route
- * because the application form does not yet accept a plan field.
+ * capacity or certification commitments are implied. Apply opens the Request Access form
+ * with the mode and plan preselected (`planApplyHref`); the form reads this same catalogue.
  */
 export type PlanId =
   | "standard"
@@ -234,6 +241,23 @@ export const accessPlans: Record<ModeId, AccessPlan[]> = {
     },
   ],
 };
+
+/** All plans by stable id; plan ids are unique across modes. */
+export const planById = new Map<string, AccessPlan>(
+  Object.values(accessPlans).flat().map((plan) => [plan.id, plan]),
+);
+
+/** Plan, only if it belongs to the given mode; obsolete or cross-mode ids resolve to undefined. */
+export function findPlan(mode: ModeId, planId: string | null | undefined): AccessPlan | undefined {
+  const plan = planId ? planById.get(planId) : undefined;
+  return plan?.mode === mode ? plan : undefined;
+}
+
+/** Request Access link with mode and plan preselected by stable identifiers. */
+export function planApplyHref(plan: AccessPlan): string {
+  const tier = tiers.find((t) => t.id === plan.mode)!;
+  return `/contact?engagement=${tier.engagement}&plan=${plan.id}#request`;
+}
 
 /* ---------- Access-mode comparison (/explore) ----------
  * Institutional capability matrix across the eight core evaluation domains.

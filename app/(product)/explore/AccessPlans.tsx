@@ -4,8 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 import SegmentedSwitch from "@/components/SegmentedSwitch";
 import { KnightIcon } from "@/components/Icons";
-import { accessPlans, tiers, type ModeId } from "@/content/tiers";
-import ModeVisual from "./ModeVisual";
+import { accessPlans, planApplyHref, tiers, type ModeId } from "@/content/tiers";
+import Image from "next/image";
+import { planImages } from "./planImages";
 import styles from "./explore.module.css";
 
 const options = tiers.map((tier) => ({ id: tier.id, label: tier.name }));
@@ -44,7 +45,15 @@ export default function AccessPlans() {
         {plans.map((plan) => (
           <article key={plan.id} className={styles.mode} aria-labelledby={`${plan.id}-plan`}>
             <div className={styles.media}>
-              <ModeVisual plan={plan.id} />
+              <Image
+                src={planImages[plan.id].src}
+                alt={planImages[plan.id].alt}
+                fill
+                sizes="(max-width: 1179px) min(600px, 100vw), 400px"
+                loading="eager"
+                className={styles.mediaImage}
+                style={{ objectPosition: planImages[plan.id].position }}
+              />
             </div>
             <h3 id={`${plan.id}-plan`} className={styles.title}>
               {plan.name}
@@ -59,7 +68,7 @@ export default function AccessPlans() {
               ))}
             </ul>
             <Link
-              href={tier.apply}
+              href={planApplyHref(plan)}
               className={`btn btn-primary ${styles.cta}`}
               aria-label={`Apply for ${tier.name} ${plan.name}`}
             >

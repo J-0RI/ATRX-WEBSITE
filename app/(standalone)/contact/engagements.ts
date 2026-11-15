@@ -1,4 +1,7 @@
 /** Canonical request content, grounded in content/tiers.ts and the technical library. */
+import { accessPlans, findPlan, tiers, type AccessPlan, type ModeId, type Tier } from "@/content/tiers";
+import { REGION_NOT_APPLICABLE, resolveLocation, type Location } from "@/lib/geography";
+
 type RequestField = {
   key: string;
   label: string;
@@ -7,6 +10,8 @@ type RequestField = {
   hint?: string;
 };
 type EngagementConfig = {
+  /** Access mode this engagement applies for; absent for non-access requests. */
+  mode?: ModeId;
   label: string;
   heading: string;
   description: string;
@@ -15,9 +20,12 @@ type EngagementConfig = {
   fields: readonly RequestField[];
 };
 
+const modeName = (mode: ModeId) => tiers.find((tier) => tier.id === mode)!.name;
+
 export const engagements = {
   "tier-1": {
-    label: "Prosumer Node",
+    mode: "prosumer-node",
+    label: modeName("prosumer-node"),
     heading: "Application",
     description: "Evaluate a single-tenant execution pipeline with systemic guardrails at the API level. Share your intended deployment and current execution or research environment.",
     subject: "ATRX — Prosumer Node application",
@@ -30,7 +38,8 @@ export const engagements = {
     ],
   },
   "tier-2": {
-    label: "Capital Desk",
+    mode: "capital-desk",
+    label: modeName("capital-desk"),
     heading: "Application",
     description: "Evaluate multi-node deployment for cohort allocation, with custom regime-gating and drawdown parameterization. Outline your desk’s integration objective and operational context.",
     subject: "ATRX — Capital Desk application",
@@ -44,7 +53,8 @@ export const engagements = {
     ],
   },
   "tier-3": {
-    label: "Institutional",
+    mode: "institutional",
+    label: modeName("institutional"),
     heading: "Application",
     description: "Evaluate a dedicated inference cluster with bespoke structural topology and audit-grade telemetry. Share the infrastructure, integration and governance context for your deployment.",
     subject: "ATRX — Institutional deployment inquiry",
@@ -74,7 +84,7 @@ export const engagements = {
 } as const satisfies Record<string, EngagementConfig>;
 
 export type Engagement = keyof typeof engagements;
-export type Identity = { name: string; entity: string; role: string };
+export type Identity = { name: string; entity: string; role: string; country: string; region: string };
 export type EngagementAnswers = {
   [K in Engagement]: Record<(typeof engagements)[K]["fields"][number]["key"], string>;
 };
@@ -85,6 +95,23 @@ export function parseEngagement(value: string | null): Engagement | "" {
   return value && Object.hasOwn(engagements, value) ? value as Engagement : "";
 }
 
+/** Access mode for an engagement; undefined for the documentation pathway or no selection. */
+export function modeOf(engagement: Engagement | ""): ModeId | undefined {
+  return engagement ? (engagements[engagement] as EngagementConfig).mode : undefined;
+}
+
+/** Plans offered for an engagement, straight from the /explore catalogue. */
+export function plansFor(engagement: Engagement | ""): AccessPlan[] {
+  const mode = modeOf(engagement);
+  return mode ? accessPlans[mode] : [];
+}
+
+/** Plan id only if it belongs to the engagement's mode; otherwise "" (obsolete or cross-mode). */
+export function parsePlan(engagement: Engagement | "", planId: string | null): string {
+  const mode = modeOf(engagement);
+  return (mode && findPlan(mode, planId)?.id) || "";
+}
+
 export function emptyEngagementAnswers(): EngagementAnswers {
   return Object.fromEntries(engagementOptions.map((engagement) => [
     engagement,
@@ -92,18 +119,66 @@ export function emptyEngagementAnswers(): EngagementAnswers {
   ])) as EngagementAnswers;
 }
 
+export type ApplicationField = "engagement" | "plan" | "country" | "region";
+
+/** The qualification selections of a submission, resolved to stable ids plus readable names. */
+export type Application = {
+  engagement: Engagement;
+  mode?: Pick<Tier, "id" | "name">;
+  plan?: Pick<AccessPlan, "id" | "name">;
+  location: Location;
+};
+
+/**
+ * Submission boundary check. Re-resolves every selection against the catalogue and the
+ * geography dataset, so empty, stale or manipulated values cannot reach the request.
+ */
+export function validateApplication(engagementValue: string, planId: string, identity: Pick<Identity, "country" | "region">):
+  | { ok: true; application: Application }
+  | { ok: false; field: ApplicationField; message: string } {
+  const engagement = parseEngagement(engagementValue);
+  if (!engagement) return { ok: false, field: "engagement", message: "Select an engagement." };
+  const mode = modeOf(engagement);
+  let plan: AccessPlan | undefined;
+  if (mode) {
+    plan = findPlan(mode, planId);
+    if (!plan) return { ok: false, field: "plan", message: "Select a plan." };
+  }
+  const located = resolveLocation(identity.country, identity.region);
+  if (!located.ok) return located;
+  const tier = mode ? tiers.find((t) => t.id === mode)! : undefined;
+  return {
+    ok: true,
+    application: {
+      engagement,
+      mode: tier && { id: tier.id, name: tier.name },
+      plan: plan && { id: plan.id, name: plan.name },
+      location: located.location,
+    },
+  };
+}
+
 /** Only the selected schema is serialized; blank optional answers are omitted. */
-export function prepareRequest(engagement: Engagement, identity: Identity, answers: Readonly<Record<string, string>>) {
+export function prepareRequest(application: Application, identity: Identity, answers: Readonly<Record<string, string>>) {
+  const { engagement, mode, plan, location } = application;
   const config = engagements[engagement];
   const common = (["name", "entity", "role"] as const)
     .filter((key) => identity[key].trim())
     .map((key) => `${key[0].toUpperCase()}${key.slice(1)}: ${identity[key].trim()}`);
+  const selections = [
+    `Country: ${location.country.name} (${location.country.code})`,
+    location.region.id === REGION_NOT_APPLICABLE
+      ? `State / Province / Region: ${location.region.name}`
+      : `State / Province / Region: ${location.region.name} (${location.region.id})`,
+    mode ? `Access mode: ${mode.name} (${mode.id})` : `Engagement: ${config.label}`,
+    ...(plan ? [`Plan: ${plan.name} (${plan.id})`] : []),
+  ];
   const context = requestFields(engagement)
     .filter(({ key }) => answers[key]?.trim())
     .map(({ key, label }) => `${label}:\n${answers[key].trim()}`);
   return {
-    subject: config.subject,
-    body: [...common, `Engagement: ${config.label}`, "", ...context].join("\n\n"),
+    subject: plan ? `${config.subject} — ${plan.name}` : config.subject,
+    body: [...common, ...selections, "", ...context].join("\n\n"),
   };
 }
 
