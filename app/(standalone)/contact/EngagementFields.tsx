@@ -1,10 +1,12 @@
-import { engagements, requestFields, type Engagement } from "./engagements";
+import { FieldError, invalidProps, type Feedback } from "./fieldFeedback";
+import { engagements, fieldLimit, requestFields, type Engagement } from "./engagements";
 import styles from "./contact.module.css";
 
-export default function EngagementFields({ engagement, answers, onChange }: {
+export default function EngagementFields({ engagement, answers, onChange, feedback }: {
   engagement: Engagement;
   answers: Readonly<Record<string, string>>;
   onChange: (key: string, value: string) => void;
+  feedback: Feedback;
 }) {
   return (
     <fieldset className={styles.fieldGroup}>
@@ -16,7 +18,10 @@ export default function EngagementFields({ engagement, answers, onChange }: {
           name: field.key,
           required: field.required ?? false,
           value: answers[field.key],
-          "aria-describedby": field.hint ? `${id}-hint` : undefined,
+          maxLength: fieldLimit(field),
+          placeholder: field.placeholder,
+          ...invalidProps(feedback, field.key, field.hint ? `${id}-hint` : undefined),
+          onBlur: () => feedback.touch(field.key),
           onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => onChange(field.key, event.target.value),
         };
         return (
@@ -25,6 +30,7 @@ export default function EngagementFields({ engagement, answers, onChange }: {
             {field.kind === "textarea"
               ? <textarea {...props} rows={3} />
               : <input {...props} type="text" />}
+            <FieldError feedback={feedback} name={field.key} />
             {field.hint && <p id={`${id}-hint`} className={styles.fieldHint}>{field.hint}</p>}
           </div>
         );

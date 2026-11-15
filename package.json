@@ -10,13 +10,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:phone": "node --experimental-strip-types --test tests/phone.test.mjs"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cn": "^0.5.0",
     "country-region-data": "4.1.0",
+    "libphonenumber-js": "^1.13.16",
     "lucide-react": "^1.59.0",
     "next": "16.3.8",
     "radix-ui": "^1.8.1",

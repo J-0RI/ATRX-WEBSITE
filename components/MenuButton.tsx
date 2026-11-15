@@ -43,8 +43,16 @@ function nextTabbable(root: HTMLElement | null, panel: HTMLElement | null) {
 /**
  * Disclosure-style navigation panel. Trigger and panel form one pointer region
  * (the portal stays inside the trigger's React tree); hover intent, click/tap,
- * Esc, outside click and Tab-away share one controller. Rows drive one stable
- * preview: hovering or focusing a row selects it, leaving a row keeps it.
+ * Esc, outside click and Tab-away share one controller.
+ *
+ * Two independent row states (decision-20261115-nav-row-states):
+ *  - `preview`: which illustration/caption the stage shows. Always has a value (current route,
+ *    else the first row) so the stage is never empty; hovering or focusing a row moves it and
+ *    leaving a row keeps it. It never styles a row.
+ *  - `engaged`: the row that genuinely has the pointer or keyboard focus — the only source of the
+ *    row highlight. Null on every opening; set by real pointer movement (not by a panel appearing
+ *    under a stationary cursor) or by focus; cleared on pointer leave, blur and close.
+ * Neither is the current page, which is carried separately by aria-current.
  */
 export default function MenuButton({ id, controller, label, ariaLabel, panel, host, buttonClassName, size = "standard" }: Props) {
   const open = controller.openId === id;
@@ -55,7 +63,20 @@ export default function MenuButton({ id, controller, label, ariaLabel, panel, ho
   const panelRef = useRef<HTMLDivElement>(null);
   const panelId = useId();
   const current = routeIndex(panel.items, pathname);
-  const [active, setActive] = useState(Math.max(current, 0));
+  const [preview, setPreview] = useState(Math.max(current, 0));
+  const [engaged, setEngaged] = useState<number | null>(null);
+
+  const engage = (i: number) => {
+    setEngaged(i);
+    setPreview(i);
+  };
+  /* Pointer engagement needs real movement: browsers can dispatch enter/move events with zero
+   * movement when the panel renders beneath a stationary cursor, which is not hover intent. */
+  const onRowPointerMove = (i: number) => (e: React.PointerEvent) => {
+    if (engaged === i) return;
+    if (e.pointerType === "mouse" && e.movementX === 0 && e.movementY === 0) return;
+    engage(i);
+  };
 
   const rows = () => Array.from(panelRef.current?.querySelectorAll<HTMLAnchorElement>("a") ?? []);
   const focusItem = (index: number) => {
@@ -87,11 +108,16 @@ export default function MenuButton({ id, controller, label, ariaLabel, panel, ho
     return () => observer.disconnect();
   }, [host, place]);
 
-  // Every opening starts from a deliberate selection: the current route, else the first row.
+  // Every opening starts neutral: no row engaged; the stage previews the current route, else the
+  // first row. Closing clears transient engagement so nothing carries into the next opening.
   useLayoutEffect(() => {
-    if (!open) return;
+    if (!open) {
+      setEngaged(null);
+      return;
+    }
     place();
-    setActive(Math.max(current, 0));
+    setEngaged(null);
+    setPreview(Math.max(current, 0));
   }, [open, current, place]);
 
   useEffect(() => {
@@ -160,12 +186,17 @@ export default function MenuButton({ id, controller, label, ariaLabel, panel, ho
               <Link
                 href={item.href}
                 className={styles.row}
-                data-active={i === active || undefined}
+                data-active={i === engaged || undefined}
                 aria-current={i === current ? "page" : undefined}
                 aria-label={directory ? item.label : undefined}
                 aria-describedby={`${panelId}-d${i}`}
-                onPointerEnter={() => setActive(i)}
-                onFocus={() => setActive(i)}
+                onPointerMove={onRowPointerMove(i)}
+                onPointerLeave={(e) => {
+                  // Keyboard focus outranks a departing pointer: a focused row stays engaged.
+                  if (document.activeElement !== e.currentTarget) setEngaged((cur) => (cur === i ? null : cur));
+                }}
+                onFocus={() => engage(i)}
+                onBlur={() => setEngaged((cur) => (cur === i ? null : cur))}
                 onClick={() => close(id)}
               >
                 {directory ? (
@@ -204,7 +235,7 @@ export default function MenuButton({ id, controller, label, ariaLabel, panel, ho
             <img
               key={item.href}
               className={styles.art}
-              data-active={i === active || undefined}
+              data-active={i === preview || undefined}
               src={`/nav-art/${item.art}.svg`}
               alt=""
               width={600}
@@ -214,7 +245,7 @@ export default function MenuButton({ id, controller, label, ariaLabel, panel, ho
         </div>
         <div className={styles.captions}>
           {panel.items.map((item, i) => (
-            <div key={item.href} className={styles.caption} data-active={i === active || undefined}>
+            <div key={item.href} className={styles.caption} data-active={i === preview || undefined}>
               <p className={styles.captionTitle}>{item.label}</p>
               <p id={`${panelId}-d${i}`} className={styles.captionText}>
                 {item.description}

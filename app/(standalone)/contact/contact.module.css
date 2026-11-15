@@ -10,6 +10,11 @@
      text share a left edge; slim bars keep a shorter block inset. */
   --panel-inset: 32px;
   --bar-block: 20px;
+  /* Validation colour for this form only: a muted red legible on the dark panel. */
+  --field-error: #e59a92;
+  /* Fields are nested surfaces of the form panel: the panel system's translucent lift over
+     --panel-surface, edged with the field stroke (--rule-strong). Neutral, no blue cast. */
+  --field-surface: var(--panel-nested);
 }
 
 /* ---------- hero ---------- */
@@ -188,13 +193,30 @@
   border: 0;
 }
 
-.row {
+.row,
+.grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 22px;
 }
 
+/* Contact grid: cells keep their own height so a revealed field never stretches its neighbour. */
+.grid {
+  align-items: start;
+}
+
+.spanAll {
+  grid-column: 1 / -1;
+}
+
+.fieldStack {
+  display: grid;
+  gap: 22px;
+  min-width: 0;
+}
+
 .field {
+  position: relative;
   display: grid;
   gap: 10px;
   font-size: var(--type-body);
@@ -234,7 +256,7 @@
   padding: 12px 16px;
   border: 1px solid var(--rule-strong);
   border-radius: var(--radius-control);
-  background: var(--surface-inset);
+  background: var(--field-surface);
   font-size: var(--type-body-lg);
   line-height: var(--leading-body-lg);
   color: var(--text);
@@ -255,6 +277,173 @@
   padding-right: 36px;
 }
 
+/* Placeholders guide, never read as values: tertiary text, including empty selects. */
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--text-3);
+  opacity: 1;
+}
+
+.field select:has(> option[value=""]:checked) {
+  color: var(--text-3);
+}
+
+/*
+ * Phone: one control. The border, surface and radius belong to the wrapper; the calling-code
+ * trigger and the number input are borderless parts inside it, split by a short hairline.
+ * The trigger is a transparent native <select> over the "+N" label, so the platform's own
+ * picker opens while the closed state stays integrated.
+ */
+.phoneControl {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  min-height: 52px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-control);
+  background: var(--field-surface);
+}
+
+.field .phoneControl input {
+  min-height: 50px;
+  border: 0;
+  border-radius: 0 var(--radius-control) var(--radius-control) 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.dialTrigger {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 84px;
+  padding: 0 34px 0 16px;
+  /* Same chevron as the other selects. */
+  background-image: linear-gradient(45deg, transparent 50%, var(--text-2) 50%),
+    linear-gradient(135deg, var(--text-2) 50%, transparent 50%);
+  background-position: calc(100% - 21px) 23px, calc(100% - 16px) 23px;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+  font-size: var(--type-body-lg);
+  line-height: var(--leading-body-lg);
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.dialTrigger::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  right: 0;
+  bottom: 12px;
+  border-right: 1px solid var(--rule-strong);
+}
+
+/* The real control: covers the trigger, invisible, still focusable and announced. 16px keeps
+   iOS from zooming on focus. */
+.field .dialSelect {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-control) 0 0 var(--radius-control);
+  background: none;
+  box-shadow: none;
+  font-size: 16px;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.dialPlaceholder {
+  color: var(--text-3);
+}
+
+.field .phoneControl input:focus-visible {
+  box-shadow: none;
+}
+
+.phoneControl:focus-within {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+/* Keyboard focus on the code part is marked on its label, inside the shared accent edge. */
+.dialTrigger:has(> select:focus-visible) > span {
+  text-decoration: underline;
+  text-decoration-color: var(--accent-mark);
+  text-underline-offset: 4px;
+}
+
+/* Type-to-search list: opens beneath the phone control when a letter, digit or "+" is typed
+   on the focused calling code. Floating panel material; keyboard-active state only, no hover. */
+.phoneAnchor {
+  position: relative;
+}
+
+.dialPanel {
+  position: absolute;
+  z-index: 20;
+  top: 100%;
+  left: 0;
+  width: min(100%, 360px);
+  margin-top: 8px;
+  padding: 8px;
+  border-radius: var(--radius-control);
+  background: var(--panel-floating);
+  box-shadow: inset 0 0 0 1px var(--panel-edge), var(--panel-floating-shadow);
+}
+
+.field .dialSearch {
+  min-height: 44px;
+  padding: 10px 12px;
+  font-size: var(--type-body);
+  line-height: var(--leading-body);
+}
+
+.dialList {
+  max-height: 264px;
+  margin: 8px 0 0;
+  padding: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  list-style: none;
+}
+
+.dialOption {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 9px 12px;
+  border-radius: calc(var(--radius-control) - 2px);
+  font-size: var(--type-body);
+  line-height: var(--leading-body);
+  color: var(--text-2);
+  cursor: pointer;
+}
+
+.dialOption[data-active] {
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+.dialOption[aria-selected="true"] {
+  color: var(--accent);
+}
+
+.dialCode {
+  flex: none;
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.dialEmpty {
+  padding: 9px 12px;
+  font-size: var(--type-body);
+  color: var(--text-3);
+}
+
 /* Dependent selectors wait for their parent choice: quieter text, same geometry, no hover. */
 .field select:disabled {
   color: var(--text-3);
@@ -268,7 +457,7 @@
 
 .field select option {
   color: var(--text);
-  background: var(--surface-inset);
+  background: var(--panel-floating);
 }
 
 /* Focus: crisp 2px accent edge (1px border + 1px inset), no blur; hover changes nothing. */
@@ -286,6 +475,25 @@
   align-items: center;
   gap: 12px 18px;
   margin-top: 6px;
+}
+
+/* Inline validation: shown after blur or submit, directly beneath the field. */
+.fieldError {
+  margin: 8px 0 0;
+  font-size: var(--type-small);
+  line-height: var(--leading-small);
+  color: var(--field-error);
+}
+
+.field input[aria-invalid="true"]:not(:focus-visible),
+.field select[aria-invalid="true"]:not(:focus-visible),
+.field textarea[aria-invalid="true"]:not(:focus-visible),
+.phoneControl[data-invalid]:not(:focus-within) {
+  border-color: var(--field-error);
+}
+
+.field .phoneControl input[aria-invalid="true"] {
+  border: 0;
 }
 
 .hint {
@@ -379,7 +587,8 @@
 
 @container content (max-width: 640px) {
   .cards,
-  .row {
+  .row,
+  .grid {
     grid-template-columns: minmax(0, 1fr);
   }
 
