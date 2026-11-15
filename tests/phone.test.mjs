@@ -87,3 +87,49 @@ test('submission rejects invalid phones and preserves geographic country',()=>{
  const bad=validateApplication('tier-1','execution-access',{...identity,phone:'123'},{intendedUse:'Evaluate research integration.'});
  assert.equal(bad.ok,false);assert.ok(bad.errors.phone);
 });
+
+test('first national entry formats without assigning any default country', () => {
+ const result = type('', '6393829640');
+ assert.deepEqual(result.steps, ['6','63','639','639 3','639 38','639 382','639 382 9','639 382 96','639 382 964','639 382 9640']);
+ assert.equal(result.state.phoneCountry, '');
+ assert.equal(resolvePhone(result.state.phoneCountry, result.state.phone).field, 'phoneCountry');
+ const selected = change(result.state, 'CA');
+ assert.equal(format(selected.phoneCountry, selected.phone), '(639) 382-9640');
+ assert.equal(selected.phone, '6393829640');
+});
+test('fresh empty state processes direct paste and restored values without previous selection', () => {
+ for (const raw of ['+2348031234567', '+234 803 123 4567']) {
+  const result = edit(initial(), raw, raw.length, 'insertFromPaste');
+  assert.equal(result.state.phoneCountry, 'NG');
+  assert.equal(result.display, '803 123 4567');
+ }
+ assert.equal(edit(initial(), '6393829640').display, '639 382 9640');
+ assert.equal(edit(initial(), '+2').state.phoneCountry, '');
+ assert.equal(edit(initial(), '+2').display, '+2');
+ assert.equal(edit(initial(), '+1').state.phoneCountry, '+1');
+});
+test('neutral grouping supports separator deletion, middle edits and clearing', () => {
+ const state = type('', '6393829640').state;
+ const backspace = edit(state, '639382 9640', 3, 'deleteContentBackward');
+ assert.equal(backspace.state.phone, '633829640');
+ assert.equal(backspace.caret, 2);
+ const middle = edit(state, '639 582 9640', 5, 'insertText', true);
+ assert.equal(middle.state.phone, '6395829640');
+ assert.equal(middle.caret, 5);
+ assert.deepEqual(edit(state, '', 0, 'deleteContentBackward', true).state, initial());
+});
+test('explicit prefixes identify calling context on replacement', () => {
+ const state = type('', '6393829640').state;
+ for (const [number, country] of [['+2348031234567','NG'],['+33612345678','FR'],['+919876543210','IN']]) {
+  assert.equal(edit(state, number, number.length, 'insertFromPaste', true).state.phoneCountry, country);
+ }
+ assert.equal(edit(initial('NG'), '8031234567').state.phoneCountry, 'NG');
+ assert.equal(edit(initial(), '').state.phoneCountry, '');
+});
+
+test('national numbers from different plans never assign a default country', () => {
+ for (const number of ['6393829640', '08031234567', '07700900123', '0612345678', '9876543210']) {
+  assert.equal(type('', number).state.phoneCountry, '');
+  assert.equal(edit(initial(), number, number.length, 'insertFromPaste').state.phoneCountry, '');
+ }
+});

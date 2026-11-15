@@ -376,74 +376,6 @@
   text-underline-offset: 4px;
 }
 
-/* Type-to-search list: opens beneath the phone control when a letter, digit or "+" is typed
-   on the focused calling code. Floating panel material; keyboard-active state only, no hover. */
-.phoneAnchor {
-  position: relative;
-}
-
-.dialPanel {
-  position: absolute;
-  z-index: 20;
-  top: 100%;
-  left: 0;
-  width: min(100%, 360px);
-  margin-top: 8px;
-  padding: 8px;
-  border-radius: var(--radius-control);
-  background: var(--panel-floating);
-  box-shadow: inset 0 0 0 1px var(--panel-edge), var(--panel-floating-shadow);
-}
-
-.field .dialSearch {
-  min-height: 44px;
-  padding: 10px 12px;
-  font-size: var(--type-body);
-  line-height: var(--leading-body);
-}
-
-.dialList {
-  max-height: 264px;
-  margin: 8px 0 0;
-  padding: 0;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  list-style: none;
-}
-
-.dialOption {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 9px 12px;
-  border-radius: calc(var(--radius-control) - 2px);
-  font-size: var(--type-body);
-  line-height: var(--leading-body);
-  color: var(--text-2);
-  cursor: pointer;
-}
-
-.dialOption[data-active] {
-  background: var(--accent-soft);
-  color: var(--text);
-}
-
-.dialOption[aria-selected="true"] {
-  color: var(--accent);
-}
-
-.dialCode {
-  flex: none;
-  color: var(--text-3);
-  font-variant-numeric: tabular-nums;
-}
-
-.dialEmpty {
-  padding: 9px 12px;
-  font-size: var(--type-body);
-  color: var(--text-3);
-}
-
 /* Dependent selectors wait for their parent choice: quieter text, same geometry, no hover. */
 .field select:disabled {
   color: var(--text-3);
@@ -494,6 +426,28 @@
 
 .field .phoneControl input[aria-invalid="true"] {
   border: 0;
+}
+
+/* Browser autofill must paint the same nested surface as manual entry. Two inset layers
+   composite the translucent field token over its opaque panel, masking UA blue/yellow.
+   Keep the normal focus ring above that paint; the phone wrapper owns its own ring. */
+.field input:is(:autofill, :-webkit-autofill),
+.field textarea:is(:autofill, :-webkit-autofill),
+.field select:is(:autofill, :-webkit-autofill),
+.field .phoneControl input:is(:autofill, :-webkit-autofill) {
+  -webkit-text-fill-color: var(--text);
+  caret-color: var(--text);
+  box-shadow: inset 0 0 0 var(--autofill-focus-width, 0px) var(--accent),
+    inset 0 0 0 1000px var(--field-surface),
+    inset 0 0 0 1000px var(--panel-surface);
+}
+
+.field :is(input, textarea, select):is(:autofill, :-webkit-autofill):focus-visible {
+  --autofill-focus-width: 1px;
+}
+
+.field .phoneControl input:is(:autofill, :-webkit-autofill):focus-visible {
+  --autofill-focus-width: 0px;
 }
 
 .hint {

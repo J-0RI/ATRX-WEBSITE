@@ -133,7 +133,12 @@ export const editablePhone = (value: string) => /^[+\d\s().\-/]*$/.test(value)
 export function formatPhoneInput(country: string, raw: string): string {
   if (!raw || !/^\+?\d*$/.test(raw) || raw.startsWith("+")) return raw;
   const code = callingCodeOf(country);
-  if (!code) return raw;
+  if (!code) {
+    // Readability only, not a numbering-plan guess. Keep the selector unresolved and
+    // require a calling context at validation. A selected country replaces this grouping.
+    return [raw.slice(0, 3), raw.slice(3, 6), raw.slice(6, 10), ...(raw.slice(10).match(/.{1,3}/g) ?? [])]
+      .filter(Boolean).join(" ");
+  }
   const national = new AsYouType(isDialCountry(country) ? country : { defaultCallingCode: code }).input(raw);
   // Some plans require a trunk prefix for national formatting. If the applicant omitted it,
   // use international grouping without manufacturing an extra editable digit.
