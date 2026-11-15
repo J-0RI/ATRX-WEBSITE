@@ -98,10 +98,12 @@
   text-wrap: pretty;
 }
 
+/* Inline links carry the brand accent (user, decision-20261115-faq-link-accent): accent text,
+ * accent underline at the system's 40% accent-mark so the line stays quieter than the words. */
 .answer a {
-  color: var(--text);
+  color: var(--accent);
   text-decoration: underline 1px;
-  text-decoration-color: var(--text-3);
+  text-decoration-color: var(--accent-mark);
   text-underline-offset: 4px;
 }
 
